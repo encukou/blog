@@ -11,7 +11,7 @@
 > ještě o informace o některých dvojicích sousedících políček, že na jedné
 > straně je číslo větší než to na druhé.
 >
-> Zajímalo mě, zda na to lze jít metodou hrubé síly, tedy projít si všech 981
+> Zajímalo mě, zda na to lze jít metodou hrubé síly, tedy projít si všech 9^81
 > kombinací a porovnat je proti zadání. Nešlo: Za deset minut běhu program
 > prokombinoval jen třikrát prvních osm pozic. Takže než by prošel všechny,
 > uplynula by přibližně věčnost. Takže na to budeme muset jít jinak. Jak?
@@ -30,10 +30,12 @@
 > A pokud by někoho zajímalo zadání, tak se jedná o kešku Loki's mystery
 > (GCZE5N).
 
-Napsal jsem program, který to vyluští za 11 vteřin, v pomalém Pythonu bez
+Napsal jsem program, který to vyluští za <s>11 vteřin</s>, v pomalém Pythonu bez
 velkých optimalizací, jen s rozumným algoritmem.
 Zkusím tu docela detailně popsat jak na to. Třeba to nebude nudné.
 Kdyby něco naopak nebylo k pochopení, prosím čtenáře, aby se ozval.
+
+.* *Upřesnění: celý graf to projde za 3 minuty, 11 vteřin bylo jen štěstí.*
 
 Na podobné úlohy platí různé techniky prohledávání stavového prostoru.
 Zrovna tady si vystačíš s relativně jednoduchými, takže se to bude dobře
