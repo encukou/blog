@@ -148,8 +148,9 @@ The red freehand arrow
 ======================
 
 In the end, I have a Raspberry-Pi-controlled third monitor, in retro text mode.
-I'll use it mainly for display (logs, stdout of GUI or web things, ),
-but if I need control, I just click the top-left corner and type away.
+I'll use it mainly for display (logs, stdout of GUI or web things, etc.),
+but if I need control, I just click the top-left corner on my mouse-enabled
+main screen and type away.
 A popular generalization of [Fitts' law](http://en.wikipedia.org/wiki/Fitts%27s_law)
 says this is very convenient, and I'm sure not arguing with that.
 
