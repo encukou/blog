@@ -47,8 +47,8 @@
 			<a href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen" title="Permalink to Raspberry Pi and my Third Screen" rel="bookmark">Raspberry Pi and my Third Screen</a>
 		</h2>
 		<div class="entry-content">
-			<h1>Berry-flavored resurrection</h1>
-<p>Today, I finally figured out what was wrong with my Raspberry Pi.
+			            <div class="post-summary">
+        <p>Today, I finally figured out what was wrong with my Raspberry Pi.
 It <a href="http://file3.status.net/i/identica/encukou-20130120T115619-yw8xyls.jpeg">worked before</a>,
 connected to a TV, without ethernet, and with a power supply and keyboard
 borrowed from my brother.
@@ -62,179 +62,12 @@ Luckily, I can easily get micro-USB cable, even on a Saturday.
 <p>Hooray! A working computer! Let's try new things with it!
 I've used <code>apt</code> in Ubuntu for quite some time, so I thought Raspbian would be too
 boring, and decided to go for Arch. So far it's been working nicely.</p>
-<h1>Quassel</h1>
-<p>My first reason for having a Pi is a (hopefully) always-on IRC client.
-I've been using <a href="http://www.quassel-irc.org/">Quassel</a> at work, where I leave
-a Core running on a virtual machine in the lab, and connect to that with the
-graphical client. That way I don't miss anything when my laptop is off.</p>
-<p>It turns out Arch's official repos only have the monolithic build of Quassel
-(the core and client all in one), but a nice person called joschi maintains a
-<a href="https://aur.archlinux.org/packages.php?ID=42085">Core-only</a> package
-in the AUR.
-It worked for me with one modification – I had to update the list of
-supported arcitectures.
-The <code>pkgbuild</code>'s error message included the name of my architecture ('armv6h'),
-and the <code>PKGBUILD</code> file left no doubt where that string should go.
-All clear!</p>
-<p>The compile took quite some time (I don't know exactly how much because I've
-interrupted it a few times to reboot while tinkering), but it paid off.
-I'm on IRC again!</p>
-<p>Half an hour after I reported my success to the Quassel AUR maintainer,
-the arch was added to the package. Thanks, joschi!</p>
-<h1>My third monitor</h1>
-<p>Now for the other thing I had in mind for the little box.
-My laptop's graphics card only supports two screens, and I sometimes get the
-feeling that two is too few.</p>
-<p>Looks like a job for the Pi! I have a monitor conected to it, now I just need
-to wire it up to my computer.
-Well, actually, before I do that, I see the default virtual terminal font
-is rather large.
-A <code>sudo pacman -S terminus-font</code> and a <code>setfont ter-112n</code> in an rc file
-will make many more letters fit on the screen.</p>
-<p>Now, the first step to connect the two machines was of course to SSH to the Pi,
-so I don't have to plug the keyboard back and forth.
-And also to get the middle-clicky pasting goodness of an X terminal emulator.
-(Goodness, did I miss that!)</p>
-<p>And after that... hm. Let's see what I want to do, exactly.</p>
-<p>I need to run commands on the main machine, control them from the main machine,
-but have them display on the little box. Sounds easy, right?</p>
-<p>Turns out, it's not that easy. At least for me –
-I sure hope there's an easier solution than what I came up with.</p>
-<p>Since I need to display the console on the Pi, I started up a <code>tmux</code> session
-there.
-I can connect to it from my main box, but I'd like to have a “write-only”
-connection: I just want to send the keystrokes over, I don't need to see the
-third monitor's contents on the main monitor – it's on the other monitor!
-I could make the console window really small, but <code>tmux</code> insists on making
-the logical terminal just big enough for the smallest client connected to it.
-I briefly tried to find a way to use an infinitesimally small font in
-a terminal emulator, but to no avail.</p>
-<p>Luckily, thanks to research for <a href="https://ep2013.europython.eu/conference/talks/terminals-command-lines-and-text-interfaces">my talk for this summer's EuroPython</a>,
-I know that terminal size is just two properties I can set rather easily.
-<code>stty cols 256; stty rows 256;</code> and voilà, <code>tmux</code> thinks it has a window
-that's larger than my new monitor.
-The only drawback is that whenever the window is resized, it picks up the new
-size.
-My research notes tell me this is handled by SIGWINCH, a SIGnal that gets
-sent whenever the WINdow size CHanges.
-Luckily, there's a <a href="http://stackoverflow.com/a/4515549/99057">signal-blocking program</a>
-on StackOverflow, on which I do a quick <code>s/SIGINT/SIGWINCH/</code> and compile.
-I hack up a command to run SSH with the <code>stty</code>s and a signal-blocked <code>tmux</code>,
-all in a uniquely titled <code>xterm</code>, and then use KDE's nifty Window Settings
-to make the <code>xterm</code> window very tiny, borderless, always-on-top, on all
-desktops, and in the upper left corner of the screen.</p>
-<p>Glorious.</p>
-<p>I think I'll name it <code>pi-remote</code>.</p>
-<p>(Also, thank goodness for xterm's simplicity: unlike modern programs that
-try very very hard to never let users shoot themselves in the foot, xterm can
-be resized small enough to be useless.
-Well, useless for anything except what I'm trying to do here.)</p>
-<h1>A circle of SSH</h1>
-<p>Now that I have a way to control my second monitor, there's one more goal:
-running stuff on the main box.
-Do do that, I need to SSH back to it. Close the loop, so to say.</p>
-<p>I'd like to go passwordless, and I'd rather not leave a private key
-that grants access to my main box lying around on the Pi.
-I think it's time for some SSH agent forwarding.
-It turns out Github has a <a href="https://help.github.com/articles/using-ssh-agent-forwarding">nice article</a>
-on how to set that up – put some lines in <code>~/.ssh/config</code>, uncomment one in
-<code>/etc/ssh/sshd_config</code>, restart sshd – not straightforward but easy enough.</p>
-<p>Oh, and I need to trust the key.
-I think this is the first time I've put my own key for a machine in that
-machine's <code>authorized_keys</code>.</p>
-<p>The part that I didn't find an elegant solution for is passing the agent
-forwarding info through tmux.
-This stuff is passed around in environment variables, but the tmux session is
-already running, with its own environment.
-There's probably an amazingly obvious way to do this, but after a while of
-searching I decided for a brute-force approach: before joining the session I
-save the SSH-related env:</p>
-<div class="highlight"><pre>env | grep ^SSH  &gt; ~/.ssh/third_monitor_callback_env
-</pre></div>
 
-
-<p>and before SSH-ing back, I restore it.</p>
-<div class="highlight"><pre><span class="k">while </span><span class="nb">read </span>line; <span class="k">do </span><span class="nb">declare</span> -x <span class="s2">&quot;$line&quot;</span> <span class="k">done</span> &lt; ~/.ssh/third_monitor_callback_env
-</pre></div>
-
-
-<p>Works for me.</p>
-<p>It doesn't call back automatically.
-The main machine is a laptop, so it may not always be there,
-and the pi should be usable without it.</p>
-<h1>The red freehand arrow</h1>
-<p>In the end, I have a Raspberry-Pi-controlled third monitor, in retro text mode.
-I'll use it mainly for display (logs, stdout of GUI or web things, etc.),
-but if I need control, I just click the top-left corner on my mouse-enabled
-main screen and type away.
-A popular generalization of <a href="http://en.wikipedia.org/wiki/Fitts%27s_law">Fitts' law</a>
-says this is very convenient, and I'm sure not arguing with that.</p>
-<p><a href="../images/2013-05-04-screenshot.png"><img alt="Screenshot of my screen with a red freehand arrow pointing at the pi-remote" class="size-full" src="../images/2013-05-04-screenshot.png" /></a></p>
-<p>Here's a review of my files, for future reference:</p>
-<p>At the main machine, named <code>tapio</code>, there's:</p>
-<ul>
-<li>
-<p>~/bin/pi-remote:</p>
-<div class="highlight"><pre>xterm -T <span class="s1">&#39;rpi remote!&#39;</span> +sb call-to-pi &amp;
-</pre></div>
-
-
-</li>
-<li>
-<p>~/bin/call-to-pi:</p>
-<div class="highlight"><pre>ssh -t eckpi <span class="s1">&#39;env | grep ^SSH  &gt; ~/.ssh/third_monitor_callback_env; stty cols 256; stty rows 256; ~/bin/nowinch tmux attach-session -t third-monitor&#39;</span>
-</pre></div>
-
-
-</li>
-<li>
-<p>~/.kde/share/config/kwinrulesrc (partial):</p>
-<div class="highlight"><pre>[1]
-Description=Window settings for xterm
-above=true
-aboverule=3
-clientmachine=tapio
-clientmachinematch=0
-desktop=-1
-desktoprule=3
-fsplevel[$d]
-fsplevelrule[$d]
-noborder=true
-noborderrule=3
-position=0,0
-positionrule=2
-size=26,20
-sizerule=3
-title=rpi remote!
-titlematch=1
-types=1
-wmclass=xterm
-wmclasscomplete=false
-wmclassmatch=1
-</pre></div>
-
-
-</li>
-</ul>
-<p>And at the Pi side, there's <code>~/bin/nowinch</code> modified from the signal blocker
-from <a href="http://stackoverflow.com/a/4515549/99057">StackOverflow</a>,
-and <code>~/bin/tapio</code> to SSH back home:</p>
-<div class="highlight"><pre><span class="k">while </span><span class="nb">read </span>line; <span class="k">do</span>
-<span class="k">    </span><span class="nb">declare</span> -x <span class="s2">&quot;$line&quot;</span>
-<span class="k">done</span> &lt; ~/.ssh/third_monitor_callback_env
-ssh tapio
-</pre></div>
-
-
-<p>And, of course, an always-on <code>tmux</code> session.
-I sometimes press Ctrl-D by mistake and don't want to get disconnected,
-so I run the shell in a loop:</p>
-<div class="highlight"><pre>tmux new-session -s third-monitor <span class="s1">&#39;while true; bash; reset; done&#39;</span>
-</pre></div>
-
-
-<p>I sure hope there is an easier way to do this. Anyone?</p>
-		</div> <!--/#entry-content-->
+        </div>
+        <div class="read-on"><a href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen">
+                            Read on»
+                    </a></div>
+    		</div> <!--/#entry-content-->
 		    		<span class="tag-links"><strong>Tagged</strong>
     			    			 <a href="http://encukou.cz/blog/tag/quassel" rel="tag">quassel</a>,  <a href="http://encukou.cz/blog/tag/raspberry" rel="tag">raspberry</a>,  <a href="http://encukou.cz/blog/tag/shell" rel="tag">shell</a>,  <a href="http://encukou.cz/blog/tag/tmux" rel="tag">tmux</a>    		</span>
     		</div> <!--/#main-->
@@ -247,269 +80,21 @@ so I run the shell in a loop:</p>
 			<a href="http://encukou.cz/blog/2013/03/03/cs-stavove-prostory" title="Permalink to Stavové prostory" rel="bookmark">Stavové prostory</a>
 		</h2>
 		<div class="entry-content">
-			<p><a href="http://glutexo.livejournal.com/137926.html">Glutexo píše</a>:</p>
+			            <div class="post-summary">
+        <p><a href="http://glutexo.livejournal.com/137926.html">Glutexo píše</a>:</p>
 <blockquote>
 <p>Narazil jsem na drsné a vytůněné Sudoku: Podobá se klasickému killer sudoku:
 V začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
 kterých vždy víme součet čísel v nich, a také víme, že kromě řádků, sloupců
-a čtverců se ani v těchto ohraničených oblastech číslice neopakují.</p>
-<p>Řešení takového sudoku však nejspíše není unikátní (nakrmil jsem jím řešítko,
-které jsem si našel), ale výsledek nebyl takový, jaký jsem chtěl: Chtěl jsem
-jiné možné řešení, ne libovolné. A nejspíše právě proto je zadání obohaceno
-ještě o informace o některých dvojicích sousedících políček, že na jedné
-straně je číslo větší než to na druhé.</p>
-<p>Zajímalo mě, zda na to lze jít metodou hrubé síly, tedy projít si všech 9^81
-kombinací a porovnat je proti zadání. Nešlo: Za deset minut běhu program
-prokombinoval jen třikrát prvních osm pozic. Takže než by prošel všechny,
-uplynula by přibližně věčnost. Takže na to budeme muset jít jinak. Jak?</p>
-<p>Pár možností mě napadá: Např. zjistit si pro každou ohraničenou oblast
-všechny možné kombinace čísel v rozsahu 1-9, které dají při daném počtu polí
-daný součet a následně do oblastí dosazovat tato čísla ve všech možných
-kombinacích. Pak už by stačilo jen pro každé vyplnění plochy jen zvalidovat,
-zda platí základní pricipy sudoku a zda platí ona pravidla o tom, které ze
-sousedních polí má obsahovat větší číslo. Ale nedostanu se tím opět do
-astronomické množství kombinací a tak času? Uvidíme, ale jindy.</p>
-<p>Nebo máte někdo nějaký nápad, nebo dokonce víte a jste ochotni mi řešení
-představit a vysvětlit? Rád se přiučím.</p>
-<p>A pokud by někoho zajímalo zadání, tak se jedná o kešku Loki's mystery
-(GCZE5N).</p>
-</blockquote>
-<p>Napsal jsem program, který to vyluští za <s>11 vteřin</s>*, v pomalém Pythonu bez
-velkých optimalizací, jen s rozumným algoritmem.
-Zkusím tu docela detailně popsat jak na to. Třeba to nebude nudné.
-Kdyby něco naopak nebylo k pochopení, prosím čtenáře, aby se ozval.</p>
-<p>* <i>Upřesnění: celý graf to projde za 3 minuty, 11 vteřin bylo jen štěstí.</i></p>
-<p>Na podobné úlohy platí různé techniky prohledávání stavového prostoru.
-Zrovna tady si vystačíš s relativně jednoduchými, takže se to bude dobře
-vysvětlovat.</p>
-<p>Než začneme se stavovým prostorem, musíme vědět co je to stav.
-Pro sudoku si stav můžeme definovat jako 9x9 pole, kde v každém políčku
-budou číslice, které tam teoreticky můžou nakonec vyjít.
-V počátečním stavu budou všechna políčka obsahovat všech 9 možných čislic:</p>
-<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∨ ──┼───────┼── ∧ ──╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 2
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∧ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 3
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∨ ══╬═══════╪═══════╪═══════╣
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∨ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &gt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 5
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟───────┼───────┼───────╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 &gt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 6
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∧ ══╬══ ∧ ══╪══ ∨ ══╪══ ∧ ══╣
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 7
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟───────┼───────┼───────╫───────┼───────┼───────╫───────┼── ∧ ──┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &gt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 │ 4 5 6 ║ 8
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∧ ──┼── ∧ ──┼───────╫───────┼───────┼── ∧ ──╫───────┼───────┼── ∧ ──╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 9
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╚═══════╧═══════╧═══════╩═══════╧═══════╧═══════╩═══════╧═══════╧═══════╝
-    A       B       C       D       E       F       G       H       I
-</pre></div>
+a čtverců se ani v těchto ohraničených oblastech číslice neopakují.
 
-
-<p>No a abychom se dostali dál, budeme z tohohle stavu některá čísla odebírat.
-Třeba, pro začátek, hrubou silou: vygenerujeme devět stavů, které jsou stejné
-jako tenhle původní, jen v políčku A1 mají každý vybranou jednu číslici.
-Třetí z nich by vypadal takhle:</p>
-<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
-║     3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║       │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
-║       │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∨ ──┼───────┼── ∧ ──╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 2
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∧ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 3
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∨ ══╬═══════╪═══════╪═══════╣
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∨ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &gt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 5
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟───────┼───────┼───────╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 &gt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 6
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∧ ══╬══ ∧ ══╪══ ∨ ══╪══ ∧ ══╣
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 7
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟───────┼───────┼───────╫───────┼───────┼───────╫───────┼── ∧ ──┼───────╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &gt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 │ 4 5 6 ║ 8
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∧ ──┼── ∧ ──┼───────╫───────┼───────┼── ∧ ──╫───────┼───────┼── ∧ ──╢
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 9
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╚═══════╧═══════╧═══════╩═══════╧═══════╧═══════╩═══════╧═══════╧═══════╝
-    A       B       C       D       E       F       G       H       I
-</pre></div>
-
-
-<p>Nu a z tohohle stavu se jde "dostat" do dalších devíti stavů, každého s jedinou
-číslicí v políčku B1.</p>
-<p>Jeden z těchto nových stavů (B1==3) nebude odpovídat
-pravidlům. Navíc všechny další stavy, které z něj můžeme dostat odebíráním
-možností, budou taky špatně. Takže tenhle stav můžeme vyloučit.</p>
-<p>A tímhle způsobem dostaneme obrovitánský graf stavů.
-Graf vytvořený takhle hrubou silou bude až moc velký na to, aby se dal rozumně
-pozkoumat, ale důležité je, že obsahuje všechny stavy odpovídající pravidlům.
-(Vlastně je pro nás důležité jen to, že určitě obsahuje <em>řešení</em> (pokud nějaké
-existuje), ale vzhledem k tomu že řešení neznáme, všechny "správné" stavy budou
-muset stačit.)</p>
-<p>Zbývá jen nějak zajistit, abychom nemuseli procházet ten graf celý, ale
-zkusili v něm hledat rozumné cesty a zkratky, které nás k cíli dovedou co
-nejrychleji. Tedy, použít něco lepšího než hroubou sílu.</p>
-<p>(Jen podotknu že ten graf nemusí být nutně stromem; do jednoho stavu se může
-dát dostat několika různými cestami.)</p>
-<p>Základní schéma algoritmu na prohledávání stavového prostoru je následující
-(s komentáři tam, kde Pythonová syntax není naprosto pruhledná):</p>
-<div class="highlight"><pre><span class="nb">open</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_state</span><span class="p">]</span>  <span class="c"># `[v]` je seznam s jedním prvkem, `v`</span>
-<span class="n">closed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c"># prázdná množina</span>
-
-<span class="k">while</span> <span class="nb">open</span><span class="p">:</span>  <span class="c"># dokud je něco v open</span>
-    <span class="n">current</span> <span class="o">=</span> <span class="n">take_one</span><span class="p">(</span><span class="nb">open</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">is_goal</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">current</span>
-    <span class="n">closed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
-    <span class="k">for</span> <span class="nb">next</span> <span class="ow">in</span> <span class="n">generate_next_states</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">next</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">closed</span> <span class="ow">and</span> <span class="n">is_valid</span><span class="p">(</span><span class="nb">next</span><span class="p">):</span>
-            <span class="nb">open</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Algoritmus nemá k dispozici celý graf (to by se těžko vešlo do paměti!),
-ale "tvoří" si ho pomocí funkce <code>generate_next_states</code>, která prostě vrátí
-seznam stavů, do kterých se z daného stavu dá dostat.</p>
-<p>Množina <code>open</code> obsahuje všechny stavy které chceme ještě prozkoumat, neboli
-"hranici" zatím prozkoumané části grafu. Množina <code>closed</code> obsahuje stavy, které
-jsme už viděli; těmi se nemá cenu zabývat, pokud na ně narazíme znovu.</p>
-<p>Tož to by byl učebnicový algoritmus.
-Teď teoreticky všechno závisí jen na tom, jak chytře navrhneme funkce
-<code>take_one()</code> a <code>generate_next_states()</code>.
-Dám několik tipů, které jsem použil já.</p>
-<p>Přímo v <code>generate_next_states</code> je dobré vyhazovat čísla, která neodpovídají
-pravidlům. Já jsem dal tuhle logiku přímo do konstruktoru třídy Stav, takže
-můj první stav vypadá ve skutečnosti takhle:</p>
-<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
-║   2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │     3 │   2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
-║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∨ ──┼───────┼── ∧ ──╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
-║ 1 2 3 │ 1 2 3 │   2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 2
-║       │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7     ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟── ∧ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
-║   2 3 │     3 │       ║ 1 2 3 │ 1 2 3 │     3 ║       │   2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 3
-║ 7     │ 7 8   │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8   ║
-╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∨ ══╬═══════╪═══════╪═══════╣
-║     3 │       │ 1 2 3 ║   2 3 │ 1 2 3 │   2 3 ║ 1 2 3 │   2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4
-║ 7 8   │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7     ║       │ 7 8 9 │ 7 8   ║
-╟── ∨ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
-║   2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │     3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
-║ 4 5 6 &gt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 5
-║ 7     │       │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╟───────┼───────┼───────╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
-║ 1 2 3 │   2 3 │ 1 2 3 ║   2 3 │ 1 2 3 │   2 3 ║ 1 2 3 │   2 3 │ 1 2 3 ║
-║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 &gt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 6
-║ 7 8   │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7     │ 7 8   ║ 7 8   │ 7 8 9 │ 7 8   ║
-╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∧ ══╬══ ∧ ══╪══ ∨ ══╪══ ∧ ══╣
-║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │   2 3 │     3 ║   2 3 │ 1 2 3 │   2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 7
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8   │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8   │ 7 8 9 ║
-╟───────┼───────┼───────╫───────┼───────┼───────╫───────┼── ∧ ──┼───────╢
-║   2 3 │ 1 2 3 │ 1 2 3 ║   2 3 │ 1 2 3 │   2 3 ║ 1 2 3 │   2 3 │ 1 2 3 ║
-║ 4 5 6 &gt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 │ 4 5 6 ║ 8
-║ 7 8   │ 7     │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7     │ 7 8 9 │ 7 8   ║
-╟── ∧ ──┼── ∧ ──┼───────╫───────┼───────┼── ∧ ──╫───────┼───────┼── ∧ ──╢
-║     3 │   2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │     3 ║ 1 2 3 │ 1 2 3 │   2 3 ║
-║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 9
-║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
-╚═══════╧═══════╧═══════╩═══════╧═══════╧═══════╩═══════╧═══════╧═══════╝
-    A       B       C       D       E       F       G       H       I
-</pre></div>
-
-
-<p>Moje implementace tu dělá několik věcí:</p>
-<ul>
-<li>vyhazuje čísla podle zadaných nerovností (pokud má jedno číslo
-být větší než druhé, které může být 3-8, tak bude určitě 4 nebo víc).</li>
-<li>vyhazuje čísla z řádků, sloupců, čtverců a oblastí, pokud v jiném políčku
-  je už dané číslo vybrané</li>
-<li>vyhazuje čísla, která nemůžou dát daný součet pro oblast</li>
-<li>ještě by mohla vybrat číslo, pokud se v řádku/sloupci/čtverci jen jedno
-  políčko kde je to číslo možné, ale našel jsem řešení než jsem tohle stihl
-  napsat, tak jsem se na to vykašlal.</li>
-</ul>
-<p>Tím, že tohle dělám co nejdřív, se vyhýbám spoustě zbytečných stavů. Vzhledem k
-tomu, že každý stav nejen potřebuje nějaký ten procesorový čas a paměť, ale
-navíc se pak množí jak králík v Austrálii, je dobré takhle normalizovat co
-nejagresivněji.</p>
-<p>Další místo, kde je možné algoritmus potunit, je výběr políčka, ve kterém se
-budou generované stavy lišit.
-Já vždycky vyberu políčko s nejnižším počtem možností (kromě 1, samozřejmě).
-Tím docílím toho, že každý stav má co nejmenší počet "potomků", takže graf
-neroste tak rychle.
-Je samozřejmě možné zvolit úplně jinou strategii. Fungovalo by třeba udělat
-potomky dva: jednoho s první možností v daném políčku, a druhého s možnostmi
-ostatními. Dokonce není nutné generovat stavy lišící se jen v jednom políčku.
-Jen je důležité, aby existovala cesta ke každému validnímu stavu (nebo teda
-aspoň k tomu cílovému).</p>
-<p>Tohle tunění tvaruje prozkoumávanou oblast grafu, je tak širší nebo hlubší,
-rozvětvenější nebo kompaktnější.
-Nějaké velké optimalizování je silně závislé na problému,
-a je to leckdy spíš umění než exaktní věda.
-Naštěstí na tohle sudoku nic moc složitého potřeba není.</p>
-<p>No a snad poslední kritické místo v algoritmu je funkce <code>take_one</code>, která vyjme
-a vrátí další stav, kterým se bude program zabývat.
-Může například zvolit vždycky nejstarší prvek ze seznamu (v tom případě jde o
-hledání "do šířky", které se vyplatí třeba pokud víme že cíl není v grafu
-příliš hluboko), nebo naopak nejnovější (hledání do hloubky).
-Taky jde jednotlivým stavům přiřadit skóre, a vždycky vybrat ten stav, který
-nejvíc vypadá že povede ke správnému řešení.
-Vyrobit na tohle dobrou hodnotící funkci je celkem kumšt; já to tady zkusil,
-ale nakonec jsem zjistil že je to rychlejší bez ní.</p>
-<p>(Na takové hodnotící funkci jsou pak založené algoritmy jako A*, které nejen že
-ve stavovém prostoru najdou cíl, ale vrátí opotimální cíl a optimální cestu k
-němu. Typické použití: AI ve hrách.)</p>
-<p>A na závěr jeden tip: je dobré investovat nějaký čas do funkcí na zobrazení
-stavů nebo toho, jak si algoritmus vede (např. velikosti množin <code>open</code> a
-<code>closed</code>; cesta grafem k právě prohledávanému stavu, atd.).
-Možná není potřeba to přehánět jako já (ty ASCII-arty výše jsou v mém programu
-navíc obarvené podle oblastí se součtem), ale cokoli pomůže pochopit to, co se
-vevnitř děje, hodně pomáhá.</p>
-<p>Tož přeji hezké programování, snad tenhle výlev trochu pomůže.</p>
-		</div> <!--/#entry-content-->
+        </div>
+        <div class="read-on"><a href="http://encukou.cz/blog/2013/03/03/cs-stavove-prostory">
+                            Číst dál»
+                    </a></div>
+    		</div> <!--/#entry-content-->
 		    		<span class="tag-links"><strong>Tagged</strong>
-    			    			 <a href="http://encukou.cz/blog/tag/geocaching" rel="tag">geocaching</a>    		</span>
+    			    			 <a href="http://encukou.cz/blog/tag/algorithm" rel="tag">algorithm</a>,  <a href="http://encukou.cz/blog/tag/geocaching" rel="tag">geocaching</a>    		</span>
     		</div> <!--/#main-->
 </div>  <!--/#post-->			<div class="post type-post status-publish format-standard hentry category-general" id="post">
 	<div class="entry-meta">
@@ -520,33 +105,18 @@ vevnitř děje, hodně pomáhá.</p>
 			<a href="http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice" title="Permalink to Caps Lock a přepínání klávesnice" rel="bookmark">Caps Lock a přepínání klávesnice</a>
 		</h2>
 		<div class="entry-content">
-			<p>Caps Lock je k ničemu.
+			            <div class="post-summary">
+        <p>Caps Lock je k ničemu.
 Posledních asi pět let jsem ho mačkal prakticky jen omylem.
 Možná to je tím, že neumím psát všema deseti, a tudíž věci jako
 LD_LIBRARY_PATH nebo UNESCO jdou napsat rychle jen se Shiftem – každopádně fakt
 je, že Caps Lock mi je k ničemu.</p>
-<p>Když jsem ještě pracoval na desktopu, byl na klávesnici Scroll Lock – ještě
-méně užitečná klávesa, která nedělala vůbec nic.
-Přemapoval jsem si ho na přepnutí mezi anglickou a českou klávesnicí,
-což fungovalo krásně.
-Dokonce s LED indikátorem sekundárního rozložení.
-Po nějaké době jsem smazal nápis Scroll Lock a nakreslil na tu klávesu českou
-vlaječku.</p>
-<p>Pak jsem přešel na laptop.
-Scroll Lock je kdesi na Fň-F9, což je natolik neergonomická a
-nezapamatovatelná zkratka, že jsem častěji přepínal rozložení myší.
-Světýlko ale pořád fungovalo, což bylo cool.</p>
-<p>Na novém Thinkpadu ale už ani to světýlko není.
-A tak jsem přemapoval změnu klávesnice na Caps Lock.
-To ovšem nefungovalo moc dobře, protože jsem často onu klávesu zmáčkl omylem,
-a pak se najednou divil že místo čísel píšu ěščř.</p>
-<p>Pak jsem na to přišel.
-Shift+Caps přepne na češtinu, Caps na angličtinu.
-A tak to mám doteď, i když je pravda že českou klávesnici zas tak často
-nepoužívám,
-takže je to možná stejně zbytečné.</p>
-<p>Jestli nakonec nebude přece jen lepší mít na místě Capsu druhý Backspace…</p>
-		</div> <!--/#entry-content-->
+
+        </div>
+        <div class="read-on"><a href="http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice">
+                            Číst dál»
+                    </a></div>
+    		</div> <!--/#entry-content-->
 		    		<span class="tag-links"><strong>Tagged</strong>
     			    			 <a href="http://encukou.cz/blog/tag/capslock" rel="tag">capslock</a>,  <a href="http://encukou.cz/blog/tag/posterous" rel="tag">posterous</a>    		</span>
     		</div> <!--/#main-->
@@ -559,34 +129,24 @@ takže je to možná stejně zbytečné.</p>
 			<a href="http://encukou.cz/blog/2011/10/13/en-rip-dennis-ritchie" title="Permalink to Dennis Ritchie has died." rel="bookmark">Dennis Ritchie has died.</a>
 		</h2>
 		<div class="entry-content">
-			<p>The Economist has a <a href="http://www.economist.com/node/2724348">very good article</a>
-on some of his work; you should read it if you haven't done so already.
-I quote:</p>
-<blockquote>
-<p>Dr Ritchie likes to emphasise that he was just one member of a group.
-With characteristic modesty, he suggests that many of the improvements he
-introduced when developing C simply “looked like a good thing to do”.
-Anyone else in the same place at the same time, he implies, would have done
-the same thing.</p>
-</blockquote>
-<p>In other words, he Did the Right Thing; he found the answer that is, in
-retrospect, obvious. That is the mark of a genius.</p>
-<p>His ideas stood the test of time. He has reached a local maximum: Java or C++
-or C# are object-oriented languages; C is the procedural language. Sure, there
-may be something better than C, in some sense of the word.
-It's like Newton's laws being surpassed by Einstein's relativity – C will still
-be there.
-Still valid, still useful, still used.</p>
+			            <div class="post-summary">
+        
+
 <p>We have lost a humble genius, a mathematician, an architect of the abstract.
 It's sad that most poeple will never be able to appreciate the beauty of things
 he has done.
 Perhaps that, too, is the mark of a genius.</p>
-		</div> <!--/#entry-content-->
+        </div>
+        <div class="read-on"><a href="http://encukou.cz/blog/2011/10/13/en-rip-dennis-ritchie">
+                            Read on»
+                    </a></div>
+    		</div> <!--/#entry-content-->
 		    		<span class="tag-links"><strong>Tagged</strong>
-    			    			 <a href="http://encukou.cz/blog/tag/sad" rel="tag">sad</a>    		</span>
+    			    			 <a href="http://encukou.cz/blog/tag/posterous" rel="tag">posterous</a>,  <a href="http://encukou.cz/blog/tag/sad" rel="tag">sad</a>    		</span>
     		</div> <!--/#main-->
 </div>  <!--/#post-->				</div>
 
+        
 		<div id="footer">
 			<p>
     powered by <a href="http://getpelican.com/">Pelican</a>

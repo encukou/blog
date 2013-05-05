@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2013-05-04T00:00:00+02:00</updated><entry><title>Raspberry Pi and my Third Screen</title><link href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen" rel="alternate"></link><updated>2013-05-04T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-05-04:blog/2013/05/04/en-raspberry-third-screen</id><summary type="html">&lt;h1&gt;Berry-flavored resurrection&lt;/h1&gt;
-&lt;p&gt;Today, I finally figured out what was wrong with my Raspberry Pi.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2013-05-04T00:00:00+02:00</updated><entry><title>Raspberry Pi and my Third Screen</title><link href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen" rel="alternate"></link><updated>2013-05-04T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-05-04:blog/2013/05/04/en-raspberry-third-screen</id><summary type="html">&lt;p&gt;Today, I finally figured out what was wrong with my Raspberry Pi.
 It &lt;a href="http://file3.status.net/i/identica/encukou-20130120T115619-yw8xyls.jpeg"&gt;worked before&lt;/a&gt;,
 connected to a TV, without ethernet, and with a power supply and keyboard
 borrowed from my brother.
@@ -14,6 +13,8 @@ Luckily, I can easily get micro-USB cable, even on a Saturday.
 &lt;p&gt;Hooray! A working computer! Let's try new things with it!
 I've used &lt;code&gt;apt&lt;/code&gt; in Ubuntu for quite some time, so I thought Raspbian would be too
 boring, and decided to go for Arch. So far it's been working nicely.&lt;/p&gt;
+
+
 &lt;h1&gt;Quassel&lt;/h1&gt;
 &lt;p&gt;My first reason for having a Pi is a (hopefully) always-on IRC client.
 I've been using &lt;a href="http://www.quassel-irc.org/"&gt;Quassel&lt;/a&gt; at work, where I leave
@@ -121,7 +122,7 @@ but if I need control, I just click the top-left corner on my mouse-enabled
 main screen and type away.
 A popular generalization of &lt;a href="http://en.wikipedia.org/wiki/Fitts%27s_law"&gt;Fitts' law&lt;/a&gt;
 says this is very convenient, and I'm sure not arguing with that.&lt;/p&gt;
-&lt;p&gt;&lt;a href="../images/2013-05-04-screenshot.png"&gt;&lt;img alt="Screenshot of my screen with a red freehand arrow pointing at the pi-remote" class="size-full" src="../images/2013-05-04-screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/static/../images/2013-05-04-screenshot.png"&gt;&lt;img alt="Screenshot of my screen with a red freehand arrow pointing at the pi-remote" class="size-full" src="http://encukou.cz/static/../images/2013-05-04-screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Here's a review of my files, for future reference:&lt;/p&gt;
 &lt;p&gt;At the main machine, named &lt;code&gt;tapio&lt;/code&gt;, there's:&lt;/p&gt;
 &lt;ul&gt;
@@ -190,8 +191,9 @@ so I run the shell in a loop:&lt;/p&gt;
 &lt;p&gt;Narazil jsem na drsné a vytůněné Sudoku: Podobá se klasickému killer sudoku:
 V začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
 kterých vždy víme součet čísel v nich, a také víme, že kromě řádků, sloupců
-a čtverců se ani v těchto ohraničených oblastech číslice neopakují.&lt;/p&gt;
-&lt;p&gt;Řešení takového sudoku však nejspíše není unikátní (nakrmil jsem jím řešítko,
+a čtverců se ani v těchto ohraničených oblastech číslice neopakují.
+
+Řešení takového sudoku však nejspíše není unikátní (nakrmil jsem jím řešítko,
 které jsem si našel), ale výsledek nebyl takový, jaký jsem chtěl: Chtěl jsem
 jiné možné řešení, ne libovolné. A nejspíše právě proto je zadání obohaceno
 ještě o informace o některých dvojicích sousedících políček, že na jedné
@@ -444,11 +446,13 @@ stavů nebo toho, jak si algoritmus vede (např. velikosti množin &lt;code&gt;o
 Možná není potřeba to přehánět jako já (ty ASCII-arty výše jsou v mém programu
 navíc obarvené podle oblastí se součtem), ale cokoli pomůže pochopit to, co se
 vevnitř děje, hodně pomáhá.&lt;/p&gt;
-&lt;p&gt;Tož přeji hezké programování, snad tenhle výlev trochu pomůže.&lt;/p&gt;</summary><category term="geocaching"></category></entry><entry><title>Caps Lock a přepínání klávesnice</title><link href="http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice" rel="alternate"></link><updated>2011-11-21T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-11-21:blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</id><summary type="html">&lt;p&gt;Caps Lock je k ničemu.
+&lt;p&gt;Tož přeji hezké programování, snad tenhle výlev trochu pomůže.&lt;/p&gt;</summary><category term="geocaching"></category><category term="algorithm"></category></entry><entry><title>Caps Lock a přepínání klávesnice</title><link href="http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice" rel="alternate"></link><updated>2011-11-21T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-11-21:blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</id><summary type="html">&lt;p&gt;Caps Lock je k ničemu.
 Posledních asi pět let jsem ho mačkal prakticky jen omylem.
 Možná to je tím, že neumím psát všema deseti, a tudíž věci jako
 LD_LIBRARY_PATH nebo UNESCO jdou napsat rychle jen se Shiftem – každopádně fakt
 je, že Caps Lock mi je k ničemu.&lt;/p&gt;
+
+
 &lt;p&gt;Když jsem ještě pracoval na desktopu, byl na klávesnici Scroll Lock – ještě
 méně užitečná klávesa, která nedělala vůbec nic.
 Přemapoval jsem si ho na přepnutí mezi anglickou a českou klávesnicí,
@@ -487,7 +491,9 @@ may be something better than C, in some sense of the word.
 It's like Newton's laws being surpassed by Einstein's relativity – C will still
 be there.
 Still valid, still useful, still used.&lt;/p&gt;
+
+
 &lt;p&gt;We have lost a humble genius, a mathematician, an architect of the abstract.
 It's sad that most poeple will never be able to appreciate the beauty of things
 he has done.
-Perhaps that, too, is the mark of a genius.&lt;/p&gt;</summary><category term="sad"></category></entry></feed>
+Perhaps that, too, is the mark of a genius.&lt;/p&gt;</summary><category term="sad"></category><category term="posterous"></category></entry></feed>
