@@ -1,6 +1,6 @@
 Title: Stavové prostory
-Tags: geocaching
-Category: Hacking
+Tags: geocaching, algorithm
+Category: Computers
 
 [Glutexo píše](http://glutexo.livejournal.com/137926.html):
 
@@ -8,7 +8,7 @@ Category: Hacking
 > V začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
 > kterých vždy víme součet čísel v nich, a také víme, že kromě řádků, sloupců
 > a čtverců se ani v těchto ohraničených oblastech číslice neopakují.
-> 
+> <!-- PELICAN_END_SUMMARY -->
 > Řešení takového sudoku však nejspíše není unikátní (nakrmil jsem jím řešítko,
 > které jsem si našel), ale výsledek nebyl takový, jaký jsem chtěl: Chtěl jsem
 > jiné možné řešení, ne libovolné. A nejspíše právě proto je zadání obohaceno

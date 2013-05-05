@@ -1,5 +1,5 @@
 Title: Dennis Ritchie has died.
-Tags: sad
+Tags: sad, posterous
 Category: Comments
 
 The Economist has a [very good article](http://www.economist.com/node/2724348)
@@ -22,6 +22,7 @@ It's like Newton's laws being surpassed by Einstein's relativity – C will stil
 be there.
 Still valid, still useful, still used.
 
+<!-- PELICAN_BEGIN_SUMMARY -->
 We have lost a humble genius, a mathematician, an architect of the abstract.
 It's sad that most poeple will never be able to appreciate the beauty of things
 he has done.

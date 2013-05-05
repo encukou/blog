@@ -1,12 +1,14 @@
 Title: Caps Lock a přepínání klávesnice
 Tags: posterous, capslock
-Category: Hacking
+Category: Computers
 
 Caps Lock je k ničemu.
 Posledních asi pět let jsem ho mačkal prakticky jen omylem.
 Možná to je tím, že neumím psát všema deseti, a tudíž věci jako
 LD_LIBRARY_PATH nebo UNESCO jdou napsat rychle jen se Shiftem – každopádně fakt
 je, že Caps Lock mi je k ničemu.
+
+<!-- PELICAN_END_SUMMARY -->
 
 Když jsem ještě pracoval na desktopu, byl na klávesnici Scroll Lock – ještě
 méně užitečná klávesa, která nedělala vůbec nic.

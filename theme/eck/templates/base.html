@@ -72,6 +72,8 @@
 			{% endblock %}
 		</div>
 
+        {% block page_specific_navigation %}{% endblock %}
+
 		<div id="footer">
 			<p>{{ FOOTER_TEXT or 'Powered by <a href="http://getpelican.com">Pelican</a>, theme by <a href="http://bunnyman.info">tBunnyMan</a>.' }}</p>
 			{% if GOOGLE_ANALYTICS %}

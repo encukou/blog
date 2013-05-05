@@ -1,9 +1,6 @@
 Title: Raspberry Pi and my Third Screen
 Tags: raspberry, shell, quassel, tmux
-Category: Hacking
-
-Berry-flavored resurrection
-===========================
+Category: Computers
 
 Today, I finally figured out what was wrong with my Raspberry Pi.
 It [worked before](http://file3.status.net/i/identica/encukou-20130120T115619-yw8xyls.jpeg),
@@ -21,6 +18,8 @@ Luckily, I can easily get micro-USB cable, even on a Saturday.
 Hooray! A working computer! Let's try new things with it!
 I've used `apt` in Ubuntu for quite some time, so I thought Raspbian would be too
 boring, and decided to go for Arch. So far it's been working nicely.
+
+<!-- PELICAN_END_SUMMARY -->
 
 Quassel
 =======
@@ -159,7 +158,7 @@ main screen and type away.
 A popular generalization of [Fitts' law](http://en.wikipedia.org/wiki/Fitts%27s_law)
 says this is very convenient, and I'm sure not arguing with that.
 
-[![Screenshot of my screen with a red freehand arrow pointing at the pi-remote](../images/2013-05-04-screenshot.png){.size-full}](../images/2013-05-04-screenshot.png)
+[![Screenshot of my screen with a red freehand arrow pointing at the pi-remote](|filename|../images/2013-05-04-screenshot.png){.size-full}](|filename|../images/2013-05-04-screenshot.png)
 
 Here's a review of my files, for future reference:
 

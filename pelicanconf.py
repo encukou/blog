@@ -80,6 +80,7 @@ ARTICLE_LANG_SAVE_AS = ARTICLE_SAVE_AS
 
 YEAR_ARCHIVE_SAVE_AS = 'blog/{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/index.html'
+DAY_ARCHIVE_SAVE_AS = 'blog/{date:%Y}/{date:%m}/{date:%d}/index.html'
 
 PAGE_URL = '{slug}.html'
 PAGE_SAVE_AS = PAGE_URL
@@ -103,3 +104,8 @@ ARCHIVES_URL = 'blog/archive'
 ARCHIVES_SAVE_AS = ARCHIVES_URL + '/index.html'
 
 DEFAULT_LANG = "don't have one"
+
+SUMMARY_MAX_LENGTH = None
+
+PLUGIN_PATH = 'pelican-plugins'
+PLUGINS = ['summary', 'neighbors']

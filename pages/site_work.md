@@ -2,7 +2,7 @@ Title: I work
 Slug: site_3_work
 Summary:  ![](../images/home/box-gray.png)
 
-Currently, I work for [Red Hat](http://redhat.com)
+Currently, I work at [Red Hat](http://redhat.com)
 on the [FreeIPA](http://freeipa.org) project:
 an open-source identity management framework.
 

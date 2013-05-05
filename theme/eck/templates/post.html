@@ -16,7 +16,7 @@
 			<a href="{{ SITEURL }}/{{ article.url }}" title="Permalink to {{ article.title|striptags }}" rel="bookmark">{{ article.title }}</a>
 		</h2>
 		<div class="entry-content">
-			{{ article.content }}
+			{% block article_content %}{{ article.content }}{% endblock %}
 		</div> <!--/#entry-content-->
 		{% if article.tags %}
     		<span class="tag-links"><strong>Tagged</strong>

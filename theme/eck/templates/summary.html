@@ -1,0 +1,17 @@
+{% extends "post.html" %}
+{% block article_content %}
+    {% if article.summary == article.content %}
+        {{ article.content }}
+    {% else %}
+        <div class="post-summary">
+        {{ article.summary }}
+        </div>
+        <div class="read-on"><a href="{{ SITEURL }}/{{article.url}}">
+            {% if article.lang == 'cs' %}
+                Číst dál»
+            {% else %}
+                Read on»
+            {% endif %}
+        </a></div>
+    {% endif %}
+{% endblock %}
