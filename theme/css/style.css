@@ -41,6 +41,9 @@ body {
 	margin-left: 199px;
 	padding-bottom: 10px;
 }
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
 
 
 /* =Header
@@ -48,7 +51,6 @@ body {
 #site-title {
 	color: #000;
 	font-family: 'Jockey One', Helvetica, Arial, sans-serif;
-	font-weight: bold;
 	font-size: 80px;
 	margin: 0px;
 	text-transform: uppercase;
@@ -76,7 +78,6 @@ body {
 	color: #666;
 	display: inline-block;
 	font-size: 14px;
-	font-weight: 300;
 	margin-top: 0;
 	margin-bottom: 50px;
 	padding: 6px 10px;
@@ -249,7 +250,6 @@ body {
 }
 .hentry .entry-meta .date {
 	color: #000;
-	font-weight: bold;
 	margin: 0px;
 }
 .hentry .entry-meta .comments {
@@ -261,7 +261,6 @@ body {
 .hentry .entry-meta .comments a {
 	color: #36bcab;
 	font-size: 22px;
-	font-weight: bold;
 	text-decoration: none;
 }
 .hentry .entry-meta .cat-links {
@@ -524,9 +523,6 @@ ul ul, ol ol, ul ol, ol ul {
 .format-chat .entry-content p {
 	margin: 0.5em 0;
 }
-.format-chat .entry-content p:nth-child(odd) {
-	font-weight: bold;
-}
 
 
 /* =Images
@@ -637,7 +633,6 @@ article.comment {
 }
 .comment .comment-author cite {
 	font-style: normal;
-	font-weight: bold;
 }
 .comment .comment-meta {
 	font-size: 11px;
@@ -676,9 +671,6 @@ article.comment {
 .commentlist .reblog .comment-meta,
 .commentlist .reblog .comment-author {
 	display: none;
-}
-.commentlist .reblog p:first-of-type a {
-	font-weight: bold;
 }
 .comment .reply a,
 .reblog .reply a,
@@ -793,7 +785,6 @@ article.comment {
 .widget_calendar #wp-calendar caption {
 	color: #000;
 	font-size: 16px;
-	font-weight: bold;
 	padding: 0 0 3px 0;
 	text-transform: uppercase;
 }
@@ -801,7 +792,6 @@ article.comment {
 	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #ccc;
 	color: #000;
-	font-weight: bold;
 }
 .widget_calendar #wp-calendar tfoot td {
 	border-bottom: 1px solid #ccc;
@@ -896,7 +886,6 @@ article.comment {
 	clear: both;
 	color: #888;
 	font-size: 11px;
-	font-weight: bold;
 	height: auto;
 	margin: 50px 0 30px;
 	padding-top: 25px;
