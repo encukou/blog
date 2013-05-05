@@ -18,8 +18,9 @@ body {
 	background-color: #fff;
 	background-image: -moz-linear-gradient( rgba(0,0,0,0.22), rgba(255,255,255,0) 80px );
 	background-image: -webkit-linear-gradient( rgba(0,0,0,0.22), rgba(255,255,255,0) 80px );
+    background-repeat: no-repeat;
 	color: #555;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Signika', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 13px;
 	margin: 0;
 	text-align: center;
@@ -46,7 +47,7 @@ body {
 ----------------------------------------------- */
 #site-title {
 	color: #000;
-	font-family: 'Oswald', Helvetica, Arial, sans-serif;
+	font-family: 'Jockey One', Helvetica, Arial, sans-serif;
 	font-weight: bold;
 	font-size: 80px;
 	margin: 0px;
@@ -59,12 +60,18 @@ body {
 	text-decoration: none;
 }
 #site-title a:hover {
-	color: #36bcab;
+    color: #bbb;
+}
+#site-title a:hover ._en,  #menu ._en:hover a {
+    color: #bc6b36;
+}
+#site-title a:hover ._cu, #menu ._cu:hover a {
+    color: #3691bc;
+}
+#site-title a:hover ._kou, #menu ._kou:hover a {
+    color: #bcae36;
 }
 #site-description {
-	background: #f1f1f1;
-	background-image: -webkit-linear-gradient( #f8f8f8, #eee);
-	background-image: -moz-linear-gradient( #f8f8f8, #eee);
 	border-radius: 3px;
 	color: #666;
 	display: inline-block;
@@ -82,9 +89,6 @@ body {
 /* =Menu
 ----------------------------------------------- */
 #menu {
-	border-bottom: 1px solid #ddd;
-	border-top: 1px solid #ddd;
-	margin-bottom: 25px;
 	padding: 10px;
 	text-align: right;
 	width: 800px;
@@ -93,8 +97,8 @@ body {
 	margin-bottom: 10px;
 }
 #menu a {
-	color: #666;
-	font-family: 'Oswald', Helvetica, Arial, sans-serif;
+	color: #ccc;
+	font-family: 'Jockey One', Helvetica, Arial, sans-serif;
 	font-size: 18px;
 	margin: 0 10px;
 	padding: 4px 0;
@@ -112,6 +116,9 @@ body {
 #menu li {
 	float: right;
 	position: relative;
+}
+#menu li a::before {
+    content: "›"
 }
 #access a {
 	color: #888;
@@ -184,15 +191,18 @@ body {
 	border-bottom: 1px dashed #ddd;
 	float: left;
 	line-height: 175%;
-	padding: 29px 5px 15px 15px;
+	padding: 19px 5px 15px 15px;
 	text-align: left;
 	width: 580px;
 }
+.hentry .main:last-child {
+    border-bottom-style: none;
+}
 .hentry .entry-meta {
-	font-family: 'Oswald', Helvetica, Arial, sans-serif;
+	font-family: 'Jockey One', Helvetica, Arial, sans-serif;
 	font-size: 25px;
 	float: left;
-	margin: 35px 0 0 -199px;
+	margin: 25px 0 0 -199px;
 	padding: 0px;
 	text-align: right;
 	text-transform: uppercase;
@@ -203,6 +213,12 @@ body {
 }
 .hentry .entry-meta div {
 	margin: 10px;
+}
+.hentry .entry-meta p {
+    margin: 0;
+}
+.hentry .entry-meta img {
+    width: 40%;
 }
 .hentry .entry-meta .date {
 	color: #000;
@@ -231,7 +247,7 @@ body {
 	color: #777;
 }
 .hentry .entry-meta .cat-links a:hover {
-	color: #36bcab;
+	color: #000;
 }
 .hentry .entry-meta .edit-link a {
 	font-size: 16px;
@@ -241,7 +257,7 @@ body {
 }
 .entry-title {
 	color: #666;
-	font-family: 'Oswald', Helvetica, Arial, sans-serif;
+	font-family: 'Jockey One', Helvetica, Arial, sans-serif;
 	font-size: 25px;
 	line-height: 38px;
 	margin: 5px 0px 15px 0px;
@@ -267,25 +283,20 @@ body {
 }
 blockquote {
 	background: #eee;
-	border-left: 10px solid #36bcab;
+	border-left: 10px solid #fff;
 	color: #000;
-	font-family: Georgia, Arial, Helvetica, sans-serif;
+	font-family: 'Signika', Georgia, Arial, Helvetica, sans-serif;
 	font-size: 15px;
 	padding: 10px;
 	text-align: justify;
+    font-weight: normal;
 }
 a {
 	color: #000;
 	text-decoration: underline;
 }
 a:hover {
-	color: #36bcab;
-}
-.entry-content a img {
-	border: 10px solid #ddd;
-}
-.entry-content a:hover img {
-	border: 10px solid #000;
+	color: #000;
 }
 b, strong {
 	color: #000;
@@ -654,7 +665,7 @@ article.comment {
 }
 .widget-title {
 	color: #555;
-	font-family: 'Oswald', Helvetica, Arial, sans-serif;
+	font-family: 'Jockey One', Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	margin: 0 0 12px 0;
 	text-transform: uppercase;
@@ -798,7 +809,7 @@ article.comment {
 #footer {
 	border-top: 1px solid #ddd;
 	clear: both;
-	color: #555;
+	color: #888;
 	font-size: 11px;
 	font-weight: bold;
 	height: auto;
@@ -808,7 +819,7 @@ article.comment {
 	width: 800px;
 }
 #footer a {
-	color: #36bcab;
+	color: #000;
 	text-decoration: none;
 }
 
@@ -817,4 +828,10 @@ article.comment {
 ----------------------------------------------- */
 .sharedaddy {
 	clear: both;
+}
+
+/* =ECK
+----------------------------------------------- */
+pre {
+    line-height: 1.2;
 }

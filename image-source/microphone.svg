@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Microphone icon -->
+
+<!-- Written by John Smith - http://john-smith.appspot.com -->
+
+<!-- Licenced under WTFPL - http://sam.zoy.org/wtfpl/ -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="98.235374"
+   height="98.235374"
+   id="microphone-icon"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="microphone.svg"
+   inkscape:export-filename="/home/petr/projects/blog/images/home/mic-gray.png"
+   inkscape:export-xdpi="469.07745"
+   inkscape:export-ydpi="469.07745">
+  <metadata
+     id="metadata3091">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3089">
+    <defs
+       id="defs3072">
+      <clipPath
+         id="mike-lower-half">
+        <rect
+           id="rect3075"
+           height="18"
+           width="80"
+           y="32"
+           x="20" />
+      </clipPath>
+    </defs>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1342"
+     inkscape:window-height="723"
+     id="namedview3087"
+     showgrid="false"
+     inkscape:zoom="1.9666667"
+     inkscape:cx="174.40678"
+     inkscape:cy="55.990132"
+     inkscape:window-x="24"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="microphone-icon"
+     fit-margin-top="1"
+     fit-margin-right="1"
+     fit-margin-bottom="1"
+     fit-margin-left="1" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path3077"
+     style="fill:#c4c4c4;fill-opacity:1;stroke:#c4c4c4;stroke-width:1;stroke-opacity:1"
+     d="M 8.3825616,36.666833 A 22,20 45 1 1 36.666833,8.3825616" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path3079"
+     style="fill:#c4c4c4;fill-opacity:1;stroke:#c4c4c4;stroke-width:1;stroke-opacity:1"
+     clip-path="url(#mike-lower-half)"
+     d="m 30,32 a 20,22 0 0 0 40,0"
+     transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,-34.043845,36.666833)" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path3081"
+     style="fill:#c4c4c4;fill-opacity:1;stroke:#c4c4c4;stroke-width:1;stroke-opacity:1"
+     d="M 31.009979,45.152114 45.152114,31.009979 91.114055,84.042987 84.042987,91.114055 31.009979,45.152114" />
+  <line
+     id="line3083"
+     style="fill:#c4c4c4;fill-opacity:1;stroke:#c4c4c4;stroke-width:8;stroke-linecap:butt;stroke-opacity:1"
+     y2="93.235374"
+     x2="93.235374"
+     y1="88.992729"
+     x1="88.992729" />
+  <text
+     xml:space="preserve"
+     style="font-size:6px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="2.0338957"
+     y="113.48962"
+     id="text3888"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3890"
+       x="2.0338957"
+       y="113.48962">From http://www.john-smith.me/the-de-facto-standard-icon-for-microphone-is-rubbish</tspan><tspan
+       sodipodi:role="line"
+       x="2.0338957"
+       y="120.98962"
+       id="tspan3892">WTFPL licensed.</tspan></text>
+</svg>

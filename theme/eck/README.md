@@ -1,3 +1,5 @@
+This theme is based on Chunk, whose readme follows:
+
 # Chunk for Pelican
 This is a "faithful as possible" translation of Chunk-wpcom v1.0 for Pelican 3. My goal is to make it near indistinguishable from the original.
 

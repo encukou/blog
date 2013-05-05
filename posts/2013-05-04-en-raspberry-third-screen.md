@@ -1,3 +1,6 @@
+Title: Raspberry Pi and my Third Screen
+Tags: raspberry, shell, quassel, tmux
+Category: Hacking
 
 Berry-flavored resurrection
 ===========================
@@ -131,10 +134,12 @@ There's probably an amazingly obvious way to do this, but after a while of
 searching I decided for a brute-force approach: before joining the session I
 save the SSH-related env:
 
+    :::bash
     env | grep ^SSH  > ~/.ssh/third_monitor_callback_env
 
 and before SSH-ing back, I restore it.
 
+    :::bash
     while read line; do declare -x "$line" done < ~/.ssh/third_monitor_callback_env
 
 Works for me.
@@ -154,19 +159,25 @@ main screen and type away.
 A popular generalization of [Fitts' law](http://en.wikipedia.org/wiki/Fitts%27s_law)
 says this is very convenient, and I'm sure not arguing with that.
 
-![Screenshot of my screen with a red freehand arrow pointing at the pi-remote](../images/2013-05-04-screenshot.png)
+[![Screenshot of my screen with a red freehand arrow pointing at the pi-remote](../images/2013-05-04-screenshot.png){.size-full}](../images/2013-05-04-screenshot.png)
 
 Here's a review of my files, for future reference:
 
 At the main machine, named `tapio`, there's:
 
-    ~/bin/pi-remote:
+* ~/bin/pi-remote:
+
+        :::bash
         xterm -T 'rpi remote!' +sb call-to-pi &
 
-    ~/bin/call-to-pi:
+* ~/bin/call-to-pi:
+
+        :::bash
         ssh -t eckpi 'env | grep ^SSH  > ~/.ssh/third_monitor_callback_env; stty cols 256; stty rows 256; ~/bin/nowinch tmux attach-session -t third-monitor'
 
-    ~/.kde/share/config/kwinrulesrc (partial):
+* ~/.kde/share/config/kwinrulesrc (partial):
+
+        :::text
         [1]
         Description=Window settings for xterm
         above=true
@@ -194,6 +205,7 @@ And at the Pi side, there's `~/bin/nowinch` modified from the signal blocker
 from [StackOverflow](http://stackoverflow.com/a/4515549/99057),
 and `~/bin/tapio` to SSH back home:
 
+    :::bash
     while read line; do
         declare -x "$line"
     done < ~/.ssh/third_monitor_callback_env
@@ -203,6 +215,7 @@ And, of course, an always-on `tmux` session.
 I sometimes press Ctrl-D by mistake and don't want to get disconnected,
 so I run the shell in a loop:
 
+    :::bash
     tmux new-session -s third-monitor 'while true; bash; reset; done'
 
 

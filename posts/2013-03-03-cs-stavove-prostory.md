@@ -1,3 +1,7 @@
+Title: Stavové prostory
+Tags: geocaching
+Category: Hacking
+
 [Glutexo píše](http://glutexo.livejournal.com/137926.html):
 
 > Narazil jsem na drsné a vytůněné Sudoku: Podobá se klasickému killer sudoku:
@@ -30,12 +34,12 @@
 > A pokud by někoho zajímalo zadání, tak se jedná o kešku Loki's mystery
 > (GCZE5N).
 
-Napsal jsem program, který to vyluští za <s>11 vteřin</s>, v pomalém Pythonu bez
+Napsal jsem program, který to vyluští za <s>11 vteřin</s>*, v pomalém Pythonu bez
 velkých optimalizací, jen s rozumným algoritmem.
 Zkusím tu docela detailně popsat jak na to. Třeba to nebude nudné.
 Kdyby něco naopak nebylo k pochopení, prosím čtenáře, aby se ozval.
 
-.* *Upřesnění: celý graf to projde za 3 minuty, 11 vteřin bylo jen štěstí.*
+\* <i>Upřesnění: celý graf to projde za 3 minuty, 11 vteřin bylo jen štěstí.</i>
 
 Na podobné úlohy platí různé techniky prohledávání stavového prostoru.
 Zrovna tady si vystačíš s relativně jednoduchými, takže se to bude dobře
@@ -46,6 +50,7 @@ Pro sudoku si stav můžeme definovat jako 9x9 pole, kde v každém políčku
 budou číslice, které tam teoreticky můžou nakonec vyjít.
 V počátečním stavu budou všechna políčka obsahovat všech 9 možných čislic:
 
+    :::text
     ╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
     ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
     ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 > 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
@@ -91,6 +96,7 @@ jako tenhle původní, jen v políčku A1 mají každý vybranou jednu číslici
 Třetí z nich by vypadal takhle:
 
 
+    :::text
     ╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
     ║     3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
     ║       │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 > 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
@@ -154,6 +160,7 @@ dát dostat několika různými cestami.)
 Základní schéma algoritmu na prohledávání stavového prostoru je následující
 (s komentáři tam, kde Pythonová syntax není naprosto pruhledná):
 
+    :::python
     open = [initial_state]  # `[v]` je seznam s jedním prvkem, `v`
     closed = set()  # prázdná množina
 
@@ -183,6 +190,7 @@ Přímo v `generate_next_states` je dobré vyhazovat čísla, která neodpovída
 pravidlům. Já jsem dal tuhle logiku přímo do konstruktoru třídy Stav, takže
 můj první stav vypadá ve skutečnosti takhle:
 
+    :::text
     ╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
     ║   2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │     3 │   2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
     ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 > 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1

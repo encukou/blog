@@ -1,0 +1,13 @@
+Title: I talk
+Slug: site_2c_lanyrd
+Summary: ![](../images/home/mic-gray.png)
+
+I also share my knowledge in various presentations.
+Most of my talks happen at meetups of our the local
+[Python users' group](http://python.cz) in Brno,
+which I help organize.
+
+My talks can be found on [Lanyrd](http://lanyrd.com/profile/encukou/).
+Unfortunately, a lot of my talks have been slide-less lately,
+and good recordings aren't that easy to make.
+You shold come in person!

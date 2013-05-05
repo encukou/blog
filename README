@@ -1,4 +1,4 @@
-This is my blog. It's just a Git repo.
+This is my blog. It's hosted at http://encukou.cz
 
 If you have a comment, tweet me at @encukou.
 If you have a substantial comment, or correction, send a pull request.
@@ -12,3 +12,10 @@ Enjoy.
  github.com/encukou
            @encukou
             encukou@gmail.com
+
+
+The Chunk-based theme is available under the GNU GPL, see theme/eck/licence.txt
+
+The contents of the blog are available under the
+Creative Commons Attribution-ShareAlike 3.0 Unported License:
+    http://creativecommons.org/licenses/by-sa/3.0/deed.en_US

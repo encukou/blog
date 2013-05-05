@@ -1,4 +1,6 @@
-Caps Lock a přepínání klávesnice
+Title: Caps Lock a přepínání klávesnice
+Tags: posterous, capslock
+Category: Hacking
 
 Caps Lock je k ničemu.
 Posledních asi pět let jsem ho mačkal prakticky jen omylem.

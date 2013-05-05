@@ -1,4 +1,6 @@
-Dennis Ritchie has died.
+Title: Dennis Ritchie has died.
+Tags: sad
+Category: Comments
 
 The Economist has a [very good article](http://www.economist.com/node/2724348)
 on some of his work; you should read it if you haven't done so already.
