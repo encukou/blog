@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/comments.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2011-10-13T00:00:00+02:00</updated><entry><title>Dennis Ritchie has died.</title><link href="http://encukou.cz/blog/2011/10/13/en-rip-dennis-ritchie" rel="alternate"></link><updated>2011-10-13T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-10-13:blog/2011/10/13/en-rip-dennis-ritchie</id><summary type="html">&lt;p&gt;The Economist has a &lt;a href="http://www.economist.com/node/2724348"&gt;very good article&lt;/a&gt;
+on some of his work; you should read it if you haven't done so already.
+I quote:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Dr Ritchie likes to emphasise that he was just one member of a group.
+With characteristic modesty, he suggests that many of the improvements he
+introduced when developing C simply “looked like a good thing to do”.
+Anyone else in the same place at the same time, he implies, would have done
+the same thing.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In other words, he Did the Right Thing; he found the answer that is, in
+retrospect, obvious. That is the mark of a genius.&lt;/p&gt;
+&lt;p&gt;His ideas stood the test of time. He has reached a local maximum: Java or C++
+or C# are object-oriented languages; C is the procedural language. Sure, there
+may be something better than C, in some sense of the word.
+It's like Newton's laws being surpassed by Einstein's relativity – C will still
+be there.
+Still valid, still useful, still used.&lt;/p&gt;
+&lt;p&gt;We have lost a humble genius, a mathematician, an architect of the abstract.
+It's sad that most poeple will never be able to appreciate the beauty of things
+he has done.
+Perhaps that, too, is the mark of a genius.&lt;/p&gt;</summary><category term="sad"></category></entry></feed>

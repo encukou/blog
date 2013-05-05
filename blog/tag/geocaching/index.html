@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+				<title>encukou/blog &mdash; Articles tagged geocaching</title>
+		<meta charset="utf-8" />
+		<link rel="profile" href="http://gmpg.org/xfn/11" />
+		<link rel="stylesheet" type="text/css" href="http://encukou.cz/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			body.custom-background { background-color: #f5f5f5; }
+		</style>
+		<link rel="alternate" type="application/atom+xml"
+			title="encukou/blog — Flux Atom"
+			href="http://encukou.cz/" /> 
+				<!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
+				</head>
+
+<body class="home blog custom-background single-author" >
+	<div id="container">
+		<div id="header">
+				<h1 id="site-title"><a href="http://encukou.cz"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>/blog</a></h1>
+				<h2 id="site-description">primary colors underneath</h2>
+		</div><!-- /#banner -->
+		
+		<div class="page-title">
+			<div class="page-title">
+	<h2>Tagged with <span>geocaching</span> &hellip;</h2>
+</div>
+		</div>
+
+                <div id="menu">
+            <div class="menu-navigation-container">
+                <ul id="menu-navigation" class="menu">
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="http://github.com/encukou">github</a></li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://twitter.com/encukou">twitter</a></li>
+                                                                <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
+                                                                                
+                </ul>
+            </div> <!--/#menu-navigation-container-->
+        </div><!-- /#menu -->
+        
+		<div id="contents">
+						<div class="post type-post status-publish format-standard hentry category-general" id="post">
+	<div class="entry-meta">
+		<div class="date"><a href="http://encukou.cz/blog/2013/03/03/cs-stavove-prostory">2013-03-03</a></div>
+							</div> <!-- /#entry-meta -->
+	<div class="main">
+		<h2 class="entry-title">
+			<a href="http://encukou.cz/blog/2013/03/03/cs-stavove-prostory" title="Permalink to Stavové prostory" rel="bookmark">Stavové prostory</a>
+		</h2>
+		<div class="entry-content">
+			<p><a href="http://glutexo.livejournal.com/137926.html">Glutexo píše</a>:</p>
+<blockquote>
+<p>Narazil jsem na drsné a vytůněné Sudoku: Podobá se klasickému killer sudoku:
+V začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
+kterých vždy víme součet čísel v nich, a také víme, že kromě řádků, sloupců
+a čtverců se ani v těchto ohraničených oblastech číslice neopakují.</p>
+<p>Řešení takového sudoku však nejspíše není unikátní (nakrmil jsem jím řešítko,
+které jsem si našel), ale výsledek nebyl takový, jaký jsem chtěl: Chtěl jsem
+jiné možné řešení, ne libovolné. A nejspíše právě proto je zadání obohaceno
+ještě o informace o některých dvojicích sousedících políček, že na jedné
+straně je číslo větší než to na druhé.</p>
+<p>Zajímalo mě, zda na to lze jít metodou hrubé síly, tedy projít si všech 9^81
+kombinací a porovnat je proti zadání. Nešlo: Za deset minut běhu program
+prokombinoval jen třikrát prvních osm pozic. Takže než by prošel všechny,
+uplynula by přibližně věčnost. Takže na to budeme muset jít jinak. Jak?</p>
+<p>Pár možností mě napadá: Např. zjistit si pro každou ohraničenou oblast
+všechny možné kombinace čísel v rozsahu 1-9, které dají při daném počtu polí
+daný součet a následně do oblastí dosazovat tato čísla ve všech možných
+kombinacích. Pak už by stačilo jen pro každé vyplnění plochy jen zvalidovat,
+zda platí základní pricipy sudoku a zda platí ona pravidla o tom, které ze
+sousedních polí má obsahovat větší číslo. Ale nedostanu se tím opět do
+astronomické množství kombinací a tak času? Uvidíme, ale jindy.</p>
+<p>Nebo máte někdo nějaký nápad, nebo dokonce víte a jste ochotni mi řešení
+představit a vysvětlit? Rád se přiučím.</p>
+<p>A pokud by někoho zajímalo zadání, tak se jedná o kešku Loki's mystery
+(GCZE5N).</p>
+</blockquote>
+<p>Napsal jsem program, který to vyluští za <s>11 vteřin</s>*, v pomalém Pythonu bez
+velkých optimalizací, jen s rozumným algoritmem.
+Zkusím tu docela detailně popsat jak na to. Třeba to nebude nudné.
+Kdyby něco naopak nebylo k pochopení, prosím čtenáře, aby se ozval.</p>
+<p>* <i>Upřesnění: celý graf to projde za 3 minuty, 11 vteřin bylo jen štěstí.</i></p>
+<p>Na podobné úlohy platí různé techniky prohledávání stavového prostoru.
+Zrovna tady si vystačíš s relativně jednoduchými, takže se to bude dobře
+vysvětlovat.</p>
+<p>Než začneme se stavovým prostorem, musíme vědět co je to stav.
+Pro sudoku si stav můžeme definovat jako 9x9 pole, kde v každém políčku
+budou číslice, které tam teoreticky můžou nakonec vyjít.
+V počátečním stavu budou všechna políčka obsahovat všech 9 možných čislic:</p>
+<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∨ ──┼───────┼── ∧ ──╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 2
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∧ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 3
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∨ ══╬═══════╪═══════╪═══════╣
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∨ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &gt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 5
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟───────┼───────┼───────╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 &gt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 6
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∧ ══╬══ ∧ ══╪══ ∨ ══╪══ ∧ ══╣
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 7
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟───────┼───────┼───────╫───────┼───────┼───────╫───────┼── ∧ ──┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &gt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 │ 4 5 6 ║ 8
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∧ ──┼── ∧ ──┼───────╫───────┼───────┼── ∧ ──╫───────┼───────┼── ∧ ──╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 9
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╚═══════╧═══════╧═══════╩═══════╧═══════╧═══════╩═══════╧═══════╧═══════╝
+    A       B       C       D       E       F       G       H       I
+</pre></div>
+
+
+<p>No a abychom se dostali dál, budeme z tohohle stavu některá čísla odebírat.
+Třeba, pro začátek, hrubou silou: vygenerujeme devět stavů, které jsou stejné
+jako tenhle původní, jen v políčku A1 mají každý vybranou jednu číslici.
+Třetí z nich by vypadal takhle:</p>
+<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+║     3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║       │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
+║       │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∨ ──┼───────┼── ∧ ──╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 2
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∧ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 3
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∨ ══╬═══════╪═══════╪═══════╣
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∨ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &gt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 5
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟───────┼───────┼───────╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 &gt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 6
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∧ ══╬══ ∧ ══╪══ ∨ ══╪══ ∧ ══╣
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 7
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟───────┼───────┼───────╫───────┼───────┼───────╫───────┼── ∧ ──┼───────╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &gt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 │ 4 5 6 ║ 8
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∧ ──┼── ∧ ──┼───────╫───────┼───────┼── ∧ ──╫───────┼───────┼── ∧ ──╢
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 9
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╚═══════╧═══════╧═══════╩═══════╧═══════╧═══════╩═══════╧═══════╧═══════╝
+    A       B       C       D       E       F       G       H       I
+</pre></div>
+
+
+<p>Nu a z tohohle stavu se jde "dostat" do dalších devíti stavů, každého s jedinou
+číslicí v políčku B1.</p>
+<p>Jeden z těchto nových stavů (B1==3) nebude odpovídat
+pravidlům. Navíc všechny další stavy, které z něj můžeme dostat odebíráním
+možností, budou taky špatně. Takže tenhle stav můžeme vyloučit.</p>
+<p>A tímhle způsobem dostaneme obrovitánský graf stavů.
+Graf vytvořený takhle hrubou silou bude až moc velký na to, aby se dal rozumně
+pozkoumat, ale důležité je, že obsahuje všechny stavy odpovídající pravidlům.
+(Vlastně je pro nás důležité jen to, že určitě obsahuje <em>řešení</em> (pokud nějaké
+existuje), ale vzhledem k tomu že řešení neznáme, všechny "správné" stavy budou
+muset stačit.)</p>
+<p>Zbývá jen nějak zajistit, abychom nemuseli procházet ten graf celý, ale
+zkusili v něm hledat rozumné cesty a zkratky, které nás k cíli dovedou co
+nejrychleji. Tedy, použít něco lepšího než hroubou sílu.</p>
+<p>(Jen podotknu že ten graf nemusí být nutně stromem; do jednoho stavu se může
+dát dostat několika různými cestami.)</p>
+<p>Základní schéma algoritmu na prohledávání stavového prostoru je následující
+(s komentáři tam, kde Pythonová syntax není naprosto pruhledná):</p>
+<div class="highlight"><pre><span class="nb">open</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_state</span><span class="p">]</span>  <span class="c"># `[v]` je seznam s jedním prvkem, `v`</span>
+<span class="n">closed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c"># prázdná množina</span>
+
+<span class="k">while</span> <span class="nb">open</span><span class="p">:</span>  <span class="c"># dokud je něco v open</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">take_one</span><span class="p">(</span><span class="nb">open</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">is_goal</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">current</span>
+    <span class="n">closed</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nb">next</span> <span class="ow">in</span> <span class="n">generate_next_states</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">next</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">closed</span> <span class="ow">and</span> <span class="n">is_valid</span><span class="p">(</span><span class="nb">next</span><span class="p">):</span>
+            <span class="nb">open</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">next</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Algoritmus nemá k dispozici celý graf (to by se těžko vešlo do paměti!),
+ale "tvoří" si ho pomocí funkce <code>generate_next_states</code>, která prostě vrátí
+seznam stavů, do kterých se z daného stavu dá dostat.</p>
+<p>Množina <code>open</code> obsahuje všechny stavy které chceme ještě prozkoumat, neboli
+"hranici" zatím prozkoumané části grafu. Množina <code>closed</code> obsahuje stavy, které
+jsme už viděli; těmi se nemá cenu zabývat, pokud na ně narazíme znovu.</p>
+<p>Tož to by byl učebnicový algoritmus.
+Teď teoreticky všechno závisí jen na tom, jak chytře navrhneme funkce
+<code>take_one()</code> a <code>generate_next_states()</code>.
+Dám několik tipů, které jsem použil já.</p>
+<p>Přímo v <code>generate_next_states</code> je dobré vyhazovat čísla, která neodpovídají
+pravidlům. Já jsem dal tuhle logiku přímo do konstruktoru třídy Stav, takže
+můj první stav vypadá ve skutečnosti takhle:</p>
+<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+║   2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │     3 │   2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
+║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∨ ──┼───────┼── ∧ ──╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
+║ 1 2 3 │ 1 2 3 │   2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 2
+║       │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7     ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟── ∧ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
+║   2 3 │     3 │       ║ 1 2 3 │ 1 2 3 │     3 ║       │   2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 3
+║ 7     │ 7 8   │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8   ║
+╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∨ ══╬═══════╪═══════╪═══════╣
+║     3 │       │ 1 2 3 ║   2 3 │ 1 2 3 │   2 3 ║ 1 2 3 │   2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4
+║ 7 8   │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7     ║       │ 7 8 9 │ 7 8   ║
+╟── ∨ ──┼───────┼───────╫───────┼───────┼───────╫───────┼───────┼───────╢
+║   2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │     3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
+║ 4 5 6 &gt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 5
+║ 7     │       │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╟───────┼───────┼───────╫───────┼───────┼── ∨ ──╫───────┼───────┼───────╢
+║ 1 2 3 │   2 3 │ 1 2 3 ║   2 3 │ 1 2 3 │   2 3 ║ 1 2 3 │   2 3 │ 1 2 3 ║
+║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 &gt; 4 5 6 &lt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 6
+║ 7 8   │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7     │ 7 8   ║ 7 8   │ 7 8 9 │ 7 8   ║
+╠═══════╪═══════╪═══════╬═══════╪═══════╪══ ∧ ══╬══ ∧ ══╪══ ∨ ══╪══ ∧ ══╣
+║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │   2 3 │     3 ║   2 3 │ 1 2 3 │   2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 &lt; 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 7
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8   │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8   │ 7 8 9 ║
+╟───────┼───────┼───────╫───────┼───────┼───────╫───────┼── ∧ ──┼───────╢
+║   2 3 │ 1 2 3 │ 1 2 3 ║   2 3 │ 1 2 3 │   2 3 ║ 1 2 3 │   2 3 │ 1 2 3 ║
+║ 4 5 6 &gt; 4 5 6 │ 4 5 6 &lt; 4 5 6 │ 4 5 6 │ 4 5 6 &gt; 4 5 6 │ 4 5 6 │ 4 5 6 ║ 8
+║ 7 8   │ 7     │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7     │ 7 8 9 │ 7 8   ║
+╟── ∧ ──┼── ∧ ──┼───────╫───────┼───────┼── ∧ ──╫───────┼───────┼── ∧ ──╢
+║     3 │   2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │     3 ║ 1 2 3 │ 1 2 3 │   2 3 ║
+║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 9
+║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
+╚═══════╧═══════╧═══════╩═══════╧═══════╧═══════╩═══════╧═══════╧═══════╝
+    A       B       C       D       E       F       G       H       I
+</pre></div>
+
+
+<p>Moje implementace tu dělá několik věcí:</p>
+<ul>
+<li>vyhazuje čísla podle zadaných nerovností (pokud má jedno číslo
+být větší než druhé, které může být 3-8, tak bude určitě 4 nebo víc).</li>
+<li>vyhazuje čísla z řádků, sloupců, čtverců a oblastí, pokud v jiném políčku
+  je už dané číslo vybrané</li>
+<li>vyhazuje čísla, která nemůžou dát daný součet pro oblast</li>
+<li>ještě by mohla vybrat číslo, pokud se v řádku/sloupci/čtverci jen jedno
+  políčko kde je to číslo možné, ale našel jsem řešení než jsem tohle stihl
+  napsat, tak jsem se na to vykašlal.</li>
+</ul>
+<p>Tím, že tohle dělám co nejdřív, se vyhýbám spoustě zbytečných stavů. Vzhledem k
+tomu, že každý stav nejen potřebuje nějaký ten procesorový čas a paměť, ale
+navíc se pak množí jak králík v Austrálii, je dobré takhle normalizovat co
+nejagresivněji.</p>
+<p>Další místo, kde je možné algoritmus potunit, je výběr políčka, ve kterém se
+budou generované stavy lišit.
+Já vždycky vyberu políčko s nejnižším počtem možností (kromě 1, samozřejmě).
+Tím docílím toho, že každý stav má co nejmenší počet "potomků", takže graf
+neroste tak rychle.
+Je samozřejmě možné zvolit úplně jinou strategii. Fungovalo by třeba udělat
+potomky dva: jednoho s první možností v daném políčku, a druhého s možnostmi
+ostatními. Dokonce není nutné generovat stavy lišící se jen v jednom políčku.
+Jen je důležité, aby existovala cesta ke každému validnímu stavu (nebo teda
+aspoň k tomu cílovému).</p>
+<p>Tohle tunění tvaruje prozkoumávanou oblast grafu, je tak širší nebo hlubší,
+rozvětvenější nebo kompaktnější.
+Nějaké velké optimalizování je silně závislé na problému,
+a je to leckdy spíš umění než exaktní věda.
+Naštěstí na tohle sudoku nic moc složitého potřeba není.</p>
+<p>No a snad poslední kritické místo v algoritmu je funkce <code>take_one</code>, která vyjme
+a vrátí další stav, kterým se bude program zabývat.
+Může například zvolit vždycky nejstarší prvek ze seznamu (v tom případě jde o
+hledání "do šířky", které se vyplatí třeba pokud víme že cíl není v grafu
+příliš hluboko), nebo naopak nejnovější (hledání do hloubky).
+Taky jde jednotlivým stavům přiřadit skóre, a vždycky vybrat ten stav, který
+nejvíc vypadá že povede ke správnému řešení.
+Vyrobit na tohle dobrou hodnotící funkci je celkem kumšt; já to tady zkusil,
+ale nakonec jsem zjistil že je to rychlejší bez ní.</p>
+<p>(Na takové hodnotící funkci jsou pak založené algoritmy jako A*, které nejen že
+ve stavovém prostoru najdou cíl, ale vrátí opotimální cíl a optimální cestu k
+němu. Typické použití: AI ve hrách.)</p>
+<p>A na závěr jeden tip: je dobré investovat nějaký čas do funkcí na zobrazení
+stavů nebo toho, jak si algoritmus vede (např. velikosti množin <code>open</code> a
+<code>closed</code>; cesta grafem k právě prohledávanému stavu, atd.).
+Možná není potřeba to přehánět jako já (ty ASCII-arty výše jsou v mém programu
+navíc obarvené podle oblastí se součtem), ale cokoli pomůže pochopit to, co se
+vevnitř děje, hodně pomáhá.</p>
+<p>Tož přeji hezké programování, snad tenhle výlev trochu pomůže.</p>
+		</div> <!--/#entry-content-->
+		    		<span class="tag-links"><strong>Tagged</strong>
+    			    			 <a href="http://encukou.cz/blog/tag/geocaching" rel="tag">geocaching</a>    		</span>
+    		</div> <!--/#main-->
+</div>  <!--/#post-->				</div>
+
+		<div id="footer">
+			<p>
+    powered by <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    theme adapted from <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        by <a href="https://twitter.com/thisistran">Tran</a>
+        and <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    fonts: Signika by <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
+        and Jockey One by <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    <br>
+    fork this blog on <a href="https://github.com/encukou/github">Github</a>
+    </p>
+								</div><!-- /#footer -->
+	</div><!-- /#container -->
+	<div style="display:none"></div>
+</body>
+</html>

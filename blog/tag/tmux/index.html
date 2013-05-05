@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+				<title>encukou/blog &mdash; Articles tagged tmux</title>
+		<meta charset="utf-8" />
+		<link rel="profile" href="http://gmpg.org/xfn/11" />
+		<link rel="stylesheet" type="text/css" href="http://encukou.cz/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			body.custom-background { background-color: #f5f5f5; }
+		</style>
+		<link rel="alternate" type="application/atom+xml"
+			title="encukou/blog — Flux Atom"
+			href="http://encukou.cz/" /> 
+				<!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
+				</head>
+
+<body class="home blog custom-background single-author" >
+	<div id="container">
+		<div id="header">
+				<h1 id="site-title"><a href="http://encukou.cz"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>/blog</a></h1>
+				<h2 id="site-description">primary colors underneath</h2>
+		</div><!-- /#banner -->
+		
+		<div class="page-title">
+			<div class="page-title">
+	<h2>Tagged with <span>tmux</span> &hellip;</h2>
+</div>
+		</div>
+
+                <div id="menu">
+            <div class="menu-navigation-container">
+                <ul id="menu-navigation" class="menu">
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="http://github.com/encukou">github</a></li>
+                                            <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://twitter.com/encukou">twitter</a></li>
+                                                                <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
+                                                                                
+                </ul>
+            </div> <!--/#menu-navigation-container-->
+        </div><!-- /#menu -->
+        
+		<div id="contents">
+						<div class="post type-post status-publish format-standard hentry category-general" id="post">
+	<div class="entry-meta">
+		<div class="date"><a href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen">2013-05-04</a></div>
+							</div> <!-- /#entry-meta -->
+	<div class="main">
+		<h2 class="entry-title">
+			<a href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen" title="Permalink to Raspberry Pi and my Third Screen" rel="bookmark">Raspberry Pi and my Third Screen</a>
+		</h2>
+		<div class="entry-content">
+			<h1>Berry-flavored resurrection</h1>
+<p>Today, I finally figured out what was wrong with my Raspberry Pi.
+It <a href="http://file3.status.net/i/identica/encukou-20130120T115619-yw8xyls.jpeg">worked before</a>,
+connected to a TV, without ethernet, and with a power supply and keyboard
+borrowed from my brother.
+When I got my own accessories for it, though, I found the USB ports and network
+were dead.</p>
+<p>Well, today I finally got around to some debugging, and found that the faulty
+part was the USB cable between the box and the power supply (i.e. a phone
+charger). Don't ask me how much I spent diagnosing that.
+Luckily, I can easily get micro-USB cable, even on a Saturday.
+(Okay, not nearly easily enough, but I did get one.)</p>
+<p>Hooray! A working computer! Let's try new things with it!
+I've used <code>apt</code> in Ubuntu for quite some time, so I thought Raspbian would be too
+boring, and decided to go for Arch. So far it's been working nicely.</p>
+<h1>Quassel</h1>
+<p>My first reason for having a Pi is a (hopefully) always-on IRC client.
+I've been using <a href="http://www.quassel-irc.org/">Quassel</a> at work, where I leave
+a Core running on a virtual machine in the lab, and connect to that with the
+graphical client. That way I don't miss anything when my laptop is off.</p>
+<p>It turns out Arch's official repos only have the monolithic build of Quassel
+(the core and client all in one), but a nice person called joschi maintains a
+<a href="https://aur.archlinux.org/packages.php?ID=42085">Core-only</a> package
+in the AUR.
+It worked for me with one modification – I had to update the list of
+supported arcitectures.
+The <code>pkgbuild</code>'s error message included the name of my architecture ('armv6h'),
+and the <code>PKGBUILD</code> file left no doubt where that string should go.
+All clear!</p>
+<p>The compile took quite some time (I don't know exactly how much because I've
+interrupted it a few times to reboot while tinkering), but it paid off.
+I'm on IRC again!</p>
+<p>Half an hour after I reported my success to the Quassel AUR maintainer,
+the arch was added to the package. Thanks, joschi!</p>
+<h1>My third monitor</h1>
+<p>Now for the other thing I had in mind for the little box.
+My laptop's graphics card only supports two screens, and I sometimes get the
+feeling that two is too few.</p>
+<p>Looks like a job for the Pi! I have a monitor conected to it, now I just need
+to wire it up to my computer.
+Well, actually, before I do that, I see the default virtual terminal font
+is rather large.
+A <code>sudo pacman -S terminus-font</code> and a <code>setfont ter-112n</code> in an rc file
+will make many more letters fit on the screen.</p>
+<p>Now, the first step to connect the two machines was of course to SSH to the Pi,
+so I don't have to plug the keyboard back and forth.
+And also to get the middle-clicky pasting goodness of an X terminal emulator.
+(Goodness, did I miss that!)</p>
+<p>And after that... hm. Let's see what I want to do, exactly.</p>
+<p>I need to run commands on the main machine, control them from the main machine,
+but have them display on the little box. Sounds easy, right?</p>
+<p>Turns out, it's not that easy. At least for me –
+I sure hope there's an easier solution than what I came up with.</p>
+<p>Since I need to display the console on the Pi, I started up a <code>tmux</code> session
+there.
+I can connect to it from my main box, but I'd like to have a “write-only”
+connection: I just want to send the keystrokes over, I don't need to see the
+third monitor's contents on the main monitor – it's on the other monitor!
+I could make the console window really small, but <code>tmux</code> insists on making
+the logical terminal just big enough for the smallest client connected to it.
+I briefly tried to find a way to use an infinitesimally small font in
+a terminal emulator, but to no avail.</p>
+<p>Luckily, thanks to research for <a href="https://ep2013.europython.eu/conference/talks/terminals-command-lines-and-text-interfaces">my talk for this summer's EuroPython</a>,
+I know that terminal size is just two properties I can set rather easily.
+<code>stty cols 256; stty rows 256;</code> and voilà, <code>tmux</code> thinks it has a window
+that's larger than my new monitor.
+The only drawback is that whenever the window is resized, it picks up the new
+size.
+My research notes tell me this is handled by SIGWINCH, a SIGnal that gets
+sent whenever the WINdow size CHanges.
+Luckily, there's a <a href="http://stackoverflow.com/a/4515549/99057">signal-blocking program</a>
+on StackOverflow, on which I do a quick <code>s/SIGINT/SIGWINCH/</code> and compile.
+I hack up a command to run SSH with the <code>stty</code>s and a signal-blocked <code>tmux</code>,
+all in a uniquely titled <code>xterm</code>, and then use KDE's nifty Window Settings
+to make the <code>xterm</code> window very tiny, borderless, always-on-top, on all
+desktops, and in the upper left corner of the screen.</p>
+<p>Glorious.</p>
+<p>I think I'll name it <code>pi-remote</code>.</p>
+<p>(Also, thank goodness for xterm's simplicity: unlike modern programs that
+try very very hard to never let users shoot themselves in the foot, xterm can
+be resized small enough to be useless.
+Well, useless for anything except what I'm trying to do here.)</p>
+<h1>A circle of SSH</h1>
+<p>Now that I have a way to control my second monitor, there's one more goal:
+running stuff on the main box.
+Do do that, I need to SSH back to it. Close the loop, so to say.</p>
+<p>I'd like to go passwordless, and I'd rather not leave a private key
+that grants access to my main box lying around on the Pi.
+I think it's time for some SSH agent forwarding.
+It turns out Github has a <a href="https://help.github.com/articles/using-ssh-agent-forwarding">nice article</a>
+on how to set that up – put some lines in <code>~/.ssh/config</code>, uncomment one in
+<code>/etc/ssh/sshd_config</code>, restart sshd – not straightforward but easy enough.</p>
+<p>Oh, and I need to trust the key.
+I think this is the first time I've put my own key for a machine in that
+machine's <code>authorized_keys</code>.</p>
+<p>The part that I didn't find an elegant solution for is passing the agent
+forwarding info through tmux.
+This stuff is passed around in environment variables, but the tmux session is
+already running, with its own environment.
+There's probably an amazingly obvious way to do this, but after a while of
+searching I decided for a brute-force approach: before joining the session I
+save the SSH-related env:</p>
+<div class="highlight"><pre>env | grep ^SSH  &gt; ~/.ssh/third_monitor_callback_env
+</pre></div>
+
+
+<p>and before SSH-ing back, I restore it.</p>
+<div class="highlight"><pre><span class="k">while </span><span class="nb">read </span>line; <span class="k">do </span><span class="nb">declare</span> -x <span class="s2">&quot;$line&quot;</span> <span class="k">done</span> &lt; ~/.ssh/third_monitor_callback_env
+</pre></div>
+
+
+<p>Works for me.</p>
+<p>It doesn't call back automatically.
+The main machine is a laptop, so it may not always be there,
+and the pi should be usable without it.</p>
+<h1>The red freehand arrow</h1>
+<p>In the end, I have a Raspberry-Pi-controlled third monitor, in retro text mode.
+I'll use it mainly for display (logs, stdout of GUI or web things, etc.),
+but if I need control, I just click the top-left corner on my mouse-enabled
+main screen and type away.
+A popular generalization of <a href="http://en.wikipedia.org/wiki/Fitts%27s_law">Fitts' law</a>
+says this is very convenient, and I'm sure not arguing with that.</p>
+<p><a href="../images/2013-05-04-screenshot.png"><img alt="Screenshot of my screen with a red freehand arrow pointing at the pi-remote" class="size-full" src="../images/2013-05-04-screenshot.png" /></a></p>
+<p>Here's a review of my files, for future reference:</p>
+<p>At the main machine, named <code>tapio</code>, there's:</p>
+<ul>
+<li>
+<p>~/bin/pi-remote:</p>
+<div class="highlight"><pre>xterm -T <span class="s1">&#39;rpi remote!&#39;</span> +sb call-to-pi &amp;
+</pre></div>
+
+
+</li>
+<li>
+<p>~/bin/call-to-pi:</p>
+<div class="highlight"><pre>ssh -t eckpi <span class="s1">&#39;env | grep ^SSH  &gt; ~/.ssh/third_monitor_callback_env; stty cols 256; stty rows 256; ~/bin/nowinch tmux attach-session -t third-monitor&#39;</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>~/.kde/share/config/kwinrulesrc (partial):</p>
+<div class="highlight"><pre>[1]
+Description=Window settings for xterm
+above=true
+aboverule=3
+clientmachine=tapio
+clientmachinematch=0
+desktop=-1
+desktoprule=3
+fsplevel[$d]
+fsplevelrule[$d]
+noborder=true
+noborderrule=3
+position=0,0
+positionrule=2
+size=26,20
+sizerule=3
+title=rpi remote!
+titlematch=1
+types=1
+wmclass=xterm
+wmclasscomplete=false
+wmclassmatch=1
+</pre></div>
+
+
+</li>
+</ul>
+<p>And at the Pi side, there's <code>~/bin/nowinch</code> modified from the signal blocker
+from <a href="http://stackoverflow.com/a/4515549/99057">StackOverflow</a>,
+and <code>~/bin/tapio</code> to SSH back home:</p>
+<div class="highlight"><pre><span class="k">while </span><span class="nb">read </span>line; <span class="k">do</span>
+<span class="k">    </span><span class="nb">declare</span> -x <span class="s2">&quot;$line&quot;</span>
+<span class="k">done</span> &lt; ~/.ssh/third_monitor_callback_env
+ssh tapio
+</pre></div>
+
+
+<p>And, of course, an always-on <code>tmux</code> session.
+I sometimes press Ctrl-D by mistake and don't want to get disconnected,
+so I run the shell in a loop:</p>
+<div class="highlight"><pre>tmux new-session -s third-monitor <span class="s1">&#39;while true; bash; reset; done&#39;</span>
+</pre></div>
+
+
+<p>I sure hope there is an easier way to do this. Anyone?</p>
+		</div> <!--/#entry-content-->
+		    		<span class="tag-links"><strong>Tagged</strong>
+    			    			 <a href="http://encukou.cz/blog/tag/quassel" rel="tag">quassel</a>,  <a href="http://encukou.cz/blog/tag/raspberry" rel="tag">raspberry</a>,  <a href="http://encukou.cz/blog/tag/shell" rel="tag">shell</a>,  <a href="http://encukou.cz/blog/tag/tmux" rel="tag">tmux</a>    		</span>
+    		</div> <!--/#main-->
+</div>  <!--/#post-->				</div>
+
+		<div id="footer">
+			<p>
+    powered by <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    theme adapted from <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        by <a href="https://twitter.com/thisistran">Tran</a>
+        and <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    fonts: Signika by <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
+        and Jockey One by <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    <br>
+    fork this blog on <a href="https://github.com/encukou/github">Github</a>
+    </p>
+								</div><!-- /#footer -->
+	</div><!-- /#container -->
+	<div style="display:none"></div>
+</body>
+</html>
