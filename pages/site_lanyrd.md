@@ -3,8 +3,8 @@ Slug: site_2b_lanyrd
 Image: mic
 
 I also share my knowledge in various presentations.
-Most of my talks happen at meetups of our the local
-[Python users' group](http://python.cz) in Brno,
+Most of my talks happen at meetups of the
+[Python users group](http://python.cz) in Brno,
 which I help organize.
 
 My talks can be found on [Lanyrd](http://lanyrd.com/profile/encukou/).
