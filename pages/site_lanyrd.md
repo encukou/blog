@@ -1,6 +1,6 @@
 Title: I talk
-Slug: site_2c_lanyrd
-Summary: ![](../images/home/mic-gray.png)
+Slug: site_2b_lanyrd
+Image: mic
 
 I also share my knowledge in various presentations.
 Most of my talks happen at meetups of our the local

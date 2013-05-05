@@ -18,9 +18,12 @@
 {% block content %}
     {% for page in pages|sort(attribute='slug') %}
         {% if page.slug.startswith('site_') %}
-            <div class="post type-post status-publish format-standard hentry category-general" id="post">
+            <div class="hentry siteindex">
                 <div class="entry-meta">
-                    {{ page.summary }}
+                    <div class="siteindex-image {{ 'default' if page.default_section else '' }}"
+                            style="background-image: URL(images/home/{{ page.image }}-gray.png)">
+                        <img src="images/home/{{ page.image }}.png" class="hover-only"></img>
+                    </div>
                 </div> <!-- /#entry-meta -->
                 <div class="main">
                     <h2 class="entry-title">

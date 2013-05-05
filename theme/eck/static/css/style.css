@@ -63,13 +63,13 @@ body {
     color: #bbb;
 }
 #site-title a:hover ._en,  #menu ._en:hover a {
-    color: #bc6b36;
+    color: #dc2e1c;
 }
 #site-title a:hover ._cu, #menu ._cu:hover a {
-    color: #3691bc;
+    color: #3775a9;
 }
 #site-title a:hover ._kou, #menu ._kou:hover a {
-    color: #bcae36;
+    color: #ffd949;
 }
 #site-description {
 	border-radius: 3px;
@@ -179,6 +179,8 @@ body {
 	height: auto;
 	clear: both;
 	position: relative;
+    margin-left: -200px;
+    padding-left: 200px;
 }
 .hentry:after {
 	clear: both;
@@ -217,8 +219,33 @@ body {
 .hentry .entry-meta p {
     margin: 0;
 }
-.hentry .entry-meta img {
-    width: 40%;
+.hentry .entry-meta .siteindex-image {
+    width: 100px;
+    height: 120px;
+    margin: 0;
+    padding: 0;
+    float: right;
+    background-position: 100% 0%;
+    background-repeat: no-repeat;
+    text-align: right;
+    background-size: 100px;
+}
+.hentry .entry-meta .siteindex-image img {
+    width: 100px;
+}
+.hentry .entry-meta .siteindex-image img.hover-only,
+#contents:hover .hentry .entry-meta .siteindex-image.default img.hover-only {
+    opacity: 0%;
+    visibility: hidden;
+}
+#contents .hentry .entry-meta .siteindex-image.default img.hover-only,
+#container #contents .hentry:hover .entry-meta div.siteindex-image img.hover-only {
+    opacity: 100%;
+    visibility: visible;
+}
+.hentry.siteindex:hover h2,
+.hentry.siteindex:hover {
+    color: #000;
 }
 .hentry .entry-meta .date {
 	color: #000;
