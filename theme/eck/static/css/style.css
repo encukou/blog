@@ -965,3 +965,78 @@ h2 {
     height: 1px;
     width: 70%;
 }
+
+
+@media screen and (max-width: 800px) {
+    #container {
+        width: auto;
+        margin: 0;
+        margin: 0px 2em;
+    }
+    #menu, #header, #footer {
+        width: auto;
+        margin: 0;
+    }
+    #header {
+        padding: 0;
+        min-height: 0;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    #header h2 {
+        padding: 0;
+        margin: 1ex;
+    }
+    #menu {
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+    #menu li {
+        float: none;
+        display: inline;
+    }
+    #menu a {
+        padding: 0;
+    }
+    #site-title {
+        font-size: 400%;
+    }
+    #contents {
+        margin-left: 0;
+        border-style: none;
+    }
+    * + .post {
+        margin-top: 4em;
+    }
+    .hentry {
+        margin-left: 0;
+        padding-left: 0;
+    }
+    .hentry .entry-meta {
+        float: none;
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        text-align: left;
+        width: auto;
+        margin-top: 1ex;
+        margin-bottom: -1ex;
+        color: #666;
+    }
+    .hentry .entry-meta a {
+        color: #666;
+    }
+    .hentry .main {
+        padding: 0;
+    }
+    .siteindex-image {
+        display: none;
+    }
+    .siteindex .entry-title {
+        color: #000;
+    }
+    .hentry .main {
+        width: 100%;
+    }
+}
