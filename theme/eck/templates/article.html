@@ -26,6 +26,7 @@
 {% endblock %}
 
 {% block page_specific_navigation %}
+
 <ul class="prev-next">
 {% if article.prev_article %}
     <li class="prev">
@@ -43,4 +44,21 @@
 {% endif %}
 </ul>
 <span class="clearfix"></span>
+
+<ul class="article-links">
+    {% if article.lang == 'cs' %}
+        <li><a href="{{article.github_url}}"><em>Forkni</em> si tenhle článek na Githubu</a></li>
+    {% else %}
+        <li><a href="{{article.github_url}}"><em>Fork</em> this post on Github</a></li>
+    {% endif %}
+</ul>
+
+{% endblock %}
+
+{% block footer_text %}
+    {% if article.lang == 'cs' %}
+        {{ FOOTER_TEXT_CS }}
+    {% else %}
+        {{ FOOTER_TEXT }}
+    {% endif %}
 {% endblock %}

@@ -2,6 +2,12 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+import markdown
+import re
+import os
+
+from pelican import signals
+
 AUTHOR = u'Petr Viktorin'
 SITENAME = u"encukou/blog"
 SITEURL = ''
@@ -29,7 +35,7 @@ RELATIVE_URLS = True
 
 THEME = "theme/eck"
 
-FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})-(?P<lang>[a-z]+)-(?P<slug>.*)'
+FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})-(?P<day_disambig>\d+-)?(?P<lang>[a-z]+)-(?P<slug>.*)'
 
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 SITESUBTITLE = 'primary colors underneath'
@@ -52,6 +58,25 @@ FOOTER_TEXT = """
     <br>
     by Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
     """
+FOOTER_TEXT_CS = """
+    tento blog používá systém <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    styl adaptovaný z <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        © <a href="https://twitter.com/thisistran">Tran</a>
+        a <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    použité fonty: Signika © <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
+        a Jockey One © <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    <br>
+    tento blog je na <a href="https://github.com/encukou/blog">Githubu</a>
+    <br>
+    <br>
+    text na této stránce je k dispozici pod licencí
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+            Creative Commons Attribution-ShareAlike 3.0 Unported</a>
+    <br>
+    © Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    """
 DISPLAY_CATEGORIES_ON_MENU = False
 SINGLE_AUTHOR = True
 MENUITEMS_COLORFUL = (
@@ -67,10 +92,15 @@ XMENUITEMS = (
     )
 DISPLAY_PAGES_ON_MENU = False
 
-STATIC_PATHS = ['../images']
-
 PAGE_DIR = '../pages'
-FILES_TO_COPY = (('../extra/CNAME', 'CNAME'),)
+STATIC_PATHS = [
+    '../images',
+    '../extra/CNAME',
+    ]
+STATIC_SAVE_AS = 'output/{path}'
+EXTRA_PATH_METADATA = {
+    '../extra/CNAME': {'path': '../CNAME'},
+    }
 
 ARTICLE_URL = 'blog/{date:%Y}/{date:%m}/{date:%d}/{lang}-{slug}'
 ARTICLE_SAVE_AS = ARTICLE_URL + '/index.html'
@@ -107,5 +137,72 @@ DEFAULT_LANG = "don't have one"
 
 SUMMARY_MAX_LENGTH = None
 
+# Markdown DownHeader from http://code.google.com/p/markdown-downheader/
+
+class DownHeaderExtension(markdown.Extension):
+    def extendMarkdown(self, md, md_globals):
+        if 'downheader' in md.treeprocessors.keys():
+            md.treeprocessors['downheader'].offset += 1
+        else:
+            md.treeprocessors.add('downheader', DownHeaderProcessor(), '_end')
+
+class DownHeaderProcessor(markdown.treeprocessors.Treeprocessor):
+    def __init__(self, offset=1):
+        markdown.treeprocessors.Treeprocessor.__init__(self)
+        self.offset = offset
+    def run(self, node):
+        expr = re.compile('h(\d)')
+        for child in node.getiterator():
+            match = expr.match(child.tag)
+            if match:
+                child.tag = 'h' + str(min(6, int(match.group(1))+self.offset))
+        return node
+
+# Join one-letter words (Czech typography convention)
+
+class VlnaExtension(markdown.Extension):
+    def extendMarkdown(self, md, md_globals):
+        md.treeprocessors.add('vlna', VlnaProcessor(), '_begin')
+
+class VlnaProcessor(markdown.treeprocessors.Treeprocessor):
+    def fix(self, text):
+        previous = text
+        text = re.sub(r'\b([ksvzouiaKSVZOUIA]) (\w)', r'\1&nbsp;\2', text)  # k oknu
+        text = re.sub(r'(\d) (\d)', r'\1&nbsp;\2', text)  # 4 500
+        text = re.sub(r'(\d\.?) (\w)', r'\1&nbsp;\2', text)  # 10 kg
+        text = re.sub(r'(\d\.) (\d)', r'\1&nbsp;\2', text)  # 2. 4.
+        text = re.sub(r'(.{30}) ([^ &]+[.?!])$', r'\1&nbsp;\2', text)  # last word
+        if previous != text:
+            return self.fix(text)
+        return text
+
+    def run(self, node):
+        if node.tag in ('pre', 'code'):
+            return node
+        if node.text:
+            node.text = self.fix(node.text)
+        for child in node.getchildren():
+            self.run(child)
+        return node
+
+class GithubLinkPlugin(object):
+    __name__ = 'GithubLinkPlugin'
+    def add_github_links(self, generator):
+        for article in generator.articles:
+            article.github_url = GITHUB_URL + os.path.relpath(article.source_path, '.')
+
+    def register(self):
+        signals.article_generator_finalized.connect(self.add_github_links)
+
+MD_EXTENSIONS = [
+    'codehilite(css_class=highlight,guess_lang=false)',
+    'headerid',
+    'extra',
+    DownHeaderExtension(),
+    VlnaExtension(),
+]
+
 PLUGIN_PATH = 'pelican-plugins'
-PLUGINS = ['summary', 'neighbors']
+PLUGINS = ['summary', 'neighbors', 'latex', GithubLinkPlugin()]
+
+GITHUB_URL = 'https://github.com/encukou/blog/blob/master/'

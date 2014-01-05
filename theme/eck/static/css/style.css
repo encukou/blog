@@ -353,11 +353,12 @@ div.read-on a:hover {
 }
 .cat-links,
 .tag-links {
-	display: block;
+    display: block;
+    margin-top: 3em;
 }
 .tag-links strong {
-	color: #666;
-	font-weight: normal;
+    color: #666;
+    font-weight: normal;
 }
 ul.prev-next {
     clear: both;
@@ -908,4 +909,59 @@ article.comment {
 ----------------------------------------------- */
 pre {
     line-height: 1.2;
+    margin: 0.5ex;
+}
+pre, code {
+    background-color: #FAFAFA;
+}
+code {
+    padding-left: 0.5ex;
+    padding-right: 0.5ex;
+    margin-left: 0.5ex;
+    margin-right: 0.5ex;
+    outline: 1px solid #FFFFFF;
+}
+sup {
+    font-family: sans-serif;
+}
+h2 {
+    color: #666;
+    font-family: 'Jockey One', Helvetica, Arial, sans-serif;
+    font-size: 25px;
+    line-height: 38px;
+    margin: 5px 0px 15px 0px;
+    text-align: left;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+* + h2 {
+    padding-top: 1ex;
+}
+.article-links {
+    padding: 0;
+    padding-top: 50px;
+    margin-bottom: -25px;
+    text-align: center;
+    list-style: none;
+}
+.article-links li {
+    font-size: 11px;
+    color: #888;
+}
+.article-links li a {
+    text-decoration: none;
+    color: #888;
+}
+.article-links li em {
+    font-style: normal;
+    color: #000;
+}
+#contents hr {
+    display: block;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    background-color: rgb(204, 204, 204);
+    border: 0;
+    height: 1px;
+    width: 70%;
 }
