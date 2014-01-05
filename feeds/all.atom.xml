@@ -1,129 +1,702 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2013-05-04T00:00:00+02:00</updated><entry><title>Raspberry Pi and my Third Screen</title><link href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen" rel="alternate"></link><updated>2013-05-04T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-05-04:blog/2013/05/04/en-raspberry-third-screen</id><summary type="html">&lt;p&gt;Today, I finally figured out what was wrong with my Raspberry Pi.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2014-01-05T00:00:00+01:00</updated><entry><title>Měnění objektů</title><link href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu" rel="alternate"></link><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-meneni-objektu</id><summary type="html">&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
+(Pokud ne, doporučuju to napřed zjistit,
+už jen pro seznámení s&amp;nbsp;mými uměleckými diagramy.)
+Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy&amp;nbsp;objekty.&lt;/p&gt;
+
+
+&lt;p&gt;Toto je druhý ze série článků o&amp;nbsp;tom, jak funguje Python.
+Pokud jsi se dostala přímo sem, koukni na
+&lt;a href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
+a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Řetězce, stejně jako čísla nebo n-tice, jsou neměnitelné &lt;em&gt;(immutable)&lt;/em&gt;.
+To znamená, že se nedá žádným způsobem změnit jejich hodnota.
+Chceme-li řetězec „změnit“, musíme vytvořit úplně nový objekt
+s&amp;nbsp;novou hodnotou.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;D&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Tyhle příkazy vytvoří několik „sirotků“,
+než do proměnné dostanou správnou hodnotu:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;┌─────────┐     ╔═══════╗
+│ retezec ├─┐ ×→║ &amp;#39;abc&amp;#39; ║
+└─────────┘ │   ╚═══════╝
+            │   ╔═══════╗
+            │ ×→║ &amp;#39;ABC&amp;#39; ║    ╔═════╗
+            │   ╚═══════╝    ║ &amp;#39;D&amp;#39; ║
+            │   ╔════════╗   ╚═════╝
+            │ ×→║ &amp;#39;ABCD&amp;#39; ║
+            │   ╚════════╝
+            │   ╔═══════╗
+            └──→║ &amp;#39;BCD&amp;#39; ║
+                ╚═══════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Existují ale i&amp;nbsp;objekty, které měnit lze. Klasický příklad jsou&amp;nbsp;seznamy.&lt;/p&gt;
+&lt;p&gt;Jak funguje takový seznam?&lt;/p&gt;
+&lt;p&gt;Když napíšeme&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jmeno&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;hynek&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;jmena&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;štěpán&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;vilém&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;dostaneme následující situaci:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐          ╔═════════╗
+│ jmeno ├─────────→║ &amp;#39;hynek&amp;#39; ║
+└───────┘          ╚═════════╝
+┌───────┐    ╔═════╤═════╗
+│ jmena ├───→║ [0] │ [1] ║
+└───────┘    ╚══╪══╧══╪══╝
+                │     │         ╔═════════╗
+                │     └────────→║ &amp;#39;vilém&amp;#39; ║
+                │ ╔══════════╗  ╚═════════╝
+                └→║ &amp;#39;štěpán&amp;#39; ║ 
+                  ╚══════════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Položky seznamu se chovají jako proměnné.
+Stejně jako hodnota výrazu &lt;code&gt;jmeno&lt;/code&gt; je teď &lt;code&gt;'hynek&lt;/code&gt;',
+výraz &lt;code&gt;jmena[0]&lt;/code&gt; má hodnotu &lt;code&gt;'štěpán'&lt;/code&gt;.
+A&amp;nbsp;stejně tak jako můžeme přiřadit do proměnné &lt;code&gt;jmeno&lt;/code&gt;,
+můžeme přiřadit i&amp;nbsp;do &lt;code&gt;jmena[0]&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmeno&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;a&amp;nbsp;dostaneme stejný výsledek, jako by &lt;code&gt;jmena[0]&lt;/code&gt; byla normální proměnná:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐          ╔═════════╗
+│ jmeno ├─────────→║ &amp;#39;hynek&amp;#39; ║
+└───────┘       ┌─→╚═════════╝
+┌───────┐    ╔══╪══╤═════╗
+│ jmena ├───→║ [0] │ [1] ║
+└───────┘    ╚═════╧══╪══╝
+                      │         ╔═════════╗
+                      └────────→║ &amp;#39;vilém&amp;#39; ║
+                                ╚═════════╝
+                    * poof *
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Protože je seznam objekt jako každý jiný,
+může mít více jmen — může na něj ukazovat více proměnných.
+Po příkazu&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;slova&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmena&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;bude situace vypadat takhle:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;                   ╔═════════╗
+                ┌─→║ &amp;#39;hynek&amp;#39; ║
+                │  ╚═════════╝
+┌───────┐    ╔══╪══╤═════╗
+│ jmena ├───→║ [0] │ [1] ║
+└───────┘ ┌─→╚═════╧══╪══╝
+┌───────┐ │           │         ╔═════════╗
+│ slova ├─┘           └────────→║ &amp;#39;vilém&amp;#39; ║
+└───────┘                       ╚═════════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Seznam teď můžeme měnit pomocí kteréhokoli z&amp;nbsp;těch dvou&amp;nbsp;jmen.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;]&lt;/span&gt;
+&lt;span class="n"&gt;slova&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;jarmila&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# na proměnnou `jmena` vůbec nesaháme!&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;, &amp;#39;jarmila&amp;#39;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Když si uvědomíme, co se děje uvnitř,
+nemůže nás&amp;nbsp;toto chování ničím&amp;nbsp;překvapit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;                   ╔═════════╗
+                ┌─→║ &amp;#39;hynek&amp;#39; ║
+                │  ╚═════════╝
+┌───────┐    ╔══╪══╤═════╤═════╗   ╔═══════════╗
+│ jmena ├───→║ [0] │ [1] │ [2] ╫──→║ &amp;#39;jarmila&amp;#39; ║
+└───────┘ ┌─→╚═════╧══╪══╧═════╝   ╚═══════════╝
+┌───────┐ │           │         ╔═════════╗
+│ slova ├─┘           └────────→║ &amp;#39;vilém&amp;#39; ║
+└───────┘                       ╚═════════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Toto chování je zdrojem častých chyb.
+Musíme pořád mít na paměti, že pokud jakýkoli měnitelný objekt
+(např. seznam, nebo slovník) poskytneme třeba nějaké funkci jako parametr,
+ta funkce nám ho může pod rukama&amp;nbsp;změnit.&lt;/p&gt;
+&lt;p&gt;Abychom zabránili chybám, je dobré co používat neměnitelné objekty
+(řetězce, čísla, n-tice), a&amp;nbsp;psát kód tak,
+aby objekty neměnil pokud přímo&amp;nbsp;nemusí.&lt;/p&gt;
+&lt;p&gt;Ještě připomenu, že pokud máš n-tici,
+nelze přiřadit přímo do jejích položek:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;def&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ghi&amp;#39;&lt;/span&gt;
+&lt;span class="c"&gt;# → TypeError: &amp;#39;tuple&amp;#39; object does not support item assignment&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;ale dej si pozor na i&amp;nbsp;to,
+že objekty které obsahuje se stále měnit dají:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → (&amp;#39;abc&amp;#39;, [1, 2, 3, 4])&lt;/span&gt;
+&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → [1, 2, 3, 4, 5]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A&amp;nbsp;to je prozatím k&amp;nbsp;měnění objektů všechno.
+Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</summary><category term="python"></category><category term="mutability"></category></entry><entry><title>Proměnné jsou jména</title><link href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena" rel="alternate"></link><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-promenne-jsou-jmena</id><summary type="html">&lt;p&gt;Jak v&amp;nbsp;Pythonu fungují proměnné?
+Už asi víš, že se přiřazují pomocí rovnítka,
+a že se pak dají používat ve výrazech.
+Pojďme se na ně podívat trochu&amp;nbsp;podrobněji.&lt;/p&gt;
+
+
+&lt;p&gt;Toto je první ze série článků o&amp;nbsp;tom, jak funguje Python.
+Pokud jsi se dostala přímo sem, koukni na
+&lt;a href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
+a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Na rozdíl od jazyků jako C, kde proměnná je vyhrazené místo v&amp;nbsp;paměti,
+Proměnné v&amp;nbsp;Pythonu jsou &lt;em&gt;jména&lt;/em&gt;, nebo řekněme&amp;nbsp;&lt;em&gt;ukazatele&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Abych to vysvětlil, pojďme se krok po kroku podívat,
+co přesně dělá tohle jednoduché přiřazení:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Nejdřív&amp;nbsp;se vyhodnotí výraz za rovnítkem.
+Výsledek vyhodnocení výrazu je vždycky nějaký &lt;em&gt;objekt&lt;/em&gt;;
+v&amp;nbsp;našem případě řetězec 'python'.
+Ukážeme si ho takhle:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;                ╔══════════╗
+                ║ &amp;#39;python&amp;#39; ║
+                ╚══════════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Teď, když má hodnotu výrazu, podívá se Python na jméno před rovnítkem,
+a&amp;nbsp;zařídí, aby na tu hodnotu&amp;nbsp;„ukazovalo“.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+│ jazyk ├──────→║ &amp;#39;python&amp;#39; ║
+└───────┘       ╚══════════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Voilà! Hodnota proměnné &lt;code&gt;jazyk&lt;/code&gt; je odteď&amp;nbsp;&lt;code&gt;'python'&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Pojďme si přiřadit další proměnnou:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;češ&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tina&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Opět se vyhodnotí výraz, vezmou se řetězce &lt;code&gt;'češ'&lt;/code&gt; a &lt;code&gt;'tina'&lt;/code&gt;, sečtou se,
+a&amp;nbsp;na výslednou hodnotu začne ukazovat proměnná &lt;code&gt;rec&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+│ jazyk ├──────→║ &amp;#39;python&amp;#39; ║
+└───────┘       ╚══════════╝
+┌─────┐         ╔═══════════╗
+│ rec ├────────→║ &amp;#39;čeština&amp;#39; ║
+└─────┘         ╚═══════════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Že to není zas tak složité?&lt;/p&gt;
+&lt;p&gt;Teď zkusíme jednu proměnnou „přiřadit“ do druhé:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Opět se nejdřív&amp;nbsp;vyhodnotí výraz za rovnítkem.
+Výsledek bude objekt, který je v&amp;nbsp;proměnné &lt;code&gt;rec&lt;/code&gt;.
+A&amp;nbsp;proměnná &lt;code&gt;jazyk&lt;/code&gt; začne jednoduše ukazovat na tento objekt:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+│ jazyk ├───┐ ×→║ &amp;#39;python&amp;#39; ║
+└───────┘   │   ╚══════════╝
+┌─────┐     └──→╔═══════════╗
+│ rec ├────────→║ &amp;#39;čeština&amp;#39; ║
+└─────┘         ╚═══════════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Tady je důvod, proč říkám že proměnné v&amp;nbsp;Pythonu jsou &lt;em&gt;jména&lt;/em&gt;.
+Jeden objekt může mít několik jmen, ale pořád je to ten samý&amp;nbsp;objekt.&lt;/p&gt;
+&lt;p&gt;Řetězec &lt;code&gt;'python'&lt;/code&gt; teď žádné jméno nemá. Nedá se k&amp;nbsp;němu nijak
+dostat&lt;sup id="fnref:interned-strings"&gt;&lt;a class="footnote-ref" href="#fn:interned-strings" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;, a&amp;nbsp;tudíž s&amp;nbsp;ním dál nemůžeme nijak pracovat.
+Jediné co můžeme dělat je vytvořit nový objekt se stejnou hodnotou.
+Takovéhle sirotky Python časem smaže, aby nezabíraly paměť počítače:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐
+│ jazyk ├───┐      * poof *
+└───────┘   │
+┌─────┐     └──→╔═══════════╗
+│ rec ├────────→║ &amp;#39;čeština&amp;#39; ║
+└─────┘         ╚═══════════╝
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Teď, když víme jak fungují proměnné, se můžeme podívat na zoubek
+jejich hodnotám, tedy objektům.
+Další článek v&amp;nbsp;sérii nám poví
+o &lt;a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id="zdroje-awzxhzdk31dalsi-materialy"&gt;Zdroje a&amp;nbsp;další materiály&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://pythontutor.com/"&gt;Python Tutor&lt;/a&gt; umí názorně zobrazovat, jak proměnné fungují&lt;/li&gt;
+&lt;li&gt;Ned Batchelder: &lt;a href="http://nedbatchelder.com/text/names.html"&gt;Facts and myths about Python names and values &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;David Gooder: &lt;a href="http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html#python-has-names"&gt;Code Like a&amp;nbsp;Pythonista: Idiomatic Python — Python has Names&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:interned-strings"&gt;
+&lt;p&gt;Tohle je zjednodušení; řetězce co se vyskytují přímo v kódu
+jsou (v CPythonu) součástí modulu, takže se k nim nějak dostat dá,
+a budou “žít” dál.
+Podrobněji to plánuju rozeberat v článku &lt;em&gt;identity a hodnoty&lt;/em&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:interned-strings" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary><category term="python"></category><category term="proměnné"></category></entry><entry><title>Jak funguje Python</title><link href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python" rel="alternate"></link><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-rozcestnik-python</id><summary type="html">&lt;p&gt;Znáte to.
+Studentka vám položí otázku, a&amp;nbsp;abyste na ni mohli pořádně odpovědět,
+je potřeba trochu osvětlit základy.
+Mně se to stalo s&amp;nbsp;proměnnými v&amp;nbsp;Pythonu.&lt;/p&gt;
+&lt;p&gt;No a&amp;nbsp;tak píšu.&lt;br /&gt;
+Píšu&amp;nbsp;na téma &lt;em&gt;Všechno o&amp;nbsp;proměnných, hodnotách a&amp;nbsp;jménech v&amp;nbsp;Pythonu.&lt;/em&gt;&lt;br /&gt;
+Píšu&amp;nbsp;už druhý den.&lt;/p&gt;
+
+
+&lt;p&gt;Přišel čas to trošku rozdělit.
+Tady je moje osnova; až (a&amp;nbsp;jestli) to dopíšu, tak z&amp;nbsp;toho udělám&amp;nbsp;odkazy.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;Proměnné jsou jména&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Přiřazování&lt;/li&gt;
+&lt;li&gt;Jmenné prostory&lt;/li&gt;
+&lt;li&gt;Identity a&amp;nbsp;hodnoty &lt;!-- udělat odkaz v&amp;nbsp;poznámce pod čarou v "Proměnné jsou jména" --&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Všechen kód by měl fungovat v&amp;nbsp;Pythonu 2.7&amp;nbsp;i&amp;nbsp;3.3, pokud není uvedeno jinak.
+Pokud uvidíš nějakou chybu, ozvi se mi na &lt;a href="mailto:encukou@gmail.com"&gt;mail&lt;/a&gt;,
+nebo rovnou založ &lt;a href="https://github.com/encukou/blog/issues/new"&gt;issue&lt;/a&gt; či &lt;a href="https://github.com/encukou/blog"&gt;pull&amp;nbsp;request&lt;/a&gt;.&lt;/p&gt;</summary><category term="python"></category><category term="rozcestník"></category></entry><entry><title>Jak fungují proměnné v Pythonu</title><link href="http://encukou.cz/blog/2014/01/04/cs-promenne-v-pythonu" rel="alternate"></link><updated>2014-01-04T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-04:blog/2014/01/04/cs-promenne-v-pythonu</id><summary type="html">&lt;p&gt;Všechen kód by měl fungovat v&amp;nbsp;Pythonu 2.7&amp;nbsp;i&amp;nbsp;3.3, pokud není napsáno&amp;nbsp;jinak.&lt;/p&gt;
+
+
+&lt;h2 id="prirazovani"&gt;Přiřazování&lt;/h2&gt;
+&lt;p&gt;Jak už víme, kromě proměnných dovoluje Python přiřazovat i&amp;nbsp;do položek seznamu.
+Kromě toho se ještě dá přiřazovat do atributů:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cislo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;   &lt;span class="c"&gt;# přiřazení do proměnné&lt;/span&gt;
+&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;  &lt;span class="c"&gt;# přiřazení do položky seznamu&lt;/span&gt;
+&lt;span class="n"&gt;objekt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;atribut&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;  &lt;span class="c"&gt;# přiřazení do atributu&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Přiřazování do položky nebo atributu musí daný objekt „umět“.
+Pokud je &lt;code&gt;seznam&lt;/code&gt; opravdu seznam, a&amp;nbsp;pokud je v&amp;nbsp;něm nějaký prvek,
+bude &lt;code&gt;seznam[0] = 4&lt;/code&gt; fungovat.
+Když to zkusíme s&amp;nbsp;prázdným seznamem, dostaneme chybu.
+Stejně tak dostaneme chybu, když máme z&amp;nbsp;nějakého důvodu v&amp;nbsp;proměnné &lt;code&gt;seznam&lt;/code&gt;
+třeba číslo (které nemá strukturu jako seznam, není&amp;nbsp;&lt;em&gt;sekvence&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Stejně tak to hodí chybu s řetězcem, který sice indexování umí
+(&lt;code&gt;r[0]&lt;/code&gt; vrátí první písmenko), ale jak popisuju výš nedá nijak&amp;nbsp;měnit.&lt;/p&gt;
+&lt;p&gt;Co můžeme dát do oněch hranatých závorek taky závisí na typu objektu.
+Slovníky podporují různé druhy klíčů.
+Seznamy a řetězce podporují čísla (a&amp;nbsp;zápornými čísly se indexuje odzadu),
+nebo rozsahy (&lt;em&gt;slices&lt;/em&gt;) jako &lt;code&gt;seznam[2:3]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Stejně tak u&amp;nbsp;atributů záleží na typu objektu,
+jestli nás&amp;nbsp;nechá do toho kterého atributu zapsat.
+Ze začátku se s&amp;nbsp;tím moc nesetkáme, ale hned v&amp;nbsp;první lekci objektového
+programování začneme přiřazujovat do atributů&amp;nbsp;&lt;code&gt;self&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Základní objekt, do jehož položky nebo atributu přiřazujeme,
+může být výsledek jakéhokoli výrazu.
+Třeba i&amp;nbsp;volání funkce:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;jedna&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;vrat_seznam&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;seznam&lt;/span&gt;
+&lt;span class="n"&gt;vrat_seznam&lt;/span&gt;&lt;span class="p"&gt;()[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → [0, 1, 2]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="rozbalovaci-prirazeni"&gt;Rozbalovací přiřazení&lt;/h3&gt;
+&lt;p&gt;Python nám umožňuje „rozbalit“ (&lt;em&gt;unpack&lt;/em&gt;) objekty jako n-tice a&amp;nbsp;seznamy,
+a&amp;nbsp;přiřazovat tak do několika proměnných najednou.
+Máme-li třeba funkci jako &lt;code&gt;divmod&lt;/code&gt;, která vrací n-tici, dvojici (podíl, zbytek),
+můžeme napsat:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;podil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;zbytek&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;divmod&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;a&amp;nbsp;nastavit tak obě proměnné.
+Oproti krkolomnému zápisu&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;vysledek&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;divmod&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;podil&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vysledek&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;zbytek&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vysledek&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;rozbalovací přiřazení nejen přiřadí hodnoty, ale navíc zkontroluje,
+že funkce opravdu vrátila právě dvě&amp;nbsp;hodnoty.&lt;/p&gt;
+&lt;p&gt;Rozbalovací přiřazení se často používá na výměnu dvou hodnot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Jak to funguje?
+Nejdřív&amp;nbsp;se vyhodnotí výraz za rovnítkem, dvojice &lt;code&gt;(b, a)&lt;/code&gt;.
+Ta se pak rozbalí a&amp;nbsp;přiřadí do proměnných &lt;code&gt;a&lt;/code&gt;, &lt;code&gt;b&lt;/code&gt;.&lt;sup id="fnref:swap-optimization"&gt;&lt;a class="footnote-ref" href="#fn:swap-optimization" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Rozbalovat můžeme i&amp;nbsp;na vnořené objekty.
+Řekněme, budeme reprezentovat body v&amp;nbsp;ploše dvojicemi souřadnic,
+třeba &lt;code&gt;(0, 0)&lt;/code&gt; a &lt;code&gt;(10, 10)&lt;/code&gt;, a úsečky dvojicemi bodů.
+Jednotlivé souřadnice můžeme získat jedním rozbalením,
+pomocí závorek – vypadá to, jako bychom „přiřazovali do n-tice“:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cara&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c"&gt;# úsečka z (0, 0) do (10, 10)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cara&lt;/span&gt;  &lt;span class="c"&gt;# rozbalení jednotlivých souřadnic&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Můžeme tu použít i&amp;nbsp;závorky hranaté,
+kde se chovají úplně steně, jen to vypadají trochu nezvykle:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cara&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pokud předem nevíme, kolik hodnot má objekt který rozbalujeme,
+můžeme v&amp;nbsp;Pythonu 3&amp;nbsp;do jedné proměnné dát seznam zbývajících hodnot.
+Stačí ji označit hvězdičkou:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Pouze v Pythonu 3&lt;/span&gt;
+&lt;span class="n"&gt;prvni&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;druhy&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;zbytek&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;posledni&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prvni&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → 0&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;druhy&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → 1&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zbytek&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → [2, 3]&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;posledni&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → 4&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Občas se stane že máme seznam s&amp;nbsp;jedním prvkem.
+Obvykle to bývá u&amp;nbsp;struktur, kde jsou některé prvky vícehodnotové a&amp;nbsp;jiné ne,
+ale pro zachování „tvaru“ jsou všechny v&amp;nbsp;seznamech.
+Třeba HTML hlavičky: &lt;!-- záznamy z&amp;nbsp;LDAPu by asi nikomu nic neřekly :( --&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;#39;Server&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;example.com&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;  &lt;span class="c"&gt;# víme že &amp;#39;Server&amp;#39; bude vždy jen jeden&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;#39;Connection&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;keep-alive&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;#39;Cache-Control&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;no-cache&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;no-store&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;  &lt;span class="c"&gt;# ale tady je hodnot víc&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Stejně jako n-tici s&amp;nbsp;jedním prvkem píšeme &lt;code&gt;(1,)&lt;/code&gt; a&amp;nbsp;ne &lt;code&gt;(1)&lt;/code&gt;,
+u&amp;nbsp;rozbalení musíme použít čárku navíc.
+A&amp;nbsp;nebo použijeme hranaté závorky:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;server&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;server&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Oproti &lt;code&gt;server = headers['server'][0]&lt;/code&gt; je rozbalení bezpečnější:
+ověří, že máme opravdu jen jeden&amp;nbsp;prvek.&lt;/p&gt;
+&lt;h3 id="rozsirene-prirazovani"&gt;Rozšířené přiřazování&lt;/h3&gt;
+&lt;p&gt;Komu samotné &lt;code&gt;=&lt;/code&gt; nestačí, může použít tzv. rozšířené přiřazovací operátory
+(&lt;em&gt;augmented assignment operators&lt;/em&gt;), které kromě přiřazení
+dělají nějakou operaci.
+Jsou to
+&lt;code&gt;+=&lt;/code&gt;, &lt;code&gt;-=&lt;/code&gt;, &lt;code&gt;*=&lt;/code&gt;, &lt;code&gt;/=&lt;/code&gt;, &lt;code&gt;%=&lt;/code&gt;, &lt;code&gt;&amp;amp;=&lt;/code&gt;, &lt;code&gt;|=&lt;/code&gt;, &lt;code&gt;^=&lt;/code&gt;, &lt;code&gt;&amp;lt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;&amp;gt;&amp;gt;=&lt;/code&gt;, &lt;code&gt;**=&lt;/code&gt;, a&amp;nbsp;&lt;code&gt;//=&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Například&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;promenna&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;dělá téměř to samé jako&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;promenna&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;promenna&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;s&amp;nbsp;tím rozdílem, že některé objekty, se tímto příkazem přímo změní.
+Ilustruje to následující příklad:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;druhy_seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;seznam&lt;/span&gt;
+&lt;span class="n"&gt;druhy_seznam&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c"&gt;# změna původního seznamu&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → [1, 2, 3, 4]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;ale:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;druhy_seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;seznam&lt;/span&gt;
+&lt;span class="n"&gt;druhy_seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;druhy_seznam&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c"&gt;# vytvoření nového seznamu&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → [1, 2, 3]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Rozšířené přiřazení je proto záhodno používat &lt;em&gt;jen&lt;/em&gt; tam,
+kde měněný objekt není dostupný pod jinými&amp;nbsp;jmény.&lt;/p&gt;
+&lt;h3 id="dalsi-prirazujici-prikazy"&gt;Další přiřazující příkazy&lt;/h3&gt;
+&lt;p&gt;A&amp;nbsp;komu nestačí &lt;code&gt;=&lt;/code&gt; ani rozšířené přiřazení,
+má na výběr vybrat z&amp;nbsp;několika dalších příkazů, které přiřazují hodnoty.
+Některé z&amp;nbsp;nich možná ještě neznáte – nevadí, prostě je zatím přeskočte.
+První z&amp;nbsp;nich je ale snadvšem dobře známý:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hodnota&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Příkaz &lt;code&gt;for&lt;/code&gt; přiřazuje do své kontrolní proměnné.
+A&amp;nbsp;přiřazuje se vším všudy: můžeme v&amp;nbsp;něm použít i&amp;nbsp;rozbalování,
+například při&amp;nbsp;procházení slovníkem:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;slovnik&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;jedna&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;dva&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tri&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;klic&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;slovnik&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt; -&amp;gt; &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;klic&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Stejně tak můžeme ve &lt;code&gt;for&lt;/code&gt; přiřazovat do atributu nebo položky,
+ale ještě jsem se nesetkal se situací, kdy by to bylo&amp;nbsp;užitečné.&lt;/p&gt;
+&lt;p&gt;Stejně jako v&amp;nbsp;příkazové formě &lt;code&gt;for&lt;/code&gt; funguje přiřazení i&amp;nbsp;v&amp;nbsp;generátorových
+notacích (&lt;em&gt;generator, list/dict/set&amp;nbsp;comprehension&lt;/em&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Také příkazy &lt;code&gt;with&lt;/code&gt; a &lt;code&gt;except&lt;/code&gt; jsou, co se přiřazování týče, normální:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Jen pokud budeme z&amp;nbsp;nějakého důvodu chtít rozbalovat,
+je potřeba všechny zúčastněné proměnné uzavřít do závorek,
+protože čárka tu už má (nebo měla) jiný význam.
+Můžeme tedy napsat třeba šílenost jako:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;dvouradkovy_soubor.txt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radek1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;radek2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radek1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radek2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Další přiřazující příkaz je &lt;code&gt;import&lt;/code&gt;, ve všech jeho podobách.
+Na rozdíl od ostatních umí přiřadit jen do čistého jména proměnné;
+položky ani atributy nemá rád.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hodnota&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;hodnota2&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;modul&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hodnota2&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;modul&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;hodnota&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;modul&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;vec&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;hodnota&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ještě zajímavější jsou příkazy &lt;code&gt;def&lt;/code&gt; a &lt;code&gt;class&lt;/code&gt;.
+Obě vytvoří nějaký objekt, ať už funkci nebo třídu,
+a&amp;nbsp;přiřadí jej do dané proměnné (zase ale umí pouze jednoduchá&amp;nbsp;jména).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hodnota&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;hodnota&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Navíc ale jméno „zapíše“ do vytvořeného objektu.
+Funkce si bude sama „pamatovat“ jak se jmenuje,
+nezávisle na proměnné ve které je&amp;nbsp;uložena.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;nejaka_funkce&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;span class="n"&gt;jine_jmeno&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nejaka_funkce&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jine_jmeno&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → &amp;lt;function nejaka_funkce ...&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Poslední (opravdu!) a&amp;nbsp;nejexotičtější forma přiřazování jsou formální
+argumenty funkcí.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;funkce&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hodnota&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hodnota2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; 
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hodnota2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;funkce&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c"&gt;# → 2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Hned po zavolání funkce se daná jména nastaví na předané hodnoty.
+Děje se to v&amp;nbsp;kontextu funkce,
+takže, jak si povíme v&amp;nbsp;příštím článku, vznikají lokální&amp;nbsp;proměnné.&lt;/p&gt;
+&lt;p&gt;Opět zde není možné přiřazovat do položek či&amp;nbsp;atributů.
+V&amp;nbsp;Pythonu 2&amp;nbsp;sice v&amp;nbsp;argumentech jde použít rozbalování,
+ale nedoporučuju to dělat – už jen proto že
+to nejnovější verze jazyka nepodporuje.&lt;/p&gt;
+&lt;p&gt;Funkce definované pomocí &lt;code&gt;lambda&lt;/code&gt; se, co se argumentů týče,
+samozřejmě chovají úplně stejně jako ty z&amp;nbsp;&lt;code&gt;def&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="jmenne-prostory"&gt;Jmenné prostory&lt;/h2&gt;
+&lt;p&gt;xxx: úvod&lt;/p&gt;
+&lt;h3 id="lokalni-promenne"&gt;Lokální proměnné&lt;/h3&gt;
+&lt;h3 id="hranice-jmennych-prostoru"&gt;Hranice jmenných prostorů&lt;/h3&gt;
+&lt;h3 id="generatory-vwzxhzdk93pythonu-3"&gt;Generátory v&amp;nbsp;Pythonu 3&lt;/h3&gt;
+&lt;h2 id="identity-awzxhzdk94hodnoty"&gt;Identity a&amp;nbsp;hodnoty&lt;/h2&gt;
+&lt;h2 id="odpoved-sandre"&gt;(odpověď Sandře)&lt;/h2&gt;
+&lt;p&gt;Připravím obsáhlejší odpověď. Pro teď jen shrnutí, snad to bude trochu
+pochopitelné:&lt;/p&gt;
+&lt;p&gt;Lokální proměnné se vytváří přiřazením: pokud je kdekoli ve funkci příkaz jako
+    promenna = nejaka_hodnota
+nebo jiné přiřazení, např:
+    promenna += 1
+    for promenna in 1, 2, 3: ...
+    def promenna(a, b, c): ...
+tak je &lt;code&gt;promenna&lt;/code&gt; lokální, a "vnější" proměnná stejného názvu se úplně&amp;nbsp;ignoruje.&lt;/p&gt;
+&lt;p&gt;Pokud tam žádný přiřazovací příkaz není, tak se lokální proměnná
+nevytvoří, výrazy jako
+    print promenna
+    funkce(promenna)
+budou používat globální proměnnou.&lt;/p&gt;
+&lt;p&gt;Příkaz &lt;code&gt;global&lt;/code&gt; zabraňuje vytváření lokální proměnné v&amp;nbsp;dané funkci,
+takže se globální proměnné dá přiřadit.&lt;/p&gt;
+&lt;p&gt;Tenhle příkaz:
+    x = promenna + 1
+přiřazuje do &lt;code&gt;x&lt;/code&gt;; z &lt;code&gt;promenna&lt;/code&gt; nedělá lokální proměnnou.
+Je-li v &lt;code&gt;promenna&lt;/code&gt; seznam, po příkazu:
+    promenna[0] = 24
+bude v &lt;code&gt;promenna&lt;/code&gt; stále stejný seznam, změní se jen hodnota "vevnitř".
+Přiřazuje se do &lt;code&gt;promenna[0]&lt;/code&gt;, nikoli do samotné &lt;code&gt;promenna&lt;/code&gt;, takže to
+zase nedělá lokální proměnnou.
+Proto jsou v&amp;nbsp;té hře všechny ty globální proměnné&amp;nbsp;seznamy.&lt;/p&gt;
+&lt;p&gt;Bez globálních proměnných by se to dalo napsat objektově, ale to je na
+delší projekt pro PyLadies 2014 :)&lt;/p&gt;
+&lt;h2 id="zdroje-awzxhzdk99dalsi-materialy"&gt;Zdroje a&amp;nbsp;další materiály&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Dokumentace Pythonu, zvláště &lt;a href="http://docs.python.org/2/reference/index.html"&gt;popis jazyka&lt;/a&gt; a&amp;nbsp;&lt;a href="http://docs.python.org/2/reference/grammar.html"&gt;gramatiky&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="footnote"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:swap-optimization"&gt;
+&lt;p&gt;Další zjednodušení; tvořit nový objekt je zbytečně pomalé,
+proto se v tomhle případě se v CPythonu n-tice ve skutečnosti nevytvoří.
+Proměnné se prohodí přímo.
+Ale efekt je stejný, jako kdyby se to dělo podle mého popisu.&amp;#160;&lt;a class="footnote-backref" href="#fnref:swap-optimization" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</summary><category term="python"></category><category term="proměnné"></category></entry><entry><title>Raspberry Pi and my Third Screen</title><link href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen" rel="alternate"></link><updated>2013-05-04T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-05-04:blog/2013/05/04/en-raspberry-third-screen</id><summary type="html">&lt;p&gt;Today, I&amp;nbsp;finally figured out what was wrong with my Raspberry Pi.
 It &lt;a href="http://file3.status.net/i/identica/encukou-20130120T115619-yw8xyls.jpeg"&gt;worked before&lt;/a&gt;,
-connected to a TV, without ethernet, and with a power supply and keyboard
+connected to a&amp;nbsp;TV, without ethernet, and with a&amp;nbsp;power supply and keyboard
 borrowed from my brother.
-When I got my own accessories for it, though, I found the USB ports and network
+When I&amp;nbsp;got my own accessories for it, though, I&amp;nbsp;found the USB ports and network
 were dead.&lt;/p&gt;
-&lt;p&gt;Well, today I finally got around to some debugging, and found that the faulty
-part was the USB cable between the box and the power supply (i.e. a phone
-charger). Don't ask me how much I spent diagnosing that.
-Luckily, I can easily get micro-USB cable, even on a Saturday.
-(Okay, not nearly easily enough, but I did get one.)&lt;/p&gt;
-&lt;p&gt;Hooray! A working computer! Let's try new things with it!
-I've used &lt;code&gt;apt&lt;/code&gt; in Ubuntu for quite some time, so I thought Raspbian would be too
-boring, and decided to go for Arch. So far it's been working nicely.&lt;/p&gt;
+&lt;p&gt;Well, today I&amp;nbsp;finally got around to some debugging, and found that the faulty
+part was the USB cable between the box and the power supply (i.e. a&amp;nbsp;phone
+charger). Don't ask me how much I&amp;nbsp;spent diagnosing that.
+Luckily, I&amp;nbsp;can easily get micro-USB cable, even on a&amp;nbsp;Saturday.
+(Okay, not nearly easily enough, but I&amp;nbsp;did get one.)&lt;/p&gt;
+&lt;p&gt;Hooray! A&amp;nbsp;working computer! Let's&amp;nbsp;try new things with it!
+I've used &lt;code&gt;apt&lt;/code&gt; in Ubuntu for quite some time, so I&amp;nbsp;thought Raspbian would be too
+boring, and decided to go for Arch. So far it's&amp;nbsp;been working&amp;nbsp;nicely.&lt;/p&gt;
 
 
-&lt;h1&gt;Quassel&lt;/h1&gt;
-&lt;p&gt;My first reason for having a Pi is a (hopefully) always-on IRC client.
-I've been using &lt;a href="http://www.quassel-irc.org/"&gt;Quassel&lt;/a&gt; at work, where I leave
-a Core running on a virtual machine in the lab, and connect to that with the
-graphical client. That way I don't miss anything when my laptop is off.&lt;/p&gt;
-&lt;p&gt;It turns out Arch's official repos only have the monolithic build of Quassel
-(the core and client all in one), but a nice person called joschi maintains a
+&lt;h2 id="quassel"&gt;Quassel&lt;/h2&gt;
+&lt;p&gt;My first reason for having a&amp;nbsp;Pi is a (hopefully) always-on IRC client.
+I've been using &lt;a href="http://www.quassel-irc.org/"&gt;Quassel&lt;/a&gt; at work, where I&amp;nbsp;leave
+a&amp;nbsp;Core running on a&amp;nbsp;virtual machine in the lab, and connect to that with the
+graphical client. That way I&amp;nbsp;don't miss anything when my laptop is&amp;nbsp;off.&lt;/p&gt;
+&lt;p&gt;It turns out Arch's&amp;nbsp;official repos only have the monolithic build of Quassel
+(the core and client all in one), but a&amp;nbsp;nice person called joschi maintains a
 &lt;a href="https://aur.archlinux.org/packages.php?ID=42085"&gt;Core-only&lt;/a&gt; package
 in the AUR.
-It worked for me with one modification – I had to update the list of
+It worked for me with one modification – I&amp;nbsp;had to update the list of
 supported arcitectures.
-The &lt;code&gt;pkgbuild&lt;/code&gt;'s error message included the name of my architecture ('armv6h'),
+The &lt;code&gt;pkgbuild&lt;/code&gt;'s&amp;nbsp;error message included the name of my architecture ('armv6h'),
 and the &lt;code&gt;PKGBUILD&lt;/code&gt; file left no doubt where that string should go.
 All clear!&lt;/p&gt;
-&lt;p&gt;The compile took quite some time (I don't know exactly how much because I've
-interrupted it a few times to reboot while tinkering), but it paid off.
+&lt;p&gt;The compile took quite some time (I&amp;nbsp;don't know exactly how much because I've
+interrupted it a&amp;nbsp;few times to reboot while tinkering), but it paid off.
 I'm on IRC again!&lt;/p&gt;
-&lt;p&gt;Half an hour after I reported my success to the Quassel AUR maintainer,
-the arch was added to the package. Thanks, joschi!&lt;/p&gt;
-&lt;h1&gt;My third monitor&lt;/h1&gt;
-&lt;p&gt;Now for the other thing I had in mind for the little box.
-My laptop's graphics card only supports two screens, and I sometimes get the
+&lt;p&gt;Half an hour after I&amp;nbsp;reported my success to the Quassel AUR maintainer,
+the arch was added to the package. Thanks,&amp;nbsp;joschi!&lt;/p&gt;
+&lt;h2 id="my-third-monitor"&gt;My third monitor&lt;/h2&gt;
+&lt;p&gt;Now for the other thing I&amp;nbsp;had in mind for the little box.
+My laptop's&amp;nbsp;graphics card only supports two screens, and I&amp;nbsp;sometimes get the
 feeling that two is too few.&lt;/p&gt;
-&lt;p&gt;Looks like a job for the Pi! I have a monitor conected to it, now I just need
+&lt;p&gt;Looks like a&amp;nbsp;job for the Pi! I&amp;nbsp;have a&amp;nbsp;monitor conected to it, now I&amp;nbsp;just need
 to wire it up to my computer.
-Well, actually, before I do that, I see the default virtual terminal font
+Well, actually, before I&amp;nbsp;do that, I&amp;nbsp;see the default virtual terminal font
 is rather large.
-A &lt;code&gt;sudo pacman -S terminus-font&lt;/code&gt; and a &lt;code&gt;setfont ter-112n&lt;/code&gt; in an rc file
-will make many more letters fit on the screen.&lt;/p&gt;
+A &lt;code&gt;sudo pacman -S&amp;amp;nbsp;terminus-font&lt;/code&gt; and a &lt;code&gt;setfont ter-112n&lt;/code&gt; in an rc file
+will make many more letters fit on the&amp;nbsp;screen.&lt;/p&gt;
 &lt;p&gt;Now, the first step to connect the two machines was of course to SSH to the Pi,
-so I don't have to plug the keyboard back and forth.
+so I&amp;nbsp;don't have to plug the keyboard back and forth.
 And also to get the middle-clicky pasting goodness of an X terminal emulator.
-(Goodness, did I miss that!)&lt;/p&gt;
-&lt;p&gt;And after that... hm. Let's see what I want to do, exactly.&lt;/p&gt;
-&lt;p&gt;I need to run commands on the main machine, control them from the main machine,
-but have them display on the little box. Sounds easy, right?&lt;/p&gt;
-&lt;p&gt;Turns out, it's not that easy. At least for me –
-I sure hope there's an easier solution than what I came up with.&lt;/p&gt;
-&lt;p&gt;Since I need to display the console on the Pi, I started up a &lt;code&gt;tmux&lt;/code&gt; session
+(Goodness, did I&amp;nbsp;miss that!)&lt;/p&gt;
+&lt;p&gt;And after that... hm. Let's&amp;nbsp;see what I&amp;nbsp;want to do,&amp;nbsp;exactly.&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;need to run commands on the main machine, control them from the main machine,
+but have them display on the little box. Sounds easy,&amp;nbsp;right?&lt;/p&gt;
+&lt;p&gt;Turns out, it's&amp;nbsp;not that easy. At least for me –
+I&amp;nbsp;sure hope there's&amp;nbsp;an easier solution than what I&amp;nbsp;came up&amp;nbsp;with.&lt;/p&gt;
+&lt;p&gt;Since I&amp;nbsp;need to display the console on the Pi, I&amp;nbsp;started up a &lt;code&gt;tmux&lt;/code&gt; session
 there.
-I can connect to it from my main box, but I'd like to have a “write-only”
-connection: I just want to send the keystrokes over, I don't need to see the
-third monitor's contents on the main monitor – it's on the other monitor!
-I could make the console window really small, but &lt;code&gt;tmux&lt;/code&gt; insists on making
+I&amp;nbsp;can connect to it from my main box, but I'd like to have a “write-only”
+connection: I&amp;nbsp;just want to send the keystrokes over, I&amp;nbsp;don't need to see the
+third monitor's&amp;nbsp;contents on the main monitor – it's&amp;nbsp;on the other monitor!
+I&amp;nbsp;could make the console window really small, but &lt;code&gt;tmux&lt;/code&gt; insists on making
 the logical terminal just big enough for the smallest client connected to it.
-I briefly tried to find a way to use an infinitesimally small font in
-a terminal emulator, but to no avail.&lt;/p&gt;
-&lt;p&gt;Luckily, thanks to research for &lt;a href="https://ep2013.europython.eu/conference/talks/terminals-command-lines-and-text-interfaces"&gt;my talk for this summer's EuroPython&lt;/a&gt;,
-I know that terminal size is just two properties I can set rather easily.
-&lt;code&gt;stty cols 256; stty rows 256;&lt;/code&gt; and voilà, &lt;code&gt;tmux&lt;/code&gt; thinks it has a window
-that's larger than my new monitor.
+I&amp;nbsp;briefly tried to find a&amp;nbsp;way to use an infinitesimally small font in
+a&amp;nbsp;terminal emulator, but to no&amp;nbsp;avail.&lt;/p&gt;
+&lt;p&gt;Luckily, thanks to research for &lt;a href="https://ep2013.europython.eu/conference/talks/terminals-command-lines-and-text-interfaces"&gt;my talk for this summer's&amp;nbsp;EuroPython&lt;/a&gt;,
+I&amp;nbsp;know that terminal size is just two properties I&amp;nbsp;can set rather easily.
+&lt;code&gt;stty cols 256; stty rows 256;&lt;/code&gt; and voilà, &lt;code&gt;tmux&lt;/code&gt; thinks it has a&amp;nbsp;window
+that's&amp;nbsp;larger than my new monitor.
 The only drawback is that whenever the window is resized, it picks up the new
 size.
-My research notes tell me this is handled by SIGWINCH, a SIGnal that gets
+My research notes tell me this is handled by SIGWINCH, a&amp;nbsp;SIGnal that gets
 sent whenever the WINdow size CHanges.
-Luckily, there's a &lt;a href="http://stackoverflow.com/a/4515549/99057"&gt;signal-blocking program&lt;/a&gt;
-on StackOverflow, on which I do a quick &lt;code&gt;s/SIGINT/SIGWINCH/&lt;/code&gt; and compile.
-I hack up a command to run SSH with the &lt;code&gt;stty&lt;/code&gt;s and a signal-blocked &lt;code&gt;tmux&lt;/code&gt;,
-all in a uniquely titled &lt;code&gt;xterm&lt;/code&gt;, and then use KDE's nifty Window Settings
+Luckily, there's&amp;nbsp;a &lt;a href="http://stackoverflow.com/a/4515549/99057"&gt;signal-blocking program&lt;/a&gt;
+on StackOverflow, on which I&amp;nbsp;do a&amp;nbsp;quick &lt;code&gt;s/SIGINT/SIGWINCH/&lt;/code&gt; and compile.
+I&amp;nbsp;hack up a&amp;nbsp;command to run SSH with the &lt;code&gt;stty&lt;/code&gt;s&amp;nbsp;and a&amp;nbsp;signal-blocked &lt;code&gt;tmux&lt;/code&gt;,
+all in a&amp;nbsp;uniquely titled &lt;code&gt;xterm&lt;/code&gt;, and then use KDE's&amp;nbsp;nifty Window Settings
 to make the &lt;code&gt;xterm&lt;/code&gt; window very tiny, borderless, always-on-top, on all
-desktops, and in the upper left corner of the screen.&lt;/p&gt;
+desktops, and in the upper left corner of the&amp;nbsp;screen.&lt;/p&gt;
 &lt;p&gt;Glorious.&lt;/p&gt;
-&lt;p&gt;I think I'll name it &lt;code&gt;pi-remote&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;(Also, thank goodness for xterm's simplicity: unlike modern programs that
+&lt;p&gt;I&amp;nbsp;think I'll name it &lt;code&gt;pi-remote&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;(Also, thank goodness for xterm's&amp;nbsp;simplicity: unlike modern programs that
 try very very hard to never let users shoot themselves in the foot, xterm can
 be resized small enough to be useless.
 Well, useless for anything except what I'm trying to do here.)&lt;/p&gt;
-&lt;h1&gt;A circle of SSH&lt;/h1&gt;
-&lt;p&gt;Now that I have a way to control my second monitor, there's one more goal:
+&lt;h2 id="awzxhzdk90circle-of-ssh"&gt;A&amp;nbsp;circle of SSH&lt;/h2&gt;
+&lt;p&gt;Now that I&amp;nbsp;have a&amp;nbsp;way to control my second monitor, there's&amp;nbsp;one more goal:
 running stuff on the main box.
-Do do that, I need to SSH back to it. Close the loop, so to say.&lt;/p&gt;
-&lt;p&gt;I'd like to go passwordless, and I'd rather not leave a private key
+Do do that, I&amp;nbsp;need to SSH back to it. Close the loop, so to&amp;nbsp;say.&lt;/p&gt;
+&lt;p&gt;I'd like to go passwordless, and I'd rather not leave a&amp;nbsp;private key
 that grants access to my main box lying around on the Pi.
-I think it's time for some SSH agent forwarding.
+I&amp;nbsp;think it's&amp;nbsp;time for some SSH agent forwarding.
 It turns out Github has a &lt;a href="https://help.github.com/articles/using-ssh-agent-forwarding"&gt;nice article&lt;/a&gt;
 on how to set that up – put some lines in &lt;code&gt;~/.ssh/config&lt;/code&gt;, uncomment one in
-&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;, restart sshd – not straightforward but easy enough.&lt;/p&gt;
-&lt;p&gt;Oh, and I need to trust the key.
-I think this is the first time I've put my own key for a machine in that
+&lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;, restart sshd – not straightforward but easy&amp;nbsp;enough.&lt;/p&gt;
+&lt;p&gt;Oh, and I&amp;nbsp;need to trust the key.
+I&amp;nbsp;think this is the first time I've put my own key for a&amp;nbsp;machine in that
 machine's &lt;code&gt;authorized_keys&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The part that I didn't find an elegant solution for is passing the agent
+&lt;p&gt;The part that I&amp;nbsp;didn't find an elegant solution for is passing the agent
 forwarding info through tmux.
 This stuff is passed around in environment variables, but the tmux session is
 already running, with its own environment.
-There's probably an amazingly obvious way to do this, but after a while of
-searching I decided for a brute-force approach: before joining the session I
+There's&amp;nbsp;probably an amazingly obvious way to do this, but after a&amp;nbsp;while of
+searching I&amp;nbsp;decided for a&amp;nbsp;brute-force approach: before joining the session I
 save the SSH-related env:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;env | grep ^SSH  &amp;gt; ~/.ssh/third_monitor_callback_env
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and before SSH-ing back, I restore it.&lt;/p&gt;
+&lt;p&gt;and before SSH-ing back, I&amp;nbsp;restore&amp;nbsp;it.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;while &lt;/span&gt;&lt;span class="nb"&gt;read &lt;/span&gt;line; &lt;span class="k"&gt;do &lt;/span&gt;&lt;span class="nb"&gt;declare&lt;/span&gt; -x &lt;span class="s2"&gt;&amp;quot;$line&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;done&lt;/span&gt; &amp;lt; ~/.ssh/third_monitor_callback_env
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Works for me.&lt;/p&gt;
 &lt;p&gt;It doesn't call back automatically.
-The main machine is a laptop, so it may not always be there,
-and the pi should be usable without it.&lt;/p&gt;
-&lt;h1&gt;The red freehand arrow&lt;/h1&gt;
-&lt;p&gt;In the end, I have a Raspberry-Pi-controlled third monitor, in retro text mode.
+The main machine is a&amp;nbsp;laptop, so it may not always be there,
+and the pi should be usable without&amp;nbsp;it.&lt;/p&gt;
+&lt;h2 id="the-red-freehand-arrow"&gt;The red freehand arrow&lt;/h2&gt;
+&lt;p&gt;In the end, I&amp;nbsp;have a&amp;nbsp;Raspberry-Pi-controlled third monitor, in retro text mode.
 I'll use it mainly for display (logs, stdout of GUI or web things, etc.),
-but if I need control, I just click the top-left corner on my mouse-enabled
+but if I&amp;nbsp;need control, I&amp;nbsp;just click the top-left corner on my mouse-enabled
 main screen and type away.
-A popular generalization of &lt;a href="http://en.wikipedia.org/wiki/Fitts%27s_law"&gt;Fitts' law&lt;/a&gt;
-says this is very convenient, and I'm sure not arguing with that.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/static/../images/2013-05-04-screenshot.png"&gt;&lt;img alt="Screenshot of my screen with a red freehand arrow pointing at the pi-remote" class="size-full" src="http://encukou.cz/static/../images/2013-05-04-screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Here's a review of my files, for future reference:&lt;/p&gt;
+A&amp;nbsp;popular generalization of &lt;a href="http://en.wikipedia.org/wiki/Fitts%27s_law"&gt;Fitts' law&lt;/a&gt;
+says this is very convenient, and I'm sure not arguing with&amp;nbsp;that.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/../images/2013-05-04-screenshot.png"&gt;&lt;img alt="Screenshot of my screen with a&amp;amp;nbsp;red freehand arrow pointing at the pi-remote" class="size-full" src="http://encukou.cz/../images/2013-05-04-screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Here's&amp;nbsp;a&amp;nbsp;review of my files, for future reference:&lt;/p&gt;
 &lt;p&gt;At the main machine, named &lt;code&gt;tapio&lt;/code&gt;, there's:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -180,52 +753,52 @@ ssh tapio
 
 
 &lt;p&gt;And, of course, an always-on &lt;code&gt;tmux&lt;/code&gt; session.
-I sometimes press Ctrl-D by mistake and don't want to get disconnected,
-so I run the shell in a loop:&lt;/p&gt;
+I&amp;nbsp;sometimes press Ctrl-D by mistake and don't want to get disconnected,
+so I&amp;nbsp;run the shell in a&amp;nbsp;loop:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;tmux new-session -s third-monitor &lt;span class="s1"&gt;&amp;#39;while true; bash; reset; done&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;I sure hope there is an easier way to do this. Anyone?&lt;/p&gt;</summary><category term="raspberry"></category><category term="shell"></category><category term="quassel"></category><category term="tmux"></category></entry><entry><title>Stavové prostory</title><link href="http://encukou.cz/blog/2013/03/03/cs-stavove-prostory" rel="alternate"></link><updated>2013-03-03T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-03-03:blog/2013/03/03/cs-stavove-prostory</id><summary type="html">&lt;p&gt;&lt;a href="http://glutexo.livejournal.com/137926.html"&gt;Glutexo píše&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;sure hope there is an easier way to do this.&amp;nbsp;Anyone?&lt;/p&gt;</summary><category term="raspberry"></category><category term="shell"></category><category term="quassel"></category><category term="tmux"></category></entry><entry><title>Stavové prostory</title><link href="http://encukou.cz/blog/2013/03/03/cs-stavove-prostory" rel="alternate"></link><updated>2013-03-03T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-03-03:blog/2013/03/03/cs-stavove-prostory</id><summary type="html">&lt;p&gt;&lt;a href="http://glutexo.livejournal.com/137926.html"&gt;Glutexo píše&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Narazil jsem na drsné a vytůněné Sudoku: Podobá se klasickému killer sudoku:
-V začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
-kterých vždy víme součet čísel v nich, a také víme, že kromě řádků, sloupců
-a čtverců se ani v těchto ohraničených oblastech číslice neopakují.
+&lt;p&gt;Narazil jsem na drsné a&amp;nbsp;vytůněné Sudoku: Podobá se klasickému killer sudoku:
+V&amp;nbsp;začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
+kterých vždy víme součet čísel v&amp;nbsp;nich, a&amp;nbsp;také víme, že kromě řádků, sloupců
+a čtverců se ani v&amp;nbsp;těchto ohraničených oblastech číslice neopakují.
 
 Řešení takového sudoku však nejspíše není unikátní (nakrmil jsem jím řešítko,
 které jsem si našel), ale výsledek nebyl takový, jaký jsem chtěl: Chtěl jsem
-jiné možné řešení, ne libovolné. A nejspíše právě proto je zadání obohaceno
-ještě o informace o některých dvojicích sousedících políček, že na jedné
-straně je číslo větší než to na druhé.&lt;/p&gt;
+jiné možné řešení, ne libovolné. A&amp;nbsp;nejspíše právě proto je zadání obohaceno
+ještě o&amp;nbsp;informace o&amp;nbsp;některých dvojicích sousedících políček, že na jedné
+straně je číslo větší než to na&amp;nbsp;druhé.&lt;/p&gt;
 &lt;p&gt;Zajímalo mě, zda na to lze jít metodou hrubé síly, tedy projít si všech 9^81
-kombinací a porovnat je proti zadání. Nešlo: Za deset minut běhu program
+kombinací a&amp;nbsp;porovnat je proti zadání. Nešlo: Za deset minut běhu program
 prokombinoval jen třikrát prvních osm pozic. Takže než by prošel všechny,
-uplynula by přibližně věčnost. Takže na to budeme muset jít jinak. Jak?&lt;/p&gt;
+uplynula by přibližně věčnost. Takže na to budeme muset jít jinak.&amp;nbsp;Jak?&lt;/p&gt;
 &lt;p&gt;Pár možností mě napadá: Např. zjistit si pro každou ohraničenou oblast
-všechny možné kombinace čísel v rozsahu 1-9, které dají při daném počtu polí
-daný součet a následně do oblastí dosazovat tato čísla ve všech možných
+všechny možné kombinace čísel v&amp;nbsp;rozsahu 1-9, které dají při&amp;nbsp;daném počtu polí
+daný součet a&amp;nbsp;následně do oblastí dosazovat tato čísla ve všech možných
 kombinacích. Pak už by stačilo jen pro každé vyplnění plochy jen zvalidovat,
-zda platí základní pricipy sudoku a zda platí ona pravidla o tom, které ze
+zda platí základní pricipy sudoku a&amp;nbsp;zda platí ona pravidla o&amp;nbsp;tom, které ze
 sousedních polí má obsahovat větší číslo. Ale nedostanu se tím opět do
-astronomické množství kombinací a tak času? Uvidíme, ale jindy.&lt;/p&gt;
-&lt;p&gt;Nebo máte někdo nějaký nápad, nebo dokonce víte a jste ochotni mi řešení
-představit a vysvětlit? Rád se přiučím.&lt;/p&gt;
-&lt;p&gt;A pokud by někoho zajímalo zadání, tak se jedná o kešku Loki's mystery
+astronomické množství kombinací a&amp;nbsp;tak času? Uvidíme, ale&amp;nbsp;jindy.&lt;/p&gt;
+&lt;p&gt;Nebo máte někdo nějaký nápad, nebo dokonce víte a&amp;nbsp;jste ochotni mi řešení
+představit a&amp;nbsp;vysvětlit? Rád se&amp;nbsp;přiučím.&lt;/p&gt;
+&lt;p&gt;A&amp;nbsp;pokud by někoho zajímalo zadání, tak se jedná o&amp;nbsp;kešku Loki's&amp;nbsp;mystery
 (GCZE5N).&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Napsal jsem program, který to vyluští za &lt;s&gt;11 vteřin&lt;/s&gt;*, v pomalém Pythonu bez
-velkých optimalizací, jen s rozumným algoritmem.
+&lt;p&gt;Napsal jsem program, který to vyluští za &lt;s&gt;11&amp;nbsp;vteřin&lt;/s&gt;*, v&amp;nbsp;pomalém Pythonu bez
+velkých optimalizací, jen s&amp;nbsp;rozumným algoritmem.
 Zkusím tu docela detailně popsat jak na to. Třeba to nebude nudné.
-Kdyby něco naopak nebylo k pochopení, prosím čtenáře, aby se ozval.&lt;/p&gt;
-&lt;p&gt;* &lt;i&gt;Upřesnění: celý graf to projde za 3 minuty, 11 vteřin bylo jen štěstí.&lt;/i&gt;&lt;/p&gt;
+Kdyby něco naopak nebylo k&amp;nbsp;pochopení, prosím čtenáře, aby se&amp;nbsp;ozval.&lt;/p&gt;
+&lt;p&gt;* &lt;i&gt;Upřesnění: celý graf to projde za 3&amp;nbsp;minuty, 11&amp;nbsp;vteřin bylo jen štěstí.&lt;/i&gt;&lt;/p&gt;
 &lt;p&gt;Na podobné úlohy platí různé techniky prohledávání stavového prostoru.
-Zrovna tady si vystačíš s relativně jednoduchými, takže se to bude dobře
+Zrovna tady si vystačíš s&amp;nbsp;relativně jednoduchými, takže se to bude&amp;nbsp;dobře
 vysvětlovat.&lt;/p&gt;
 &lt;p&gt;Než začneme se stavovým prostorem, musíme vědět co je to stav.
-Pro sudoku si stav můžeme definovat jako 9x9 pole, kde v každém políčku
+Pro sudoku si stav můžeme definovat jako 9x9&amp;nbsp;pole, kde v&amp;nbsp;každém políčku
 budou číslice, které tam teoreticky můžou nakonec vyjít.
-V počátečním stavu budou všechna políčka obsahovat všech 9 možných čislic:&lt;/p&gt;
+V&amp;nbsp;počátečním stavu budou všechna políčka obsahovat všech 9&amp;nbsp;možných čislic:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &amp;gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
@@ -267,10 +840,10 @@ V počátečním stavu budou všechna políčka obsahovat všech 9 možných či
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;No a abychom se dostali dál, budeme z tohohle stavu některá čísla odebírat.
+&lt;p&gt;No a&amp;nbsp;abychom se dostali dál, budeme z&amp;nbsp;tohohle stavu některá čísla odebírat.
 Třeba, pro začátek, hrubou silou: vygenerujeme devět stavů, které jsou stejné
-jako tenhle původní, jen v políčku A1 mají každý vybranou jednu číslici.
-Třetí z nich by vypadal takhle:&lt;/p&gt;
+jako tenhle původní, jen v&amp;nbsp;políčku A1&amp;nbsp;mají každý vybranou jednu číslici.
+Třetí z&amp;nbsp;nich by vypadal takhle:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
 ║     3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
 ║       │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &amp;gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
@@ -312,24 +885,24 @@ Třetí z nich by vypadal takhle:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Nu a z tohohle stavu se jde "dostat" do dalších devíti stavů, každého s jedinou
-číslicí v políčku B1.&lt;/p&gt;
-&lt;p&gt;Jeden z těchto nových stavů (B1==3) nebude odpovídat
-pravidlům. Navíc všechny další stavy, které z něj můžeme dostat odebíráním
-možností, budou taky špatně. Takže tenhle stav můžeme vyloučit.&lt;/p&gt;
-&lt;p&gt;A tímhle způsobem dostaneme obrovitánský graf stavů.
+&lt;p&gt;Nu a&amp;nbsp;z&amp;nbsp;tohohle stavu se jde "dostat" do dalších devíti stavů, každého s&amp;nbsp;jedinou
+číslicí v&amp;nbsp;políčku B1.&lt;/p&gt;
+&lt;p&gt;Jeden z&amp;nbsp;těchto nových stavů (B1==3) nebude odpovídat
+pravidlům. Navíc všechny další stavy, které z&amp;nbsp;něj můžeme dostat odebíráním
+možností, budou taky špatně. Takže tenhle stav můžeme&amp;nbsp;vyloučit.&lt;/p&gt;
+&lt;p&gt;A&amp;nbsp;tímhle způsobem dostaneme obrovitánský graf stavů.
 Graf vytvořený takhle hrubou silou bude až moc velký na to, aby se dal rozumně
 pozkoumat, ale důležité je, že obsahuje všechny stavy odpovídající pravidlům.
-(Vlastně je pro nás důležité jen to, že určitě obsahuje &lt;em&gt;řešení&lt;/em&gt; (pokud nějaké
-existuje), ale vzhledem k tomu že řešení neznáme, všechny "správné" stavy budou
+(Vlastně je pro nás&amp;nbsp;důležité jen to, že určitě obsahuje &lt;em&gt;řešení&lt;/em&gt; (pokud nějaké
+existuje), ale vzhledem k&amp;nbsp;tomu že řešení neznáme, všechny "správné" stavy budou
 muset stačit.)&lt;/p&gt;
 &lt;p&gt;Zbývá jen nějak zajistit, abychom nemuseli procházet ten graf celý, ale
-zkusili v něm hledat rozumné cesty a zkratky, které nás k cíli dovedou co
-nejrychleji. Tedy, použít něco lepšího než hroubou sílu.&lt;/p&gt;
+zkusili v&amp;nbsp;něm hledat rozumné cesty a&amp;nbsp;zkratky, které nás&amp;nbsp;k&amp;nbsp;cíli dovedou co
+nejrychleji. Tedy, použít něco lepšího než hroubou&amp;nbsp;sílu.&lt;/p&gt;
 &lt;p&gt;(Jen podotknu že ten graf nemusí být nutně stromem; do jednoho stavu se může
 dát dostat několika různými cestami.)&lt;/p&gt;
 &lt;p&gt;Základní schéma algoritmu na prohledávání stavového prostoru je následující
-(s komentáři tam, kde Pythonová syntax není naprosto pruhledná):&lt;/p&gt;
+(s&amp;nbsp;komentáři&amp;nbsp;tam, kde Pythonová syntax není naprosto pruhledná):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;open&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initial_state&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c"&gt;# `[v]` je seznam s jedním prvkem, `v`&lt;/span&gt;
 &lt;span class="n"&gt;closed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c"&gt;# prázdná množina&lt;/span&gt;
 
@@ -344,16 +917,16 @@ dát dostat několika různými cestami.)&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Algoritmus nemá k dispozici celý graf (to by se těžko vešlo do paměti!),
+&lt;p&gt;Algoritmus nemá k&amp;nbsp;dispozici celý graf (to by se těžko vešlo do paměti!),
 ale "tvoří" si ho pomocí funkce &lt;code&gt;generate_next_states&lt;/code&gt;, která prostě vrátí
-seznam stavů, do kterých se z daného stavu dá dostat.&lt;/p&gt;
+seznam stavů, do kterých se z&amp;nbsp;daného stavu dá&amp;nbsp;dostat.&lt;/p&gt;
 &lt;p&gt;Množina &lt;code&gt;open&lt;/code&gt; obsahuje všechny stavy které chceme ještě prozkoumat, neboli
 "hranici" zatím prozkoumané části grafu. Množina &lt;code&gt;closed&lt;/code&gt; obsahuje stavy, které
-jsme už viděli; těmi se nemá cenu zabývat, pokud na ně narazíme znovu.&lt;/p&gt;
+jsme už viděli; těmi se nemá cenu zabývat, pokud na ně narazíme&amp;nbsp;znovu.&lt;/p&gt;
 &lt;p&gt;Tož to by byl učebnicový algoritmus.
 Teď teoreticky všechno závisí jen na tom, jak chytře navrhneme funkce
 &lt;code&gt;take_one()&lt;/code&gt; a &lt;code&gt;generate_next_states()&lt;/code&gt;.
-Dám několik tipů, které jsem použil já.&lt;/p&gt;
+Dám několik tipů, které jsem použil&amp;nbsp;já.&lt;/p&gt;
 &lt;p&gt;Přímo v &lt;code&gt;generate_next_states&lt;/code&gt; je dobré vyhazovat čísla, která neodpovídají
 pravidlům. Já jsem dal tuhle logiku přímo do konstruktoru třídy Stav, takže
 můj první stav vypadá ve skutečnosti takhle:&lt;/p&gt;
@@ -401,8 +974,8 @@ můj první stav vypadá ve skutečnosti takhle:&lt;/p&gt;
 &lt;p&gt;Moje implementace tu dělá několik věcí:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;vyhazuje čísla podle zadaných nerovností (pokud má jedno číslo
-být větší než druhé, které může být 3-8, tak bude určitě 4 nebo víc).&lt;/li&gt;
-&lt;li&gt;vyhazuje čísla z řádků, sloupců, čtverců a oblastí, pokud v jiném políčku
+být větší než druhé, které může být 3-8, tak bude určitě 4&amp;nbsp;nebo&amp;nbsp;víc).&lt;/li&gt;
+&lt;li&gt;vyhazuje čísla z řádků, sloupců, čtverců a&amp;nbsp;oblastí, pokud v&amp;nbsp;jiném políčku
   je už dané číslo vybrané&lt;/li&gt;
 &lt;li&gt;vyhazuje čísla, která nemůžou dát daný součet pro oblast&lt;/li&gt;
 &lt;li&gt;ještě by mohla vybrat číslo, pokud se v řádku/sloupci/čtverci jen jedno
@@ -410,90 +983,90 @@ být větší než druhé, které může být 3-8, tak bude určitě 4 nebo víc
   napsat, tak jsem se na to vykašlal.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Tím, že tohle dělám co nejdřív, se vyhýbám spoustě zbytečných stavů. Vzhledem k
-tomu, že každý stav nejen potřebuje nějaký ten procesorový čas a paměť, ale
-navíc se pak množí jak králík v Austrálii, je dobré takhle normalizovat co
+tomu, že každý stav nejen potřebuje nějaký ten procesorový čas a&amp;nbsp;paměť, ale
+navíc se pak množí jak králík&amp;nbsp;v&amp;nbsp;Austrálii, je dobré takhle normalizovat&amp;nbsp;co
 nejagresivněji.&lt;/p&gt;
 &lt;p&gt;Další místo, kde je možné algoritmus potunit, je výběr políčka, ve kterém se
 budou generované stavy lišit.
-Já vždycky vyberu políčko s nejnižším počtem možností (kromě 1, samozřejmě).
+Já vždycky vyberu políčko s&amp;nbsp;nejnižším počtem možností (kromě 1, samozřejmě).
 Tím docílím toho, že každý stav má co nejmenší počet "potomků", takže graf
 neroste tak rychle.
 Je samozřejmě možné zvolit úplně jinou strategii. Fungovalo by třeba udělat
-potomky dva: jednoho s první možností v daném políčku, a druhého s možnostmi
-ostatními. Dokonce není nutné generovat stavy lišící se jen v jednom políčku.
+potomky dva: jednoho s&amp;nbsp;první možností v&amp;nbsp;daném políčku, a&amp;nbsp;druhého s&amp;nbsp;možnostmi
+ostatními. Dokonce není nutné generovat stavy lišící se jen v&amp;nbsp;jednom políčku.
 Jen je důležité, aby existovala cesta ke každému validnímu stavu (nebo teda
-aspoň k tomu cílovému).&lt;/p&gt;
+aspoň k&amp;nbsp;tomu cílovému).&lt;/p&gt;
 &lt;p&gt;Tohle tunění tvaruje prozkoumávanou oblast grafu, je tak širší nebo hlubší,
 rozvětvenější nebo kompaktnější.
 Nějaké velké optimalizování je silně závislé na problému,
-a je to leckdy spíš umění než exaktní věda.
-Naštěstí na tohle sudoku nic moc složitého potřeba není.&lt;/p&gt;
-&lt;p&gt;No a snad poslední kritické místo v algoritmu je funkce &lt;code&gt;take_one&lt;/code&gt;, která vyjme
-a vrátí další stav, kterým se bude program zabývat.
-Může například zvolit vždycky nejstarší prvek ze seznamu (v tom případě jde o
-hledání "do šířky", které se vyplatí třeba pokud víme že cíl není v grafu
+a&amp;nbsp;je to leckdy spíš umění než exaktní věda.
+Naštěstí na tohle sudoku nic moc složitého potřeba&amp;nbsp;není.&lt;/p&gt;
+&lt;p&gt;No a&amp;nbsp;snad poslední kritické místo v&amp;nbsp;algoritmu je funkce &lt;code&gt;take_one&lt;/code&gt;, která vyjme
+a&amp;nbsp;vrátí další stav, kterým se bude program zabývat.
+Může například zvolit vždycky nejstarší prvek ze seznamu (v&amp;nbsp;tom případě jde o
+hledání "do šířky", které se vyplatí třeba pokud víme že cíl není v&amp;nbsp;grafu
 příliš hluboko), nebo naopak nejnovější (hledání do hloubky).
-Taky jde jednotlivým stavům přiřadit skóre, a vždycky vybrat ten stav, který
+Taky jde jednotlivým stavům přiřadit skóre, a&amp;nbsp;vždycky vybrat ten stav, který
 nejvíc vypadá že povede ke správnému řešení.
 Vyrobit na tohle dobrou hodnotící funkci je celkem kumšt; já to tady zkusil,
-ale nakonec jsem zjistil že je to rychlejší bez ní.&lt;/p&gt;
+ale nakonec jsem zjistil že je to rychlejší bez&amp;nbsp;ní.&lt;/p&gt;
 &lt;p&gt;(Na takové hodnotící funkci jsou pak založené algoritmy jako A*, které nejen že
-ve stavovém prostoru najdou cíl, ale vrátí opotimální cíl a optimální cestu k
+ve stavovém prostoru najdou cíl, ale vrátí opotimální cíl a&amp;nbsp;optimální cestu k
 němu. Typické použití: AI ve hrách.)&lt;/p&gt;
-&lt;p&gt;A na závěr jeden tip: je dobré investovat nějaký čas do funkcí na zobrazení
+&lt;p&gt;A&amp;nbsp;na závěr jeden tip: je dobré investovat nějaký čas do funkcí na zobrazení
 stavů nebo toho, jak si algoritmus vede (např. velikosti množin &lt;code&gt;open&lt;/code&gt; a
-&lt;code&gt;closed&lt;/code&gt;; cesta grafem k právě prohledávanému stavu, atd.).
-Možná není potřeba to přehánět jako já (ty ASCII-arty výše jsou v mém programu
+&lt;code&gt;closed&lt;/code&gt;; cesta grafem k&amp;nbsp;právě prohledávanému stavu, atd.).
+Možná není potřeba to přehánět jako já (ty ASCII-arty výše jsou v&amp;nbsp;mém programu
 navíc obarvené podle oblastí se součtem), ale cokoli pomůže pochopit to, co se
 vevnitř děje, hodně pomáhá.&lt;/p&gt;
-&lt;p&gt;Tož přeji hezké programování, snad tenhle výlev trochu pomůže.&lt;/p&gt;</summary><category term="geocaching"></category><category term="algorithm"></category></entry><entry><title>Caps Lock a přepínání klávesnice</title><link href="http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice" rel="alternate"></link><updated>2011-11-21T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-11-21:blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</id><summary type="html">&lt;p&gt;Caps Lock je k ničemu.
+&lt;p&gt;Tož přeji hezké programování, snad tenhle výlev trochu&amp;nbsp;pomůže.&lt;/p&gt;</summary><category term="geocaching"></category><category term="algorithm"></category></entry><entry><title>Caps Lock a přepínání klávesnice</title><link href="http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice" rel="alternate"></link><updated>2011-11-21T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-11-21:blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</id><summary type="html">&lt;p&gt;Caps Lock je k&amp;nbsp;ničemu.
 Posledních asi pět let jsem ho mačkal prakticky jen omylem.
-Možná to je tím, že neumím psát všema deseti, a tudíž věci jako
+Možná to je tím, že neumím psát všema deseti, a&amp;nbsp;tudíž věci jako
 LD_LIBRARY_PATH nebo UNESCO jdou napsat rychle jen se Shiftem – každopádně fakt
-je, že Caps Lock mi je k ničemu.&lt;/p&gt;
+je, že Caps Lock mi je k&amp;nbsp;ničemu.&lt;/p&gt;
 
 
 &lt;p&gt;Když jsem ještě pracoval na desktopu, byl na klávesnici Scroll Lock – ještě
 méně užitečná klávesa, která nedělala vůbec nic.
 Přemapoval jsem si ho na přepnutí mezi anglickou a českou klávesnicí,
 což fungovalo krásně.
-Dokonce s LED indikátorem sekundárního rozložení.
-Po nějaké době jsem smazal nápis Scroll Lock a nakreslil na tu klávesu českou
+Dokonce s&amp;nbsp;LED indikátorem sekundárního rozložení.
+Po nějaké době jsem smazal nápis Scroll Lock a&amp;nbsp;nakreslil na tu klávesu&amp;nbsp;českou
 vlaječku.&lt;/p&gt;
 &lt;p&gt;Pak jsem přešel na laptop.
 Scroll Lock je kdesi na Fň-F9, což je natolik neergonomická a
 nezapamatovatelná zkratka, že jsem častěji přepínal rozložení myší.
-Světýlko ale pořád fungovalo, což bylo cool.&lt;/p&gt;
+Světýlko ale pořád fungovalo, což bylo&amp;nbsp;cool.&lt;/p&gt;
 &lt;p&gt;Na novém Thinkpadu ale už ani to světýlko není.
-A tak jsem přemapoval změnu klávesnice na Caps Lock.
+A&amp;nbsp;tak jsem přemapoval změnu klávesnice na Caps Lock.
 To ovšem nefungovalo moc dobře, protože jsem často onu klávesu zmáčkl omylem,
-a pak se najednou divil že místo čísel píšu ěščř.&lt;/p&gt;
+a&amp;nbsp;pak se najednou divil že místo čísel píšu&amp;nbsp;ěščř.&lt;/p&gt;
 &lt;p&gt;Pak jsem na to přišel.
 Shift+Caps přepne na češtinu, Caps na angličtinu.
-A tak to mám doteď, i když je pravda že českou klávesnici zas tak často
+A&amp;nbsp;tak to mám doteď, i&amp;nbsp;když je pravda že českou klávesnici zas tak často
 nepoužívám,
 takže je to možná stejně zbytečné.&lt;/p&gt;
 &lt;p&gt;Jestli nakonec nebude přece jen lepší mít na místě Capsu druhý Backspace…&lt;/p&gt;</summary><category term="posterous"></category><category term="capslock"></category></entry><entry><title>Dennis Ritchie has died.</title><link href="http://encukou.cz/blog/2011/10/13/en-rip-dennis-ritchie" rel="alternate"></link><updated>2011-10-13T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-10-13:blog/2011/10/13/en-rip-dennis-ritchie</id><summary type="html">&lt;p&gt;The Economist has a &lt;a href="http://www.economist.com/node/2724348"&gt;very good article&lt;/a&gt;
 on some of his work; you should read it if you haven't done so already.
-I quote:&lt;/p&gt;
+I&amp;nbsp;quote:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Dr Ritchie likes to emphasise that he was just one member of a group.
+&lt;p&gt;Dr Ritchie likes to emphasise that he was just one member of a&amp;nbsp;group.
 With characteristic modesty, he suggests that many of the improvements he
-introduced when developing C simply “looked like a good thing to do”.
+introduced when developing C simply “looked like a&amp;nbsp;good thing to do”.
 Anyone else in the same place at the same time, he implies, would have done
 the same thing.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;In other words, he Did the Right Thing; he found the answer that is, in
-retrospect, obvious. That is the mark of a genius.&lt;/p&gt;
-&lt;p&gt;His ideas stood the test of time. He has reached a local maximum: Java or C++
+retrospect, obvious. That is the mark of a&amp;nbsp;genius.&lt;/p&gt;
+&lt;p&gt;His ideas stood the test of time. He has reached a&amp;nbsp;local maximum: Java or C++
 or C# are object-oriented languages; C is the procedural language. Sure, there
 may be something better than C, in some sense of the word.
-It's like Newton's laws being surpassed by Einstein's relativity – C will still
+It's&amp;nbsp;like Newton's&amp;nbsp;laws being surpassed by Einstein's&amp;nbsp;relativity – C will still
 be there.
-Still valid, still useful, still used.&lt;/p&gt;
+Still valid, still useful, still&amp;nbsp;used.&lt;/p&gt;
 
 
-&lt;p&gt;We have lost a humble genius, a mathematician, an architect of the abstract.
-It's sad that most poeple will never be able to appreciate the beauty of things
+&lt;p&gt;We have lost a&amp;nbsp;humble genius, a&amp;nbsp;mathematician, an architect of the abstract.
+It's&amp;nbsp;sad that most poeple will never be able to appreciate the beauty of things
 he has done.
-Perhaps that, too, is the mark of a genius.&lt;/p&gt;</summary><category term="sad"></category><category term="posterous"></category></entry></feed>
+Perhaps that, too, is the mark of a&amp;nbsp;genius.&lt;/p&gt;</summary><category term="sad"></category><category term="posterous"></category></entry></feed>

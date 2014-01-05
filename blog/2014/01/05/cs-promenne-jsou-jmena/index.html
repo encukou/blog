@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>encukou/blog &mdash; Proměnné jsou jména</title>
+        <meta charset="utf-8" />
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="stylesheet" type="text/css" href="http://encukou.cz/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            body.custom-background { background-color: #f5f5f5; }
+        </style>
+        <link rel="alternate" type="application/atom+xml"
+            title="encukou/blog — Atom"
+            href="http://encukou.cz/" /> 
+        <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
+</head>
+
+<body class="home blog custom-background single-author" >
+    <div id="container">
+        <div id="header">
+                <h1 id="site-title"><a href="http://encukou.cz"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>.cz</a></h1>
+                <h2 id="site-description">primary colors underneath</h2>
+        </div><!-- /#banner -->
+        
+        <div class="page-title">
+        </div>
+
+        <div id="menu">
+            <div class="menu-navigation-container">
+                <ul id="menu-navigation" class="menu">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="http://github.com/encukou">github</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
+
+                </ul>
+            </div> <!--/#menu-navigation-container-->
+        </div><!-- /#menu -->
+
+        <div id="contents">
+
+<div class="post type-post status-publish format-standard hentry category-general">
+    <div class="entry-meta">
+        <div class="date"><a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena">2014-01-05</a></div>
+    </div> <!-- /#entry-meta -->
+    <div class="main">
+        <h2 class="entry-title">
+            <a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena" title="Permalink to Proměnné jsou jména" rel="bookmark">Proměnné jsou jména</a>
+        </h2>
+        <div class="entry-content">
+<p>Jak v&nbsp;Pythonu fungují proměnné?
+Už asi víš, že se přiřazují pomocí rovnítka,
+a že se pak dají používat ve výrazech.
+Pojďme se na ně podívat trochu&nbsp;podrobněji.</p>
+
+
+<p>Toto je první ze série článků o&nbsp;tom, jak funguje Python.
+Pokud jsi se dostala přímo sem, koukni na
+<a href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python">Rozcestník</a>
+a&nbsp;trochu se zorientuj.</p>
+<hr />
+<p>Na rozdíl od jazyků jako C, kde proměnná je vyhrazené místo v&nbsp;paměti,
+Proměnné v&nbsp;Pythonu jsou <em>jména</em>, nebo řekněme&nbsp;<em>ukazatele</em>.</p>
+<p>Abych to vysvětlil, pojďme se krok po kroku podívat,
+co přesně dělá tohle jednoduché přiřazení:</p>
+<div class="highlight"><pre><span class="n">jazyk</span> <span class="o">=</span> <span class="s">&#39;python&#39;</span>
+</pre></div>
+
+
+<p>Nejdřív&nbsp;se vyhodnotí výraz za rovnítkem.
+Výsledek vyhodnocení výrazu je vždycky nějaký <em>objekt</em>;
+v&nbsp;našem případě řetězec 'python'.
+Ukážeme si ho takhle:</p>
+<div class="highlight"><pre>                ╔══════════╗
+                ║ &#39;python&#39; ║
+                ╚══════════╝
+</pre></div>
+
+
+<p>Teď, když má hodnotu výrazu, podívá se Python na jméno před rovnítkem,
+a&nbsp;zařídí, aby na tu hodnotu&nbsp;„ukazovalo“.</p>
+<div class="highlight"><pre>┌───────┐       ╔══════════╗
+│ jazyk ├──────→║ &#39;python&#39; ║
+└───────┘       ╚══════════╝
+</pre></div>
+
+
+<p>Voilà! Hodnota proměnné <code>jazyk</code> je odteď&nbsp;<code>'python'</code>.</p>
+<p>Pojďme si přiřadit další proměnnou:</p>
+<div class="highlight"><pre><span class="n">rec</span> <span class="o">=</span> <span class="s">&#39;češ&#39;</span> <span class="o">+</span> <span class="s">&#39;tina&#39;</span>
+</pre></div>
+
+
+<p>Opět se vyhodnotí výraz, vezmou se řetězce <code>'češ'</code> a <code>'tina'</code>, sečtou se,
+a&nbsp;na výslednou hodnotu začne ukazovat proměnná <code>rec</code>:</p>
+<div class="highlight"><pre>┌───────┐       ╔══════════╗
+│ jazyk ├──────→║ &#39;python&#39; ║
+└───────┘       ╚══════════╝
+┌─────┐         ╔═══════════╗
+│ rec ├────────→║ &#39;čeština&#39; ║
+└─────┘         ╚═══════════╝
+</pre></div>
+
+
+<p>Že to není zas tak složité?</p>
+<p>Teď zkusíme jednu proměnnou „přiřadit“ do druhé:</p>
+<div class="highlight"><pre><span class="n">jazyk</span> <span class="o">=</span> <span class="n">rec</span>
+</pre></div>
+
+
+<p>Opět se nejdřív&nbsp;vyhodnotí výraz za rovnítkem.
+Výsledek bude objekt, který je v&nbsp;proměnné <code>rec</code>.
+A&nbsp;proměnná <code>jazyk</code> začne jednoduše ukazovat na tento objekt:</p>
+<div class="highlight"><pre>┌───────┐       ╔══════════╗
+│ jazyk ├───┐ ×→║ &#39;python&#39; ║
+└───────┘   │   ╚══════════╝
+┌─────┐     └──→╔═══════════╗
+│ rec ├────────→║ &#39;čeština&#39; ║
+└─────┘         ╚═══════════╝
+</pre></div>
+
+
+<p>Tady je důvod, proč říkám že proměnné v&nbsp;Pythonu jsou <em>jména</em>.
+Jeden objekt může mít několik jmen, ale pořád je to ten samý&nbsp;objekt.</p>
+<p>Řetězec <code>'python'</code> teď žádné jméno nemá. Nedá se k&nbsp;němu nijak
+dostat<sup id="fnref:interned-strings"><a class="footnote-ref" href="#fn:interned-strings" rel="footnote">1</a></sup>, a&nbsp;tudíž s&nbsp;ním dál nemůžeme nijak pracovat.
+Jediné co můžeme dělat je vytvořit nový objekt se stejnou hodnotou.
+Takovéhle sirotky Python časem smaže, aby nezabíraly paměť počítače:</p>
+<div class="highlight"><pre>┌───────┐
+│ jazyk ├───┐      * poof *
+└───────┘   │
+┌─────┐     └──→╔═══════════╗
+│ rec ├────────→║ &#39;čeština&#39; ║
+└─────┘         ╚═══════════╝
+</pre></div>
+
+
+<p>Teď, když víme jak fungují proměnné, se můžeme podívat na zoubek
+jejich hodnotám, tedy objektům.
+Další článek v&nbsp;sérii nám poví
+o <a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu">Měnění objektů</a>.</p>
+<hr />
+<h3 id="zdroje-awzxhzdk31dalsi-materialy">Zdroje a&nbsp;další materiály</h3>
+<ul>
+<li><a href="http://pythontutor.com/">Python Tutor</a> umí názorně zobrazovat, jak proměnné fungují</li>
+<li>Ned Batchelder: <a href="http://nedbatchelder.com/text/names.html">Facts and myths about Python names and values </a></li>
+<li>David Gooder: <a href="http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html#python-has-names">Code Like a&nbsp;Pythonista: Idiomatic Python — Python has Names</a></li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:interned-strings">
+<p>Tohle je zjednodušení; řetězce co se vyskytují přímo v kódu
+jsou (v CPythonu) součástí modulu, takže se k nim nějak dostat dá,
+a budou “žít” dál.
+Podrobněji to plánuju rozeberat v článku <em>identity a hodnoty</em>.&#160;<a class="footnote-backref" href="#fnref:interned-strings" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>        </div> <!--/#entry-content-->
+            <span class="tag-links"><strong>📌</strong>
+ <a href="http://encukou.cz/blog/tag/promenne" rel="tag">proměnné</a>,  <a href="http://encukou.cz/blog/tag/python" rel="tag">python</a>            </span>
+    </div> <!--/#main-->
+</div>  <!--/#post-->
+        </div>
+
+
+<ul class="prev-next">
+    <li class="prev">
+        <a href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python">
+            Jak funguje Python
+        </a>
+    </li>
+    <li class="next">
+        <a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu">
+            Měnění objektů
+        </a>
+    </li>
+</ul>
+<span class="clearfix"></span>
+
+<ul class="article-links">
+        <li><a href="https://github.com/encukou/blog/blob/master/posts/2014-01-05-02-cs-promenne-jsou-jmena.md"><em>Forkni</em> si tenhle článek na Githubu</a></li>
+</ul>
+
+
+        <footer id="footer">
+            <p>
+        
+    tento blog používá systém <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    styl adaptovaný z <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        © <a href="https://twitter.com/thisistran">Tran</a>
+        a <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    použité fonty: Signika © <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
+        a Jockey One © <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    <br>
+    tento blog je na <a href="https://github.com/encukou/blog">Githubu</a>
+    <br>
+    <br>
+    text na této stránce je k dispozici pod licencí
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+            Creative Commons Attribution-ShareAlike 3.0 Unported</a>
+    <br>
+    © Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    
+            </p>
+        </footer>
+    </div><!-- /#container -->
+    <div style="display:none"></div>
+</body>
+</html>
