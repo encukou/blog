@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-		{% block head %}
-		<title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
-		<meta charset="utf-8" />
-		<link rel="profile" href="http://gmpg.org/xfn/11" />
-		<link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/style.css" />
+        {% block head %}
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+        <meta charset="utf-8" />
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/style.css" />
         <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-		<style type="text/css">
-			body.custom-background { background-color: #f5f5f5; }
-		</style>
-		<link rel="alternate" type="application/atom+xml"
-			title="{{ SITENAME }} — Atom"
-			href="{{ SITEURL }}/{{ FEED }}" /> 
-		{% if FEED_RSS %}
-		<link rel ="alternate" type="application/rss+xml"
-			title="{{ SITENAME }} — RSS"
-			href="{{ SITEURL }}/{{ FEED_RSS }}" /> 
-		{% endif %}
-		<!--[if lte IE 8]><script src="{{ SITEURL }}/theme/js/html5shiv.js"></script><![endif]-->
-		{% if MINT %}
-		<script src="/mint/?js" type="text/javascript"></script>
-		{% endif %}
-		{% endblock head %}
+        <style type="text/css">
+            body.custom-background { background-color: #f5f5f5; }
+        </style>
+        <link rel="alternate" type="application/atom+xml"
+            title="{{ SITENAME }} — Atom"
+            href="{{ SITEURL }}/{{ FEED }}" /> 
+        {% if FEED_RSS %}
+        <link rel ="alternate" type="application/rss+xml"
+            title="{{ SITENAME }} — RSS"
+            href="{{ SITEURL }}/{{ FEED_RSS }}" /> 
+        {% endif %}
+        <!--[if lte IE 8]><script src="{{ SITEURL }}/theme/js/html5shiv.js"></script><![endif]-->
+        {% if MINT %}
+        <script src="/mint/?js" type="text/javascript"></script>
+        {% endif %}
+        {% endblock head %}
 </head>
 
 <body class="home blog custom-background {% if SINGLE_AUTHOR %}single-author{% endif %}" >
-	<div id="container">
-		<div id="header">
-				<h1 id="site-title"><a href="{{ SITEURL }}"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>{% block title_postfix %}/blog{% endblock title_postfix %}</a></h1>
-				<h2 id="site-description">{% block site_subtitle %}{{ SITESUBTITLE }}{% endblock %}</h2>
-		</div><!-- /#banner -->
-		
-		<div class="page-title">
-			{% block content_title %}{% endblock %}
-		</div>
+    <div id="container">
+        <div id="header">
+                <h1 id="site-title"><a href="{{ SITEURL }}"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>{% block title_postfix %}/blog{% endblock title_postfix %}</a></h1>
+                <h2 id="site-description">{% block site_subtitle %}{{ SITESUBTITLE }}{% endblock %}</h2>
+        </div><!-- /#banner -->
+        
+        <div class="page-title">
+            {% block content_title %}{% endblock %}
+        </div>
 
         {% block menu %}
         <div id="menu">
@@ -47,19 +47,19 @@
                         <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{{ link }}">{{ title }}</a></li>
                     {% endfor %}
                     {% if DISPLAY_CATEGORIES_ON_MENU %}
-                      {% for p in PAGES %}
+                    {% for p in PAGES %}
                         <li{% if p == page %} class="active"{% endif %} class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-                      {% endfor %}
+                    {% endfor %}
                     {% endif %}
                     {% if DISPLAY_CATEGORIES_ON_MENU %}
-                      {% for cat, null in categories %}
+                    {% for cat, null in categories %}
                         <li{% if cat == category %} class="active"{% endif %} class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
-                      {% endfor %}
+                    {% endfor %}
                     {% endif %}
                     {% if LINKS %}
-                      {% for name, url in LINKS %}
+                    {% for name, url in LINKS %}
                         <li  class="active" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="{{ url }}">{{ name }}</a></li>
-                      {% endfor %}
+                    {% endfor %}
                     {% endif %}
 
                 </ul>
@@ -67,37 +67,37 @@
         </div><!-- /#menu -->
         {% endblock menu %}
 
-		<div id="contents">
-			{% block content %}
-			{% endblock %}
-		</div>
+        <div id="contents">
+            {% block content %}
+            {% endblock %}
+        </div>
 
         {% block page_specific_navigation %}{% endblock %}
 
-		<footer id="footer">
-			<p>
+        <footer id="footer">
+            <p>
                 {% block footer_text %}
                     {{ FOOTER_TEXT or 'Powered by <a href="http://getpelican.com">Pelican</a>, theme by <a href="http://bunnyman.info">tBunnyMan</a>.' }}
                 {% endblock %}
             </p>
-			{% if GOOGLE_ANALYTICS %}
-				<script type="text/javascript">
-					var _gaq = _gaq || [];
-					_gaq.push(['_setAccount', '{{ GOOGLE_ANALYTICS }}']);
-					_gaq.push(['_trackPageview']);
-					(function() {
-						var ga = document.createElement('script'); 
-						ga.type = 'text/javascript'; ga.async = true;
-						ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-					})();
-				</script>
-			{% endif %}
-			{% if DISQUS_SITENAME %}
-				{% include 'disqus_script.html' %}
-			{% endif %}
-		</footer>
-	</div><!-- /#container -->
-	<div style="display:none"></div>
+            {% if GOOGLE_ANALYTICS %}
+                <script type="text/javascript">
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', '{{ GOOGLE_ANALYTICS }}']);
+                    _gaq.push(['_trackPageview']);
+                    (function() {
+                        var ga = document.createElement('script'); 
+                        ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                    })();
+                </script>
+            {% endif %}
+            {% if DISQUS_SITENAME %}
+                {% include 'disqus_script.html' %}
+            {% endif %}
+        </footer>
+    </div><!-- /#container -->
+    <div style="display:none"></div>
 </body>
 </html>
