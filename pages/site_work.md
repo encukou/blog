@@ -1,6 +1,6 @@
 Title: I work
 Slug: site_3_work
-Image: box
+Image: fedora
 
 Currently, I work at [Red Hat](http://redhat.com)
 on the [FreeIPA](http://freeipa.org) project:
