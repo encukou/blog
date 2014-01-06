@@ -278,8 +278,17 @@ Tady je moje osnova; až (a&amp;nbsp;jestli) to dopíšu, tak z&amp;nbsp;toho ud
 &lt;li&gt;Jmenné prostory&lt;/li&gt;
 &lt;li&gt;Identity a&amp;nbsp;hodnoty &lt;!-- udělat odkaz v&amp;nbsp;poznámce pod čarou v "Proměnné jsou jména" --&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Všechen kód by měl fungovat v&amp;nbsp;Pythonu 2.7&amp;nbsp;i&amp;nbsp;3.3, pokud není uvedeno jinak.
-Pokud uvidíš nějakou chybu, ozvi se mi na &lt;a href="mailto:encukou@gmail.com"&gt;mail&lt;/a&gt;,
+&lt;p&gt;Články budou používat diakritiku v řetězcích.
+V&amp;nbsp;Pythonu 3&amp;nbsp;s&amp;nbsp;tím není žádný problém, ale používáš-li Python 2,
+napiš na začátek každého pythoního souboru tyto řádky:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Encoding: UTF-8&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Jinak by všechny ukázky kódu měly fungovat v&amp;nbsp;Pythonu 2.7&amp;nbsp;i&amp;nbsp;3.3,
+pokud není jinak uvedeno.&lt;/p&gt;
+&lt;p&gt;Pokud uvidíš nějakou chybu, ozvi se mi na &lt;a href="mailto:encukou@gmail.com"&gt;mail&lt;/a&gt;,
 nebo rovnou založ &lt;a href="https://github.com/encukou/blog/issues/new"&gt;issue&lt;/a&gt; či &lt;a href="https://github.com/encukou/blog"&gt;pull&amp;nbsp;request&lt;/a&gt;.&lt;/p&gt;</summary><category term="python"></category><category term="rozcestník"></category></entry><entry><title>Jak fungují proměnné v Pythonu</title><link href="http://encukou.cz/blog/2014/01/04/cs-promenne-v-pythonu" rel="alternate"></link><updated>2014-01-04T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-04:blog/2014/01/04/cs-promenne-v-pythonu</id><summary type="html">&lt;p&gt;Všechen kód by měl fungovat v&amp;nbsp;Pythonu 2.7&amp;nbsp;i&amp;nbsp;3.3, pokud není napsáno&amp;nbsp;jinak.&lt;/p&gt;
 
 
