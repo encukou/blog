@@ -22,7 +22,18 @@ Tady je moje osnova; až (a jestli) to dopíšu, tak z toho udělám odkazy.
 * Jmenné prostory
 * Identity a hodnoty <!-- udělat odkaz v poznámce pod čarou v "Proměnné jsou jména" -->
 
-Všechen kód by měl fungovat v Pythonu 2.7 i 3.3, pokud není uvedeno jinak.
+Články budou používat diakritiku v řetězcích.
+V Pythonu 3 s tím není žádný problém, ale používáš-li Python 2,
+napiš na začátek každého pythoního souboru tyto řádky:
+
+    :::python
+    # Encoding: UTF-8
+    from __future__ import unicode_literals
+
+Jinak by všechny ukázky kódu měly fungovat v Pythonu 2.7 i 3.3,
+pokud není jinak uvedeno.
+
+
 Pokud uvidíš nějakou chybu, ozvi se mi na [mail],
 nebo rovnou založ [issue] či [pull request][github].
 
