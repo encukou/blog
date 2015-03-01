@@ -81,7 +81,7 @@ explicit &lt;code&gt;self&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;In my syntax, variable declarations can specify the type:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;str: String = &amp;quot;abcd&amp;quot;
 
-list: List = [&amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;]
+list: List = [1, 2, 3]
 
 for i:int in list:
     print(i * i)
@@ -111,7 +111,9 @@ assert elementwise-add(a, b) == [5, 7, 9]
 
 
 &lt;p&gt;because while &lt;code&gt;Sequence:\+&lt;/code&gt; and &lt;code&gt;Array:\+&lt;/code&gt; are two different things,
-lists can support &lt;em&gt;both&lt;/em&gt;.&lt;/p&gt;
+lists can support &lt;em&gt;both&lt;/em&gt;.
+(Here &lt;code&gt;List:\+&lt;/code&gt; is an alias for &lt;code&gt;Sequence:\+&lt;/code&gt; – a&amp;nbsp;List is primarily
+a&amp;nbsp;Sequence.)&lt;/p&gt;
 &lt;p&gt;(Extending this to custom operators with custom priority is left as an exercise...)&lt;/p&gt;
 &lt;h2 id="definitions-and-implementations"&gt;Definitions and Implementations&lt;/h2&gt;
 &lt;p&gt;Let's&amp;nbsp;make a&amp;nbsp;Tree interface.

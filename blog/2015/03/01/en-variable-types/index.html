@@ -130,7 +130,7 @@ explicit <code>self</code>.</p>
 <p>In my syntax, variable declarations can specify the type:</p>
 <div class="highlight"><pre>str: String = &quot;abcd&quot;
 
-list: List = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
+list: List = [1, 2, 3]
 
 for i:int in list:
     print(i * i)
@@ -160,7 +160,9 @@ assert elementwise-add(a, b) == [5, 7, 9]
 
 
 <p>because while <code>Sequence:\+</code> and <code>Array:\+</code> are two different things,
-lists can support <em>both</em>.</p>
+lists can support <em>both</em>.
+(Here <code>List:\+</code> is an alias for <code>Sequence:\+</code> – a&nbsp;List is primarily
+a&nbsp;Sequence.)</p>
 <p>(Extending this to custom operators with custom priority is left as an exercise...)</p>
 <h2 id="definitions-and-implementations">Definitions and Implementations</h2>
 <p>Let's&nbsp;make a&nbsp;Tree interface.
