@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>encukou/blog &mdash; Types as namespaces</title>
+        <meta charset="utf-8" />
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="stylesheet" type="text/css" href="http://encukou.cz/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            body.custom-background { background-color: #f5f5f5; }
+        </style>
+        <link rel="alternate" type="application/atom+xml"
+            title="encukou/blog — Atom"
+            href="http://encukou.cz/" /> 
+        <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
+</head>
+
+<body class="home blog custom-background single-author" >
+    <div id="container">
+        <div id="header">
+                <h1 id="site-title"><a href="http://encukou.cz"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>.cz</a></h1>
+                <h2 id="site-description">primary colors underneath</h2>
+        </div><!-- /#banner -->
+        
+        <div class="page-title">
+        </div>
+
+        <div id="menu">
+            <div class="menu-navigation-container">
+                <ul id="menu-navigation" class="menu">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="http://github.com/encukou">github</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
+
+                </ul>
+            </div> <!--/#menu-navigation-container-->
+        </div><!-- /#menu -->
+
+        <div id="contents">
+
+<div class="post type-post status-publish format-standard hentry category-general">
+    <div class="entry-meta">
+        <div class="date"><a href="http://encukou.cz/blog/2015/03/01/en-variable-types">2015-03-01</a></div>
+    </div> <!-- /#entry-meta -->
+    <div class="main">
+        <h2 class="entry-title">
+            <a href="http://encukou.cz/blog/2015/03/01/en-variable-types" title="Permalink to Types as namespaces" rel="bookmark">Types as namespaces</a>
+        </h2>
+        <div class="entry-content">
+<p>Musings inspired by Eevee's <a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/">post about Sylph</a>.
+Read that first.</p>
+<p>In Python's&nbsp;duck-typing system, it's&nbsp;enough if things quack.
+They don't actually need to quack <em>like a&nbsp;duck</em>.</p>
+
+
+<hr />
+<p>Whenever you program, you need to keep track of the types of things you're dealing with.
+Some languages – the statically typed ones – require you to specify the type in front, and then they check it rigorously.
+In Python, you need to keep track of this in your head.
+It's&nbsp;possible that you're writing code where a&nbsp;variable could be either a&nbsp;string or a&nbsp;number:</p>
+<div class="highlight"><pre>def add(a, b):
+    return a + b
+</pre></div>
+
+
+<p>... or you might want a&nbsp;variable to changes type in the middle of a&nbsp;function,
+like in the example from <a href="http://docs.python-guide.org/en/latest/writing/structure/#dynamic-typing">Hitchhiker's&nbsp;guide to Python</a>:</p>
+<div class="highlight"><pre>items = &#39;a b c d&#39;  # This is a string...
+items = items.split(&#39; &#39;)  # ...becoming a list
+items = set(items)  # ...and then a set
+</pre></div>
+
+
+<p>Those are smells: they should be <em>possible</em> but not&nbsp;<em>easy</em>.</p>
+<p>Variables (the <em>names</em>, not just values) always have types, even if,
+as in the “dynamic” languages, they're only implied – they only exist in the
+programmer's&nbsp;head, as assumptions on the value's&nbsp;behavior.
+If I&nbsp;use a <code>startswith</code> I&nbsp;really want “a&nbsp;method with the <em>semantics</em> of <code>String:startswith</code>”,
+rather than “the method <em>named</em>&nbsp;startswith”.</p>
+<h2 id="types-of-variables">Types of variables</h2>
+<p>I&nbsp;have some syntax in mind. If I&nbsp;rewrite one of the first examples in
+Eevee's&nbsp;post in it, I&nbsp;can get something like this:</p>
+<div class="highlight"><pre>def foo(a: String, b: StringPattern, c: List):
+    if a.startswith(b):
+        c.append(a)
+</pre></div>
+
+
+<p>By which I&nbsp;want to say <code>b</code> can be string, or a&nbsp;tuple of strings,
+or even a&nbsp;regex for all I&nbsp;care – as long as it can be matched against a&nbsp;string.
+Those are the semantics I&nbsp;wrote the function for.
+If you call it with different types then you're on your own – it might work,
+and the language should allow it, but I&nbsp;offer no guarantees about the behavior of my&nbsp;function.</p>
+<p>Here the “startswith” is, quite explicitly, <code>String:startswith</code>.
+The call is not a&nbsp;command to “quack”, but to “quack <em>like a&nbsp;duck</em>”.</p>
+<p>The difference from statically-typed languages is that I'm not requiring <code>a</code> to be
+a&nbsp;string, or a&nbsp;string subtype.
+I&nbsp;don't even care if <code>a</code> implements the string interface.
+I'm just saying that I&nbsp;want to call <code>String:startswith</code>.
+The <code>String</code> declaration does not restrict the value, it provides a&nbsp;namespace for my operations on it.
+And with the namespaced operations come some well-defined semantics: if you misimplement them,
+it's&nbsp;not my fault that my <code>foo</code> function won't&nbsp;work.</p>
+<p>Similarly, I&nbsp;don't care if <code>c</code> is actually a&nbsp;list. I'm just saying I&nbsp;want the
+<code>MutableSequence:append</code> method (for which <code>List:append</code> is an alias).
+After the <code>append</code> call, <code>c[-1]</code> should be whatever I&nbsp;just put there.
+But that's&nbsp;your (the caller's) problem. If <code>c</code> is not <code>List</code> enough,
+your code might break with the next version of my&nbsp;library.</p>
+<p>Of course, usually <code>a</code> will be an “actual string”, and the compiler can
+optimize for that case.</p>
+<p>I'll put a&nbsp;random snippet with syntax ideas here:</p>
+<div class="highlight"><pre>from somewhere import Snake
+
+def print_length(x: List):
+    print(x.length)
+
+    if x has Snake:length:
+        print(&quot;Scary! I got a {}m long snake as argument!&quot;(x.Snake:length))
+</pre></div>
+
+
+<h2 id="type-declarations">Type declarations</h2>
+<p>For variables, the type can be specified declaration.
+Python has no variable declarations, which I&nbsp;don't think is healthy, because the
+resulting scoping rules are not intuitive. They happen to work OK for 99%
+of the cases, but when you get hit by the 1%, you don't even know where to look
+(unless you remember the warning from your tutorial).
+Javascript's&nbsp;explicit <code>var</code> keyword is a&nbsp;good thing, for much the same reasons as Python's
+explicit <code>self</code>.</p>
+<p>In my syntax, variable declarations can specify the type:</p>
+<div class="highlight"><pre>str: String = &quot;abcd&quot;
+
+list: List = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
+
+for i:int in list:
+    print(i * i)
+</pre></div>
+
+
+<p>But, since most (or ideally all) expressions have a&nbsp;well-defined types, a&nbsp;shorthand comes to mind:</p>
+<div class="highlight"><pre>str := &quot;abcd&quot;
+list := [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
+</pre></div>
+
+
+<h2 id="operator-namespaces">Operator namespaces</h2>
+<p>This would work:</p>
+<div class="highlight"><pre>def concat(a: List, b: List):
+    return a + b
+
+def elementwise-add(a: Array, b: Array):
+    return a + b
+
+a := [1, 2, 3]
+b := [4, 5, 6]
+
+assert concat(a, b) == [1, 2, 3, 4, 5, 6]
+assert elementwise-add(a, b) == [5, 7, 9]
+</pre></div>
+
+
+<p>because while <code>Sequence:\+</code> and <code>Array:\+</code> are two different things,
+lists can support <em>both</em>.</p>
+<p>(Extending this to custom operators with custom priority is left as an exercise...)</p>
+<h2 id="definitions-and-implementations">Definitions and Implementations</h2>
+<p>Let's&nbsp;make a&nbsp;Tree interface.
+I'll use <a href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a>-ish syntax for generics:</p>
+<div class="highlight"><pre>T := TypePlaceholder()
+
+interface Tree:
+    walk(self: T) -&gt; Iterator[T]
+</pre></div>
+
+
+<p>This says that the type of <code>x.Tree:walk().next()</code> will be the same as the
+type of <code>x</code>.
+(For any <code>x</code>. Remember it's&nbsp;defining the type of the <em>expression</em>, not the value;
+it's&nbsp;defining the namespace that expression will use by default.)</p>
+<p>Then you can define BinaryTree like this.
+<code>BinaryTree:walk</code> becomes an implementation of&nbsp;<code>Tree:walk</code>.</p>
+<div class="highlight"><pre>class BinaryTree(Tree):
+    left: Tree
+    right: Tree
+
+    impl walk(self):
+        if self.left:
+            yield from self.left.walk()
+        yield self
+        if self.right:
+            yield from self.left.walk()
+</pre></div>
+
+
+<p>Note the kewyord is <code>impl</code>, not <code>def</code>: this ensures that if the <code>Tree</code> interface
+grows a&nbsp;new method, existing methods of the same name won't magically become
+its implementations.
+(Though you will get lots of <em>warnings</em> about the new method not being implemented
+by classes that claim to implement <code>Tree</code>.)</p>
+<p>Next let's&nbsp;have a&nbsp;class for corporate employees.
+An amployee is not a&nbsp;tree, and there's&nbsp;no <code>Employee:walk</code> in our model,
+but you can still use an employee as a&nbsp;tree node:</p>
+<div class="highlight"><pre>class Employee:
+    boss: Employee
+    underlings: List[Employee]
+
+    impl Tree:walk(self):
+        yield self
+        for underling in self.underlings:
+            yield from underling.walk()
+</pre></div>
+
+
+<p>And you might want to attach a <code>Tree:walk</code> to something from some library you
+can't easily change, like the stdlib.</p>
+<div class="highlight"><pre>impl Path.Tree:walk(self):
+    yield self
+    if self.isdir:
+        for child:Tree in self.listdir:
+            yield from child
+</pre></div>
+
+
+<p>The language should probably limit who can do this and where,&nbsp;though.</p>
+<p>To step away from Tree for one paragraph:
+Since every class derives from <code>Object</code>, which has a <code>to_string</code> method,
+you can write <code>impl to_string</code> in any class.
+Or you can write <code>def to_string</code>, which won't conflict with <code>Object:to_string</code>
+(though it will raise eyebrows and trip up your linter).
+And you can later add <code>impl Object:to_string</code>, which won't be aliased&nbsp;to
+<code>YourClass:to_string</code>.</p>
+<h2 id="interface-conflicts">Interface conflicts</h2>
+<p>Consider this class:</p>
+<div class="highlight"><pre>class FamilyMember:
+    parents: List[FamilyMember]
+    children: List[FamilyMember]
+
+    impl Tree:walk(self):
+        # this is not be correct but w/e
+        yield self
+        for child:Tree in self.children:
+            yield from child
+</pre></div>
+
+
+<p>Now, if you inherit from both <code>Employee</code> and <code>FamilyMember</code>, you're in trouble.
+The resulting <code>Tree:walk</code> should fail loudly, unless you explicitly override&nbsp;it.</p>
+<h2 id="bags-of-attributes">Bags of attributes</h2>
+<p>“But Petr“, I&nbsp;hear you saying, “I&nbsp;want my <code>getattr(self, 'visit_' + node.type)</code>”!
+Eh, really? I&nbsp;reply. That looks quite ugly.
+I&nbsp;jut explained that I&nbsp;think attribute names should <em>not</em> be just names, didn't I?
+If you want a&nbsp;collection of things keyed by strings, use a&nbsp;mapping.
+You don't even want the keys to be strings here – you want Node&nbsp;subclasses.</p>
+<p>That said, you could write <code>getattr(self, Attribute(Visit, node.type))</code>,
+and implement <code>Visit:leaf</code>, where <code>Visit</code> is an empty(!)&nbsp;interface.</p>
+<h2 id="thatsit-for-now">That's&nbsp;it for now</h2>
+<p>I&nbsp;could rant on, about, say, registration conflicts or efficient vtable
+references, but let's&nbsp;end it here, throw it at the wall and see if it&nbsp;sticks.</p>
+<p>(I&nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)</p>        </div> <!--/#entry-content-->
+            <span class="tag-links"><strong>📌</strong>
+ <a href="http://encukou.cz/blog/tag/language-design" rel="tag">language design</a>            </span>
+    </div> <!--/#main-->
+</div>  <!--/#post-->
+        </div>
+
+
+<ul class="prev-next">
+    <li class="prev">
+        <a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu">
+            Měnění objektů
+        </a>
+    </li>
+</ul>
+<span class="clearfix"></span>
+
+<ul class="article-links">
+        <li><a href="https://github.com/encukou/blog/blob/master/posts/2015-03-01-en-variable-types.md"><em>Fork</em> this post on Github</a></li>
+</ul>
+
+
+        <footer id="footer">
+            <p>
+        
+    powered by <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    theme adapted from <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        by <a href="https://twitter.com/thisistran">Tran</a>
+        and <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    fonts: Signika by <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
+        and Jockey One by <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    <br>
+    fork this blog on <a href="https://github.com/encukou/blog">Github</a>
+    <br>
+    <br>
+    the text on this page is licensed under the
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+            Creative Commons Attribution-ShareAlike 3.0 Unported License</a>
+    <br>
+    by Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    
+            </p>
+        </footer>
+    </div><!-- /#container -->
+    <div style="display:none"></div>
+</body>
+</html>

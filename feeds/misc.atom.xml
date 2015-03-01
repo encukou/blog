@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2015-03-01T00:00:00+01:00</updated><entry><title>Types as namespaces</title><link href="http://encukou.cz/blog/2015/03/01/en-variable-types" rel="alternate"></link><updated>2015-03-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-03-01:blog/2015/03/01/en-variable-types</id><summary type="html">&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
+Read that first.&lt;/p&gt;
+&lt;p&gt;In Python's&amp;nbsp;duck-typing system, it's&amp;nbsp;enough if things quack.
+They don't actually need to quack &lt;em&gt;like a&amp;nbsp;duck&lt;/em&gt;.&lt;/p&gt;
+
+
+&lt;hr /&gt;
+&lt;p&gt;Whenever you program, you need to keep track of the types of things you're dealing with.
+Some languages – the statically typed ones – require you to specify the type in front, and then they check it rigorously.
+In Python, you need to keep track of this in your head.
+It's&amp;nbsp;possible that you're writing code where a&amp;nbsp;variable could be either a&amp;nbsp;string or a&amp;nbsp;number:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;def add(a, b):
+    return a + b
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;... or you might want a&amp;nbsp;variable to changes type in the middle of a&amp;nbsp;function,
+like in the example from &lt;a href="http://docs.python-guide.org/en/latest/writing/structure/#dynamic-typing"&gt;Hitchhiker's&amp;nbsp;guide to Python&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;items = &amp;#39;a b c d&amp;#39;  # This is a string...
+items = items.split(&amp;#39; &amp;#39;)  # ...becoming a list
+items = set(items)  # ...and then a set
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Those are smells: they should be &lt;em&gt;possible&lt;/em&gt; but not&amp;nbsp;&lt;em&gt;easy&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Variables (the &lt;em&gt;names&lt;/em&gt;, not just values) always have types, even if,
+as in the “dynamic” languages, they're only implied – they only exist in the
+programmer's&amp;nbsp;head, as assumptions on the value's&amp;nbsp;behavior.
+If I&amp;nbsp;use a &lt;code&gt;startswith&lt;/code&gt; I&amp;nbsp;really want “a&amp;nbsp;method with the &lt;em&gt;semantics&lt;/em&gt; of &lt;code&gt;String:startswith&lt;/code&gt;”,
+rather than “the method &lt;em&gt;named&lt;/em&gt;&amp;nbsp;startswith”.&lt;/p&gt;
+&lt;h2 id="types-of-variables"&gt;Types of variables&lt;/h2&gt;
+&lt;p&gt;I&amp;nbsp;have some syntax in mind. If I&amp;nbsp;rewrite one of the first examples in
+Eevee's&amp;nbsp;post in it, I&amp;nbsp;can get something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;def foo(a: String, b: StringPattern, c: List):
+    if a.startswith(b):
+        c.append(a)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;By which I&amp;nbsp;want to say &lt;code&gt;b&lt;/code&gt; can be string, or a&amp;nbsp;tuple of strings,
+or even a&amp;nbsp;regex for all I&amp;nbsp;care – as long as it can be matched against a&amp;nbsp;string.
+Those are the semantics I&amp;nbsp;wrote the function for.
+If you call it with different types then you're on your own – it might work,
+and the language should allow it, but I&amp;nbsp;offer no guarantees about the behavior of my&amp;nbsp;function.&lt;/p&gt;
+&lt;p&gt;Here the “startswith” is, quite explicitly, &lt;code&gt;String:startswith&lt;/code&gt;.
+The call is not a&amp;nbsp;command to “quack”, but to “quack &lt;em&gt;like a&amp;nbsp;duck&lt;/em&gt;”.&lt;/p&gt;
+&lt;p&gt;The difference from statically-typed languages is that I'm not requiring &lt;code&gt;a&lt;/code&gt; to be
+a&amp;nbsp;string, or a&amp;nbsp;string subtype.
+I&amp;nbsp;don't even care if &lt;code&gt;a&lt;/code&gt; implements the string interface.
+I'm just saying that I&amp;nbsp;want to call &lt;code&gt;String:startswith&lt;/code&gt;.
+The &lt;code&gt;String&lt;/code&gt; declaration does not restrict the value, it provides a&amp;nbsp;namespace for my operations on it.
+And with the namespaced operations come some well-defined semantics: if you misimplement them,
+it's&amp;nbsp;not my fault that my &lt;code&gt;foo&lt;/code&gt; function won't&amp;nbsp;work.&lt;/p&gt;
+&lt;p&gt;Similarly, I&amp;nbsp;don't care if &lt;code&gt;c&lt;/code&gt; is actually a&amp;nbsp;list. I'm just saying I&amp;nbsp;want the
+&lt;code&gt;MutableSequence:append&lt;/code&gt; method (for which &lt;code&gt;List:append&lt;/code&gt; is an alias).
+After the &lt;code&gt;append&lt;/code&gt; call, &lt;code&gt;c[-1]&lt;/code&gt; should be whatever I&amp;nbsp;just put there.
+But that's&amp;nbsp;your (the caller's) problem. If &lt;code&gt;c&lt;/code&gt; is not &lt;code&gt;List&lt;/code&gt; enough,
+your code might break with the next version of my&amp;nbsp;library.&lt;/p&gt;
+&lt;p&gt;Of course, usually &lt;code&gt;a&lt;/code&gt; will be an “actual string”, and the compiler can
+optimize for that case.&lt;/p&gt;
+&lt;p&gt;I'll put a&amp;nbsp;random snippet with syntax ideas here:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;from somewhere import Snake
+
+def print_length(x: List):
+    print(x.length)
+
+    if x has Snake:length:
+        print(&amp;quot;Scary! I got a {}m long snake as argument!&amp;quot;(x.Snake:length))
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="type-declarations"&gt;Type declarations&lt;/h2&gt;
+&lt;p&gt;For variables, the type can be specified declaration.
+Python has no variable declarations, which I&amp;nbsp;don't think is healthy, because the
+resulting scoping rules are not intuitive. They happen to work OK for 99%
+of the cases, but when you get hit by the 1%, you don't even know where to look
+(unless you remember the warning from your tutorial).
+Javascript's&amp;nbsp;explicit &lt;code&gt;var&lt;/code&gt; keyword is a&amp;nbsp;good thing, for much the same reasons as Python's
+explicit &lt;code&gt;self&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In my syntax, variable declarations can specify the type:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;str: String = &amp;quot;abcd&amp;quot;
+
+list: List = [&amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;]
+
+for i:int in list:
+    print(i * i)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But, since most (or ideally all) expressions have a&amp;nbsp;well-defined types, a&amp;nbsp;shorthand comes to mind:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;str := &amp;quot;abcd&amp;quot;
+list := [&amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="operator-namespaces"&gt;Operator namespaces&lt;/h2&gt;
+&lt;p&gt;This would work:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;def concat(a: List, b: List):
+    return a + b
+
+def elementwise-add(a: Array, b: Array):
+    return a + b
+
+a := [1, 2, 3]
+b := [4, 5, 6]
+
+assert concat(a, b) == [1, 2, 3, 4, 5, 6]
+assert elementwise-add(a, b) == [5, 7, 9]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;because while &lt;code&gt;Sequence:\+&lt;/code&gt; and &lt;code&gt;Array:\+&lt;/code&gt; are two different things,
+lists can support &lt;em&gt;both&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;(Extending this to custom operators with custom priority is left as an exercise...)&lt;/p&gt;
+&lt;h2 id="definitions-and-implementations"&gt;Definitions and Implementations&lt;/h2&gt;
+&lt;p&gt;Let's&amp;nbsp;make a&amp;nbsp;Tree interface.
+I'll use &lt;a href="https://www.python.org/dev/peps/pep-0484/"&gt;PEP 484&lt;/a&gt;-ish syntax for generics:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;T := TypePlaceholder()
+
+interface Tree:
+    walk(self: T) -&amp;gt; Iterator[T]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This says that the type of &lt;code&gt;x.Tree:walk().next()&lt;/code&gt; will be the same as the
+type of &lt;code&gt;x&lt;/code&gt;.
+(For any &lt;code&gt;x&lt;/code&gt;. Remember it's&amp;nbsp;defining the type of the &lt;em&gt;expression&lt;/em&gt;, not the value;
+it's&amp;nbsp;defining the namespace that expression will use by default.)&lt;/p&gt;
+&lt;p&gt;Then you can define BinaryTree like this.
+&lt;code&gt;BinaryTree:walk&lt;/code&gt; becomes an implementation of&amp;nbsp;&lt;code&gt;Tree:walk&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;class BinaryTree(Tree):
+    left: Tree
+    right: Tree
+
+    impl walk(self):
+        if self.left:
+            yield from self.left.walk()
+        yield self
+        if self.right:
+            yield from self.left.walk()
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note the kewyord is &lt;code&gt;impl&lt;/code&gt;, not &lt;code&gt;def&lt;/code&gt;: this ensures that if the &lt;code&gt;Tree&lt;/code&gt; interface
+grows a&amp;nbsp;new method, existing methods of the same name won't magically become
+its implementations.
+(Though you will get lots of &lt;em&gt;warnings&lt;/em&gt; about the new method not being implemented
+by classes that claim to implement &lt;code&gt;Tree&lt;/code&gt;.)&lt;/p&gt;
+&lt;p&gt;Next let's&amp;nbsp;have a&amp;nbsp;class for corporate employees.
+An amployee is not a&amp;nbsp;tree, and there's&amp;nbsp;no &lt;code&gt;Employee:walk&lt;/code&gt; in our model,
+but you can still use an employee as a&amp;nbsp;tree node:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;class Employee:
+    boss: Employee
+    underlings: List[Employee]
+
+    impl Tree:walk(self):
+        yield self
+        for underling in self.underlings:
+            yield from underling.walk()
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And you might want to attach a &lt;code&gt;Tree:walk&lt;/code&gt; to something from some library you
+can't easily change, like the stdlib.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;impl Path.Tree:walk(self):
+    yield self
+    if self.isdir:
+        for child:Tree in self.listdir:
+            yield from child
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The language should probably limit who can do this and where,&amp;nbsp;though.&lt;/p&gt;
+&lt;p&gt;To step away from Tree for one paragraph:
+Since every class derives from &lt;code&gt;Object&lt;/code&gt;, which has a &lt;code&gt;to_string&lt;/code&gt; method,
+you can write &lt;code&gt;impl to_string&lt;/code&gt; in any class.
+Or you can write &lt;code&gt;def to_string&lt;/code&gt;, which won't conflict with &lt;code&gt;Object:to_string&lt;/code&gt;
+(though it will raise eyebrows and trip up your linter).
+And you can later add &lt;code&gt;impl Object:to_string&lt;/code&gt;, which won't be aliased&amp;nbsp;to
+&lt;code&gt;YourClass:to_string&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="interface-conflicts"&gt;Interface conflicts&lt;/h2&gt;
+&lt;p&gt;Consider this class:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;class FamilyMember:
+    parents: List[FamilyMember]
+    children: List[FamilyMember]
+
+    impl Tree:walk(self):
+        # this is not be correct but w/e
+        yield self
+        for child:Tree in self.children:
+            yield from child
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, if you inherit from both &lt;code&gt;Employee&lt;/code&gt; and &lt;code&gt;FamilyMember&lt;/code&gt;, you're in trouble.
+The resulting &lt;code&gt;Tree:walk&lt;/code&gt; should fail loudly, unless you explicitly override&amp;nbsp;it.&lt;/p&gt;
+&lt;h2 id="bags-of-attributes"&gt;Bags of attributes&lt;/h2&gt;
+&lt;p&gt;“But Petr“, I&amp;nbsp;hear you saying, “I&amp;nbsp;want my &lt;code&gt;getattr(self, 'visit_' + node.type)&lt;/code&gt;”!
+Eh, really? I&amp;nbsp;reply. That looks quite ugly.
+I&amp;nbsp;jut explained that I&amp;nbsp;think attribute names should &lt;em&gt;not&lt;/em&gt; be just names, didn't I?
+If you want a&amp;nbsp;collection of things keyed by strings, use a&amp;nbsp;mapping.
+You don't even want the keys to be strings here – you want Node&amp;nbsp;subclasses.&lt;/p&gt;
+&lt;p&gt;That said, you could write &lt;code&gt;getattr(self, Attribute(Visit, node.type))&lt;/code&gt;,
+and implement &lt;code&gt;Visit:leaf&lt;/code&gt;, where &lt;code&gt;Visit&lt;/code&gt; is an empty(!)&amp;nbsp;interface.&lt;/p&gt;
+&lt;h2 id="thatsit-for-now"&gt;That's&amp;nbsp;it for now&lt;/h2&gt;
+&lt;p&gt;I&amp;nbsp;could rant on, about, say, registration conflicts or efficient vtable
+references, but let's&amp;nbsp;end it here, throw it at the wall and see if it&amp;nbsp;sticks.&lt;/p&gt;
+&lt;p&gt;(I&amp;nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)&lt;/p&gt;</summary><category term="language design"></category></entry></feed>
