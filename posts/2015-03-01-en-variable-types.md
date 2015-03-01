@@ -94,7 +94,7 @@ In my syntax, variable declarations can specify the type:
 
     str: String = "abcd"
 
-    list: List = ["1", "2", "3"]
+    list: List = [1, 2, 3]
 
     for i:int in list:
         print(i * i)
@@ -122,6 +122,8 @@ This would work:
 
 because while `Sequence:\+` and `Array:\+` are two different things,
 lists can support *both*.
+(Here `List:\+` is an alias for `Sequence:\+` – a List is primarily
+a Sequence.)
 
 (Extending this to custom operators with custom priority is left as an exercise...)
 
