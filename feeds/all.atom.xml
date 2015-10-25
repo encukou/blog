@@ -1,5 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2015-03-01T00:00:00+01:00</updated><entry><title>Types as namespaces</title><link href="http://encukou.cz/blog/2015/03/01/en-variable-types" rel="alternate"></link><updated>2015-03-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-03-01:blog/2015/03/01/en-variable-types</id><summary type="html">&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2015-10-25T00:00:00+02:00</updated><entry><title>First Layer Patterns with Slic3r Modifier Objects</title><link href="http://encukou.cz/blog/2015/10/25/en-slic3r-first-layer-patterns" rel="alternate"></link><updated>2015-10-25T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-10-25:blog/2015/10/25/en-slic3r-first-layer-patterns</id><summary type="html">&lt;p&gt;I've built a&amp;nbsp;3D printer, and found a&amp;nbsp;cool effect I&amp;nbsp;wasn't able to
+find on the Internet yet.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/first-layer.jpg"&gt;&lt;img alt="What I'll be describing" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/first-layer.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="my-setup"&gt;My Setup&lt;/h2&gt;
+&lt;p&gt;I&amp;nbsp;haven't blogged about my 3D printer yet, so let's&amp;nbsp;quickly get that out
+of the way.&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;built a&amp;nbsp;modified &lt;a href="https://github.com/RepRap4U/RebeliX"&gt;RebeliX&lt;/a&gt; printer
+at a&amp;nbsp;workshop.
+(If you want to build a&amp;nbsp;printer, I'd really recommend you find a&amp;nbsp;workshop
+nearby, rather than trying to figure out everything by yourself.
+Tweaking something that already works is so much nicer than debugging an
+unfamiliar system. And being able to ask experts anything is invaluable.)&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;use Fedora's&amp;nbsp;3D printing stack (conveniently curated by my colleague
+&lt;a href="http://hroncok.cz/"&gt;Miro Hrončok&lt;/a&gt;, who got me into this in the first place),
+so it's&amp;nbsp;all nicely open-source and open-hardware.
+The three main programs I&amp;nbsp;use are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://copr.fedoraproject.org/coprs/churchyard/openscad-devel/"&gt;OpenSCAD&lt;/a&gt;
+  for modeling (going from idea to a&amp;nbsp;3D model on the screen)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://copr.fedoraproject.org/coprs/churchyard/slic3r-latest/"&gt;Slic3r&lt;/a&gt;
+  for G-code generation (going from 3D to instructions for the printer)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/kliment/Printrun"&gt;Pronterface&lt;/a&gt; for printer control&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Today I'll be talking about the second tool in that chain.
+But first, what will I&amp;nbsp;print?&lt;/p&gt;
+&lt;h2 id="adrawer-handle"&gt;A&amp;nbsp;Drawer Handle&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/handle-old.jpg"&gt;&lt;img alt="The Problem" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/handle-old.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;have some drawers whose handles are pretty flimsy, and as time goes by,
+they're detaching.
+Which is a&amp;nbsp;shame, because these big, red handles fit my room really well.
+And I&amp;nbsp;can't replace them, because nobody makes them anymore.
+(Well, maybe they do – I&amp;nbsp;didn't look for them &lt;em&gt;everywhere&lt;/em&gt; – but the DYI
+alternative is still more fun!)&lt;/p&gt;
+&lt;p&gt;So, I&amp;nbsp;decided print handles! I'm designing a&amp;nbsp;handle that can take a&amp;nbsp;screw and
+a&amp;nbsp;nut, so it should hold well.
+At this point I'm still learning about prinitng objects with exact
+measurements, so that part isn't really done.
+What I &lt;em&gt;have&lt;/em&gt; done – perhaps prematurely – is the aesthetical&amp;nbsp;design.&lt;/p&gt;
+&lt;h2 id="the-first-layer"&gt;The First Layer&lt;/h2&gt;
+&lt;p&gt;Professionally printed things have a&amp;nbsp;smooth finish, where you can't see
+the individual strands and layers that make up the object.
+I'm sure with enouth calibration and &lt;a href="http://airwolf3d.com/2013/11/26/7-steps-shiny-finish-on-abs-parts-acetone/"&gt;finishing work&lt;/a&gt;
+I&amp;nbsp;can achieve that with my printer as well, but for now, everyone can see my
+objects come from an extruding printer&amp;nbsp;head.&lt;/p&gt;
+&lt;p&gt;And I&amp;nbsp;like that! Not only me, several people I&amp;nbsp;showed the objects to liked
+the pattern on the bottom, which is smooth and flat and smooth from lying
+on the print bed, but still shows the path the extruder took.
+As any good artist, I&amp;nbsp;get to take advantage of the imperfections
+in my medium!&lt;/p&gt;
+&lt;p&gt;The tool that generates the patterns for me, Slic3r, has
+&lt;a href="http://manual.slic3r.org/expert-mode/infill"&gt;several to choose from&lt;/a&gt;.
+Some are only available for the inside of objects, because they can't cover
+100% of the space, but there's&amp;nbsp;still a&amp;nbsp;good selection: the boring old
+Rectilinear, the outline-following Cocentric, the fractal Hilbert Curve,
+the Archimedean Chords spiral, and the angular Octagram&amp;nbsp;Spiral.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/rectilinear.png"&gt;&lt;img alt="Plain Old Rectilinear" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/rectilinear.png" /&gt;&lt;/a&gt;
+&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/cocentric.png"&gt;&lt;img alt="Cocentric pattern" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/cocentric.png" /&gt;&lt;/a&gt;
+&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/hilbert.png"&gt;&lt;img alt="Hilbert Curve" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/hilbert.png" /&gt;&lt;/a&gt;
+&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/archimedean.png"&gt;&lt;img alt="Archimedean Chords" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/archimedean.png" /&gt;&lt;/a&gt;
+&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/octagram-spiral.png"&gt;&lt;img alt="Octagram Spiral" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/octagram-spiral.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;They're mostly meant to be functional, but some are quite aesthetically
+pleasing than others.
+Being the geek that I&amp;nbsp;am, I&amp;nbsp;prefer the Archimedean Chords and
+Hilbert Curve.
+&lt;em&gt;(Octagram Spiral comes in at a&amp;nbsp;close third place, but if I&amp;nbsp;printed that I
+would be worried about a&amp;nbsp;magic portal to Discworld suddenly opening. (I&amp;nbsp;wonder,
+would that be a&amp;nbsp;bad thing? Anyway, where was I? Ah,
+&lt;a href="https://en.wikipedia.org/wiki/Archimedes"&gt;Archimedes&lt;/a&gt; and
+&lt;a href="https://en.wikipedia.org/wiki/David_Hilbert"&gt;Hilbert&lt;/a&gt;.))&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The trouble is, I&amp;nbsp;couldn't choose between the two.
+Is there a&amp;nbsp;way to use both, I&amp;nbsp;wondered?&lt;/p&gt;
+&lt;h2 id="modifier-objects"&gt;Modifier objects&lt;/h2&gt;
+&lt;p&gt;Yes, there is!
+At the workshop I&amp;nbsp;built my printer, the discussion wandered a&amp;nbsp;little too deep
+into a&amp;nbsp;few obscure details that nobody really uses.
+One of those is slic3r's&amp;nbsp;modifier meshes: a&amp;nbsp;way to change print settings
+for a&amp;nbsp;specified part of the object.
+There's&amp;nbsp;apparently only one documented use case for these on the Internet:
+&lt;a href="http://slic3r.org/blog/modifier-meshes"&gt;strengthening the neck of an ukulele&lt;/a&gt;.
+Let's&amp;nbsp;add another one!&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;decided my new handles will be various regular polygons instead of
+the original circles. I&amp;nbsp;decided to start with a&amp;nbsp;pentagon. To provide
+some contrast to the geometric infill patterns, I&amp;nbsp;chose to include the
+&lt;a href="https://en.wikipedia.org/wiki/Vinca_major"&gt;&lt;em&gt;Vinca major&lt;/em&gt;&lt;/a&gt;
+&lt;a href="https://en.wikipedia.org/wiki/File:Apocynaceae_-_Vinca_major-1.JPG"&gt;flower&lt;/a&gt;
+to the design.
+Its five-fold rotational (but not reflectional) symmetry is quite&amp;nbsp;beautiful.&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;traced a&amp;nbsp;petal in &lt;a href="https://inkscape.org"&gt;Inkcsape&lt;/a&gt;, and used
+&lt;a href="http://www.thingiverse.com/thing:25036"&gt;a&amp;nbsp;plugin&lt;/a&gt; to generate a&amp;nbsp;very thin
+3D model from it.
+The thickness is about the same as the first layer of my printout.
+Then, I&amp;nbsp;added the part as a&amp;nbsp;Modifier object in Slic3r, and set its infill
+to Hilbert Curve. The rest of the object usess Archimedean&amp;nbsp;Chords.&lt;/p&gt;
+&lt;p&gt;Et voilà! A&amp;nbsp;combined pattern&amp;nbsp;emerges.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/combination.png"&gt;&lt;img alt="Sliced bottom layer" class="size-full" src="http://encukou.cz/../images/2015-10-25-slic3r/combination.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Slic3r adds quite a&amp;nbsp;wide margin between the two areas, which works out well
+for my use of two large patches of distinct textures.
+If you want finer control, it might not be that&amp;nbsp;convenient.&lt;/p&gt;
+&lt;h2 id="centering"&gt;Centering&lt;/h2&gt;
+&lt;p&gt;Actually, there's&amp;nbsp;one more thing needed for a&amp;nbsp;nice result.
+For patterns that have a&amp;nbsp;visible center (i.e. Octagram and the Archimedean Chords),
+Slic3r seems to use the part's&amp;nbsp;bounding box to compute the&amp;nbsp;center.&lt;/p&gt;
+&lt;p&gt;For the modifier object, this would be easy to fix: just add a&amp;nbsp;circle around
+the flower, making it large enough to not intersect the handle&amp;nbsp;itself.&lt;/p&gt;
+&lt;p&gt;For the actual handle, I&amp;nbsp;instead added little “specks” around the perimeter,
+small enough to not be printed.
+You can see them in the screnshot above as light grey dots off to the sides
+of the pentagon.
+This tricked Slic3r into putting the center where it should&amp;nbsp;be.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/handle-new.jpg"&gt;&lt;img alt="The Solution" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/handle-new.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="to-be-continued"&gt;To Be Continued&lt;/h2&gt;
+&lt;p&gt;Now that I&amp;nbsp;have the first layer ready, I'm off to making the screw &amp;amp; nut fit
+well inside the handle.
+And, of course, making similar designs for other polygons.
+And printing other interesting things.
+Maybe I'll blog about that as well!&lt;/p&gt;
+&lt;p&gt;By the way, all the files for this project are &lt;a href="https://github.com/encukou/3d/tree/master/handle"&gt;on&amp;nbsp;Github&lt;/a&gt;.
+Enjoy!&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;Oh, and if you want me to print anything: come visit me, bring some tea, and
+we can chat while watching the printer make electronic noises and plastic
+creations. (Otherwise, i&amp;nbsp;might add a&amp;nbsp;simple, small object to a&amp;nbsp;print job
+if you send me a&amp;nbsp;fully prepared model, but you're probably better off ordering
+a&amp;nbsp;print online.)&lt;/p&gt;</summary><category term="3d"></category></entry><entry><title>Types as namespaces</title><link href="http://encukou.cz/blog/2015/03/01/en-variable-types" rel="alternate"></link><updated>2015-03-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-03-01:blog/2015/03/01/en-variable-types</id><summary type="html">&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
 Read that first.&lt;/p&gt;
 &lt;p&gt;In Python's&amp;nbsp;duck-typing system, it's&amp;nbsp;enough if things quack.
 They don't actually need to quack &lt;em&gt;like a&amp;nbsp;duck&lt;/em&gt;.&lt;/p&gt;
