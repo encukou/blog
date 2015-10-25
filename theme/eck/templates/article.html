@@ -45,14 +45,6 @@
 </ul>
 <span class="clearfix"></span>
 
-<ul class="article-links">
-    {% if article.lang == 'cs' %}
-        <li><a href="{{article.github_url}}"><em>Forkni</em> si tenhle článek na Githubu</a></li>
-    {% else %}
-        <li><a href="{{article.github_url}}"><em>Fork</em> this post on Github</a></li>
-    {% endif %}
-</ul>
-
 {% endblock %}
 
 {% block footer_text %}

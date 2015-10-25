@@ -24,5 +24,14 @@
                 {% for tag in article.tags|sort %}{{- delimiter() }} <a href="{{ SITEURL }}/{{ tag.url }}" rel="tag">{{ tag }}</a>{% endfor %}
             </span>
         {% endif %}
+        <ul class="article-links">
+            {% if article.lang == 'cs' %}
+                <li><a href="mailto:encukou@gmail.com?subject=Re:+článek+'{{ article.title|urlencode }}'">Přidat <em>komentář</em></a></li>
+                <li><a href="{{article.github_url}}"><em>Forknout</em> tenhle článek na Githubu</a></li>
+            {% else %}
+                <li><a href="mailto:encukou@gmail.com?subject=Re:+'{{ article.title|urlencode }}'+blog+post">Add a <em>Comment</em></a></li>
+                <li><a href="{{article.github_url}}"><em>Fork</em> this post on Github</a></li>
+            {% endif %}
+        </ul>
     </div> <!--/#main-->
 </div>  <!--/#post-->
