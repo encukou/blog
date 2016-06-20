@@ -1,5 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>encukou/blog</title><link>http://encukou.cz/</link><description>primary colors underneath</description><atom:link href="http://encukou.cz/feeds/petr-viktorin.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 25 Oct 2015 00:00:00 +0200</lastBuildDate><item><title>First Layer Patterns with Slic3r Modifier Objects</title><link>http://encukou.cz/blog/2015/10/25/en-slic3r-first-layer-patterns</link><description>&lt;p&gt;I've built a&amp;nbsp;3D printer, and found a&amp;nbsp;cool effect I&amp;nbsp;wasn't able to
+<rss version="2.0"><channel><title>encukou/blog</title><link>http://encukou.cz/</link><description>primary colors underneath</description><lastBuildDate>Mon, 20 Jun 2016 00:00:00 +0200</lastBuildDate><item><title>PyCon 2016 Report</title><link>http://encukou.cz/blog/2016/06/20/pycon-report</link><description>&lt;p&gt;I&amp;nbsp;attended PyCon 2016, the annual Python language conference, which took part
+between May 28th to June 5th.&lt;/p&gt;
+&lt;p&gt;Here's&amp;nbsp;a&amp;nbsp;long, rambling and somewhat personal report of what I&amp;nbsp;got from
+the conference.&lt;/p&gt;
+
+
+&lt;p&gt;I&amp;nbsp;found accommodation through Airbnb, and ended up staying with Jov,
+a&amp;nbsp;laid-back drummer.  He apparently prepared a&amp;nbsp;lot of info about local
+breweries to share with his guest, but as I&amp;nbsp;don't drink, we had to find
+other topics to talk about.  Which we did!
+I'm never going to stay at a&amp;nbsp;conference hotel again if I&amp;nbsp;can help
+it. (Except at PyCon PL, of course.)&lt;/p&gt;
+&lt;h3 id="language-summit"&gt;Language Summit&lt;/h3&gt;
+&lt;p&gt;Saturday and Sunday before the main conference were "tutorial days", with
+opportinities to learn various technologies, either paid by the attendees
+or sponsored.  Unfortunately, I&amp;nbsp;registered late enough that the interesting
+free ones were already full.  However, on Saturday another event was held:
+the &lt;a href="https://us.pycon.org/2016/events/langsummit/"&gt;Language Summit&lt;/a&gt;, to which Nick Coghlan kindly invided&amp;nbsp;me.&lt;/p&gt;
+&lt;p&gt;The Summit is a&amp;nbsp;gathering of Python core developers and people invited by them
+at which language issues are discussed.  Though there are no recordings,
+the Summit was covered by Jake Edge in &lt;a href="https://lwn.net/Articles/688969/"&gt;LWN&lt;/a&gt;.
+My talk aimed to relate the perspective of Fedora (and redistributors in
+general) to Python developers.
+Specifically, I&amp;nbsp;talked about:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Python 3&amp;nbsp;porting: Many people in the Python ecosystem use the &lt;a href="https://pypi.python.org/pypi"&gt;PyPI&lt;/a&gt;
+    as the canonical list of Python software, so tools tracking Python 3
+    porting progress (e.g. &lt;a href="https://python3wos.appspot.com/"&gt;WoS&lt;/a&gt;) are usually biased against system tools
+    (q.g. DNF, Samba, Openstack) and applications (e.g. pitivi, Inkscape).
+    Fedora's &lt;a href="http://fedora.portingdb.xyz/"&gt;PortingDB&lt;/a&gt; arguably gives a&amp;nbsp;better subset of "popular open-
+    source packages".  I&amp;nbsp;gave an introduction to PortingDB, how we use it
+    and how to look at the data.  I&amp;nbsp;also mentioned that we're nearing having
+    50% of packages ported, hopefully as soon as Fedora 25.
+    I&amp;nbsp;talked about major software that is not ported yet. Anything based on
+    GTK2&amp;nbsp;will need to be ported to GTK 3&amp;nbsp;to get Python 3&amp;nbsp;support; wxWidgets
+    support for is still incomplete. The other blockers are Ansible,
+    enterprise-y software (Samba, FreeIPA), VCSs (Mercurial, Bazaar),
+    and large parts of the Fedora infrastructure.  Unsurprisingly,
+    all are projects that are not published on PyPI.
+    I&amp;nbsp;also linked porting guides: &lt;a href="https://py3c.readthedocs.io/en/latest/guide.html"&gt;py3c&lt;/a&gt; for extension modules, the &lt;a href="http://python-rpm-porting.readthedocs.io/en/latest/"&gt;RPM
+    porting Guide&lt;/a&gt; for RPMs, and the upcoming Conservative Porting
+    Guide.&lt;/li&gt;
+&lt;li&gt;pyp2rpm &amp;amp; COPR PyPI rebuilds: I&amp;nbsp;talked briefly how we're trying to
+    rebuild all PyPI packages in COPR, which would help with packaging
+    Python 3&amp;nbsp;compatible versions of software.  Tying in to a&amp;nbsp;previous talk,
+    I&amp;nbsp;mentioned that since running tests is part of building a&amp;nbsp;RPM,
+    these automatic COPR builds could provide integration tests for
+    Python packages – something both Fedora and the Python ecosystem
+    need.&lt;/li&gt;
+&lt;li&gt;System Python: I&amp;nbsp;presented the need for a&amp;nbsp;lighter standard library
+    that could be used for minimal systems.  More than three-fourths of
+    Python's&amp;nbsp;stdlib are not needed at runtime by most applications, and
+    parts like the test suite and TK are already split out of python-libs
+    in Fedora.  The idea was met with understanding, though (rather
+    surprisingly for me) Kushal Das from Fedora Cloud objected to
+    splitting the stdlib, preferring a&amp;nbsp;full Python even in the base cloud
+    image.
+    I&amp;nbsp;noted that splitting the standard library, and letting packages
+    opt-in to defining exactly which parts they need, might be useful for
+    projects like MicroPython, or making Python work on Android.  I&amp;nbsp;learned
+    that this might be good for Windows as well.  However, I&amp;nbsp;said that
+    neither I&amp;nbsp;nor Red Hat's&amp;nbsp;python-maint has resources to commit to a
+    general solution yet.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Overall, the audience was responsive and asked good questions. We ran a&amp;nbsp;bit
+over the 20&amp;nbsp;minutes I&amp;nbsp;had allocated, but at that point running over was
+a&amp;nbsp;common theme at Language&amp;nbsp;Summit.&lt;/p&gt;
+&lt;p&gt;Other Language Summit talks focused on security, porting to Python 3,
+removing the GIL, core dev workflows, automated testing, gradual typing,
+and JITs.  Read the LWN reports if you're&amp;nbsp;interested.&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;went to see the city on Sunday, and returned on Monday for the first
+day of conference talks.&lt;/p&gt;
+&lt;h2 id="monday"&gt;Monday&lt;/h2&gt;
+&lt;p&gt;Meals at PyCon took place in the Expo hall, among sponsor booths.  Most
+sponsors were either developing Python apps, or providing services to
+deploy them, debug them, or otherwise make Python developers' lives&amp;nbsp;easier.&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;was happy to see a&amp;nbsp;section of the Expo Hall dedicated to open-source
+projects: Cookiecutter, BeeWare, Django Girls and PyLadies, Read the Docs,
+Plone, Pyramid, and the Recurse Center.  Of course, the were also open-source
+projects in the "paid" section: I&amp;nbsp;counted Ansible, Sentry, OpenShift,
+Elastic, and Docker.&lt;/p&gt;
+&lt;p&gt;Below are my notes from talks, open spaces, and discussions I&amp;nbsp;attended.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ned Batchelder: Machete Mode Debugging.&lt;/strong&gt;
+  This talk didn't have much new material for me, but it illustrates what
+  for me is a&amp;nbsp;large part of Python's&amp;nbsp;appeal: it's&amp;nbsp;possible to do very
+  effective (but nasty) hacks to solve a&amp;nbsp;problem quickly, once one knows
+  the language internals.  A&amp;nbsp;necessary part of what makes this appealing
+  is then the resistance to these hacks ever leaving a&amp;nbsp;development machine.
+  This resistance is largely cultural: Python could be a&amp;nbsp;very different
+  language even if the syntax stayed the&amp;nbsp;same.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Brett Cannon, Dino Viehland: Pyjion.&lt;/strong&gt;
+  This was a&amp;nbsp;rehash of the Language Summit talk, with some points
+  elaborated further.  Adding JIT hooks to core Python is a&amp;nbsp;great idea
+  that could make speeding up the reference interpreter – or creaing
+  debugging tool – easy and thus allowing healthy competition between
+  various approaches.  (It would also allow proprietary speed-up addons;
+  but hopefully Microsoft has learned the idea that collaboration
+  works better.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Drew Fisher: Object-Capabilities, Cap'n Proto.&lt;/strong&gt;
+  Object capabilities are a&amp;nbsp;great framework for building secure systems.
+  Sadly, not the default in today's&amp;nbsp;frameworks.
+  I&amp;nbsp;didn't see any functional programming talks at PyCon; I&amp;nbsp;assume this
+  is because they all tend to be similar and everybody knows the material
+  by now.  I&amp;nbsp;can't wait until object capabilities reac a&amp;nbsp;similar "exotic
+  but well-known" status.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Open Space: Meetup Organizers.&lt;/strong&gt;
+  As the Pyvo meetups in Brno are struggling with too many attendees,
+  we're planning to add parallel beginner-focused events to split the
+  audience.  It turns out many meetups across the world are doing the same,
+  and hopefully I'll be able to use my notes in Brno soon.
+  (This Open Space continued with another session on Wednesday.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Open Space: Python and Rust.&lt;/strong&gt;
+  When it comes to Rust, I'm interested in the concept of a&amp;nbsp;Mozilla-supported
+  compiled language, and despite never trying it for a&amp;nbsp;serious project,
+  whenever I&amp;nbsp;read about the technical choices that go in the languahe,
+  I&amp;nbsp;have nothing but respect for its developers.
+  Since I&amp;nbsp;don't know much about Rust I&amp;nbsp;planned to join the Rust open space
+  as a&amp;nbsp;silent lurker, but I&amp;nbsp;was able to provide some details about CPython
+  internals that might make it easier to build Python-Rust&amp;nbsp;bridges.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Open Space: IoT, MicroPython, automation.&lt;/strong&gt;
+  This open space had an interesting topic and great people (Nicholas
+  Tollervey and Paulus Schoutsen were both there), but there was a&amp;nbsp;lack
+  of good talking points, so I&amp;nbsp;didn't get much more out of it than an
+  urge to try giving a&amp;nbsp;MicroPython-themed lightning talk.
+  And I&amp;nbsp;did get to hold a&amp;nbsp;BBC Micro:Bit :)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lightning Talks.&lt;/strong&gt;
+  The best part of the conference – a&amp;nbsp;mixt of mini-talks ranging from
+  funny to practical to dead serious.  Professionally, the most important
+  was probably about "star_destroyer" – a&amp;nbsp;tool that removes "import *"
+  statements in a&amp;nbsp;smart way.&lt;/p&gt;
+&lt;p&gt;After the talks, Sentry and Linode sponsored an evening at the local arcade,
+even providing quarters to feed the Marios and Pacmans.  Even nerdier than
+PyCon itself.&lt;/p&gt;
+&lt;h2 id="tuesday"&gt;Tuesday&lt;/h2&gt;
+&lt;p&gt;Guido van Rossum: Keynote
+  Guido is a&amp;nbsp;great language designer and community leader, but
+  I'm not much of a&amp;nbsp;fan of his keynotes :(&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Parisa Tabriz: Keynote&lt;/strong&gt;
+  A&amp;nbsp;talk about security.  To me the most important point was that while
+  software engineers spend time thinking about making things work, security
+  engineers think about making things break.  It's&amp;nbsp;a&amp;nbsp;mindset everyone
+  should slip into at times.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Daniele Procida: Documentation-driven development.&lt;/strong&gt;
+  Django is a&amp;nbsp;perfect example of how great documentation, great community,
+  and great product go together.  Daniele talked about the importance of
+  the process of documenting, rather than having documentation, and
+  he process of informing, rather than publishing information.  And he
+  explained a&amp;nbsp;few guidelines for great&amp;nbsp;documentation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Anthony Scopatz: xonsh.&lt;/strong&gt;
+  xonsh is a&amp;nbsp;shell that is, syntax-wise, a&amp;nbsp;hybrid between (Ba)sh and Python.
+  Based on the presentation, it looks like the merge was (surprisingly for
+  me) done relatively cleanly and respectfully.  I&amp;nbsp;need to try it out
+  soon.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Glyph: Shipping Software To Users With Python.&lt;/strong&gt;
+  An overview of practices for shipping Python software: the good and the
+  bad, the existing ones, the near future, and the ideal state.
+  I've heard more than one person say this was the most informative talk
+  at Pycon.  I&amp;nbsp;seem to be more interested in teaching programming and
+  building tools for programmers than in real-world apps, but this was still
+  a&amp;nbsp;great overview.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Paul Kehrer: Reliably Distributing Compiled Modules.&lt;/strong&gt;
+  Packaging is perhaps the area of Python ecosystem that is changing most
+  rapidly, so good talks on these topics are always welcome – especially
+  if it broadens awareness of manylinux&amp;nbsp;wheels.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Amber Brown: The Report Of Twisted’s&amp;nbsp;Death.&lt;/strong&gt;
+  Unfortunately, I&amp;nbsp;didn't get much out of this talk, but other people's
+  reactions were positive, so it's&amp;nbsp;probably just me.
+  Amber's&amp;nbsp;talk at the Language Summit was much&amp;nbsp;better.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Katie Bell: The computer science of marking computer science assignments.&lt;/strong&gt;
+  This talk ended up mainly focusing on computational geometry, which
+  is a&amp;nbsp;fun subject.  Although it had "computer science" in the title,
+  it was a&amp;nbsp;little underresearched – but as Katie learned some better
+  techniques from the audience, everyone kept&amp;nbsp;smiling.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Russell Keith-Magee: A&amp;nbsp;tale of two cellphones: Python on Android and iOS.&lt;/strong&gt;
+  I&amp;nbsp;consider this the most important talk of this PyCon.  Russel's&amp;nbsp;BeeWare
+  project is not the first to bring Python to mobile phones (and I&amp;nbsp;have
+  big respect for Kivy), but it aims to make Python a&amp;nbsp;first-class language
+  for native apps. Also, it seems designed from the ground up for long-term
+  maintainability, both technical and social.
+  I&amp;nbsp;had to leave in the middle of the talk to prepare my lightning talk,
+  but I&amp;nbsp;made sure to watch the recording before the sprints&amp;nbsp;later.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lightning Talks.&lt;/strong&gt;
+  My lightning talk was on the fun side of the spectrum: how to make
+  a&amp;nbsp;cheap glowing, Wi-Fi controlled balloon.
+  A&amp;nbsp;notable talk in this block by Nathaniel Smith introduced &lt;code&gt;async yield&lt;/code&gt;.
+  I&amp;nbsp;asked Nathaniel afterwards if he's&amp;nbsp;planning to add this feature (which
+  I&amp;nbsp;think is conspicuously missing from Python) to the language, and he said
+  it's&amp;nbsp;actually the prototype just for that. Yipee!
+  Oh, and Larry Hastings gave a&amp;nbsp;very entertaining talk, not about Python
+  but about speed gaming.  I&amp;nbsp;heard about #dsdad before, but I&amp;nbsp;had no idea
+  he's&amp;nbsp;a&amp;nbsp;Python release&amp;nbsp;manager!&lt;/p&gt;
+&lt;p&gt;The day ended with a&amp;nbsp;PyLadies charity auction, which was quite fun but
+the wrong kind of fun for me, I&amp;nbsp;guess.&lt;/p&gt;
+&lt;h2 id="wednesday"&gt;Wednesday&lt;/h2&gt;
+&lt;p&gt;Wednesday started with keynotes (about the Python Software Foundation,
+and about Plone), the first of which I&amp;nbsp;missed for the Meetups open space.
+As for Plone, I&amp;nbsp;definitely suggest the talk to anyone interested in
+designing sustainable projects – the history of such a&amp;nbsp;large and long-lived
+project is fascinating.&lt;/p&gt;
+&lt;p&gt;After the keynotes, there was the poster session. Some notes from there:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hdbscan – a&amp;nbsp;library I&amp;nbsp;just saw mentioned at Pyvo Ostrava was here
+    with its authors.&lt;/li&gt;
+&lt;li&gt;An interesting system for data visualization was presented, but
+    unfortunately it'll only be open-sourced after publication of the
+    paper.&lt;/li&gt;
+&lt;li&gt;PyMoms – meetups with provided childcare. I&amp;nbsp;need to suggest this to
+    the local PyLadies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And then talks resumed:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Anne DeCusatis: More Than Binary: Inclusive Gender Collection and You.&lt;/strong&gt;
+  I&amp;nbsp;went to this talk more for the discussion at the end than for the
+  talk itself.  In English, the only part of the language that's&amp;nbsp;different
+  between genders is pronouns (he/she), and there are efforts to be more
+  welcoming to people who are neither or both male and/or female.
+  However, the Czech language only supports the case of an animate object
+  being either male or female.  I&amp;nbsp;would imagine this makes it practically
+  mandatory for non-binary people to choose one of the two, leading
+  to public perception that non-binary people just don't exist.  But, the
+  fact that they do exist is just about the only thing in this area that
+  I&amp;nbsp;can be sure about.  And, as we all know, diversity is important – both
+  diversity of programmers, to get various points of view, and diversity
+  of users, so that we don't make some people's&amp;nbsp;lives harder by just not
+  thinking about them in our designs.
+  The speaker sadly couldn't provide any pointers for exploring this space
+  further, but I&amp;nbsp;got some from people standing&amp;nbsp;by.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Laura Rupprecht: What can software engineers learn from the medical field?&lt;/strong&gt;
+  I&amp;nbsp;came late, as discussion from the previous talk took more than the break.
+  Beyond the concept of "triage", which comes from medical field, there
+  are are other concepts we can learn from doctors.  The one I&amp;nbsp;liked was
+  the fact that teaching hospitals have better outcomes.  The software
+  world reflect this in code reviews, pair programming, and internships.
+  I&amp;nbsp;believe software development internships – or even apprenticeships –
+  should be &lt;em&gt;much&lt;/em&gt; more common than they are now, and they should serve both
+  to train new contributors/employees, and to ensure simplicity – and thus
+  maintainability – of the resulting&amp;nbsp;code.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Jacob Kovac: Revitalizing Python Game Development.&lt;/strong&gt;
+  This was a&amp;nbsp;talk about Kivy, which does "Packaging", "Performance", and
+  "Platforms" right for Python-based games.
+  I&amp;nbsp;like Kivy – I&amp;nbsp;made software for my Master's&amp;nbsp;thesis in it – but it
+  always felt as a&amp;nbsp;monolith that's&amp;nbsp;a&amp;nbsp;bit removed from the Python ecosysyem.
+  Still, just like Django is currently the king of web frameworks, I&amp;nbsp;would
+  not object to Kivy becoming the king for Python game development.
+  I&amp;nbsp;believe the project needs much better community management,&amp;nbsp;though.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;K&amp;nbsp;Lars Lohn: Keynote.&lt;/strong&gt;
+  This was a&amp;nbsp;masterpiece of a&amp;nbsp;keynote. It brought tears to my&amp;nbsp;eyes.&lt;/p&gt;
+&lt;p&gt;In the evening, I&amp;nbsp;got together with Christian Heimes, Paul Hildebrandt,
+Katie Bell, and a&amp;nbsp;couple other people for dinner at the McMenamins School,
+a&amp;nbsp;elementary school turned into a&amp;nbsp;hotel and&amp;nbsp;restaurant.&lt;/p&gt;
+&lt;h2 id="sprints-thursday-friday-sunday"&gt;Sprints (Thursday, Friday, Sunday)&lt;/h2&gt;
+&lt;p&gt;I&amp;nbsp;sprinted on CPython, and got Nick Coghlan and Eric Snow review and refine
+my &lt;a href="https://github.com/encukou/peps/blob/module-state-access/pep-9999.txt"&gt;upcoming PEP&lt;/a&gt;.  It felt like several weeks of work getting done in two
+days.
+Late Friday, after I&amp;nbsp;sendt the pre-PEP to review, Ubuntu's&amp;nbsp;Matthias Klose
+told me about a&amp;nbsp;file naming problem in Python 3&amp;nbsp;versions of Samba's&amp;nbsp;supporting
+packages.  We discussed until we identified the problem and found a&amp;nbsp;possible
+solution (which still needs to be implemented).
+After that I&amp;nbsp;went to the BeeWare table and picked a&amp;nbsp;task: getting the float
+test suite to pass in VOC, the Python-to-Java compiler used for Android
+support.  I&amp;nbsp;found out this required writing &lt;code&gt;float.__repr__()&lt;/code&gt;, since the
+tests do textual comparisons, so I&amp;nbsp;didn't finish by a&amp;nbsp;long shot.
+I&amp;nbsp;took Saturday off, and returned on Sunday to finish a &lt;code&gt;__repr__&lt;/code&gt;
+implementation that usually does the same thing as CPython's (and never gives
+an unreasonable result – it will just sometimes show an extra digit).
+The atmosphere at the BeeWare table (and, for example, at the Cookiecutter
+table beside it) was extremely pleasant and welcoming, something I&amp;nbsp;need to
+learn to emulate when I'll run&amp;nbsp;sprints.&lt;/p&gt;
+&lt;p&gt;During Sunday, lots of people left to catch their planes, including Russel
+the BeeWare sprint leader, so my pull request was merged only some time
+next week.
+After the sprints, I&amp;nbsp;got some Fedora swag from Remy to bring back to Brno,
+and joined fellow BeeWare sprinters – Jeremy, Marina and Holly – for dinner
+and board games.&lt;/p&gt;
+&lt;p&gt;And that was it!  I&amp;nbsp;spent a&amp;nbsp;few days after the conference enjoying the city
+of Portland, then hopped on a&amp;nbsp;train to Seattle and back&amp;nbsp;home.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Mon, 20 Jun 2016 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:encukou.cz,2016-06-20:blog/2016/06/20/pycon-report</guid><category>conference</category><category>pycon</category></item><item><title>First Layer Patterns with Slic3r Modifier Objects</title><link>http://encukou.cz/blog/2015/10/25/en-slic3r-first-layer-patterns</link><description>&lt;p&gt;I've built a&amp;nbsp;3D printer, and found a&amp;nbsp;cool effect I&amp;nbsp;wasn't able to
 find on the Internet yet.&lt;/p&gt;
 
 
@@ -124,7 +398,7 @@ Enjoy!&lt;/p&gt;
 we can chat while watching the printer make electronic noises and plastic
 creations. (Otherwise, i&amp;nbsp;might add a&amp;nbsp;simple, small object to a&amp;nbsp;print job
 if you send me a&amp;nbsp;fully prepared model, but you're probably better off ordering
-a&amp;nbsp;print online.)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 25 Oct 2015 00:00:00 +0200</pubDate><guid>tag:encukou.cz,2015-10-25:blog/2015/10/25/en-slic3r-first-layer-patterns</guid><category>3d</category></item><item><title>Types as namespaces</title><link>http://encukou.cz/blog/2015/03/01/en-variable-types</link><description>&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
+a&amp;nbsp;print online.)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 25 Oct 2015 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:encukou.cz,2015-10-25:blog/2015/10/25/en-slic3r-first-layer-patterns</guid><category>3d</category></item><item><title>Types as namespaces</title><link>http://encukou.cz/blog/2015/03/01/en-variable-types</link><description>&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
 Read that first.&lt;/p&gt;
 &lt;p&gt;In Python's&amp;nbsp;duck-typing system, it's&amp;nbsp;enough if things quack.
 They don't actually need to quack &lt;em&gt;like a&amp;nbsp;duck&lt;/em&gt;.&lt;/p&gt;
@@ -135,14 +409,14 @@ They don't actually need to quack &lt;em&gt;like a&amp;nbsp;duck&lt;/em&gt;.&lt;
 Some languages – the statically typed ones – require you to specify the type in front, and then they check it rigorously.
 In Python, you need to keep track of this in your head.
 It's&amp;nbsp;possible that you're writing code where a&amp;nbsp;variable could be either a&amp;nbsp;string or a&amp;nbsp;number:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;def add(a, b):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def add(a, b):
     return a + b
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;... or you might want a&amp;nbsp;variable to changes type in the middle of a&amp;nbsp;function,
 like in the example from &lt;a href="http://docs.python-guide.org/en/latest/writing/structure/#dynamic-typing"&gt;Hitchhiker's&amp;nbsp;guide to Python&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;items = &amp;#39;a b c d&amp;#39;  # This is a string...
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;items = &amp;#39;a b c d&amp;#39;  # This is a string...
 items = items.split(&amp;#39; &amp;#39;)  # ...becoming a list
 items = set(items)  # ...and then a set
 &lt;/pre&gt;&lt;/div&gt;
@@ -157,7 +431,7 @@ rather than “the method &lt;em&gt;named&lt;/em&gt;&amp;nbsp;startswith”.&lt;
 &lt;h2 id="types-of-variables"&gt;Types of variables&lt;/h2&gt;
 &lt;p&gt;I&amp;nbsp;have some syntax in mind. If I&amp;nbsp;rewrite one of the first examples in
 Eevee's&amp;nbsp;post in it, I&amp;nbsp;can get something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;def foo(a: String, b: StringPattern, c: List):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def foo(a: String, b: StringPattern, c: List):
     if a.startswith(b):
         c.append(a)
 &lt;/pre&gt;&lt;/div&gt;
@@ -185,7 +459,7 @@ your code might break with the next version of my&amp;nbsp;library.&lt;/p&gt;
 &lt;p&gt;Of course, usually &lt;code&gt;a&lt;/code&gt; will be an “actual string”, and the compiler can
 optimize for that case.&lt;/p&gt;
 &lt;p&gt;I'll put a&amp;nbsp;random snippet with syntax ideas here:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;from somewhere import Snake
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from somewhere import Snake
 
 def print_length(x: List):
     print(x.length)
@@ -204,7 +478,7 @@ of the cases, but when you get hit by the 1%, you don't even know where to look
 Javascript's&amp;nbsp;explicit &lt;code&gt;var&lt;/code&gt; keyword is a&amp;nbsp;good thing, for much the same reasons as Python's
 explicit &lt;code&gt;self&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;In my syntax, variable declarations can specify the type:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;str: String = &amp;quot;abcd&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;str: String = &amp;quot;abcd&amp;quot;
 
 list: List = [1, 2, 3]
 
@@ -214,14 +488,14 @@ for i:int in list:
 
 
 &lt;p&gt;But, since most (or ideally all) expressions have a&amp;nbsp;well-defined types, a&amp;nbsp;shorthand comes to mind:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;str := &amp;quot;abcd&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;str := &amp;quot;abcd&amp;quot;
 list := [&amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;]
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2 id="operator-namespaces"&gt;Operator namespaces&lt;/h2&gt;
 &lt;p&gt;This would work:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;def concat(a: List, b: List):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def concat(a: List, b: List):
     return a + b
 
 def elementwise-add(a: Array, b: Array):
@@ -243,7 +517,7 @@ a&amp;nbsp;Sequence.)&lt;/p&gt;
 &lt;h2 id="definitions-and-implementations"&gt;Definitions and Implementations&lt;/h2&gt;
 &lt;p&gt;Let's&amp;nbsp;make a&amp;nbsp;Tree interface.
 I'll use &lt;a href="https://www.python.org/dev/peps/pep-0484/"&gt;PEP 484&lt;/a&gt;-ish syntax for generics:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;T := TypePlaceholder()
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;T := TypePlaceholder()
 
 interface Tree:
     walk(self: T) -&amp;gt; Iterator[T]
@@ -256,7 +530,7 @@ type of &lt;code&gt;x&lt;/code&gt;.
 it's&amp;nbsp;defining the namespace that expression will use by default.)&lt;/p&gt;
 &lt;p&gt;Then you can define BinaryTree like this.
 &lt;code&gt;BinaryTree:walk&lt;/code&gt; becomes an implementation of&amp;nbsp;&lt;code&gt;Tree:walk&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;class BinaryTree(Tree):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class BinaryTree(Tree):
     left: Tree
     right: Tree
 
@@ -277,7 +551,7 @@ by classes that claim to implement &lt;code&gt;Tree&lt;/code&gt;.)&lt;/p&gt;
 &lt;p&gt;Next let's&amp;nbsp;have a&amp;nbsp;class for corporate employees.
 An amployee is not a&amp;nbsp;tree, and there's&amp;nbsp;no &lt;code&gt;Employee:walk&lt;/code&gt; in our model,
 but you can still use an employee as a&amp;nbsp;tree node:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;class Employee:
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class Employee:
     boss: Employee
     underlings: List[Employee]
 
@@ -290,7 +564,7 @@ but you can still use an employee as a&amp;nbsp;tree node:&lt;/p&gt;
 
 &lt;p&gt;And you might want to attach a &lt;code&gt;Tree:walk&lt;/code&gt; to something from some library you
 can't easily change, like the stdlib.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;impl Path.Tree:walk(self):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;impl Path.Tree:walk(self):
     yield self
     if self.isdir:
         for child:Tree in self.listdir:
@@ -308,7 +582,7 @@ And you can later add &lt;code&gt;impl Object:to_string&lt;/code&gt;, which won'
 &lt;code&gt;YourClass:to_string&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="interface-conflicts"&gt;Interface conflicts&lt;/h2&gt;
 &lt;p&gt;Consider this class:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;class FamilyMember:
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class FamilyMember:
     parents: List[FamilyMember]
     children: List[FamilyMember]
 
@@ -333,7 +607,7 @@ and implement &lt;code&gt;Visit:leaf&lt;/code&gt;, where &lt;code&gt;Visit&lt;/c
 &lt;h2 id="thatsit-for-now"&gt;That's&amp;nbsp;it for now&lt;/h2&gt;
 &lt;p&gt;I&amp;nbsp;could rant on, about, say, registration conflicts or efficient vtable
 references, but let's&amp;nbsp;end it here, throw it at the wall and see if it&amp;nbsp;sticks.&lt;/p&gt;
-&lt;p&gt;(I&amp;nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 01 Mar 2015 00:00:00 +0100</pubDate><guid>tag:encukou.cz,2015-03-01:blog/2015/03/01/en-variable-types</guid><category>language design</category></item><item><title>Měnění objektů</title><link>http://encukou.cz/blog/2014/01/05/cs-meneni-objektu</link><description>&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
+&lt;p&gt;(I&amp;nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 01 Mar 2015 00:00:00 +0100</pubDate><guid isPermaLink="false">tag:encukou.cz,2015-03-01:blog/2015/03/01/en-variable-types</guid><category>language design</category></item><item><title>Měnění objektů</title><link>http://encukou.cz/blog/2014/01/05/cs-meneni-objektu</link><description>&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
 (Pokud ne, doporučuju to napřed zjistit,
 už jen pro seznámení s&amp;nbsp;mými uměleckými diagramy.)
 Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy&amp;nbsp;objekty.&lt;/p&gt;
@@ -348,16 +622,16 @@ a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
 To znamená, že se nedá žádným způsobem změnit jejich hodnota.
 Chceme-li řetězec „změnit“, musíme vytvořit úplně nový objekt
 s&amp;nbsp;novou hodnotou.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;D&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;D&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Tyhle příkazy vytvoří několik „sirotků“,
 než do proměnné dostanou správnou hodnotu:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌─────────┐     ╔═══════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌─────────┐     ╔═══════╗
 │ retezec ├─┐ ×→║ &amp;#39;abc&amp;#39; ║
 └─────────┘ │   ╚═══════╝
             │   ╔═══════╗
@@ -375,13 +649,13 @@ než do proměnné dostanou správnou hodnotu:&lt;/p&gt;
 &lt;p&gt;Existují ale i&amp;nbsp;objekty, které měnit lze. Klasický příklad jsou&amp;nbsp;seznamy.&lt;/p&gt;
 &lt;p&gt;Jak funguje takový seznam?&lt;/p&gt;
 &lt;p&gt;Když napíšeme&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jmeno&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;hynek&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;jmena&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;štěpán&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;vilém&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jmeno&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;hynek&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;jmena&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;štěpán&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;vilém&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;dostaneme následující situaci:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐          ╔═════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐          ╔═════════╗
 │ jmeno ├─────────→║ &amp;#39;hynek&amp;#39; ║
 └───────┘          ╚═════════╝
 ┌───────┐    ╔═════╤═════╗
@@ -400,12 +674,12 @@ Stejně jako hodnota výrazu &lt;code&gt;jmeno&lt;/code&gt; je teď &lt;code&gt;
 výraz &lt;code&gt;jmena[0]&lt;/code&gt; má hodnotu &lt;code&gt;'štěpán'&lt;/code&gt;.
 A&amp;nbsp;stejně tak jako můžeme přiřadit do proměnné &lt;code&gt;jmeno&lt;/code&gt;,
 můžeme přiřadit i&amp;nbsp;do &lt;code&gt;jmena[0]&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmeno&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmeno&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;a&amp;nbsp;dostaneme stejný výsledek, jako by &lt;code&gt;jmena[0]&lt;/code&gt; byla normální proměnná:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐          ╔═════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐          ╔═════════╗
 │ jmeno ├─────────→║ &amp;#39;hynek&amp;#39; ║
 └───────┘       ┌─→╚═════════╝
 ┌───────┐    ╔══╪══╤═════╗
@@ -421,12 +695,12 @@ můžeme přiřadit i&amp;nbsp;do &lt;code&gt;jmena[0]&lt;/code&gt;:&lt;/p&gt;
 &lt;p&gt;Protože je seznam objekt jako každý jiný,
 může mít více jmen — může na něj ukazovat více proměnných.
 Po příkazu&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;slova&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmena&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;slova&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmena&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;bude situace vypadat takhle:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;                   ╔═════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                   ╔═════════╗
                 ┌─→║ &amp;#39;hynek&amp;#39; ║
                 │  ╚═════════╝
 ┌───────┐    ╔══╪══╤═════╗
@@ -439,15 +713,15 @@ Po příkazu&lt;/p&gt;
 
 
 &lt;p&gt;Seznam teď můžeme měnit pomocí kteréhokoli z&amp;nbsp;těch dvou&amp;nbsp;jmen.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;]&lt;/span&gt;
-&lt;span class="n"&gt;slova&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;jarmila&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# na proměnnou `jmena` vůbec nesaháme!&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;, &amp;#39;jarmila&amp;#39;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;]&lt;/span&gt;
+&lt;span class="n"&gt;slova&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;jarmila&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# na proměnnou `jmena` vůbec nesaháme!&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;, &amp;#39;jarmila&amp;#39;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Když si uvědomíme, co se děje uvnitř,
-nemůže nás&amp;nbsp;toto chování ničím&amp;nbsp;překvapit.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;                   ╔═════════╗
+nemůže nás toto chování ničím překvapit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                   ╔═════════╗
                 ┌─→║ &amp;#39;hynek&amp;#39; ║
                 │  ╚═════════╝
 ┌───────┐    ╔══╪══╤═════╤═════╗   ╔═══════════╗
@@ -468,27 +742,27 @@ ta funkce nám ho může pod rukama&amp;nbsp;změnit.&lt;/p&gt;
 aby objekty neměnil pokud přímo&amp;nbsp;nemusí.&lt;/p&gt;
 &lt;p&gt;Ještě připomenu, že pokud máš n-tici,
 nelze přiřadit přímo do jejích položek:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;def&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ghi&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;# → TypeError: &amp;#39;tuple&amp;#39; object does not support item assignment&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;def&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ghi&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;# → TypeError: &amp;#39;tuple&amp;#39; object does not support item assignment&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;ale dej si pozor na i&amp;nbsp;to,
 že objekty které obsahuje se stále měnit dají:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → (&amp;#39;abc&amp;#39;, [1, 2, 3, 4])&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# → (&amp;#39;abc&amp;#39;, [1, 2, 3, 4])&lt;/span&gt;
 &lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → [1, 2, 3, 4, 5]&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# → [1, 2, 3, 4, 5]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;A&amp;nbsp;to je prozatím k&amp;nbsp;měnění objektů všechno.
-Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 05 Jan 2014 00:00:00 +0100</pubDate><guid>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-meneni-objektu</guid><category>python</category><category>mutability</category></item><item><title>Proměnné jsou jména</title><link>http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena</link><description>&lt;p&gt;Jak v&amp;nbsp;Pythonu fungují proměnné?
+Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 05 Jan 2014 00:00:00 +0100</pubDate><guid isPermaLink="false">tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-meneni-objektu</guid><category>python</category><category>mutability</category></item><item><title>Proměnné jsou jména</title><link>http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena</link><description>&lt;p&gt;Jak v&amp;nbsp;Pythonu fungují proměnné?
 Už asi víš, že se přiřazují pomocí rovnítka,
-a že se pak dají používat ve výrazech.
+a&amp;nbsp;že se pak dají používat ve výrazech.
 Pojďme se na ně podívat trochu&amp;nbsp;podrobněji.&lt;/p&gt;
 
 
@@ -501,15 +775,15 @@ a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
 Proměnné v&amp;nbsp;Pythonu jsou &lt;em&gt;jména&lt;/em&gt;, nebo řekněme&amp;nbsp;&lt;em&gt;ukazatele&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Abych to vysvětlil, pojďme se krok po kroku podívat,
 co přesně dělá tohle jednoduché přiřazení:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Nejdřív&amp;nbsp;se vyhodnotí výraz za rovnítkem.
+&lt;p&gt;Nejdřív se vyhodnotí výraz za rovnítkem.
 Výsledek vyhodnocení výrazu je vždycky nějaký &lt;em&gt;objekt&lt;/em&gt;;
 v&amp;nbsp;našem případě řetězec 'python'.
 Ukážeme si ho takhle:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;                ╔══════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                ╔══════════╗
                 ║ &amp;#39;python&amp;#39; ║
                 ╚══════════╝
 &lt;/pre&gt;&lt;/div&gt;
@@ -517,7 +791,7 @@ Ukážeme si ho takhle:&lt;/p&gt;
 
 &lt;p&gt;Teď, když má hodnotu výrazu, podívá se Python na jméno před rovnítkem,
 a&amp;nbsp;zařídí, aby na tu hodnotu&amp;nbsp;„ukazovalo“.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐       ╔══════════╗
 │ jazyk ├──────→║ &amp;#39;python&amp;#39; ║
 └───────┘       ╚══════════╝
 &lt;/pre&gt;&lt;/div&gt;
@@ -525,13 +799,13 @@ a&amp;nbsp;zařídí, aby na tu hodnotu&amp;nbsp;„ukazovalo“.&lt;/p&gt;
 
 &lt;p&gt;Voilà! Hodnota proměnné &lt;code&gt;jazyk&lt;/code&gt; je odteď&amp;nbsp;&lt;code&gt;'python'&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Pojďme si přiřadit další proměnnou:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;češ&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tina&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;češ&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;tina&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Opět se vyhodnotí výraz, vezmou se řetězce &lt;code&gt;'češ'&lt;/code&gt; a &lt;code&gt;'tina'&lt;/code&gt;, sečtou se,
 a&amp;nbsp;na výslednou hodnotu začne ukazovat proměnná &lt;code&gt;rec&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐       ╔══════════╗
 │ jazyk ├──────→║ &amp;#39;python&amp;#39; ║
 └───────┘       ╚══════════╝
 ┌─────┐         ╔═══════════╗
@@ -542,14 +816,14 @@ a&amp;nbsp;na výslednou hodnotu začne ukazovat proměnná &lt;code&gt;rec&lt;/
 
 &lt;p&gt;Že to není zas tak složité?&lt;/p&gt;
 &lt;p&gt;Teď zkusíme jednu proměnnou „přiřadit“ do druhé:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Opět se nejdřív&amp;nbsp;vyhodnotí výraz za rovnítkem.
+&lt;p&gt;Opět se nejdřív vyhodnotí výraz za rovnítkem.
 Výsledek bude objekt, který je v&amp;nbsp;proměnné &lt;code&gt;rec&lt;/code&gt;.
 A&amp;nbsp;proměnná &lt;code&gt;jazyk&lt;/code&gt; začne jednoduše ukazovat na tento objekt:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐       ╔══════════╗
 │ jazyk ├───┐ ×→║ &amp;#39;python&amp;#39; ║
 └───────┘   │   ╚══════════╝
 ┌─────┐     └──→╔═══════════╗
@@ -564,7 +838,7 @@ Jeden objekt může mít několik jmen, ale pořád je to ten samý&amp;nbsp;obj
 dostat&lt;sup id="fnref:interned-strings"&gt;&lt;a class="footnote-ref" href="#fn:interned-strings" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;, a&amp;nbsp;tudíž s&amp;nbsp;ním dál nemůžeme nijak pracovat.
 Jediné co můžeme dělat je vytvořit nový objekt se stejnou hodnotou.
 Takovéhle sirotky Python časem smaže, aby nezabíraly paměť počítače:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐
 │ jazyk ├───┐      * poof *
 └───────┘   │
 ┌─────┐     └──→╔═══════════╗
@@ -594,13 +868,13 @@ a budou “žít” dál.
 Podrobněji to plánuju rozeberat v článku &lt;em&gt;identity a hodnoty&lt;/em&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:interned-strings" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 05 Jan 2014 00:00:00 +0100</pubDate><guid>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-promenne-jsou-jmena</guid><category>python</category><category>proměnné</category></item><item><title>Jak funguje Python</title><link>http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python</link><description>&lt;p&gt;Znáte to.
+&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 05 Jan 2014 00:00:00 +0100</pubDate><guid isPermaLink="false">tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-promenne-jsou-jmena</guid><category>python</category><category>proměnné</category></item><item><title>Jak funguje Python</title><link>http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python</link><description>&lt;p&gt;Znáte to.
 Studentka vám položí otázku, a&amp;nbsp;abyste na ni mohli pořádně odpovědět,
 je potřeba trochu osvětlit základy.
 Mně se to stalo s&amp;nbsp;proměnnými v&amp;nbsp;Pythonu.&lt;/p&gt;
 &lt;p&gt;No a&amp;nbsp;tak píšu.&lt;br /&gt;
-Píšu&amp;nbsp;na téma &lt;em&gt;Všechno o&amp;nbsp;proměnných, hodnotách a&amp;nbsp;jménech v&amp;nbsp;Pythonu.&lt;/em&gt;&lt;br /&gt;
-Píšu&amp;nbsp;už druhý den.&lt;/p&gt;
+Píšu na téma &lt;em&gt;Všechno o&amp;nbsp;proměnných, hodnotách a&amp;nbsp;jménech v&amp;nbsp;Pythonu.&lt;/em&gt;&lt;br /&gt;
+Píšu už druhý den.&lt;/p&gt;
 
 
 &lt;p&gt;Přišel čas to trošku rozdělit.
@@ -612,10 +886,10 @@ Tady je moje osnova; až (a&amp;nbsp;jestli) to dopíšu, tak z&amp;nbsp;toho ud
 &lt;li&gt;Jmenné prostory&lt;/li&gt;
 &lt;li&gt;Identity a&amp;nbsp;hodnoty &lt;!-- udělat odkaz v&amp;nbsp;poznámce pod čarou v "Proměnné jsou jména" --&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Články budou používat diakritiku v řetězcích.
+&lt;p&gt;Články budou používat diakritiku v&amp;nbsp;řetězcích.
 V&amp;nbsp;Pythonu 3&amp;nbsp;s&amp;nbsp;tím není žádný problém, ale používáš-li Python 2,
 napiš na začátek každého pythoního souboru tyto řádky:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Encoding: UTF-8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Encoding: UTF-8&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -623,7 +897,7 @@ napiš na začátek každého pythoního souboru tyto řádky:&lt;/p&gt;
 &lt;p&gt;Jinak by všechny ukázky kódu měly fungovat v&amp;nbsp;Pythonu 2.7&amp;nbsp;i&amp;nbsp;3.3,
 pokud není jinak uvedeno.&lt;/p&gt;
 &lt;p&gt;Pokud uvidíš nějakou chybu, ozvi se mi na &lt;a href="mailto:encukou@gmail.com"&gt;mail&lt;/a&gt;,
-nebo rovnou založ &lt;a href="https://github.com/encukou/blog/issues/new"&gt;issue&lt;/a&gt; či &lt;a href="https://github.com/encukou/blog"&gt;pull&amp;nbsp;request&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 05 Jan 2014 00:00:00 +0100</pubDate><guid>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-rozcestnik-python</guid><category>python</category><category>rozcestník</category></item><item><title>Raspberry Pi and my Third Screen</title><link>http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen</link><description>&lt;p&gt;Today, I&amp;nbsp;finally figured out what was wrong with my Raspberry Pi.
+nebo rovnou založ &lt;a href="https://github.com/encukou/blog/issues/new"&gt;issue&lt;/a&gt; či &lt;a href="https://github.com/encukou/blog"&gt;pull&amp;nbsp;request&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 05 Jan 2014 00:00:00 +0100</pubDate><guid isPermaLink="false">tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-rozcestnik-python</guid><category>python</category><category>rozcestník</category></item><item><title>Raspberry Pi and my Third Screen</title><link>http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen</link><description>&lt;p&gt;Today, I&amp;nbsp;finally figured out what was wrong with my Raspberry Pi.
 It &lt;a href="http://file3.status.net/i/identica/encukou-20130120T115619-yw8xyls.jpeg"&gt;worked before&lt;/a&gt;,
 connected to a&amp;nbsp;TV, without ethernet, and with a&amp;nbsp;power supply and keyboard
 borrowed from my brother.
@@ -726,12 +1000,12 @@ already running, with its own environment.
 There's&amp;nbsp;probably an amazingly obvious way to do this, but after a&amp;nbsp;while of
 searching I&amp;nbsp;decided for a&amp;nbsp;brute-force approach: before joining the session I
 save the SSH-related env:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;env &lt;span class="p"&gt;|&lt;/span&gt; grep ^SSH  &amp;gt; ~/.ssh/third_monitor_callback_env
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;env &lt;span class="p"&gt;|&lt;/span&gt; grep ^SSH  &amp;gt; ~/.ssh/third_monitor_callback_env
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;and before SSH-ing back, I&amp;nbsp;restore&amp;nbsp;it.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;read &lt;/span&gt;line&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nb"&gt;declare&lt;/span&gt; -x &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$line&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;done&lt;/span&gt; &amp;lt; ~/.ssh/third_monitor_callback_env
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;read&lt;/span&gt; line&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nb"&gt;declare&lt;/span&gt; -x &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$line&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;done&lt;/span&gt; &amp;lt; ~/.ssh/third_monitor_callback_env
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -752,21 +1026,21 @@ says this is very convenient, and I'm sure not arguing with&amp;nbsp;that.&lt;/p
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;~/bin/pi-remote:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;xterm -T &lt;span class="s1"&gt;&amp;#39;rpi remote!&amp;#39;&lt;/span&gt; +sb call-to-pi &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xterm -T &lt;span class="s1"&gt;&amp;#39;rpi remote!&amp;#39;&lt;/span&gt; +sb call-to-pi &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;~/bin/call-to-pi:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ssh -t eckpi &lt;span class="s1"&gt;&amp;#39;env | grep ^SSH  &amp;gt; ~/.ssh/third_monitor_callback_env; stty cols 256; stty rows 256; ~/bin/nowinch tmux attach-session -t third-monitor&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -t eckpi &lt;span class="s1"&gt;&amp;#39;env | grep ^SSH  &amp;gt; ~/.ssh/third_monitor_callback_env; stty cols 256; stty rows 256; ~/bin/nowinch tmux attach-session -t third-monitor&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;~/.kde/share/config/kwinrulesrc (partial):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;[1]
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[1]
 Description=Window settings for xterm
 above=true
 aboverule=3
@@ -796,7 +1070,7 @@ wmclassmatch=1
 &lt;p&gt;And at the Pi side, there's &lt;code&gt;~/bin/nowinch&lt;/code&gt; modified from the signal blocker
 from &lt;a href="http://stackoverflow.com/a/4515549/99057"&gt;StackOverflow&lt;/a&gt;,
 and &lt;code&gt;~/bin/tapio&lt;/code&gt; to SSH back home:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;read &lt;/span&gt;line&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;read&lt;/span&gt; line&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
     &lt;span class="nb"&gt;declare&lt;/span&gt; -x &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$line&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 &lt;span class="k"&gt;done&lt;/span&gt; &amp;lt; ~/.ssh/third_monitor_callback_env
 ssh tapio
@@ -806,16 +1080,16 @@ ssh tapio
 &lt;p&gt;And, of course, an always-on &lt;code&gt;tmux&lt;/code&gt; session.
 I&amp;nbsp;sometimes press Ctrl-D by mistake and don't want to get disconnected,
 so I&amp;nbsp;run the shell in a&amp;nbsp;loop:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;tmux new-session -s third-monitor &lt;span class="s1"&gt;&amp;#39;while true; bash; reset; done&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tmux new-session -s third-monitor &lt;span class="s1"&gt;&amp;#39;while true; bash; reset; done&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;I&amp;nbsp;sure hope there is an easier way to do this.&amp;nbsp;Anyone?&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sat, 04 May 2013 00:00:00 +0200</pubDate><guid>tag:encukou.cz,2013-05-04:blog/2013/05/04/en-raspberry-third-screen</guid><category>raspberry</category><category>shell</category><category>quassel</category><category>tmux</category></item><item><title>Stavové prostory</title><link>http://encukou.cz/blog/2013/03/03/cs-stavove-prostory</link><description>&lt;p&gt;&lt;a href="http://glutexo.livejournal.com/137926.html"&gt;Glutexo píše&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;sure hope there is an easier way to do this.&amp;nbsp;Anyone?&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sat, 04 May 2013 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:encukou.cz,2013-05-04:blog/2013/05/04/en-raspberry-third-screen</guid><category>raspberry</category><category>shell</category><category>quassel</category><category>tmux</category></item><item><title>Stavové prostory</title><link>http://encukou.cz/blog/2013/03/03/cs-stavove-prostory</link><description>&lt;p&gt;&lt;a href="http://glutexo.livejournal.com/137926.html"&gt;Glutexo píše&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Narazil jsem na drsné a&amp;nbsp;vytůněné Sudoku: Podobá se klasickému killer sudoku:
 V&amp;nbsp;začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
 kterých vždy víme součet čísel v&amp;nbsp;nich, a&amp;nbsp;také víme, že kromě řádků, sloupců
-a čtverců se ani v&amp;nbsp;těchto ohraničených oblastech číslice neopakují.
+a&amp;nbsp;čtverců se ani v&amp;nbsp;těchto ohraničených oblastech číslice neopakují.
 
 Řešení takového sudoku však nejspíše není unikátní (nakrmil jsem jím řešítko,
 které jsem si našel), ale výsledek nebyl takový, jaký jsem chtěl: Chtěl jsem
@@ -827,7 +1101,7 @@ kombinací a&amp;nbsp;porovnat je proti zadání. Nešlo: Za deset minut běhu p
 prokombinoval jen třikrát prvních osm pozic. Takže než by prošel všechny,
 uplynula by přibližně věčnost. Takže na to budeme muset jít jinak.&amp;nbsp;Jak?&lt;/p&gt;
 &lt;p&gt;Pár možností mě napadá: Např. zjistit si pro každou ohraničenou oblast
-všechny možné kombinace čísel v&amp;nbsp;rozsahu 1-9, které dají při&amp;nbsp;daném počtu polí
+všechny možné kombinace čísel v&amp;nbsp;rozsahu 1-9, které dají při daném počtu polí
 daný součet a&amp;nbsp;následně do oblastí dosazovat tato čísla ve všech možných
 kombinacích. Pak už by stačilo jen pro každé vyplnění plochy jen zvalidovat,
 zda platí základní pricipy sudoku a&amp;nbsp;zda platí ona pravidla o&amp;nbsp;tom, které ze
@@ -850,7 +1124,7 @@ vysvětlovat.&lt;/p&gt;
 Pro sudoku si stav můžeme definovat jako 9x9&amp;nbsp;pole, kde v&amp;nbsp;každém políčku
 budou číslice, které tam teoreticky můžou nakonec vyjít.
 V&amp;nbsp;počátečním stavu budou všechna políčka obsahovat všech 9&amp;nbsp;možných čislic:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &amp;gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
@@ -895,7 +1169,7 @@ V&amp;nbsp;počátečním stavu budou všechna políčka obsahovat všech 9&amp;
 Třeba, pro začátek, hrubou silou: vygenerujeme devět stavů, které jsou stejné
 jako tenhle původní, jen v&amp;nbsp;políčku A1&amp;nbsp;mají každý vybranou jednu číslici.
 Třetí z&amp;nbsp;nich by vypadal takhle:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
 ║     3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
 ║       │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &amp;gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
 ║       │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
@@ -944,20 +1218,20 @@ možností, budou taky špatně. Takže tenhle stav můžeme&amp;nbsp;vyloučit.
 &lt;p&gt;A&amp;nbsp;tímhle způsobem dostaneme obrovitánský graf stavů.
 Graf vytvořený takhle hrubou silou bude až moc velký na to, aby se dal rozumně
 pozkoumat, ale důležité je, že obsahuje všechny stavy odpovídající pravidlům.
-(Vlastně je pro nás&amp;nbsp;důležité jen to, že určitě obsahuje &lt;em&gt;řešení&lt;/em&gt; (pokud nějaké
+(Vlastně je pro nás důležité jen to, že určitě obsahuje &lt;em&gt;řešení&lt;/em&gt; (pokud nějaké
 existuje), ale vzhledem k&amp;nbsp;tomu že řešení neznáme, všechny "správné" stavy budou
 muset stačit.)&lt;/p&gt;
 &lt;p&gt;Zbývá jen nějak zajistit, abychom nemuseli procházet ten graf celý, ale
-zkusili v&amp;nbsp;něm hledat rozumné cesty a&amp;nbsp;zkratky, které nás&amp;nbsp;k&amp;nbsp;cíli dovedou co
+zkusili v&amp;nbsp;něm hledat rozumné cesty a&amp;nbsp;zkratky, které nás k&amp;nbsp;cíli dovedou co
 nejrychleji. Tedy, použít něco lepšího než hroubou&amp;nbsp;sílu.&lt;/p&gt;
 &lt;p&gt;(Jen podotknu že ten graf nemusí být nutně stromem; do jednoho stavu se může
 dát dostat několika různými cestami.)&lt;/p&gt;
 &lt;p&gt;Základní schéma algoritmu na prohledávání stavového prostoru je následující
-(s&amp;nbsp;komentáři&amp;nbsp;tam, kde Pythonová syntax není naprosto pruhledná):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;open&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initial_state&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c"&gt;# `[v]` je seznam s jedním prvkem, `v`&lt;/span&gt;
-&lt;span class="n"&gt;closed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c"&gt;# prázdná množina&lt;/span&gt;
+(s&amp;nbsp;komentáři tam, kde Pythonová syntax není naprosto pruhledná):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;open&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;initial_state&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  &lt;span class="c1"&gt;# `[v]` je seznam s jedním prvkem, `v`&lt;/span&gt;
+&lt;span class="n"&gt;closed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;  &lt;span class="c1"&gt;# prázdná množina&lt;/span&gt;
 
-&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c"&gt;# dokud je něco v open&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# dokud je něco v open&lt;/span&gt;
     &lt;span class="n"&gt;current&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;take_one&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;is_goal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;current&lt;/span&gt;
@@ -981,7 +1255,7 @@ Dám několik tipů, které jsem použil&amp;nbsp;já.&lt;/p&gt;
 &lt;p&gt;Přímo v &lt;code&gt;generate_next_states&lt;/code&gt; je dobré vyhazovat čísla, která neodpovídají
 pravidlům. Já jsem dal tuhle logiku přímo do konstruktoru třídy Stav, takže
 můj první stav vypadá ve skutečnosti takhle:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
 ║   2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │     3 │   2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &amp;gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
 ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
@@ -1026,16 +1300,16 @@ můj první stav vypadá ve skutečnosti takhle:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;vyhazuje čísla podle zadaných nerovností (pokud má jedno číslo
 být větší než druhé, které může být 3-8, tak bude určitě 4&amp;nbsp;nebo&amp;nbsp;víc).&lt;/li&gt;
-&lt;li&gt;vyhazuje čísla z řádků, sloupců, čtverců a&amp;nbsp;oblastí, pokud v&amp;nbsp;jiném políčku
+&lt;li&gt;vyhazuje čísla z&amp;nbsp;řádků, sloupců, čtverců a&amp;nbsp;oblastí, pokud v&amp;nbsp;jiném políčku
   je už dané číslo vybrané&lt;/li&gt;
 &lt;li&gt;vyhazuje čísla, která nemůžou dát daný součet pro oblast&lt;/li&gt;
-&lt;li&gt;ještě by mohla vybrat číslo, pokud se v řádku/sloupci/čtverci jen jedno
+&lt;li&gt;ještě by mohla vybrat číslo, pokud se v&amp;nbsp;řádku/sloupci/čtverci jen jedno
   políčko kde je to číslo možné, ale našel jsem řešení než jsem tohle stihl
   napsat, tak jsem se na to vykašlal.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Tím, že tohle dělám co nejdřív, se vyhýbám spoustě zbytečných stavů. Vzhledem k
 tomu, že každý stav nejen potřebuje nějaký ten procesorový čas a&amp;nbsp;paměť, ale
-navíc se pak množí jak králík&amp;nbsp;v&amp;nbsp;Austrálii, je dobré takhle normalizovat&amp;nbsp;co
+navíc se pak množí jak králík v&amp;nbsp;Austrálii, je dobré takhle normalizovat&amp;nbsp;co
 nejagresivněji.&lt;/p&gt;
 &lt;p&gt;Další místo, kde je možné algoritmus potunit, je výběr políčka, ve kterém se
 budou generované stavy lišit.
@@ -1070,7 +1344,7 @@ stavů nebo toho, jak si algoritmus vede (např. velikosti množin &lt;code&gt;o
 Možná není potřeba to přehánět jako já (ty ASCII-arty výše jsou v&amp;nbsp;mém programu
 navíc obarvené podle oblastí se součtem), ale cokoli pomůže pochopit to, co se
 vevnitř děje, hodně pomáhá.&lt;/p&gt;
-&lt;p&gt;Tož přeji hezké programování, snad tenhle výlev trochu&amp;nbsp;pomůže.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 03 Mar 2013 00:00:00 +0100</pubDate><guid>tag:encukou.cz,2013-03-03:blog/2013/03/03/cs-stavove-prostory</guid><category>geocaching</category><category>algorithm</category></item><item><title>Caps Lock a přepínání klávesnice</title><link>http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</link><description>&lt;p&gt;Caps Lock je k&amp;nbsp;ničemu.
+&lt;p&gt;Tož přeji hezké programování, snad tenhle výlev trochu&amp;nbsp;pomůže.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Sun, 03 Mar 2013 00:00:00 +0100</pubDate><guid isPermaLink="false">tag:encukou.cz,2013-03-03:blog/2013/03/03/cs-stavove-prostory</guid><category>geocaching</category><category>algorithm</category></item><item><title>Caps Lock a přepínání klávesnice</title><link>http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</link><description>&lt;p&gt;Caps Lock je k&amp;nbsp;ničemu.
 Posledních asi pět let jsem ho mačkal prakticky jen omylem.
 Možná to je tím, že neumím psát všema deseti, a&amp;nbsp;tudíž věci jako
 LD_LIBRARY_PATH nebo UNESCO jdou napsat rychle jen se Shiftem – každopádně fakt
@@ -1079,7 +1353,7 @@ je, že Caps Lock mi je k&amp;nbsp;ničemu.&lt;/p&gt;
 
 &lt;p&gt;Když jsem ještě pracoval na desktopu, byl na klávesnici Scroll Lock – ještě
 méně užitečná klávesa, která nedělala vůbec nic.
-Přemapoval jsem si ho na přepnutí mezi anglickou a českou klávesnicí,
+Přemapoval jsem si ho na přepnutí mezi anglickou a&amp;nbsp;českou klávesnicí,
 což fungovalo krásně.
 Dokonce s&amp;nbsp;LED indikátorem sekundárního rozložení.
 Po nějaké době jsem smazal nápis Scroll Lock a&amp;nbsp;nakreslil na tu klávesu&amp;nbsp;českou
@@ -1097,7 +1371,7 @@ Shift+Caps přepne na češtinu, Caps na angličtinu.
 A&amp;nbsp;tak to mám doteď, i&amp;nbsp;když je pravda že českou klávesnici zas tak často
 nepoužívám,
 takže je to možná stejně zbytečné.&lt;/p&gt;
-&lt;p&gt;Jestli nakonec nebude přece jen lepší mít na místě Capsu druhý Backspace…&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Mon, 21 Nov 2011 00:00:00 +0100</pubDate><guid>tag:encukou.cz,2011-11-21:blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</guid><category>posterous</category><category>capslock</category></item><item><title>Dennis Ritchie has died.</title><link>http://encukou.cz/blog/2011/10/13/en-rip-dennis-ritchie</link><description>&lt;p&gt;The Economist has a &lt;a href="http://www.economist.com/node/2724348"&gt;very good article&lt;/a&gt;
+&lt;p&gt;Jestli nakonec nebude přece jen lepší mít na místě Capsu druhý Backspace…&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Mon, 21 Nov 2011 00:00:00 +0100</pubDate><guid isPermaLink="false">tag:encukou.cz,2011-11-21:blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</guid><category>posterous</category><category>capslock</category></item><item><title>Dennis Ritchie has died.</title><link>http://encukou.cz/blog/2011/10/13/en-rip-dennis-ritchie</link><description>&lt;p&gt;The Economist has a &lt;a href="http://www.economist.com/node/2724348"&gt;very good article&lt;/a&gt;
 on some of his work; you should read it if you haven't done so already.
 I&amp;nbsp;quote:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1120,4 +1394,4 @@ Still valid, still useful, still&amp;nbsp;used.&lt;/p&gt;
 &lt;p&gt;We have lost a&amp;nbsp;humble genius, a&amp;nbsp;mathematician, an architect of the abstract.
 It's&amp;nbsp;sad that most poeple will never be able to appreciate the beauty of things
 he has done.
-Perhaps that, too, is the mark of a&amp;nbsp;genius.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Thu, 13 Oct 2011 00:00:00 +0200</pubDate><guid>tag:encukou.cz,2011-10-13:blog/2011/10/13/en-rip-dennis-ritchie</guid><category>sad</category><category>posterous</category></item></channel></rss>
+Perhaps that, too, is the mark of a&amp;nbsp;genius.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Petr Viktorin</dc:creator><pubDate>Thu, 13 Oct 2011 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:encukou.cz,2011-10-13:blog/2011/10/13/en-rip-dennis-ritchie</guid><category>sad</category><category>posterous</category></item></channel></rss>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/python.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2014-01-05T00:00:00+01:00</updated><entry><title>Měnění objektů</title><link href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu" rel="alternate"></link><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-meneni-objektu</id><summary type="html">&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/python.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2014-01-05T00:00:00+01:00</updated><entry><title>Měnění objektů</title><link href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-meneni-objektu</id><summary type="html">&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
 (Pokud ne, doporučuju to napřed zjistit,
 už jen pro seznámení s&amp;nbsp;mými uměleckými diagramy.)
 Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy&amp;nbsp;objekty.&lt;/p&gt;
@@ -14,16 +14,16 @@ a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
 To znamená, že se nedá žádným způsobem změnit jejich hodnota.
 Chceme-li řetězec „změnit“, musíme vytvořit úplně nový objekt
 s&amp;nbsp;novou hodnotou.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;D&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;D&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;retezec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;retezec&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Tyhle příkazy vytvoří několik „sirotků“,
 než do proměnné dostanou správnou hodnotu:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌─────────┐     ╔═══════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌─────────┐     ╔═══════╗
 │ retezec ├─┐ ×→║ &amp;#39;abc&amp;#39; ║
 └─────────┘ │   ╚═══════╝
             │   ╔═══════╗
@@ -41,13 +41,13 @@ než do proměnné dostanou správnou hodnotu:&lt;/p&gt;
 &lt;p&gt;Existují ale i&amp;nbsp;objekty, které měnit lze. Klasický příklad jsou&amp;nbsp;seznamy.&lt;/p&gt;
 &lt;p&gt;Jak funguje takový seznam?&lt;/p&gt;
 &lt;p&gt;Když napíšeme&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jmeno&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;hynek&amp;#39;&lt;/span&gt;
-&lt;span class="n"&gt;jmena&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;štěpán&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;vilém&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jmeno&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;hynek&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;jmena&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;štěpán&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;vilém&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;dostaneme následující situaci:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐          ╔═════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐          ╔═════════╗
 │ jmeno ├─────────→║ &amp;#39;hynek&amp;#39; ║
 └───────┘          ╚═════════╝
 ┌───────┐    ╔═════╤═════╗
@@ -66,12 +66,12 @@ Stejně jako hodnota výrazu &lt;code&gt;jmeno&lt;/code&gt; je teď &lt;code&gt;
 výraz &lt;code&gt;jmena[0]&lt;/code&gt; má hodnotu &lt;code&gt;'štěpán'&lt;/code&gt;.
 A&amp;nbsp;stejně tak jako můžeme přiřadit do proměnné &lt;code&gt;jmeno&lt;/code&gt;,
 můžeme přiřadit i&amp;nbsp;do &lt;code&gt;jmena[0]&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmeno&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmeno&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;a&amp;nbsp;dostaneme stejný výsledek, jako by &lt;code&gt;jmena[0]&lt;/code&gt; byla normální proměnná:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐          ╔═════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐          ╔═════════╗
 │ jmeno ├─────────→║ &amp;#39;hynek&amp;#39; ║
 └───────┘       ┌─→╚═════════╝
 ┌───────┐    ╔══╪══╤═════╗
@@ -87,12 +87,12 @@ můžeme přiřadit i&amp;nbsp;do &lt;code&gt;jmena[0]&lt;/code&gt;:&lt;/p&gt;
 &lt;p&gt;Protože je seznam objekt jako každý jiný,
 může mít více jmen — může na něj ukazovat více proměnných.
 Po příkazu&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;slova&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmena&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;slova&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;jmena&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;bude situace vypadat takhle:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;                   ╔═════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                   ╔═════════╗
                 ┌─→║ &amp;#39;hynek&amp;#39; ║
                 │  ╚═════════╝
 ┌───────┐    ╔══╪══╤═════╗
@@ -105,15 +105,15 @@ Po příkazu&lt;/p&gt;
 
 
 &lt;p&gt;Seznam teď můžeme měnit pomocí kteréhokoli z&amp;nbsp;těch dvou&amp;nbsp;jmen.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;]&lt;/span&gt;
-&lt;span class="n"&gt;slova&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;jarmila&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# na proměnnou `jmena` vůbec nesaháme!&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;, &amp;#39;jarmila&amp;#39;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;]&lt;/span&gt;
+&lt;span class="n"&gt;slova&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;jarmila&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# na proměnnou `jmena` vůbec nesaháme!&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jmena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# → [&amp;#39;hynek&amp;#39;, &amp;#39;vilem&amp;#39;, &amp;#39;jarmila&amp;#39;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Když si uvědomíme, co se děje uvnitř,
-nemůže nás&amp;nbsp;toto chování ničím&amp;nbsp;překvapit.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;                   ╔═════════╗
+nemůže nás toto chování ničím překvapit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                   ╔═════════╗
                 ┌─→║ &amp;#39;hynek&amp;#39; ║
                 │  ╚═════════╝
 ┌───────┐    ╔══╪══╤═════╤═════╗   ╔═══════════╗
@@ -134,27 +134,27 @@ ta funkce nám ho může pod rukama&amp;nbsp;změnit.&lt;/p&gt;
 aby objekty neměnil pokud přímo&amp;nbsp;nemusí.&lt;/p&gt;
 &lt;p&gt;Ještě připomenu, že pokud máš n-tici,
 nelze přiřadit přímo do jejích položek:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;def&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ghi&amp;#39;&lt;/span&gt;
-&lt;span class="c"&gt;# → TypeError: &amp;#39;tuple&amp;#39; object does not support item assignment&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;def&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ghi&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;# → TypeError: &amp;#39;tuple&amp;#39; object does not support item assignment&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;ale dej si pozor na i&amp;nbsp;to,
 že objekty které obsahuje se stále měnit dají:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;ntice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;abc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → (&amp;#39;abc&amp;#39;, [1, 2, 3, 4])&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# → (&amp;#39;abc&amp;#39;, [1, 2, 3, 4])&lt;/span&gt;
 &lt;span class="n"&gt;ntice&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c"&gt;# → [1, 2, 3, 4, 5]&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seznam&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# → [1, 2, 3, 4, 5]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;A&amp;nbsp;to je prozatím k&amp;nbsp;měnění objektů všechno.
-Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</summary><category term="python"></category><category term="mutability"></category></entry><entry><title>Proměnné jsou jména</title><link href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena" rel="alternate"></link><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-promenne-jsou-jmena</id><summary type="html">&lt;p&gt;Jak v&amp;nbsp;Pythonu fungují proměnné?
+Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</summary><category term="python"></category><category term="mutability"></category></entry><entry><title>Proměnné jsou jména</title><link href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-promenne-jsou-jmena</id><summary type="html">&lt;p&gt;Jak v&amp;nbsp;Pythonu fungují proměnné?
 Už asi víš, že se přiřazují pomocí rovnítka,
-a že se pak dají používat ve výrazech.
+a&amp;nbsp;že se pak dají používat ve výrazech.
 Pojďme se na ně podívat trochu&amp;nbsp;podrobněji.&lt;/p&gt;
 
 
@@ -167,15 +167,15 @@ a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
 Proměnné v&amp;nbsp;Pythonu jsou &lt;em&gt;jména&lt;/em&gt;, nebo řekněme&amp;nbsp;&lt;em&gt;ukazatele&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Abych to vysvětlil, pojďme se krok po kroku podívat,
 co přesně dělá tohle jednoduché přiřazení:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Nejdřív&amp;nbsp;se vyhodnotí výraz za rovnítkem.
+&lt;p&gt;Nejdřív se vyhodnotí výraz za rovnítkem.
 Výsledek vyhodnocení výrazu je vždycky nějaký &lt;em&gt;objekt&lt;/em&gt;;
 v&amp;nbsp;našem případě řetězec 'python'.
 Ukážeme si ho takhle:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;                ╔══════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;                ╔══════════╗
                 ║ &amp;#39;python&amp;#39; ║
                 ╚══════════╝
 &lt;/pre&gt;&lt;/div&gt;
@@ -183,7 +183,7 @@ Ukážeme si ho takhle:&lt;/p&gt;
 
 &lt;p&gt;Teď, když má hodnotu výrazu, podívá se Python na jméno před rovnítkem,
 a&amp;nbsp;zařídí, aby na tu hodnotu&amp;nbsp;„ukazovalo“.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐       ╔══════════╗
 │ jazyk ├──────→║ &amp;#39;python&amp;#39; ║
 └───────┘       ╚══════════╝
 &lt;/pre&gt;&lt;/div&gt;
@@ -191,13 +191,13 @@ a&amp;nbsp;zařídí, aby na tu hodnotu&amp;nbsp;„ukazovalo“.&lt;/p&gt;
 
 &lt;p&gt;Voilà! Hodnota proměnné &lt;code&gt;jazyk&lt;/code&gt; je odteď&amp;nbsp;&lt;code&gt;'python'&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Pojďme si přiřadit další proměnnou:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;češ&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;tina&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;češ&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;tina&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Opět se vyhodnotí výraz, vezmou se řetězce &lt;code&gt;'češ'&lt;/code&gt; a &lt;code&gt;'tina'&lt;/code&gt;, sečtou se,
 a&amp;nbsp;na výslednou hodnotu začne ukazovat proměnná &lt;code&gt;rec&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐       ╔══════════╗
 │ jazyk ├──────→║ &amp;#39;python&amp;#39; ║
 └───────┘       ╚══════════╝
 ┌─────┐         ╔═══════════╗
@@ -208,14 +208,14 @@ a&amp;nbsp;na výslednou hodnotu začne ukazovat proměnná &lt;code&gt;rec&lt;/
 
 &lt;p&gt;Že to není zas tak složité?&lt;/p&gt;
 &lt;p&gt;Teď zkusíme jednu proměnnou „přiřadit“ do druhé:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jazyk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Opět se nejdřív&amp;nbsp;vyhodnotí výraz za rovnítkem.
+&lt;p&gt;Opět se nejdřív vyhodnotí výraz za rovnítkem.
 Výsledek bude objekt, který je v&amp;nbsp;proměnné &lt;code&gt;rec&lt;/code&gt;.
 A&amp;nbsp;proměnná &lt;code&gt;jazyk&lt;/code&gt; začne jednoduše ukazovat na tento objekt:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐       ╔══════════╗
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐       ╔══════════╗
 │ jazyk ├───┐ ×→║ &amp;#39;python&amp;#39; ║
 └───────┘   │   ╚══════════╝
 ┌─────┐     └──→╔═══════════╗
@@ -230,7 +230,7 @@ Jeden objekt může mít několik jmen, ale pořád je to ten samý&amp;nbsp;obj
 dostat&lt;sup id="fnref:interned-strings"&gt;&lt;a class="footnote-ref" href="#fn:interned-strings" rel="footnote"&gt;1&lt;/a&gt;&lt;/sup&gt;, a&amp;nbsp;tudíž s&amp;nbsp;ním dál nemůžeme nijak pracovat.
 Jediné co můžeme dělat je vytvořit nový objekt se stejnou hodnotou.
 Takovéhle sirotky Python časem smaže, aby nezabíraly paměť počítače:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;┌───────┐
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;┌───────┐
 │ jazyk ├───┐      * poof *
 └───────┘   │
 ┌─────┐     └──→╔═══════════╗
@@ -260,13 +260,13 @@ a budou “žít” dál.
 Podrobněji to plánuju rozeberat v článku &lt;em&gt;identity a hodnoty&lt;/em&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:interned-strings" rev="footnote" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</summary><category term="python"></category><category term="proměnné"></category></entry><entry><title>Jak funguje Python</title><link href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python" rel="alternate"></link><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-rozcestnik-python</id><summary type="html">&lt;p&gt;Znáte to.
+&lt;/div&gt;</summary><category term="python"></category><category term="proměnné"></category></entry><entry><title>Jak funguje Python</title><link href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:blog/2014/01/05/cs-rozcestnik-python</id><summary type="html">&lt;p&gt;Znáte to.
 Studentka vám položí otázku, a&amp;nbsp;abyste na ni mohli pořádně odpovědět,
 je potřeba trochu osvětlit základy.
 Mně se to stalo s&amp;nbsp;proměnnými v&amp;nbsp;Pythonu.&lt;/p&gt;
 &lt;p&gt;No a&amp;nbsp;tak píšu.&lt;br /&gt;
-Píšu&amp;nbsp;na téma &lt;em&gt;Všechno o&amp;nbsp;proměnných, hodnotách a&amp;nbsp;jménech v&amp;nbsp;Pythonu.&lt;/em&gt;&lt;br /&gt;
-Píšu&amp;nbsp;už druhý den.&lt;/p&gt;
+Píšu na téma &lt;em&gt;Všechno o&amp;nbsp;proměnných, hodnotách a&amp;nbsp;jménech v&amp;nbsp;Pythonu.&lt;/em&gt;&lt;br /&gt;
+Píšu už druhý den.&lt;/p&gt;
 
 
 &lt;p&gt;Přišel čas to trošku rozdělit.
@@ -278,10 +278,10 @@ Tady je moje osnova; až (a&amp;nbsp;jestli) to dopíšu, tak z&amp;nbsp;toho ud
 &lt;li&gt;Jmenné prostory&lt;/li&gt;
 &lt;li&gt;Identity a&amp;nbsp;hodnoty &lt;!-- udělat odkaz v&amp;nbsp;poznámce pod čarou v "Proměnné jsou jména" --&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Články budou používat diakritiku v řetězcích.
+&lt;p&gt;Články budou používat diakritiku v&amp;nbsp;řetězcích.
 V&amp;nbsp;Pythonu 3&amp;nbsp;s&amp;nbsp;tím není žádný problém, ale používáš-li Python 2,
 napiš na začátek každého pythoního souboru tyto řádky:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# Encoding: UTF-8&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Encoding: UTF-8&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 

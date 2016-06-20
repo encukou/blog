@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>encukou/blog &mdash; PyCon 2016 Report</title>
+        <meta charset="utf-8" />
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="stylesheet" type="text/css" href="http://encukou.cz/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            body.custom-background { background-color: #f5f5f5; }
+        </style>
+        <link rel="alternate" type="application/atom+xml"
+            title="encukou/blog — Atom"
+            href="http://encukou.cz/" /> 
+        <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
+</head>
+
+<body class="home blog custom-background single-author" >
+    <div id="container">
+        <div id="header">
+                <h1 id="site-title"><a href="http://encukou.cz"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>.cz</a></h1>
+                <h2 id="site-description">primary colors underneath</h2>
+        </div><!-- /#banner -->
+        
+        <div class="page-title">
+        </div>
+
+        <div id="menu">
+            <div class="menu-navigation-container">
+                <ul id="menu-navigation" class="menu">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="http://github.com/encukou">github</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
+
+                </ul>
+            </div> <!--/#menu-navigation-container-->
+        </div><!-- /#menu -->
+
+        <div id="contents">
+
+<div class="post type-post status-publish format-standard hentry category-general">
+    <div class="entry-meta">
+        <div class="date"><a href="http://encukou.cz/blog/2016/06/20/pycon-report">2016-06-20</a></div>
+    </div> <!-- /#entry-meta -->
+    <div class="main">
+        <h2 class="entry-title">
+            <a href="http://encukou.cz/blog/2016/06/20/pycon-report" title="Permalink to PyCon 2016 Report" rel="bookmark">PyCon 2016 Report</a>
+        </h2>
+        <div class="entry-content">
+<p>I&nbsp;attended PyCon 2016, the annual Python language conference, which took part
+between May 28th to June 5th.</p>
+<p>Here's&nbsp;a&nbsp;long, rambling and somewhat personal report of what I&nbsp;got from
+the conference.</p>
+
+
+<p>I&nbsp;found accommodation through Airbnb, and ended up staying with Jov,
+a&nbsp;laid-back drummer.  He apparently prepared a&nbsp;lot of info about local
+breweries to share with his guest, but as I&nbsp;don't drink, we had to find
+other topics to talk about.  Which we did!
+I'm never going to stay at a&nbsp;conference hotel again if I&nbsp;can help
+it. (Except at PyCon PL, of course.)</p>
+<h3 id="language-summit">Language Summit</h3>
+<p>Saturday and Sunday before the main conference were "tutorial days", with
+opportinities to learn various technologies, either paid by the attendees
+or sponsored.  Unfortunately, I&nbsp;registered late enough that the interesting
+free ones were already full.  However, on Saturday another event was held:
+the <a href="https://us.pycon.org/2016/events/langsummit/">Language Summit</a>, to which Nick Coghlan kindly invided&nbsp;me.</p>
+<p>The Summit is a&nbsp;gathering of Python core developers and people invited by them
+at which language issues are discussed.  Though there are no recordings,
+the Summit was covered by Jake Edge in <a href="https://lwn.net/Articles/688969/">LWN</a>.
+My talk aimed to relate the perspective of Fedora (and redistributors in
+general) to Python developers.
+Specifically, I&nbsp;talked about:</p>
+<ul>
+<li>Python 3&nbsp;porting: Many people in the Python ecosystem use the <a href="https://pypi.python.org/pypi">PyPI</a>
+    as the canonical list of Python software, so tools tracking Python 3
+    porting progress (e.g. <a href="https://python3wos.appspot.com/">WoS</a>) are usually biased against system tools
+    (q.g. DNF, Samba, Openstack) and applications (e.g. pitivi, Inkscape).
+    Fedora's <a href="http://fedora.portingdb.xyz/">PortingDB</a> arguably gives a&nbsp;better subset of "popular open-
+    source packages".  I&nbsp;gave an introduction to PortingDB, how we use it
+    and how to look at the data.  I&nbsp;also mentioned that we're nearing having
+    50% of packages ported, hopefully as soon as Fedora 25.
+    I&nbsp;talked about major software that is not ported yet. Anything based on
+    GTK2&nbsp;will need to be ported to GTK 3&nbsp;to get Python 3&nbsp;support; wxWidgets
+    support for is still incomplete. The other blockers are Ansible,
+    enterprise-y software (Samba, FreeIPA), VCSs (Mercurial, Bazaar),
+    and large parts of the Fedora infrastructure.  Unsurprisingly,
+    all are projects that are not published on PyPI.
+    I&nbsp;also linked porting guides: <a href="https://py3c.readthedocs.io/en/latest/guide.html">py3c</a> for extension modules, the <a href="http://python-rpm-porting.readthedocs.io/en/latest/">RPM
+    porting Guide</a> for RPMs, and the upcoming Conservative Porting
+    Guide.</li>
+<li>pyp2rpm &amp; COPR PyPI rebuilds: I&nbsp;talked briefly how we're trying to
+    rebuild all PyPI packages in COPR, which would help with packaging
+    Python 3&nbsp;compatible versions of software.  Tying in to a&nbsp;previous talk,
+    I&nbsp;mentioned that since running tests is part of building a&nbsp;RPM,
+    these automatic COPR builds could provide integration tests for
+    Python packages – something both Fedora and the Python ecosystem
+    need.</li>
+<li>System Python: I&nbsp;presented the need for a&nbsp;lighter standard library
+    that could be used for minimal systems.  More than three-fourths of
+    Python's&nbsp;stdlib are not needed at runtime by most applications, and
+    parts like the test suite and TK are already split out of python-libs
+    in Fedora.  The idea was met with understanding, though (rather
+    surprisingly for me) Kushal Das from Fedora Cloud objected to
+    splitting the stdlib, preferring a&nbsp;full Python even in the base cloud
+    image.
+    I&nbsp;noted that splitting the standard library, and letting packages
+    opt-in to defining exactly which parts they need, might be useful for
+    projects like MicroPython, or making Python work on Android.  I&nbsp;learned
+    that this might be good for Windows as well.  However, I&nbsp;said that
+    neither I&nbsp;nor Red Hat's&nbsp;python-maint has resources to commit to a
+    general solution yet.</li>
+</ul>
+<p>Overall, the audience was responsive and asked good questions. We ran a&nbsp;bit
+over the 20&nbsp;minutes I&nbsp;had allocated, but at that point running over was
+a&nbsp;common theme at Language&nbsp;Summit.</p>
+<p>Other Language Summit talks focused on security, porting to Python 3,
+removing the GIL, core dev workflows, automated testing, gradual typing,
+and JITs.  Read the LWN reports if you're&nbsp;interested.</p>
+<p>I&nbsp;went to see the city on Sunday, and returned on Monday for the first
+day of conference talks.</p>
+<h2 id="monday">Monday</h2>
+<p>Meals at PyCon took place in the Expo hall, among sponsor booths.  Most
+sponsors were either developing Python apps, or providing services to
+deploy them, debug them, or otherwise make Python developers' lives&nbsp;easier.</p>
+<p>I&nbsp;was happy to see a&nbsp;section of the Expo Hall dedicated to open-source
+projects: Cookiecutter, BeeWare, Django Girls and PyLadies, Read the Docs,
+Plone, Pyramid, and the Recurse Center.  Of course, the were also open-source
+projects in the "paid" section: I&nbsp;counted Ansible, Sentry, OpenShift,
+Elastic, and Docker.</p>
+<p>Below are my notes from talks, open spaces, and discussions I&nbsp;attended.</p>
+<p><strong>Ned Batchelder: Machete Mode Debugging.</strong>
+  This talk didn't have much new material for me, but it illustrates what
+  for me is a&nbsp;large part of Python's&nbsp;appeal: it's&nbsp;possible to do very
+  effective (but nasty) hacks to solve a&nbsp;problem quickly, once one knows
+  the language internals.  A&nbsp;necessary part of what makes this appealing
+  is then the resistance to these hacks ever leaving a&nbsp;development machine.
+  This resistance is largely cultural: Python could be a&nbsp;very different
+  language even if the syntax stayed the&nbsp;same.</p>
+<p><strong>Brett Cannon, Dino Viehland: Pyjion.</strong>
+  This was a&nbsp;rehash of the Language Summit talk, with some points
+  elaborated further.  Adding JIT hooks to core Python is a&nbsp;great idea
+  that could make speeding up the reference interpreter – or creaing
+  debugging tool – easy and thus allowing healthy competition between
+  various approaches.  (It would also allow proprietary speed-up addons;
+  but hopefully Microsoft has learned the idea that collaboration
+  works better.)</p>
+<p><strong>Drew Fisher: Object-Capabilities, Cap'n Proto.</strong>
+  Object capabilities are a&nbsp;great framework for building secure systems.
+  Sadly, not the default in today's&nbsp;frameworks.
+  I&nbsp;didn't see any functional programming talks at PyCon; I&nbsp;assume this
+  is because they all tend to be similar and everybody knows the material
+  by now.  I&nbsp;can't wait until object capabilities reac a&nbsp;similar "exotic
+  but well-known" status.</p>
+<p><strong>Open Space: Meetup Organizers.</strong>
+  As the Pyvo meetups in Brno are struggling with too many attendees,
+  we're planning to add parallel beginner-focused events to split the
+  audience.  It turns out many meetups across the world are doing the same,
+  and hopefully I'll be able to use my notes in Brno soon.
+  (This Open Space continued with another session on Wednesday.)</p>
+<p><strong>Open Space: Python and Rust.</strong>
+  When it comes to Rust, I'm interested in the concept of a&nbsp;Mozilla-supported
+  compiled language, and despite never trying it for a&nbsp;serious project,
+  whenever I&nbsp;read about the technical choices that go in the languahe,
+  I&nbsp;have nothing but respect for its developers.
+  Since I&nbsp;don't know much about Rust I&nbsp;planned to join the Rust open space
+  as a&nbsp;silent lurker, but I&nbsp;was able to provide some details about CPython
+  internals that might make it easier to build Python-Rust&nbsp;bridges.</p>
+<p><strong>Open Space: IoT, MicroPython, automation.</strong>
+  This open space had an interesting topic and great people (Nicholas
+  Tollervey and Paulus Schoutsen were both there), but there was a&nbsp;lack
+  of good talking points, so I&nbsp;didn't get much more out of it than an
+  urge to try giving a&nbsp;MicroPython-themed lightning talk.
+  And I&nbsp;did get to hold a&nbsp;BBC Micro:Bit :)</p>
+<p><strong>Lightning Talks.</strong>
+  The best part of the conference – a&nbsp;mixt of mini-talks ranging from
+  funny to practical to dead serious.  Professionally, the most important
+  was probably about "star_destroyer" – a&nbsp;tool that removes "import *"
+  statements in a&nbsp;smart way.</p>
+<p>After the talks, Sentry and Linode sponsored an evening at the local arcade,
+even providing quarters to feed the Marios and Pacmans.  Even nerdier than
+PyCon itself.</p>
+<h2 id="tuesday">Tuesday</h2>
+<p>Guido van Rossum: Keynote
+  Guido is a&nbsp;great language designer and community leader, but
+  I'm not much of a&nbsp;fan of his keynotes :(</p>
+<p><strong>Parisa Tabriz: Keynote</strong>
+  A&nbsp;talk about security.  To me the most important point was that while
+  software engineers spend time thinking about making things work, security
+  engineers think about making things break.  It's&nbsp;a&nbsp;mindset everyone
+  should slip into at times.</p>
+<p><strong>Daniele Procida: Documentation-driven development.</strong>
+  Django is a&nbsp;perfect example of how great documentation, great community,
+  and great product go together.  Daniele talked about the importance of
+  the process of documenting, rather than having documentation, and
+  he process of informing, rather than publishing information.  And he
+  explained a&nbsp;few guidelines for great&nbsp;documentation.</p>
+<p><strong>Anthony Scopatz: xonsh.</strong>
+  xonsh is a&nbsp;shell that is, syntax-wise, a&nbsp;hybrid between (Ba)sh and Python.
+  Based on the presentation, it looks like the merge was (surprisingly for
+  me) done relatively cleanly and respectfully.  I&nbsp;need to try it out
+  soon.</p>
+<p><strong>Glyph: Shipping Software To Users With Python.</strong>
+  An overview of practices for shipping Python software: the good and the
+  bad, the existing ones, the near future, and the ideal state.
+  I've heard more than one person say this was the most informative talk
+  at Pycon.  I&nbsp;seem to be more interested in teaching programming and
+  building tools for programmers than in real-world apps, but this was still
+  a&nbsp;great overview.</p>
+<p><strong>Paul Kehrer: Reliably Distributing Compiled Modules.</strong>
+  Packaging is perhaps the area of Python ecosystem that is changing most
+  rapidly, so good talks on these topics are always welcome – especially
+  if it broadens awareness of manylinux&nbsp;wheels.</p>
+<p><strong>Amber Brown: The Report Of Twisted’s&nbsp;Death.</strong>
+  Unfortunately, I&nbsp;didn't get much out of this talk, but other people's
+  reactions were positive, so it's&nbsp;probably just me.
+  Amber's&nbsp;talk at the Language Summit was much&nbsp;better.</p>
+<p><strong>Katie Bell: The computer science of marking computer science assignments.</strong>
+  This talk ended up mainly focusing on computational geometry, which
+  is a&nbsp;fun subject.  Although it had "computer science" in the title,
+  it was a&nbsp;little underresearched – but as Katie learned some better
+  techniques from the audience, everyone kept&nbsp;smiling.</p>
+<p><strong>Russell Keith-Magee: A&nbsp;tale of two cellphones: Python on Android and iOS.</strong>
+  I&nbsp;consider this the most important talk of this PyCon.  Russel's&nbsp;BeeWare
+  project is not the first to bring Python to mobile phones (and I&nbsp;have
+  big respect for Kivy), but it aims to make Python a&nbsp;first-class language
+  for native apps. Also, it seems designed from the ground up for long-term
+  maintainability, both technical and social.
+  I&nbsp;had to leave in the middle of the talk to prepare my lightning talk,
+  but I&nbsp;made sure to watch the recording before the sprints&nbsp;later.</p>
+<p><strong>Lightning Talks.</strong>
+  My lightning talk was on the fun side of the spectrum: how to make
+  a&nbsp;cheap glowing, Wi-Fi controlled balloon.
+  A&nbsp;notable talk in this block by Nathaniel Smith introduced <code>async yield</code>.
+  I&nbsp;asked Nathaniel afterwards if he's&nbsp;planning to add this feature (which
+  I&nbsp;think is conspicuously missing from Python) to the language, and he said
+  it's&nbsp;actually the prototype just for that. Yipee!
+  Oh, and Larry Hastings gave a&nbsp;very entertaining talk, not about Python
+  but about speed gaming.  I&nbsp;heard about #dsdad before, but I&nbsp;had no idea
+  he's&nbsp;a&nbsp;Python release&nbsp;manager!</p>
+<p>The day ended with a&nbsp;PyLadies charity auction, which was quite fun but
+the wrong kind of fun for me, I&nbsp;guess.</p>
+<h2 id="wednesday">Wednesday</h2>
+<p>Wednesday started with keynotes (about the Python Software Foundation,
+and about Plone), the first of which I&nbsp;missed for the Meetups open space.
+As for Plone, I&nbsp;definitely suggest the talk to anyone interested in
+designing sustainable projects – the history of such a&nbsp;large and long-lived
+project is fascinating.</p>
+<p>After the keynotes, there was the poster session. Some notes from there:</p>
+<ul>
+<li>hdbscan – a&nbsp;library I&nbsp;just saw mentioned at Pyvo Ostrava was here
+    with its authors.</li>
+<li>An interesting system for data visualization was presented, but
+    unfortunately it'll only be open-sourced after publication of the
+    paper.</li>
+<li>PyMoms – meetups with provided childcare. I&nbsp;need to suggest this to
+    the local PyLadies.</li>
+</ul>
+<p>And then talks resumed:</p>
+<p><strong>Anne DeCusatis: More Than Binary: Inclusive Gender Collection and You.</strong>
+  I&nbsp;went to this talk more for the discussion at the end than for the
+  talk itself.  In English, the only part of the language that's&nbsp;different
+  between genders is pronouns (he/she), and there are efforts to be more
+  welcoming to people who are neither or both male and/or female.
+  However, the Czech language only supports the case of an animate object
+  being either male or female.  I&nbsp;would imagine this makes it practically
+  mandatory for non-binary people to choose one of the two, leading
+  to public perception that non-binary people just don't exist.  But, the
+  fact that they do exist is just about the only thing in this area that
+  I&nbsp;can be sure about.  And, as we all know, diversity is important – both
+  diversity of programmers, to get various points of view, and diversity
+  of users, so that we don't make some people's&nbsp;lives harder by just not
+  thinking about them in our designs.
+  The speaker sadly couldn't provide any pointers for exploring this space
+  further, but I&nbsp;got some from people standing&nbsp;by.</p>
+<p><strong>Laura Rupprecht: What can software engineers learn from the medical field?</strong>
+  I&nbsp;came late, as discussion from the previous talk took more than the break.
+  Beyond the concept of "triage", which comes from medical field, there
+  are are other concepts we can learn from doctors.  The one I&nbsp;liked was
+  the fact that teaching hospitals have better outcomes.  The software
+  world reflect this in code reviews, pair programming, and internships.
+  I&nbsp;believe software development internships – or even apprenticeships –
+  should be <em>much</em> more common than they are now, and they should serve both
+  to train new contributors/employees, and to ensure simplicity – and thus
+  maintainability – of the resulting&nbsp;code.</p>
+<p><strong>Jacob Kovac: Revitalizing Python Game Development.</strong>
+  This was a&nbsp;talk about Kivy, which does "Packaging", "Performance", and
+  "Platforms" right for Python-based games.
+  I&nbsp;like Kivy – I&nbsp;made software for my Master's&nbsp;thesis in it – but it
+  always felt as a&nbsp;monolith that's&nbsp;a&nbsp;bit removed from the Python ecosysyem.
+  Still, just like Django is currently the king of web frameworks, I&nbsp;would
+  not object to Kivy becoming the king for Python game development.
+  I&nbsp;believe the project needs much better community management,&nbsp;though.</p>
+<p><strong>K&nbsp;Lars Lohn: Keynote.</strong>
+  This was a&nbsp;masterpiece of a&nbsp;keynote. It brought tears to my&nbsp;eyes.</p>
+<p>In the evening, I&nbsp;got together with Christian Heimes, Paul Hildebrandt,
+Katie Bell, and a&nbsp;couple other people for dinner at the McMenamins School,
+a&nbsp;elementary school turned into a&nbsp;hotel and&nbsp;restaurant.</p>
+<h2 id="sprints-thursday-friday-sunday">Sprints (Thursday, Friday, Sunday)</h2>
+<p>I&nbsp;sprinted on CPython, and got Nick Coghlan and Eric Snow review and refine
+my <a href="https://github.com/encukou/peps/blob/module-state-access/pep-9999.txt">upcoming PEP</a>.  It felt like several weeks of work getting done in two
+days.
+Late Friday, after I&nbsp;sendt the pre-PEP to review, Ubuntu's&nbsp;Matthias Klose
+told me about a&nbsp;file naming problem in Python 3&nbsp;versions of Samba's&nbsp;supporting
+packages.  We discussed until we identified the problem and found a&nbsp;possible
+solution (which still needs to be implemented).
+After that I&nbsp;went to the BeeWare table and picked a&nbsp;task: getting the float
+test suite to pass in VOC, the Python-to-Java compiler used for Android
+support.  I&nbsp;found out this required writing <code>float.__repr__()</code>, since the
+tests do textual comparisons, so I&nbsp;didn't finish by a&nbsp;long shot.
+I&nbsp;took Saturday off, and returned on Sunday to finish a <code>__repr__</code>
+implementation that usually does the same thing as CPython's (and never gives
+an unreasonable result – it will just sometimes show an extra digit).
+The atmosphere at the BeeWare table (and, for example, at the Cookiecutter
+table beside it) was extremely pleasant and welcoming, something I&nbsp;need to
+learn to emulate when I'll run&nbsp;sprints.</p>
+<p>During Sunday, lots of people left to catch their planes, including Russel
+the BeeWare sprint leader, so my pull request was merged only some time
+next week.
+After the sprints, I&nbsp;got some Fedora swag from Remy to bring back to Brno,
+and joined fellow BeeWare sprinters – Jeremy, Marina and Holly – for dinner
+and board games.</p>
+<p>And that was it!  I&nbsp;spent a&nbsp;few days after the conference enjoying the city
+of Portland, then hopped on a&nbsp;train to Seattle and back&nbsp;home.</p>        </div> <!--/#entry-content-->
+            <span class="tag-links"><strong>📌</strong>
+ <a href="http://encukou.cz/blog/tag/conference" rel="tag">conference</a>,  <a href="http://encukou.cz/blog/tag/pycon" rel="tag">pycon</a>            </span>
+        <ul class="article-links">
+                <li><a href="mailto:encukou@gmail.com?subject=Re:+'PyCon%202016%20Report'+blog+post">Add a <em>Comment</em></a></li>
+                <li><a href="https://github.com/encukou/blog/blob/master/posts/2016-06-20-pycon-report.md"><em>Fork</em> this post on Github</a></li>
+        </ul>
+    </div> <!--/#main-->
+</div>  <!--/#post-->
+        </div>
+
+
+<ul class="prev-next">
+    <li class="prev">
+        <a href="http://encukou.cz/blog/2015/10/25/en-slic3r-first-layer-patterns">
+            First Layer Patterns with Slic3r Modifier Objects
+        </a>
+    </li>
+</ul>
+<span class="clearfix"></span>
+
+
+        <footer id="footer">
+            <p>
+        
+    powered by <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    theme adapted from <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        by <a href="https://twitter.com/thisistran">Tran</a>
+        and <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    fonts: Signika by <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
+        and Jockey One by <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    <br>
+    fork this blog on <a href="https://github.com/encukou/blog">Github</a>
+    <br>
+    <br>
+    the text on this page is licensed under the
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+            Creative Commons Attribution-ShareAlike 3.0 Unported License</a>
+    <br>
+    by Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    
+            </p>
+        </footer>
+    </div><!-- /#container -->
+    <div style="display:none"></div>
+</body>
+</html>

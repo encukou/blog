@@ -59,14 +59,14 @@ They don't actually need to quack <em>like a&nbsp;duck</em>.</p>
 Some languages – the statically typed ones – require you to specify the type in front, and then they check it rigorously.
 In Python, you need to keep track of this in your head.
 It's&nbsp;possible that you're writing code where a&nbsp;variable could be either a&nbsp;string or a&nbsp;number:</p>
-<div class="highlight"><pre>def add(a, b):
+<div class="highlight"><pre><span></span>def add(a, b):
     return a + b
 </pre></div>
 
 
 <p>... or you might want a&nbsp;variable to changes type in the middle of a&nbsp;function,
 like in the example from <a href="http://docs.python-guide.org/en/latest/writing/structure/#dynamic-typing">Hitchhiker's&nbsp;guide to Python</a>:</p>
-<div class="highlight"><pre>items = &#39;a b c d&#39;  # This is a string...
+<div class="highlight"><pre><span></span>items = &#39;a b c d&#39;  # This is a string...
 items = items.split(&#39; &#39;)  # ...becoming a list
 items = set(items)  # ...and then a set
 </pre></div>
@@ -81,7 +81,7 @@ rather than “the method <em>named</em>&nbsp;startswith”.</p>
 <h2 id="types-of-variables">Types of variables</h2>
 <p>I&nbsp;have some syntax in mind. If I&nbsp;rewrite one of the first examples in
 Eevee's&nbsp;post in it, I&nbsp;can get something like this:</p>
-<div class="highlight"><pre>def foo(a: String, b: StringPattern, c: List):
+<div class="highlight"><pre><span></span>def foo(a: String, b: StringPattern, c: List):
     if a.startswith(b):
         c.append(a)
 </pre></div>
@@ -109,7 +109,7 @@ your code might break with the next version of my&nbsp;library.</p>
 <p>Of course, usually <code>a</code> will be an “actual string”, and the compiler can
 optimize for that case.</p>
 <p>I'll put a&nbsp;random snippet with syntax ideas here:</p>
-<div class="highlight"><pre>from somewhere import Snake
+<div class="highlight"><pre><span></span>from somewhere import Snake
 
 def print_length(x: List):
     print(x.length)
@@ -128,7 +128,7 @@ of the cases, but when you get hit by the 1%, you don't even know where to look
 Javascript's&nbsp;explicit <code>var</code> keyword is a&nbsp;good thing, for much the same reasons as Python's
 explicit <code>self</code>.</p>
 <p>In my syntax, variable declarations can specify the type:</p>
-<div class="highlight"><pre>str: String = &quot;abcd&quot;
+<div class="highlight"><pre><span></span>str: String = &quot;abcd&quot;
 
 list: List = [1, 2, 3]
 
@@ -138,14 +138,14 @@ for i:int in list:
 
 
 <p>But, since most (or ideally all) expressions have a&nbsp;well-defined types, a&nbsp;shorthand comes to mind:</p>
-<div class="highlight"><pre>str := &quot;abcd&quot;
+<div class="highlight"><pre><span></span>str := &quot;abcd&quot;
 list := [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
 </pre></div>
 
 
 <h2 id="operator-namespaces">Operator namespaces</h2>
 <p>This would work:</p>
-<div class="highlight"><pre>def concat(a: List, b: List):
+<div class="highlight"><pre><span></span>def concat(a: List, b: List):
     return a + b
 
 def elementwise-add(a: Array, b: Array):
@@ -167,7 +167,7 @@ a&nbsp;Sequence.)</p>
 <h2 id="definitions-and-implementations">Definitions and Implementations</h2>
 <p>Let's&nbsp;make a&nbsp;Tree interface.
 I'll use <a href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a>-ish syntax for generics:</p>
-<div class="highlight"><pre>T := TypePlaceholder()
+<div class="highlight"><pre><span></span>T := TypePlaceholder()
 
 interface Tree:
     walk(self: T) -&gt; Iterator[T]
@@ -180,7 +180,7 @@ type of <code>x</code>.
 it's&nbsp;defining the namespace that expression will use by default.)</p>
 <p>Then you can define BinaryTree like this.
 <code>BinaryTree:walk</code> becomes an implementation of&nbsp;<code>Tree:walk</code>.</p>
-<div class="highlight"><pre>class BinaryTree(Tree):
+<div class="highlight"><pre><span></span>class BinaryTree(Tree):
     left: Tree
     right: Tree
 
@@ -201,7 +201,7 @@ by classes that claim to implement <code>Tree</code>.)</p>
 <p>Next let's&nbsp;have a&nbsp;class for corporate employees.
 An amployee is not a&nbsp;tree, and there's&nbsp;no <code>Employee:walk</code> in our model,
 but you can still use an employee as a&nbsp;tree node:</p>
-<div class="highlight"><pre>class Employee:
+<div class="highlight"><pre><span></span>class Employee:
     boss: Employee
     underlings: List[Employee]
 
@@ -214,7 +214,7 @@ but you can still use an employee as a&nbsp;tree node:</p>
 
 <p>And you might want to attach a <code>Tree:walk</code> to something from some library you
 can't easily change, like the stdlib.</p>
-<div class="highlight"><pre>impl Path.Tree:walk(self):
+<div class="highlight"><pre><span></span>impl Path.Tree:walk(self):
     yield self
     if self.isdir:
         for child:Tree in self.listdir:
@@ -232,7 +232,7 @@ And you can later add <code>impl Object:to_string</code>, which won't be aliased
 <code>YourClass:to_string</code>.</p>
 <h2 id="interface-conflicts">Interface conflicts</h2>
 <p>Consider this class:</p>
-<div class="highlight"><pre>class FamilyMember:
+<div class="highlight"><pre><span></span>class FamilyMember:
     parents: List[FamilyMember]
     children: List[FamilyMember]
 

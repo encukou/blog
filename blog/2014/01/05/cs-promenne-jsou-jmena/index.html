@@ -50,7 +50,7 @@
         <div class="entry-content">
 <p>Jak v&nbsp;Pythonu fungují proměnné?
 Už asi víš, že se přiřazují pomocí rovnítka,
-a že se pak dají používat ve výrazech.
+a&nbsp;že se pak dají používat ve výrazech.
 Pojďme se na ně podívat trochu&nbsp;podrobněji.</p>
 
 
@@ -63,15 +63,15 @@ a&nbsp;trochu se zorientuj.</p>
 Proměnné v&nbsp;Pythonu jsou <em>jména</em>, nebo řekněme&nbsp;<em>ukazatele</em>.</p>
 <p>Abych to vysvětlil, pojďme se krok po kroku podívat,
 co přesně dělá tohle jednoduché přiřazení:</p>
-<div class="highlight"><pre><span class="n">jazyk</span> <span class="o">=</span> <span class="s">&#39;python&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">jazyk</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span>
 </pre></div>
 
 
-<p>Nejdřív&nbsp;se vyhodnotí výraz za rovnítkem.
+<p>Nejdřív se vyhodnotí výraz za rovnítkem.
 Výsledek vyhodnocení výrazu je vždycky nějaký <em>objekt</em>;
 v&nbsp;našem případě řetězec 'python'.
 Ukážeme si ho takhle:</p>
-<div class="highlight"><pre>                ╔══════════╗
+<div class="highlight"><pre><span></span>                ╔══════════╗
                 ║ &#39;python&#39; ║
                 ╚══════════╝
 </pre></div>
@@ -79,7 +79,7 @@ Ukážeme si ho takhle:</p>
 
 <p>Teď, když má hodnotu výrazu, podívá se Python na jméno před rovnítkem,
 a&nbsp;zařídí, aby na tu hodnotu&nbsp;„ukazovalo“.</p>
-<div class="highlight"><pre>┌───────┐       ╔══════════╗
+<div class="highlight"><pre><span></span>┌───────┐       ╔══════════╗
 │ jazyk ├──────→║ &#39;python&#39; ║
 └───────┘       ╚══════════╝
 </pre></div>
@@ -87,13 +87,13 @@ a&nbsp;zařídí, aby na tu hodnotu&nbsp;„ukazovalo“.</p>
 
 <p>Voilà! Hodnota proměnné <code>jazyk</code> je odteď&nbsp;<code>'python'</code>.</p>
 <p>Pojďme si přiřadit další proměnnou:</p>
-<div class="highlight"><pre><span class="n">rec</span> <span class="o">=</span> <span class="s">&#39;češ&#39;</span> <span class="o">+</span> <span class="s">&#39;tina&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">rec</span> <span class="o">=</span> <span class="s1">&#39;češ&#39;</span> <span class="o">+</span> <span class="s1">&#39;tina&#39;</span>
 </pre></div>
 
 
 <p>Opět se vyhodnotí výraz, vezmou se řetězce <code>'češ'</code> a <code>'tina'</code>, sečtou se,
 a&nbsp;na výslednou hodnotu začne ukazovat proměnná <code>rec</code>:</p>
-<div class="highlight"><pre>┌───────┐       ╔══════════╗
+<div class="highlight"><pre><span></span>┌───────┐       ╔══════════╗
 │ jazyk ├──────→║ &#39;python&#39; ║
 └───────┘       ╚══════════╝
 ┌─────┐         ╔═══════════╗
@@ -104,14 +104,14 @@ a&nbsp;na výslednou hodnotu začne ukazovat proměnná <code>rec</code>:</p>
 
 <p>Že to není zas tak složité?</p>
 <p>Teď zkusíme jednu proměnnou „přiřadit“ do druhé:</p>
-<div class="highlight"><pre><span class="n">jazyk</span> <span class="o">=</span> <span class="n">rec</span>
+<div class="highlight"><pre><span></span><span class="n">jazyk</span> <span class="o">=</span> <span class="n">rec</span>
 </pre></div>
 
 
-<p>Opět se nejdřív&nbsp;vyhodnotí výraz za rovnítkem.
+<p>Opět se nejdřív vyhodnotí výraz za rovnítkem.
 Výsledek bude objekt, který je v&nbsp;proměnné <code>rec</code>.
 A&nbsp;proměnná <code>jazyk</code> začne jednoduše ukazovat na tento objekt:</p>
-<div class="highlight"><pre>┌───────┐       ╔══════════╗
+<div class="highlight"><pre><span></span>┌───────┐       ╔══════════╗
 │ jazyk ├───┐ ×→║ &#39;python&#39; ║
 └───────┘   │   ╚══════════╝
 ┌─────┐     └──→╔═══════════╗
@@ -126,7 +126,7 @@ Jeden objekt může mít několik jmen, ale pořád je to ten samý&nbsp;objekt.
 dostat<sup id="fnref:interned-strings"><a class="footnote-ref" href="#fn:interned-strings" rel="footnote">1</a></sup>, a&nbsp;tudíž s&nbsp;ním dál nemůžeme nijak pracovat.
 Jediné co můžeme dělat je vytvořit nový objekt se stejnou hodnotou.
 Takovéhle sirotky Python časem smaže, aby nezabíraly paměť počítače:</p>
-<div class="highlight"><pre>┌───────┐
+<div class="highlight"><pre><span></span>┌───────┐
 │ jazyk ├───┐      * poof *
 └───────┘   │
 ┌─────┐     └──→╔═══════════╗

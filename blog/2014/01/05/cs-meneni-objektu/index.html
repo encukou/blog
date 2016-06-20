@@ -63,16 +63,16 @@ a&nbsp;trochu se zorientuj.</p>
 To znamená, že se nedá žádným způsobem změnit jejich hodnota.
 Chceme-li řetězec „změnit“, musíme vytvořit úplně nový objekt
 s&nbsp;novou hodnotou.</p>
-<div class="highlight"><pre><span class="n">retezec</span> <span class="o">=</span> <span class="s">&#39;abc&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">retezec</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span>
 <span class="n">retezec</span> <span class="o">=</span> <span class="n">retezec</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">retezec</span> <span class="o">=</span> <span class="n">retezec</span> <span class="o">+</span> <span class="s">&#39;D&#39;</span>
+<span class="n">retezec</span> <span class="o">=</span> <span class="n">retezec</span> <span class="o">+</span> <span class="s1">&#39;D&#39;</span>
 <span class="n">retezec</span> <span class="o">=</span> <span class="n">retezec</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 </pre></div>
 
 
 <p>Tyhle příkazy vytvoří několik „sirotků“,
 než do proměnné dostanou správnou hodnotu:</p>
-<div class="highlight"><pre>┌─────────┐     ╔═══════╗
+<div class="highlight"><pre><span></span>┌─────────┐     ╔═══════╗
 │ retezec ├─┐ ×→║ &#39;abc&#39; ║
 └─────────┘ │   ╚═══════╝
             │   ╔═══════╗
@@ -90,13 +90,13 @@ než do proměnné dostanou správnou hodnotu:</p>
 <p>Existují ale i&nbsp;objekty, které měnit lze. Klasický příklad jsou&nbsp;seznamy.</p>
 <p>Jak funguje takový seznam?</p>
 <p>Když napíšeme</p>
-<div class="highlight"><pre><span class="n">jmeno</span> <span class="o">=</span> <span class="s">&#39;hynek&#39;</span>
-<span class="n">jmena</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;štěpán&#39;</span><span class="p">,</span> <span class="s">&#39;vilém&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="n">jmeno</span> <span class="o">=</span> <span class="s1">&#39;hynek&#39;</span>
+<span class="n">jmena</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;štěpán&#39;</span><span class="p">,</span> <span class="s1">&#39;vilém&#39;</span><span class="p">]</span>
 </pre></div>
 
 
 <p>dostaneme následující situaci:</p>
-<div class="highlight"><pre>┌───────┐          ╔═════════╗
+<div class="highlight"><pre><span></span>┌───────┐          ╔═════════╗
 │ jmeno ├─────────→║ &#39;hynek&#39; ║
 └───────┘          ╚═════════╝
 ┌───────┐    ╔═════╤═════╗
@@ -115,12 +115,12 @@ Stejně jako hodnota výrazu <code>jmeno</code> je teď <code>'hynek</code>',
 výraz <code>jmena[0]</code> má hodnotu <code>'štěpán'</code>.
 A&nbsp;stejně tak jako můžeme přiřadit do proměnné <code>jmeno</code>,
 můžeme přiřadit i&nbsp;do <code>jmena[0]</code>:</p>
-<div class="highlight"><pre><span class="n">jmena</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">jmeno</span>
+<div class="highlight"><pre><span></span><span class="n">jmena</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">jmeno</span>
 </pre></div>
 
 
 <p>a&nbsp;dostaneme stejný výsledek, jako by <code>jmena[0]</code> byla normální proměnná:</p>
-<div class="highlight"><pre>┌───────┐          ╔═════════╗
+<div class="highlight"><pre><span></span>┌───────┐          ╔═════════╗
 │ jmeno ├─────────→║ &#39;hynek&#39; ║
 └───────┘       ┌─→╚═════════╝
 ┌───────┐    ╔══╪══╤═════╗
@@ -136,12 +136,12 @@ můžeme přiřadit i&nbsp;do <code>jmena[0]</code>:</p>
 <p>Protože je seznam objekt jako každý jiný,
 může mít více jmen — může na něj ukazovat více proměnných.
 Po příkazu</p>
-<div class="highlight"><pre><span class="n">slova</span> <span class="o">=</span> <span class="n">jmena</span>
+<div class="highlight"><pre><span></span><span class="n">slova</span> <span class="o">=</span> <span class="n">jmena</span>
 </pre></div>
 
 
 <p>bude situace vypadat takhle:</p>
-<div class="highlight"><pre>                   ╔═════════╗
+<div class="highlight"><pre><span></span>                   ╔═════════╗
                 ┌─→║ &#39;hynek&#39; ║
                 │  ╚═════════╝
 ┌───────┐    ╔══╪══╤═════╗
@@ -154,15 +154,15 @@ Po příkazu</p>
 
 
 <p>Seznam teď můžeme měnit pomocí kteréhokoli z&nbsp;těch dvou&nbsp;jmen.</p>
-<div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">jmena</span><span class="p">)</span>   <span class="c"># → [&#39;hynek&#39;, &#39;vilem&#39;]</span>
-<span class="n">slova</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;jarmila&#39;</span><span class="p">)</span>  <span class="c"># na proměnnou `jmena` vůbec nesaháme!</span>
-<span class="k">print</span><span class="p">(</span><span class="n">jmena</span><span class="p">)</span>   <span class="c"># → [&#39;hynek&#39;, &#39;vilem&#39;, &#39;jarmila&#39;]</span>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">jmena</span><span class="p">)</span>   <span class="c1"># → [&#39;hynek&#39;, &#39;vilem&#39;]</span>
+<span class="n">slova</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;jarmila&#39;</span><span class="p">)</span>  <span class="c1"># na proměnnou `jmena` vůbec nesaháme!</span>
+<span class="k">print</span><span class="p">(</span><span class="n">jmena</span><span class="p">)</span>   <span class="c1"># → [&#39;hynek&#39;, &#39;vilem&#39;, &#39;jarmila&#39;]</span>
 </pre></div>
 
 
 <p>Když si uvědomíme, co se děje uvnitř,
-nemůže nás&nbsp;toto chování ničím&nbsp;překvapit.</p>
-<div class="highlight"><pre>                   ╔═════════╗
+nemůže nás toto chování ničím překvapit.</p>
+<div class="highlight"><pre><span></span>                   ╔═════════╗
                 ┌─→║ &#39;hynek&#39; ║
                 │  ╚═════════╝
 ┌───────┐    ╔══╪══╤═════╤═════╗   ╔═══════════╗
@@ -183,20 +183,20 @@ ta funkce nám ho může pod rukama&nbsp;změnit.</p>
 aby objekty neměnil pokud přímo&nbsp;nemusí.</p>
 <p>Ještě připomenu, že pokud máš n-tici,
 nelze přiřadit přímo do jejích položek:</p>
-<div class="highlight"><pre><span class="n">ntice</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;abc&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span><span class="p">)</span>
-<span class="n">ntice</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;ghi&#39;</span>
-<span class="c"># → TypeError: &#39;tuple&#39; object does not support item assignment</span>
+<div class="highlight"><pre><span></span><span class="n">ntice</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">)</span>
+<span class="n">ntice</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ghi&#39;</span>
+<span class="c1"># → TypeError: &#39;tuple&#39; object does not support item assignment</span>
 </pre></div>
 
 
 <p>ale dej si pozor na i&nbsp;to,
 že objekty které obsahuje se stále měnit dají:</p>
-<div class="highlight"><pre><span class="n">seznam</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">ntice</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;abc&#39;</span><span class="p">,</span> <span class="n">seznam</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">seznam</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">ntice</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="n">seznam</span><span class="p">)</span>
 <span class="n">seznam</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">ntice</span><span class="p">)</span>  <span class="c"># → (&#39;abc&#39;, [1, 2, 3, 4])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ntice</span><span class="p">)</span>  <span class="c1"># → (&#39;abc&#39;, [1, 2, 3, 4])</span>
 <span class="n">ntice</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">seznam</span><span class="p">)</span>  <span class="c"># → [1, 2, 3, 4, 5]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">seznam</span><span class="p">)</span>  <span class="c1"># → [1, 2, 3, 4, 5]</span>
 </pre></div>
 
 

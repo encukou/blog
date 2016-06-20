@@ -53,7 +53,7 @@
 <p>Narazil jsem na drsné a&nbsp;vytůněné Sudoku: Podobá se klasickému killer sudoku:
 V&nbsp;začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
 kterých vždy víme součet čísel v&nbsp;nich, a&nbsp;také víme, že kromě řádků, sloupců
-a čtverců se ani v&nbsp;těchto ohraničených oblastech číslice neopakují.
+a&nbsp;čtverců se ani v&nbsp;těchto ohraničených oblastech číslice neopakují.
 
 Řešení takového sudoku však nejspíše není unikátní (nakrmil jsem jím řešítko,
 které jsem si našel), ale výsledek nebyl takový, jaký jsem chtěl: Chtěl jsem
@@ -65,7 +65,7 @@ kombinací a&nbsp;porovnat je proti zadání. Nešlo: Za deset minut běhu progr
 prokombinoval jen třikrát prvních osm pozic. Takže než by prošel všechny,
 uplynula by přibližně věčnost. Takže na to budeme muset jít jinak.&nbsp;Jak?</p>
 <p>Pár možností mě napadá: Např. zjistit si pro každou ohraničenou oblast
-všechny možné kombinace čísel v&nbsp;rozsahu 1-9, které dají při&nbsp;daném počtu polí
+všechny možné kombinace čísel v&nbsp;rozsahu 1-9, které dají při daném počtu polí
 daný součet a&nbsp;následně do oblastí dosazovat tato čísla ve všech možných
 kombinacích. Pak už by stačilo jen pro každé vyplnění plochy jen zvalidovat,
 zda platí základní pricipy sudoku a&nbsp;zda platí ona pravidla o&nbsp;tom, které ze
@@ -88,7 +88,7 @@ vysvětlovat.</p>
 Pro sudoku si stav můžeme definovat jako 9x9&nbsp;pole, kde v&nbsp;každém políčku
 budou číslice, které tam teoreticky můžou nakonec vyjít.
 V&nbsp;počátečním stavu budou všechna políčka obsahovat všech 9&nbsp;možných čislic:</p>
-<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+<div class="highlight"><pre><span></span>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
@@ -133,7 +133,7 @@ V&nbsp;počátečním stavu budou všechna políčka obsahovat všech 9&nbsp;mo�
 Třeba, pro začátek, hrubou silou: vygenerujeme devět stavů, které jsou stejné
 jako tenhle původní, jen v&nbsp;políčku A1&nbsp;mají každý vybranou jednu číslici.
 Třetí z&nbsp;nich by vypadal takhle:</p>
-<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+<div class="highlight"><pre><span></span>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
 ║     3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
 ║       │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
 ║       │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
@@ -182,20 +182,20 @@ možností, budou taky špatně. Takže tenhle stav můžeme&nbsp;vyloučit.</p>
 <p>A&nbsp;tímhle způsobem dostaneme obrovitánský graf stavů.
 Graf vytvořený takhle hrubou silou bude až moc velký na to, aby se dal rozumně
 pozkoumat, ale důležité je, že obsahuje všechny stavy odpovídající pravidlům.
-(Vlastně je pro nás&nbsp;důležité jen to, že určitě obsahuje <em>řešení</em> (pokud nějaké
+(Vlastně je pro nás důležité jen to, že určitě obsahuje <em>řešení</em> (pokud nějaké
 existuje), ale vzhledem k&nbsp;tomu že řešení neznáme, všechny "správné" stavy budou
 muset stačit.)</p>
 <p>Zbývá jen nějak zajistit, abychom nemuseli procházet ten graf celý, ale
-zkusili v&nbsp;něm hledat rozumné cesty a&nbsp;zkratky, které nás&nbsp;k&nbsp;cíli dovedou co
+zkusili v&nbsp;něm hledat rozumné cesty a&nbsp;zkratky, které nás k&nbsp;cíli dovedou co
 nejrychleji. Tedy, použít něco lepšího než hroubou&nbsp;sílu.</p>
 <p>(Jen podotknu že ten graf nemusí být nutně stromem; do jednoho stavu se může
 dát dostat několika různými cestami.)</p>
 <p>Základní schéma algoritmu na prohledávání stavového prostoru je následující
-(s&nbsp;komentáři&nbsp;tam, kde Pythonová syntax není naprosto pruhledná):</p>
-<div class="highlight"><pre><span class="nb">open</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_state</span><span class="p">]</span>  <span class="c"># `[v]` je seznam s jedním prvkem, `v`</span>
-<span class="n">closed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c"># prázdná množina</span>
+(s&nbsp;komentáři tam, kde Pythonová syntax není naprosto pruhledná):</p>
+<div class="highlight"><pre><span></span><span class="nb">open</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_state</span><span class="p">]</span>  <span class="c1"># `[v]` je seznam s jedním prvkem, `v`</span>
+<span class="n">closed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># prázdná množina</span>
 
-<span class="k">while</span> <span class="nb">open</span><span class="p">:</span>  <span class="c"># dokud je něco v open</span>
+<span class="k">while</span> <span class="nb">open</span><span class="p">:</span>  <span class="c1"># dokud je něco v open</span>
     <span class="n">current</span> <span class="o">=</span> <span class="n">take_one</span><span class="p">(</span><span class="nb">open</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">is_goal</span><span class="p">(</span><span class="n">current</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">current</span>
@@ -219,7 +219,7 @@ Dám několik tipů, které jsem použil&nbsp;já.</p>
 <p>Přímo v <code>generate_next_states</code> je dobré vyhazovat čísla, která neodpovídají
 pravidlům. Já jsem dal tuhle logiku přímo do konstruktoru třídy Stav, takže
 můj první stav vypadá ve skutečnosti takhle:</p>
-<div class="highlight"><pre>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
+<div class="highlight"><pre><span></span>╔═══════╤═══════╤═══════╦═══════╤═══════╤═══════╦═══════╤═══════╤═══════╗
 ║   2 3 │ 1 2 3 │ 1 2 3 ║ 1 2 3 │     3 │   2 3 ║ 1 2 3 │ 1 2 3 │ 1 2 3 ║
 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 4 5 6 │ 4 5 6 &gt; 4 5 6 ║ 4 5 6 │ 4 5 6 │ 4 5 6 ║ 1
 ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8   ║ 7 8 9 │ 7 8 9 │ 7 8 9 ║
@@ -264,16 +264,16 @@ můj první stav vypadá ve skutečnosti takhle:</p>
 <ul>
 <li>vyhazuje čísla podle zadaných nerovností (pokud má jedno číslo
 být větší než druhé, které může být 3-8, tak bude určitě 4&nbsp;nebo&nbsp;víc).</li>
-<li>vyhazuje čísla z řádků, sloupců, čtverců a&nbsp;oblastí, pokud v&nbsp;jiném políčku
+<li>vyhazuje čísla z&nbsp;řádků, sloupců, čtverců a&nbsp;oblastí, pokud v&nbsp;jiném políčku
   je už dané číslo vybrané</li>
 <li>vyhazuje čísla, která nemůžou dát daný součet pro oblast</li>
-<li>ještě by mohla vybrat číslo, pokud se v řádku/sloupci/čtverci jen jedno
+<li>ještě by mohla vybrat číslo, pokud se v&nbsp;řádku/sloupci/čtverci jen jedno
   políčko kde je to číslo možné, ale našel jsem řešení než jsem tohle stihl
   napsat, tak jsem se na to vykašlal.</li>
 </ul>
 <p>Tím, že tohle dělám co nejdřív, se vyhýbám spoustě zbytečných stavů. Vzhledem k
 tomu, že každý stav nejen potřebuje nějaký ten procesorový čas a&nbsp;paměť, ale
-navíc se pak množí jak králík&nbsp;v&nbsp;Austrálii, je dobré takhle normalizovat&nbsp;co
+navíc se pak množí jak králík v&nbsp;Austrálii, je dobré takhle normalizovat&nbsp;co
 nejagresivněji.</p>
 <p>Další místo, kde je možné algoritmus potunit, je výběr políčka, ve kterém se
 budou generované stavy lišit.
