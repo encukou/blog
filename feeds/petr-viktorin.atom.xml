@@ -27,14 +27,14 @@ Specifically, I&amp;nbsp;talked about:&lt;/p&gt;
 &lt;li&gt;Python 3&amp;nbsp;porting: Many people in the Python ecosystem use the &lt;a href="https://pypi.python.org/pypi"&gt;PyPI&lt;/a&gt;
     as the canonical list of Python software, so tools tracking Python 3
     porting progress (e.g. &lt;a href="https://python3wos.appspot.com/"&gt;WoS&lt;/a&gt;) are usually biased against system tools
-    (q.g. DNF, Samba, Openstack) and applications (e.g. pitivi, Inkscape).
+    (e.g. DNF, Samba, Openstack) and applications (e.g. pitivi, Inkscape).
     Fedora's &lt;a href="http://fedora.portingdb.xyz/"&gt;PortingDB&lt;/a&gt; arguably gives a&amp;nbsp;better subset of "popular open-
     source packages".  I&amp;nbsp;gave an introduction to PortingDB, how we use it
     and how to look at the data.  I&amp;nbsp;also mentioned that we're nearing having
     50% of packages ported, hopefully as soon as Fedora 25.
     I&amp;nbsp;talked about major software that is not ported yet. Anything based on
     GTK2&amp;nbsp;will need to be ported to GTK 3&amp;nbsp;to get Python 3&amp;nbsp;support; wxWidgets
-    support for is still incomplete. The other blockers are Ansible,
+    support for py3&amp;nbsp;is still incomplete. The other blockers are Ansible,
     enterprise-y software (Samba, FreeIPA), VCSs (Mercurial, Bazaar),
     and large parts of the Fedora infrastructure.  Unsurprisingly,
     all are projects that are not published on PyPI.
@@ -133,7 +133,7 @@ Elastic, and Docker.&lt;/p&gt;
 even providing quarters to feed the Marios and Pacmans.  Even nerdier than
 PyCon itself.&lt;/p&gt;
 &lt;h2 id="tuesday"&gt;Tuesday&lt;/h2&gt;
-&lt;p&gt;Guido van Rossum: Keynote
+&lt;p&gt;&lt;strong&gt;Guido van Rossum: Keynote&lt;/strong&gt;
   Guido is a&amp;nbsp;great language designer and community leader, but
   I'm not much of a&amp;nbsp;fan of his keynotes :(&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Parisa Tabriz: Keynote&lt;/strong&gt;
