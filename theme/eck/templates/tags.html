@@ -6,9 +6,15 @@
 </div>
 {% endblock %}
 {% block content %}
-<ul>
-{% for tag, article in tags %}
-    <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag.name }}</a></li>
+<ul class="tag-list">
+{% for tag, articles in tags %}
+    <li>
+        <a
+            href="{{ SITEURL }}/{{ tag.url }}"
+            style="font-size: {{10 * ( articles | length ) + 100}}%"
+        >{{ tag.name }}</a>
+        <small>({{ articles | length }}) {#– {{ (articles | sort(attribute='date') | last).date.year }} #}</small>
+    </li>
 {% endfor %}
 </ul>
 {% endblock %}

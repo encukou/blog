@@ -933,6 +933,17 @@ h2 {
     height: 1px;
     width: 70%;
 }
+ul.tag-list {
+    list-style-type: none;
+    text-align: left;
+    padding-left: 1ex;
+    position: relative;
+}
+ul.tag-list li:before {
+    content: '⚑';
+    position: absolute;
+    left: -1.2em;
+}
 
 
 @media screen and (max-width: 800px) {

@@ -1,13 +1,7 @@
 {% extends "archives.html" %}
 {% block title %}{{ SITENAME }}{# &mdash; {{ period_num | join('-') }}#}{% endblock %}
-{% block content_title %}{% endblock content_title %}
-{% block content %}
-<h1>Archives for {{ period | reverse | join(' ') }}</h1>
-
-<dl>
-{% for article in dates %}
-    <dt>{{ article.locale_date }}</dt>
-    <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
-{% endfor %}
-</dl>
+{% block content_title %}
+<div class="page-title">
+    <h2>Archives for <span>{{ SITENAME }}</span> — {{ period | reverse | join(' ') }}</h2>
+</div>
 {% endblock %}
