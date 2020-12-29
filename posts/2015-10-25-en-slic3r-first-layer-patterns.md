@@ -6,7 +6,7 @@ find on the Internet yet.
 
 <!-- PELICAN_END_SUMMARY -->
 
-[![What I'll be describing](|filename|../images/2015-10-25-slic3r/first-layer.jpg){.size-auto}](|filename|../images/2015-10-25-slic3r/first-layer.jpg)
+[![What I'll be describing]({static}../images/2015-10-25-slic3r/first-layer.jpg){.size-auto}]({static}../images/2015-10-25-slic3r/first-layer.jpg)
 
 # My Setup
 
@@ -36,7 +36,7 @@ But first, what will I print?
 
 # A Drawer Handle
 
-[![The Problem](|filename|../images/2015-10-25-slic3r/handle-old.jpg){.size-auto}](|filename|../images/2015-10-25-slic3r/handle-old.jpg)
+[![The Problem]({static}../images/2015-10-25-slic3r/handle-old.jpg){.size-auto}]({static}../images/2015-10-25-slic3r/handle-old.jpg)
 
 I have some drawers whose handles are pretty flimsy, and as time goes by,
 they're detaching.
@@ -72,11 +72,11 @@ Some are only available for the inside of objects, because they can't cover
 Rectilinear, the outline-following Cocentric, the fractal Hilbert Curve,
 the Archimedean Chords spiral, and the angular Octagram Spiral.
 
-[![Plain Old Rectilinear](|filename|../images/2015-10-25-slic3r/rectilinear.png){.size-auto}](|filename|../images/2015-10-25-slic3r/rectilinear.png)
-[![Cocentric pattern](|filename|../images/2015-10-25-slic3r/cocentric.png){.size-auto}](|filename|../images/2015-10-25-slic3r/cocentric.png)
-[![Hilbert Curve](|filename|../images/2015-10-25-slic3r/hilbert.png){.size-auto}](|filename|../images/2015-10-25-slic3r/hilbert.png)
-[![Archimedean Chords](|filename|../images/2015-10-25-slic3r/archimedean.png){.size-auto}](|filename|../images/2015-10-25-slic3r/archimedean.png)
-[![Octagram Spiral](|filename|../images/2015-10-25-slic3r/octagram-spiral.png){.size-auto}](|filename|../images/2015-10-25-slic3r/octagram-spiral.png)
+[![Plain Old Rectilinear]({static}../images/2015-10-25-slic3r/rectilinear.png){.size-auto}]({static}../images/2015-10-25-slic3r/rectilinear.png)
+[![Cocentric pattern]({static}../images/2015-10-25-slic3r/cocentric.png){.size-auto}]({static}../images/2015-10-25-slic3r/cocentric.png)
+[![Hilbert Curve]({static}../images/2015-10-25-slic3r/hilbert.png){.size-auto}]({static}../images/2015-10-25-slic3r/hilbert.png)
+[![Archimedean Chords]({static}../images/2015-10-25-slic3r/archimedean.png){.size-auto}]({static}../images/2015-10-25-slic3r/archimedean.png)
+[![Octagram Spiral]({static}../images/2015-10-25-slic3r/octagram-spiral.png){.size-auto}]({static}../images/2015-10-25-slic3r/octagram-spiral.png)
 
 They're mostly meant to be functional, but some are quite aesthetically
 pleasing than others.
@@ -119,7 +119,7 @@ to Hilbert Curve. The rest of the object usess Archimedean Chords.
 
 Et voilà! A combined pattern emerges.
 
-[![Sliced bottom layer](|filename|../images/2015-10-25-slic3r/combination.png){.size-full}](|filename|../images/2015-10-25-slic3r/combination.png)
+[![Sliced bottom layer]({static}../images/2015-10-25-slic3r/combination.png){.size-full}]({static}../images/2015-10-25-slic3r/combination.png)
 
 Slic3r adds quite a wide margin between the two areas, which works out well
 for my use of two large patches of distinct textures.
@@ -140,7 +140,7 @@ You can see them in the screnshot above as light grey dots off to the sides
 of the pentagon.
 This tricked Slic3r into putting the center where it should be.
 
-[![The Solution](|filename|../images/2015-10-25-slic3r/handle-new.jpg){.size-auto}](|filename|../images/2015-10-25-slic3r/handle-new.jpg)
+[![The Solution]({static}../images/2015-10-25-slic3r/handle-new.jpg){.size-auto}]({static}../images/2015-10-25-slic3r/handle-new.jpg)
 
 # To Be Continued
 

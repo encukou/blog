@@ -14,8 +14,6 @@ SITEURL = ''
 
 TIMEZONE = 'Europe/Prague'
 
-DEFAULT_LANG = u'en'
-
 DELETE_OUTPUT_DIRECTORY = True
 
 # Feed generation is usually not desired when developing
@@ -92,7 +90,7 @@ XMENUITEMS = (
     )
 DISPLAY_PAGES_ON_MENU = False
 
-PAGE_DIR = '../pages'
+PAGE_PATHS = ['../pages']
 STATIC_PATHS = [
     '../images',
     '../extra/CNAME',
@@ -121,7 +119,9 @@ CATEGORY_SAVE_AS = CATEGORY_URL + '/index.html'
 TAG_URL = 'blog/tag/{slug}'
 TAG_SAVE_AS = TAG_URL + '/index.html'
 
-DIRECT_TEMPLATES = ('siteindex', 'index', 'tags', 'categories', 'archives')
+DIRECT_TEMPLATES = (
+    'siteindex', 'index', 'tags', 'categories', 'archives', 'period_archives',
+)
 SITEINDEX_URL = 'encukou.cz'
 SITEINDEX_SAVE_AS = 'index.html'
 INDEX_URL = 'blog'
@@ -133,30 +133,8 @@ CATEGORIES_SAVE_AS = CATEGORIES_URL + '/index.html'
 ARCHIVES_URL = 'blog/archive'
 ARCHIVES_SAVE_AS = ARCHIVES_URL + '/index.html'
 
-DEFAULT_LANG = "don't have one"
-
 SUMMARY_MAX_LENGTH = None
 
-# Markdown DownHeader from http://code.google.com/p/markdown-downheader/
-
-class DownHeaderExtension(markdown.Extension):
-    def extendMarkdown(self, md, md_globals):
-        if 'downheader' in md.treeprocessors.keys():
-            md.treeprocessors['downheader'].offset += 1
-        else:
-            md.treeprocessors.add('downheader', DownHeaderProcessor(), '_end')
-
-class DownHeaderProcessor(markdown.treeprocessors.Treeprocessor):
-    def __init__(self, offset=1):
-        markdown.treeprocessors.Treeprocessor.__init__(self)
-        self.offset = offset
-    def run(self, node):
-        expr = re.compile('h(\d)')
-        for child in node.getiterator():
-            match = expr.match(child.tag)
-            if match:
-                child.tag = 'h' + str(min(6, int(match.group(1))+self.offset))
-        return node
 
 # Join one-letter words (Czech typography convention)
 
@@ -194,15 +172,28 @@ class GithubLinkPlugin(object):
     def register(self):
         signals.article_generator_finalized.connect(self.add_github_links)
 
-MD_EXTENSIONS = [
-    'codehilite(css_class=highlight,guess_lang=false)',
-    'headerid',
-    'extra',
-    DownHeaderExtension(),
-    VlnaExtension(),
-]
+MARKDOWN = {
+    'extensions': [
+        'codehilite',
+        'extra',
+        'mdx_headdown',
+        'toc',
+        VlnaExtension(),
+    ],
+    'extension_configs': {
+        'codehilite': {
+            'css_class': 'highlight',
+            'guess_lang': False,
+        },
+        'mdx_headdown': {
+            'offset': 1,
+        }
+    },
+}
 
-PLUGIN_PATH = 'pelican-plugins'
+PLUGIN_PATHS = ['pelican-plugins']
 PLUGINS = ['summary', 'neighbors', 'latex', GithubLinkPlugin()]
 
 GITHUB_URL = 'https://github.com/encukou/blog/blob/master/'
+
+SITEURL = 'http://encukou.cz'

@@ -158,7 +158,7 @@ main screen and type away.
 A popular generalization of [Fitts' law](http://en.wikipedia.org/wiki/Fitts%27s_law)
 says this is very convenient, and I'm sure not arguing with that.
 
-[![Screenshot of my screen with a red freehand arrow pointing at the pi-remote](|filename|../images/2013-05-04-screenshot.png){.size-full}](|filename|../images/2013-05-04-screenshot.png)
+[![Screenshot of my screen with a red freehand arrow pointing at the pi-remote]({static}../images/2013-05-04-screenshot.png){.size-full}]({static}../images/2013-05-04-screenshot.png)
 
 Here's a review of my files, for future reference:
 
