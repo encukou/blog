@@ -20,7 +20,7 @@
         </div> <!--/#entry-content-->
         {% block article_aux %}
         {% if article.tags %}
-            <span class="tag-links"><strong>📌</strong>
+            <span class="tag-links"><strong>⚑</strong>
                 {% set delimiter = joiner() %}
                 {% for tag in article.tags|sort %}{{- delimiter() }} <a href="{{ SITEURL }}/{{ tag.url }}" rel="tag">{{ tag }}</a>{% endfor %}
             </span>
