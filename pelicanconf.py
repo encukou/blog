@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
 
 import markdown
 import re
@@ -90,7 +88,7 @@ XMENUITEMS = (
     )
 DISPLAY_PAGES_ON_MENU = False
 
-PAGE_PATHS = ['../pages']
+PAGE_PATHS = ['pages']
 STATIC_PATHS = [
     '../images',
     '../extra/CNAME',
