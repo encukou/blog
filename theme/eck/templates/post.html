@@ -18,6 +18,7 @@
         <div class="entry-content">
             {% block article_content %}{{ article.content }}{% endblock %}
         </div> <!--/#entry-content-->
+        {% block article_aux %}
         {% if article.tags %}
             <span class="tag-links"><strong>📌</strong>
                 {% set delimiter = joiner() %}
@@ -33,5 +34,6 @@
                 <li><a href="{{article.github_url}}"><em>Fork</em> this post on Github</a></li>
             {% endif %}
         </ul>
+        {% endblock article_aux %}
     </div> <!--/#main-->
 </div>  <!--/#post-->
