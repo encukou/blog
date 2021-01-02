@@ -15,6 +15,7 @@ TIMEZONE = 'Europe/Prague'
 DELETE_OUTPUT_DIRECTORY = True
 
 # Feed generation is usually not desired when developing
+FEED_ATOM = 'feeds/all.atom.xml'
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
@@ -195,3 +196,4 @@ PLUGINS = ['summary', 'neighbors', 'latex', GithubLinkPlugin()]
 GITHUB_URL = 'https://github.com/encukou/blog/blob/master/'
 
 SITEURL = 'http://encukou.cz'
+FEED_DOMAIN = SITEURL
