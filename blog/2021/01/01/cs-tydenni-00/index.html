@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>encukou/blog &mdash; Týdenní poznámky #0</title>
+        <meta charset="utf-8" />
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="stylesheet" type="text/css" href="http://encukou.cz/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            body.custom-background { background-color: #f5f5f5; }
+        </style>
+        <link rel="alternate" type="application/atom+xml"
+            title="encukou/blog — Atom"
+            href="http://encukou.cz/feeds/all.atom.xml" />
+        <link rel="icon" type="image/png" href="http://encukou.cz/images/eck512.png">
+        <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
+</head>
+
+<body class="home blog custom-background single-author" >
+    <div id="container">
+        <div id="header">
+                <h1 id="site-title"><a href="http://encukou.cz"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>.cz</a></h1>
+                <h2 id="site-description">primary colors underneath</h2>
+        </div><!-- /#banner -->
+        
+        <div class="page-title">
+        </div>
+
+        <div id="menu">
+            <div class="menu-navigation-container">
+                <ul id="menu-navigation" class="menu">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="http://github.com/encukou">github</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
+
+                </ul>
+            </div> <!--/#menu-navigation-container-->
+        </div><!-- /#menu -->
+
+        <div id="contents">
+
+<div class="post type-post status-publish format-standard hentry category-general">
+    <div class="entry-meta">
+        <div class="date"><a href="http://encukou.cz/blog/2021/01/01/cs-tydenni-00">2021-01-01</a></div>
+    </div> <!-- /#entry-meta -->
+    <div class="main">
+        <h2 class="entry-title">
+            <a href="http://encukou.cz/blog/2021/01/01/cs-tydenni-00" title="Permalink to Týdenní poznámky #0" rel="bookmark">Týdenní poznámky #0</a>
+        </h2>
+        <div class="entry-content">
+<p>Utekl další týden (12. 28.–1. 1.), a&nbsp;tak si po vzoru
+<a href="https://honzajavorek.cz/blog/#archives-2020">Honzy Javorka</a>
+sepisuju, co jsem dělal.
+Uvidíme, třeba se mi to podaří dělat nějak&nbsp;pravidelněji.</p>
+<p>Tento týden byl zajímavý tím, že jsem měl dovolenou.
+Šetřil jsem si ji na renovaci nového bytu, nebo dokonce na stěhování,
+ale klíčové lidi napadl virus a&nbsp;tak nakonec nebylo moc co dělat
+a&nbsp;byt stále není hotový.
+A&nbsp;tak jsem seděl za počítačem.</p>
+
+
+<p>Dělám na několika projektech, které jsou schopny zabrat veškerý můj čas.
+V práci to řeším tak, že si na každý projekt vyhradím den v týdnu.
+Docela to funguje – dokud není víc projektů než těch dnů – a&nbsp;tak jsem si
+podobně rozvrhl i „volný“ týden.</p>
+<h2 id="pondeli-naucse">Pondělí: Naucse</h2>
+<p>Pondělí jsem začal převáděním z Travis CI na GitHub Actions.
+Travis-ci.org je totiž má poslední dobou dost dlouhé fronty a&nbsp;GHA jsou většinou
+mnohem rychlejší.
+Převedl jsem repozitáře <a href="https://github.com/pyvec/pyvo-data/pull/379">pyvo-data</a> a&nbsp;<a href="https://github.com/pyvec/pyvo.cz/pull/142">pyvo.cz</a>.</p>
+<p>Pak jsem pohnul s už dlouho rozdělaným
+<a href="https://github.com/pyvec/naucse/pull/42">pull requestem na lepší práci s časovými zónami</a> na naucse.python.cz.
+Vzhledem k tomu, že jsou zatím všechny kurzy v ČR, je to tak trochu zbytečné
+puntičkářství.
+Ale myslím, že to ten kód aspoň trošičku&nbsp;zpřehlednilo.</p>
+<p>Budu se na naucse muset začít dívat víc jako na produkt a&nbsp;míň jako na hobby
+projekt, kde zkouším blbůstky jako návrh detalů API které nikdo moc&nbsp;nepoužívá.</p>
+<p>Pak jsem rozpracoval <a href="https://github.com/pyvec/naucse/issues/27">aktualizaci CSS pro Notebookové lekce</a>,
+což jsem ale nedokončil.
+Design není moje nejsilnější stránka.</p>
+<p>Večer pak byl <a href="https://www.youtube.com/watch?v=tUQQ1g2VD7I&amp;list=PLFt-PM7J_H3EU5Oez3ZSVjY5pZJttP2lT&amp;index=28">další stream o&nbsp;projektu <code>freezeyt</code></a>.
+Protože minulý týden skončil začátečnický kurz, byl stream dřív a&nbsp;dvakrát delší
+než normálně.
+S Adél jsme opravili chyby v testech na Windows, Davidova testovací Django
+aplikace je hotová, a&nbsp;já pokračuju s refactoringem, který mj. umožní ukládat
+výstup jinam než na disk. Třeba rovnou do Gitového&nbsp;repozitáře.</p>
+<h2 id="utery-cpython-review">Úterý: CPython Review</h2>
+<p>V úterý jsem se kouknul na Pull Requesty v Pythonu, na které bych mohl
+udělat review.
+Specializuju na C API a&nbsp;posledních 7&nbsp;let navrhuju [nové a&nbsp;lepší API pro moduly],
+a&nbsp;tak je spousta review okolo překlápění modulů na tohle nové API.
+Jsem rád, že to lidi zajímá natolik, že si s tím dají práci.
+Na druhou stranu je to dost drbačka, a&nbsp;někdy nestíhám – pomocníci (a&nbsp;jejich
+mentor, který v tomhle vidí dobrý úvod do céčkových částí Pythonu) na tohle
+často mají mnohem víc času než&nbsp;já.</p>
+<ul>
+<li>Erlendovo <a href="https://github.com/python/cpython/pull/23124">převedení modulu <code>array</code></a>
+  je téměř hotové.</li>
+<li>Hai Shi-ovo <a href="https://github.com/python/cpython/pull/23405">převedení modulu <code>_functools</code></a></li>
+</ul>
+<p>Další review jsem udělal na jiné změny:</p>
+<ul>
+<li><a href="https://github.com/python/cpython/pull/23903">Přidání funkce <code>PyType_GetName</code></a>
+  jsem jen zběžně okomentoval a <a href="https://github.com/python/cpython/pull/15892#discussion_r549695085">upozornil</a> na něj pár lidí, které by to mohlo
+  zajímat.
+  Zjistil jsem že jména typů v Pythonu jsou nečekaně zamotaná záležitost
+  a&nbsp;rozhodnout, co <em>přesně</em> má dělat funkce co vrací jméno typu, bude nejspíš
+  potřebovat trochu delší rešerši.
+  Nevím, jestli si tohle mám vzít na svoji&nbsp;zodpovědnost.</li>
+<li><a href="https://github.com/python/cpython/pull/22632">Opravu správy paměti při importech</a>
+  jsem si prohlédl docela podrobně, ale je to docela stará změna a&nbsp;bylo ji
+  potřeba spojit s aktuálním stavem repozitáře.
+  Bohužel se při tom rozbilo něco dalšího, tak se na to příště kouknu&nbsp;znova.</li>
+<li><a href="https://github.com/python/cpython/pull/19133">U&nbsp;opravy kopírování ukazatele</a>
+  jsem vzal navrhnuté změny a&nbsp;dal jsem je do nového PR.
+  Autor původního PR totiž už pár měsíců neodpovídá na komentáře.
+  (Ale jinak je to fajn člověk ☺)</li>
+</ul>
+<p>Večer jsem pak aktualizoval tenhle blog a&nbsp;začal psát tenhle příspěvek.
+Potěšilo mě, jak málo změn bylo potřeba při aktualizaci na novou verzi
+<a href="https://docs.getpelican.com/en/stable/index.html">Pelicanu</a>&nbsp;udělat.</p>
+<h2 id="streda-actvtek-abi3pep">Středa a&nbsp;čtvtek: abi3&nbsp;PEP</h2>
+<p>Ve středu jsem psal PEP.
+PEP (Python Enhancement Proposal) je (většinou) dokument, který vysvětluje
+plánovanou změnu v Pythonu, jako přidání <a href="https://www.python.org/dev/peps/pep-0492">nového klíčového slova</a>
+nebo <a href="https://www.python.org/dev/peps/pep-0498/">řetězcových šablon</a>.
+Můj PEP bude o&nbsp;tom, na co chci dál v Pythonu zaměřit.
+Tak trochu novoroční předsevzetí.</p>
+<p>A&nbsp;co že to chci dělat?
+Oživit <a href="https://docs.python.org/3/c-api/stable.html">stabilní ABI</a> Pythonu, které aktuálně není v moc dobrém stavu
+(např. nikdo vlastně neví, co to přesně je), a&nbsp;napsat testy a&nbsp;procesy,
+aby se v budoucnu tolik nerozbíjelo.</p>
+<p>Za středu a&nbsp;čtvrtek jsem dokument dostal do <a href="https://github.com/encukou/abi3/blob/main/PEP.rst">podoby</a>,
+ve které jsem se ho nebál ho poslat do <a href="https://mail.python.org/archives/list/capi-sig@python.org/thread/PMM5QG4IAL6LOMNFXNHW72INSCN4JC5H/">diskuze</a>, aby se k němu vyjádřili
+i&nbsp;ostatní kdo jsou v téhle oblasti aktivní.
+Další důvod proč píšu dokument je totiž ten, že chci abychom se zkoordinovali.
+Aktuálně má každý kdo s tímto tématem chce pomoct trochu jinou představu
+o&nbsp;konečném výsledku. S takovou z toho žádný rozumný výsledek&nbsp;nebude.</p>
+<h2 id="patek-svatek">Pátek – svátek</h2>
+<p>No a&nbsp;v pátek byl svátek, který jsem se rozhodl strávit bez počítače.
+O&nbsp;výletech na kopec tenhle blog není, tak se nic psát nebudu.
+Ahoj za týden!</p>
+<h2 id="aco-vy">A&nbsp;co vy?</h2>
+<p>Honza, od kterého jsem okopíroval tenhle formát blogu,
+má <a href="https://honzajavorek.cz/blog/neni-to-zavod/">článek</a> pro všechny, kterým výpis všeho, co jsem za týden udělal,
+přináší deprese.
+Se spoustou z toho – i&nbsp;když samozřejmě ne se vším – se ztotožňuju. 
+Není to závod!</p>
+<p>Navíc doporučím <a href="https://www.youtube.com/watch?v=N_gysDr2gfc&amp;t=3423s">Lumírovu přednášku</a> plnou tipů pro produktivitu,
+ve které zmiňuje, jak je dobré si sepsat, co člověk za den/týden udělal.
+Pokud to neděláte, pravděpodobně vám samým toho spousta&nbsp;uniká.</p>        </div> <!--/#entry-content-->
+            <span class="tag-links"><strong>⚑</strong>
+ <a href="http://encukou.cz/blog/tag/weekly" rel="tag">weekly</a>            </span>
+        <ul class="article-links">
+                <li><a href="mailto:encukou@gmail.com?subject=Re:+článek+'T%C3%BDdenn%C3%AD%20pozn%C3%A1mky%20%230'">Přidat <em>komentář</em></a></li>
+                <li><a href="https://github.com/encukou/blog/blob/master/posts/2021-01-01-cs-tydenni-00.md"><em>Forknout</em> tenhle článek na Githubu</a></li>
+        </ul>
+    </div> <!--/#main-->
+</div>  <!--/#post-->
+        </div>
+
+
+<ul class="prev-next">
+    <li class="prev">
+        <a href="http://encukou.cz/blog/2016/06/20/pycon-report">
+            PyCon 2016 Report
+        </a>
+    </li>
+</ul>
+<span class="clearfix"></span>
+
+
+        <footer id="footer">
+            <p>
+        
+    tento blog používá systém <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    styl adaptovaný z <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        © <a href="https://twitter.com/thisistran">Tran</a>
+        a <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    použité fonty: Signika © <a href="http://ancymonic.com/">Anna Giedryś</a>
+        a Jockey One © <a href="www.type-together.com">TypeTogether</a>
+    <br>
+    tento blog je na <a href="https://github.com/encukou/blog">Githubu</a>
+    <br>
+    <br>
+    text na této stránce je k dispozici pod licencí
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+            Creative Commons Attribution-ShareAlike 3.0 Unported</a>
+    <br>
+    © Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    
+            </p>
+        </footer>
+    </div><!-- /#container -->
+    <div style="display:none"></div>
+</body>
+</html>

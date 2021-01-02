@@ -11,7 +11,8 @@
         </style>
         <link rel="alternate" type="application/atom+xml"
             title="encukou/blog — Atom"
-            href="http://encukou.cz/" /> 
+            href="http://encukou.cz/feeds/all.atom.xml" />
+        <link rel="icon" type="image/png" href="http://encukou.cz/images/eck512.png">
         <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
 </head>
 
@@ -29,8 +30,8 @@
             <div class="menu-navigation-container">
                 <ul id="menu-navigation" class="menu">
                         <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="http://github.com/encukou">github</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="http://github.com/encukou">github</a></li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
 
                 </ul>
@@ -63,77 +64,69 @@ a&nbsp;trochu se zorientuj.</p>
 Proměnné v&nbsp;Pythonu jsou <em>jména</em>, nebo řekněme&nbsp;<em>ukazatele</em>.</p>
 <p>Abych to vysvětlil, pojďme se krok po kroku podívat,
 co přesně dělá tohle jednoduché přiřazení:</p>
-<div class="highlight"><pre><span></span><span class="n">jazyk</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">jazyk</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span>
+</code></pre></div>
 
 <p>Nejdřív se vyhodnotí výraz za rovnítkem.
 Výsledek vyhodnocení výrazu je vždycky nějaký <em>objekt</em>;
 v&nbsp;našem případě řetězec 'python'.
 Ukážeme si ho takhle:</p>
-<div class="highlight"><pre><span></span>                ╔══════════╗
+<div class="highlight"><pre><span></span><code>                ╔══════════╗
                 ║ &#39;python&#39; ║
                 ╚══════════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Teď, když má hodnotu výrazu, podívá se Python na jméno před rovnítkem,
 a&nbsp;zařídí, aby na tu hodnotu&nbsp;„ukazovalo“.</p>
-<div class="highlight"><pre><span></span>┌───────┐       ╔══════════╗
+<div class="highlight"><pre><span></span><code>┌───────┐       ╔══════════╗
 │ jazyk ├──────→║ &#39;python&#39; ║
 └───────┘       ╚══════════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Voilà! Hodnota proměnné <code>jazyk</code> je odteď&nbsp;<code>'python'</code>.</p>
 <p>Pojďme si přiřadit další proměnnou:</p>
-<div class="highlight"><pre><span></span><span class="n">rec</span> <span class="o">=</span> <span class="s1">&#39;češ&#39;</span> <span class="o">+</span> <span class="s1">&#39;tina&#39;</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">rec</span> <span class="o">=</span> <span class="s1">&#39;češ&#39;</span> <span class="o">+</span> <span class="s1">&#39;tina&#39;</span>
+</code></pre></div>
 
 <p>Opět se vyhodnotí výraz, vezmou se řetězce <code>'češ'</code> a <code>'tina'</code>, sečtou se,
 a&nbsp;na výslednou hodnotu začne ukazovat proměnná <code>rec</code>:</p>
-<div class="highlight"><pre><span></span>┌───────┐       ╔══════════╗
+<div class="highlight"><pre><span></span><code>┌───────┐       ╔══════════╗
 │ jazyk ├──────→║ &#39;python&#39; ║
 └───────┘       ╚══════════╝
 ┌─────┐         ╔═══════════╗
 │ rec ├────────→║ &#39;čeština&#39; ║
 └─────┘         ╚═══════════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Že to není zas tak složité?</p>
 <p>Teď zkusíme jednu proměnnou „přiřadit“ do druhé:</p>
-<div class="highlight"><pre><span></span><span class="n">jazyk</span> <span class="o">=</span> <span class="n">rec</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">jazyk</span> <span class="o">=</span> <span class="n">rec</span>
+</code></pre></div>
 
 <p>Opět se nejdřív vyhodnotí výraz za rovnítkem.
 Výsledek bude objekt, který je v&nbsp;proměnné <code>rec</code>.
 A&nbsp;proměnná <code>jazyk</code> začne jednoduše ukazovat na tento objekt:</p>
-<div class="highlight"><pre><span></span>┌───────┐       ╔══════════╗
+<div class="highlight"><pre><span></span><code>┌───────┐       ╔══════════╗
 │ jazyk ├───┐ ×→║ &#39;python&#39; ║
 └───────┘   │   ╚══════════╝
 ┌─────┐     └──→╔═══════════╗
 │ rec ├────────→║ &#39;čeština&#39; ║
 └─────┘         ╚═══════════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Tady je důvod, proč říkám že proměnné v&nbsp;Pythonu jsou <em>jména</em>.
 Jeden objekt může mít několik jmen, ale pořád je to ten samý&nbsp;objekt.</p>
 <p>Řetězec <code>'python'</code> teď žádné jméno nemá. Nedá se k&nbsp;němu nijak
-dostat<sup id="fnref:interned-strings"><a class="footnote-ref" href="#fn:interned-strings" rel="footnote">1</a></sup>, a&nbsp;tudíž s&nbsp;ním dál nemůžeme nijak pracovat.
+dostat<sup id="fnref:interned-strings"><a class="footnote-ref" href="#fn:interned-strings">1</a></sup>, a&nbsp;tudíž s&nbsp;ním dál nemůžeme nijak pracovat.
 Jediné co můžeme dělat je vytvořit nový objekt se stejnou hodnotou.
 Takovéhle sirotky Python časem smaže, aby nezabíraly paměť počítače:</p>
-<div class="highlight"><pre><span></span>┌───────┐
+<div class="highlight"><pre><span></span><code>┌───────┐
 │ jazyk ├───┐      * poof *
 └───────┘   │
 ┌─────┐     └──→╔═══════════╗
 │ rec ├────────→║ &#39;čeština&#39; ║
 └─────┘         ╚═══════════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Teď, když víme jak fungují proměnné, se můžeme podívat na zoubek
 jejich hodnotám, tedy objektům.
@@ -153,11 +146,11 @@ o <a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu">Měnění objekt
 <p>Tohle je zjednodušení; řetězce co se vyskytují přímo v kódu
 jsou (v CPythonu) součástí modulu, takže se k nim nějak dostat dá,
 a budou “žít” dál.
-Podrobněji to plánuju rozeberat v článku <em>identity a hodnoty</em>.&#160;<a class="footnote-backref" href="#fnref:interned-strings" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+Podrobněji to plánuju rozeberat v článku <em>identity a hodnoty</em>.&#160;<a class="footnote-backref" href="#fnref:interned-strings" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>        </div> <!--/#entry-content-->
-            <span class="tag-links"><strong>📌</strong>
+            <span class="tag-links"><strong>⚑</strong>
  <a href="http://encukou.cz/blog/tag/promenne" rel="tag">proměnné</a>,  <a href="http://encukou.cz/blog/tag/python" rel="tag">python</a>            </span>
         <ul class="article-links">
                 <li><a href="mailto:encukou@gmail.com?subject=Re:+článek+'Prom%C4%9Bnn%C3%A9%20jsou%20jm%C3%A9na'">Přidat <em>komentář</em></a></li>
@@ -192,8 +185,8 @@ Podrobněji to plánuju rozeberat v článku <em>identity a hodnoty</em>.&#160;<
         © <a href="https://twitter.com/thisistran">Tran</a>
         a <a href="http://bunnyman.info/">tBunnyMan</a>
     <br>
-    použité fonty: Signika © <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
-        a Jockey One © <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    použité fonty: Signika © <a href="http://ancymonic.com/">Anna Giedryś</a>
+        a Jockey One © <a href="www.type-together.com">TypeTogether</a>
     <br>
     tento blog je na <a href="https://github.com/encukou/blog">Githubu</a>
     <br>

@@ -11,7 +11,8 @@
         </style>
         <link rel="alternate" type="application/atom+xml"
             title="encukou/blog — Atom"
-            href="http://encukou.cz/" /> 
+            href="http://encukou.cz/feeds/all.atom.xml" />
+        <link rel="icon" type="image/png" href="http://encukou.cz/images/eck512.png">
         <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
 </head>
 
@@ -29,8 +30,8 @@
             <div class="menu-navigation-container">
                 <ul id="menu-navigation" class="menu">
                         <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="http://github.com/encukou">github</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="http://github.com/encukou">github</a></li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
 
                 </ul>
@@ -59,18 +60,16 @@ They don't actually need to quack <em>like a&nbsp;duck</em>.</p>
 Some languages – the statically typed ones – require you to specify the type in front, and then they check it rigorously.
 In Python, you need to keep track of this in your head.
 It's&nbsp;possible that you're writing code where a&nbsp;variable could be either a&nbsp;string or a&nbsp;number:</p>
-<div class="highlight"><pre><span></span>def add(a, b):
+<div class="highlight"><pre><span></span><code>def add(a, b):
     return a + b
-</pre></div>
-
+</code></pre></div>
 
 <p>... or you might want a&nbsp;variable to changes type in the middle of a&nbsp;function,
 like in the example from <a href="http://docs.python-guide.org/en/latest/writing/structure/#dynamic-typing">Hitchhiker's&nbsp;guide to Python</a>:</p>
-<div class="highlight"><pre><span></span>items = &#39;a b c d&#39;  # This is a string...
+<div class="highlight"><pre><span></span><code>items = &#39;a b c d&#39;  # This is a string...
 items = items.split(&#39; &#39;)  # ...becoming a list
 items = set(items)  # ...and then a set
-</pre></div>
-
+</code></pre></div>
 
 <p>Those are smells: they should be <em>possible</em> but not&nbsp;<em>easy</em>.</p>
 <p>Variables (the <em>names</em>, not just values) always have types, even if,
@@ -81,11 +80,10 @@ rather than “the method <em>named</em>&nbsp;startswith”.</p>
 <h2 id="types-of-variables">Types of variables</h2>
 <p>I&nbsp;have some syntax in mind. If I&nbsp;rewrite one of the first examples in
 Eevee's&nbsp;post in it, I&nbsp;can get something like this:</p>
-<div class="highlight"><pre><span></span>def foo(a: String, b: StringPattern, c: List):
+<div class="highlight"><pre><span></span><code>def foo(a: String, b: StringPattern, c: List):
     if a.startswith(b):
         c.append(a)
-</pre></div>
-
+</code></pre></div>
 
 <p>By which I&nbsp;want to say <code>b</code> can be string, or a&nbsp;tuple of strings,
 or even a&nbsp;regex for all I&nbsp;care – as long as it can be matched against a&nbsp;string.
@@ -109,15 +107,14 @@ your code might break with the next version of my&nbsp;library.</p>
 <p>Of course, usually <code>a</code> will be an “actual string”, and the compiler can
 optimize for that case.</p>
 <p>I'll put a&nbsp;random snippet with syntax ideas here:</p>
-<div class="highlight"><pre><span></span>from somewhere import Snake
+<div class="highlight"><pre><span></span><code>from somewhere import Snake
 
 def print_length(x: List):
     print(x.length)
 
     if x has Snake:length:
         print(&quot;Scary! I got a {}m long snake as argument!&quot;(x.Snake:length))
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="type-declarations">Type declarations</h2>
 <p>For variables, the type can be specified declaration.
@@ -128,24 +125,22 @@ of the cases, but when you get hit by the 1%, you don't even know where to look
 Javascript's&nbsp;explicit <code>var</code> keyword is a&nbsp;good thing, for much the same reasons as Python's
 explicit <code>self</code>.</p>
 <p>In my syntax, variable declarations can specify the type:</p>
-<div class="highlight"><pre><span></span>str: String = &quot;abcd&quot;
+<div class="highlight"><pre><span></span><code>str: String = &quot;abcd&quot;
 
 list: List = [1, 2, 3]
 
 for i:int in list:
     print(i * i)
-</pre></div>
-
+</code></pre></div>
 
 <p>But, since most (or ideally all) expressions have a&nbsp;well-defined types, a&nbsp;shorthand comes to mind:</p>
-<div class="highlight"><pre><span></span>str := &quot;abcd&quot;
+<div class="highlight"><pre><span></span><code>str := &quot;abcd&quot;
 list := [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]
-</pre></div>
-
+</code></pre></div>
 
 <h2 id="operator-namespaces">Operator namespaces</h2>
 <p>This would work:</p>
-<div class="highlight"><pre><span></span>def concat(a: List, b: List):
+<div class="highlight"><pre><span></span><code>def concat(a: List, b: List):
     return a + b
 
 def elementwise-add(a: Array, b: Array):
@@ -156,8 +151,7 @@ b := [4, 5, 6]
 
 assert concat(a, b) == [1, 2, 3, 4, 5, 6]
 assert elementwise-add(a, b) == [5, 7, 9]
-</pre></div>
-
+</code></pre></div>
 
 <p>because while <code>Sequence:\+</code> and <code>Array:\+</code> are two different things,
 lists can support <em>both</em>.
@@ -167,12 +161,11 @@ a&nbsp;Sequence.)</p>
 <h2 id="definitions-and-implementations">Definitions and Implementations</h2>
 <p>Let's&nbsp;make a&nbsp;Tree interface.
 I'll use <a href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a>-ish syntax for generics:</p>
-<div class="highlight"><pre><span></span>T := TypePlaceholder()
+<div class="highlight"><pre><span></span><code>T := TypePlaceholder()
 
 interface Tree:
     walk(self: T) -&gt; Iterator[T]
-</pre></div>
-
+</code></pre></div>
 
 <p>This says that the type of <code>x.Tree:walk().next()</code> will be the same as the
 type of <code>x</code>.
@@ -180,7 +173,7 @@ type of <code>x</code>.
 it's&nbsp;defining the namespace that expression will use by default.)</p>
 <p>Then you can define BinaryTree like this.
 <code>BinaryTree:walk</code> becomes an implementation of&nbsp;<code>Tree:walk</code>.</p>
-<div class="highlight"><pre><span></span>class BinaryTree(Tree):
+<div class="highlight"><pre><span></span><code>class BinaryTree(Tree):
     left: Tree
     right: Tree
 
@@ -190,8 +183,7 @@ it's&nbsp;defining the namespace that expression will use by default.)</p>
         yield self
         if self.right:
             yield from self.left.walk()
-</pre></div>
-
+</code></pre></div>
 
 <p>Note the kewyord is <code>impl</code>, not <code>def</code>: this ensures that if the <code>Tree</code> interface
 grows a&nbsp;new method, existing methods of the same name won't magically become
@@ -201,7 +193,7 @@ by classes that claim to implement <code>Tree</code>.)</p>
 <p>Next let's&nbsp;have a&nbsp;class for corporate employees.
 An amployee is not a&nbsp;tree, and there's&nbsp;no <code>Employee:walk</code> in our model,
 but you can still use an employee as a&nbsp;tree node:</p>
-<div class="highlight"><pre><span></span>class Employee:
+<div class="highlight"><pre><span></span><code>class Employee:
     boss: Employee
     underlings: List[Employee]
 
@@ -209,18 +201,16 @@ but you can still use an employee as a&nbsp;tree node:</p>
         yield self
         for underling in self.underlings:
             yield from underling.walk()
-</pre></div>
-
+</code></pre></div>
 
 <p>And you might want to attach a <code>Tree:walk</code> to something from some library you
 can't easily change, like the stdlib.</p>
-<div class="highlight"><pre><span></span>impl Path.Tree:walk(self):
+<div class="highlight"><pre><span></span><code>impl Path.Tree:walk(self):
     yield self
     if self.isdir:
         for child:Tree in self.listdir:
             yield from child
-</pre></div>
-
+</code></pre></div>
 
 <p>The language should probably limit who can do this and where,&nbsp;though.</p>
 <p>To step away from Tree for one paragraph:
@@ -232,7 +222,7 @@ And you can later add <code>impl Object:to_string</code>, which won't be aliased
 <code>YourClass:to_string</code>.</p>
 <h2 id="interface-conflicts">Interface conflicts</h2>
 <p>Consider this class:</p>
-<div class="highlight"><pre><span></span>class FamilyMember:
+<div class="highlight"><pre><span></span><code>class FamilyMember:
     parents: List[FamilyMember]
     children: List[FamilyMember]
 
@@ -241,8 +231,7 @@ And you can later add <code>impl Object:to_string</code>, which won't be aliased
         yield self
         for child:Tree in self.children:
             yield from child
-</pre></div>
-
+</code></pre></div>
 
 <p>Now, if you inherit from both <code>Employee</code> and <code>FamilyMember</code>, you're in trouble.
 The resulting <code>Tree:walk</code> should fail loudly, unless you explicitly override&nbsp;it.</p>
@@ -258,7 +247,7 @@ and implement <code>Visit:leaf</code>, where <code>Visit</code> is an empty(!)&n
 <p>I&nbsp;could rant on, about, say, registration conflicts or efficient vtable
 references, but let's&nbsp;end it here, throw it at the wall and see if it&nbsp;sticks.</p>
 <p>(I&nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)</p>        </div> <!--/#entry-content-->
-            <span class="tag-links"><strong>📌</strong>
+            <span class="tag-links"><strong>⚑</strong>
  <a href="http://encukou.cz/blog/tag/language-design" rel="tag">language design</a>            </span>
         <ul class="article-links">
                 <li><a href="mailto:encukou@gmail.com?subject=Re:+'Types%20as%20namespaces'+blog+post">Add a <em>Comment</em></a></li>
@@ -293,8 +282,8 @@ references, but let's&nbsp;end it here, throw it at the wall and see if it&nbsp;
         by <a href="https://twitter.com/thisistran">Tran</a>
         and <a href="http://bunnyman.info/">tBunnyMan</a>
     <br>
-    fonts: Signika by <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
-        and Jockey One by <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    fonts: Signika by <a href="http://ancymonic.com/">Anna Giedryś</a>
+        and Jockey One by <a href="www.type-together.com">TypeTogether</a>
     <br>
     fork this blog on <a href="https://github.com/encukou/blog">Github</a>
     <br>

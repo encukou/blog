@@ -11,7 +11,8 @@
         </style>
         <link rel="alternate" type="application/atom+xml"
             title="encukou/blog — Atom"
-            href="http://encukou.cz/" /> 
+            href="http://encukou.cz/feeds/all.atom.xml" />
+        <link rel="icon" type="image/png" href="http://encukou.cz/images/eck512.png">
         <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
 </head>
 
@@ -29,8 +30,8 @@
             <div class="menu-navigation-container">
                 <ul id="menu-navigation" class="menu">
                         <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="http://github.com/encukou">github</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="http://github.com/encukou">github</a></li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
 
                 </ul>
@@ -63,16 +64,15 @@ a&nbsp;trochu se zorientuj.</p>
 To znamená, že se nedá žádným způsobem změnit jejich hodnota.
 Chceme-li řetězec „změnit“, musíme vytvořit úplně nový objekt
 s&nbsp;novou hodnotou.</p>
-<div class="highlight"><pre><span></span><span class="n">retezec</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="n">retezec</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span>
 <span class="n">retezec</span> <span class="o">=</span> <span class="n">retezec</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 <span class="n">retezec</span> <span class="o">=</span> <span class="n">retezec</span> <span class="o">+</span> <span class="s1">&#39;D&#39;</span>
 <span class="n">retezec</span> <span class="o">=</span> <span class="n">retezec</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Tyhle příkazy vytvoří několik „sirotků“,
 než do proměnné dostanou správnou hodnotu:</p>
-<div class="highlight"><pre><span></span>┌─────────┐     ╔═══════╗
+<div class="highlight"><pre><span></span><code>┌─────────┐     ╔═══════╗
 │ retezec ├─┐ ×→║ &#39;abc&#39; ║
 └─────────┘ │   ╚═══════╝
             │   ╔═══════╗
@@ -84,19 +84,17 @@ než do proměnné dostanou správnou hodnotu:</p>
             │   ╔═══════╗
             └──→║ &#39;BCD&#39; ║
                 ╚═══════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Existují ale i&nbsp;objekty, které měnit lze. Klasický příklad jsou&nbsp;seznamy.</p>
 <p>Jak funguje takový seznam?</p>
 <p>Když napíšeme</p>
-<div class="highlight"><pre><span></span><span class="n">jmeno</span> <span class="o">=</span> <span class="s1">&#39;hynek&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="n">jmeno</span> <span class="o">=</span> <span class="s1">&#39;hynek&#39;</span>
 <span class="n">jmena</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;štěpán&#39;</span><span class="p">,</span> <span class="s1">&#39;vilém&#39;</span><span class="p">]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>dostaneme následující situaci:</p>
-<div class="highlight"><pre><span></span>┌───────┐          ╔═════════╗
+<div class="highlight"><pre><span></span><code>┌───────┐          ╔═════════╗
 │ jmeno ├─────────→║ &#39;hynek&#39; ║
 └───────┘          ╚═════════╝
 ┌───────┐    ╔═════╤═════╗
@@ -107,20 +105,18 @@ než do proměnné dostanou správnou hodnotu:</p>
                 │ ╔══════════╗  ╚═════════╝
                 └→║ &#39;štěpán&#39; ║ 
                   ╚══════════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Položky seznamu se chovají jako proměnné.
 Stejně jako hodnota výrazu <code>jmeno</code> je teď <code>'hynek</code>',
 výraz <code>jmena[0]</code> má hodnotu <code>'štěpán'</code>.
 A&nbsp;stejně tak jako můžeme přiřadit do proměnné <code>jmeno</code>,
 můžeme přiřadit i&nbsp;do <code>jmena[0]</code>:</p>
-<div class="highlight"><pre><span></span><span class="n">jmena</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">jmeno</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">jmena</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">jmeno</span>
+</code></pre></div>
 
 <p>a&nbsp;dostaneme stejný výsledek, jako by <code>jmena[0]</code> byla normální proměnná:</p>
-<div class="highlight"><pre><span></span>┌───────┐          ╔═════════╗
+<div class="highlight"><pre><span></span><code>┌───────┐          ╔═════════╗
 │ jmeno ├─────────→║ &#39;hynek&#39; ║
 └───────┘       ┌─→╚═════════╝
 ┌───────┐    ╔══╪══╤═════╗
@@ -130,18 +126,16 @@ můžeme přiřadit i&nbsp;do <code>jmena[0]</code>:</p>
                       └────────→║ &#39;vilém&#39; ║
                                 ╚═════════╝
                     * poof *
-</pre></div>
-
+</code></pre></div>
 
 <p>Protože je seznam objekt jako každý jiný,
 může mít více jmen — může na něj ukazovat více proměnných.
 Po příkazu</p>
-<div class="highlight"><pre><span></span><span class="n">slova</span> <span class="o">=</span> <span class="n">jmena</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">slova</span> <span class="o">=</span> <span class="n">jmena</span>
+</code></pre></div>
 
 <p>bude situace vypadat takhle:</p>
-<div class="highlight"><pre><span></span>                   ╔═════════╗
+<div class="highlight"><pre><span></span><code>                   ╔═════════╗
                 ┌─→║ &#39;hynek&#39; ║
                 │  ╚═════════╝
 ┌───────┐    ╔══╪══╤═════╗
@@ -150,19 +144,17 @@ Po příkazu</p>
 ┌───────┐ │           │         ╔═════════╗
 │ slova ├─┘           └────────→║ &#39;vilém&#39; ║
 └───────┘                       ╚═════════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Seznam teď můžeme měnit pomocí kteréhokoli z&nbsp;těch dvou&nbsp;jmen.</p>
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">jmena</span><span class="p">)</span>   <span class="c1"># → [&#39;hynek&#39;, &#39;vilem&#39;]</span>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">jmena</span><span class="p">)</span>   <span class="c1"># → [&#39;hynek&#39;, &#39;vilem&#39;]</span>
 <span class="n">slova</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;jarmila&#39;</span><span class="p">)</span>  <span class="c1"># na proměnnou `jmena` vůbec nesaháme!</span>
-<span class="k">print</span><span class="p">(</span><span class="n">jmena</span><span class="p">)</span>   <span class="c1"># → [&#39;hynek&#39;, &#39;vilem&#39;, &#39;jarmila&#39;]</span>
-</pre></div>
-
+<span class="nb">print</span><span class="p">(</span><span class="n">jmena</span><span class="p">)</span>   <span class="c1"># → [&#39;hynek&#39;, &#39;vilem&#39;, &#39;jarmila&#39;]</span>
+</code></pre></div>
 
 <p>Když si uvědomíme, co se děje uvnitř,
 nemůže nás toto chování ničím překvapit.</p>
-<div class="highlight"><pre><span></span>                   ╔═════════╗
+<div class="highlight"><pre><span></span><code>                   ╔═════════╗
                 ┌─→║ &#39;hynek&#39; ║
                 │  ╚═════════╝
 ┌───────┐    ╔══╪══╤═════╤═════╗   ╔═══════════╗
@@ -171,8 +163,7 @@ nemůže nás toto chování ničím překvapit.</p>
 ┌───────┐ │           │         ╔═════════╗
 │ slova ├─┘           └────────→║ &#39;vilém&#39; ║
 └───────┘                       ╚═════════╝
-</pre></div>
-
+</code></pre></div>
 
 <p>Toto chování je zdrojem častých chyb.
 Musíme pořád mít na paměti, že pokud jakýkoli měnitelný objekt
@@ -183,26 +174,24 @@ ta funkce nám ho může pod rukama&nbsp;změnit.</p>
 aby objekty neměnil pokud přímo&nbsp;nemusí.</p>
 <p>Ještě připomenu, že pokud máš n-tici,
 nelze přiřadit přímo do jejích položek:</p>
-<div class="highlight"><pre><span></span><span class="n">ntice</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">ntice</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">)</span>
 <span class="n">ntice</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ghi&#39;</span>
 <span class="c1"># → TypeError: &#39;tuple&#39; object does not support item assignment</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>ale dej si pozor na i&nbsp;to,
 že objekty které obsahuje se stále měnit dají:</p>
-<div class="highlight"><pre><span></span><span class="n">seznam</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">seznam</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="n">ntice</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="n">seznam</span><span class="p">)</span>
 <span class="n">seznam</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">ntice</span><span class="p">)</span>  <span class="c1"># → (&#39;abc&#39;, [1, 2, 3, 4])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ntice</span><span class="p">)</span>  <span class="c1"># → (&#39;abc&#39;, [1, 2, 3, 4])</span>
 <span class="n">ntice</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">seznam</span><span class="p">)</span>  <span class="c1"># → [1, 2, 3, 4, 5]</span>
-</pre></div>
-
+<span class="nb">print</span><span class="p">(</span><span class="n">seznam</span><span class="p">)</span>  <span class="c1"># → [1, 2, 3, 4, 5]</span>
+</code></pre></div>
 
 <p>A&nbsp;to je prozatím k&nbsp;měnění objektů všechno.
 Příště se můžeš těšit na důkladný rozbor&nbsp;<em>přiřazování</em>.</p>        </div> <!--/#entry-content-->
-            <span class="tag-links"><strong>📌</strong>
+            <span class="tag-links"><strong>⚑</strong>
  <a href="http://encukou.cz/blog/tag/mutability" rel="tag">mutability</a>,  <a href="http://encukou.cz/blog/tag/python" rel="tag">python</a>            </span>
         <ul class="article-links">
                 <li><a href="mailto:encukou@gmail.com?subject=Re:+článek+'M%C4%9Bn%C4%9Bn%C3%AD%20objekt%C5%AF'">Přidat <em>komentář</em></a></li>
@@ -237,8 +226,8 @@ Příště se můžeš těšit na důkladný rozbor&nbsp;<em>přiřazování</em
         © <a href="https://twitter.com/thisistran">Tran</a>
         a <a href="http://bunnyman.info/">tBunnyMan</a>
     <br>
-    použité fonty: Signika © <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
-        a Jockey One © <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    použité fonty: Signika © <a href="http://ancymonic.com/">Anna Giedryś</a>
+        a Jockey One © <a href="www.type-together.com">TypeTogether</a>
     <br>
     tento blog je na <a href="https://github.com/encukou/blog">Githubu</a>
     <br>

@@ -1,5 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2016-06-20T00:00:00+02:00</updated><entry><title>PyCon 2016 Report</title><link href="http://encukou.cz/blog/2016/06/20/pycon-report" rel="alternate"></link><published>2016-06-20T00:00:00+02:00</published><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2016-06-20:blog/2016/06/20/pycon-report</id><summary type="html">&lt;p&gt;I&amp;nbsp;attended PyCon 2016, the annual Python language conference, which took part
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - misc</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-01T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #0</title><link href="http://encukou.cz/blog/2021/01/01/cs-tydenni-00" rel="alternate"></link><published>2021-01-01T00:00:00+01:00</published><updated>2021-01-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-01:/blog/2021/01/01/cs-tydenni-00</id><summary type="html">&lt;p&gt;Utekl další týden (12. 28.–1. 1.), a tak si po vzoru
+&lt;a href="https://honzajavorek.cz/blog/#archives-2020"&gt;Honzy Javorka&lt;/a&gt;
+sepisuju, co jsem dělal.
+Uvidíme, třeba se mi to podaří dělat nějak pravidelněji.&lt;/p&gt;
+&lt;p&gt;Tento týden byl zajímavý tím, že jsem měl dovolenou.
+Šetřil jsem si ji na renovaci nového bytu, nebo dokonce na stěhování,
+ale klíčové lidi napadl virus a tak nakonec nebylo moc co dělat
+a byt stále není hotový.
+A tak jsem seděl za počítačem.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Utekl další týden (12. 28.–1. 1.), a&amp;nbsp;tak si po vzoru
+&lt;a href="https://honzajavorek.cz/blog/#archives-2020"&gt;Honzy Javorka&lt;/a&gt;
+sepisuju, co jsem dělal.
+Uvidíme, třeba se mi to podaří dělat nějak&amp;nbsp;pravidelněji.&lt;/p&gt;
+&lt;p&gt;Tento týden byl zajímavý tím, že jsem měl dovolenou.
+Šetřil jsem si ji na renovaci nového bytu, nebo dokonce na stěhování,
+ale klíčové lidi napadl virus a&amp;nbsp;tak nakonec nebylo moc co dělat
+a&amp;nbsp;byt stále není hotový.
+A&amp;nbsp;tak jsem seděl za počítačem.&lt;/p&gt;
+
+
+&lt;p&gt;Dělám na několika projektech, které jsou schopny zabrat veškerý můj čas.
+V práci to řeším tak, že si na každý projekt vyhradím den v týdnu.
+Docela to funguje – dokud není víc projektů než těch dnů – a&amp;nbsp;tak jsem si
+podobně rozvrhl i „volný“ týden.&lt;/p&gt;
+&lt;h2 id="pondeli-naucse"&gt;Pondělí: Naucse&lt;/h2&gt;
+&lt;p&gt;Pondělí jsem začal převáděním z Travis CI na GitHub Actions.
+Travis-ci.org je totiž má poslední dobou dost dlouhé fronty a&amp;nbsp;GHA jsou většinou
+mnohem rychlejší.
+Převedl jsem repozitáře &lt;a href="https://github.com/pyvec/pyvo-data/pull/379"&gt;pyvo-data&lt;/a&gt; a&amp;nbsp;&lt;a href="https://github.com/pyvec/pyvo.cz/pull/142"&gt;pyvo.cz&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Pak jsem pohnul s už dlouho rozdělaným
+&lt;a href="https://github.com/pyvec/naucse/pull/42"&gt;pull requestem na lepší práci s časovými zónami&lt;/a&gt; na naucse.python.cz.
+Vzhledem k tomu, že jsou zatím všechny kurzy v ČR, je to tak trochu zbytečné
+puntičkářství.
+Ale myslím, že to ten kód aspoň trošičku&amp;nbsp;zpřehlednilo.&lt;/p&gt;
+&lt;p&gt;Budu se na naucse muset začít dívat víc jako na produkt a&amp;nbsp;míň jako na hobby
+projekt, kde zkouším blbůstky jako návrh detalů API které nikdo moc&amp;nbsp;nepoužívá.&lt;/p&gt;
+&lt;p&gt;Pak jsem rozpracoval &lt;a href="https://github.com/pyvec/naucse/issues/27"&gt;aktualizaci CSS pro Notebookové lekce&lt;/a&gt;,
+což jsem ale nedokončil.
+Design není moje nejsilnější stránka.&lt;/p&gt;
+&lt;p&gt;Večer pak byl &lt;a href="https://www.youtube.com/watch?v=tUQQ1g2VD7I&amp;amp;list=PLFt-PM7J_H3EU5Oez3ZSVjY5pZJttP2lT&amp;amp;index=28"&gt;další stream o&amp;nbsp;projektu &lt;code&gt;freezeyt&lt;/code&gt;&lt;/a&gt;.
+Protože minulý týden skončil začátečnický kurz, byl stream dřív a&amp;nbsp;dvakrát delší
+než normálně.
+S Adél jsme opravili chyby v testech na Windows, Davidova testovací Django
+aplikace je hotová, a&amp;nbsp;já pokračuju s refactoringem, který mj. umožní ukládat
+výstup jinam než na disk. Třeba rovnou do Gitového&amp;nbsp;repozitáře.&lt;/p&gt;
+&lt;h2 id="utery-cpython-review"&gt;Úterý: CPython Review&lt;/h2&gt;
+&lt;p&gt;V úterý jsem se kouknul na Pull Requesty v Pythonu, na které bych mohl
+udělat review.
+Specializuju na C API a&amp;nbsp;posledních 7&amp;nbsp;let navrhuju [nové a&amp;nbsp;lepší API pro moduly],
+a&amp;nbsp;tak je spousta review okolo překlápění modulů na tohle nové API.
+Jsem rád, že to lidi zajímá natolik, že si s tím dají práci.
+Na druhou stranu je to dost drbačka, a&amp;nbsp;někdy nestíhám – pomocníci (a&amp;nbsp;jejich
+mentor, který v tomhle vidí dobrý úvod do céčkových částí Pythonu) na tohle
+často mají mnohem víc času než&amp;nbsp;já.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Erlendovo &lt;a href="https://github.com/python/cpython/pull/23124"&gt;převedení modulu &lt;code&gt;array&lt;/code&gt;&lt;/a&gt;
+  je téměř hotové.&lt;/li&gt;
+&lt;li&gt;Hai Shi-ovo &lt;a href="https://github.com/python/cpython/pull/23405"&gt;převedení modulu &lt;code&gt;_functools&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Další review jsem udělal na jiné změny:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/python/cpython/pull/23903"&gt;Přidání funkce &lt;code&gt;PyType_GetName&lt;/code&gt;&lt;/a&gt;
+  jsem jen zběžně okomentoval a &lt;a href="https://github.com/python/cpython/pull/15892#discussion_r549695085"&gt;upozornil&lt;/a&gt; na něj pár lidí, které by to mohlo
+  zajímat.
+  Zjistil jsem že jména typů v Pythonu jsou nečekaně zamotaná záležitost
+  a&amp;nbsp;rozhodnout, co &lt;em&gt;přesně&lt;/em&gt; má dělat funkce co vrací jméno typu, bude nejspíš
+  potřebovat trochu delší rešerši.
+  Nevím, jestli si tohle mám vzít na svoji&amp;nbsp;zodpovědnost.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/python/cpython/pull/22632"&gt;Opravu správy paměti při importech&lt;/a&gt;
+  jsem si prohlédl docela podrobně, ale je to docela stará změna a&amp;nbsp;bylo ji
+  potřeba spojit s aktuálním stavem repozitáře.
+  Bohužel se při tom rozbilo něco dalšího, tak se na to příště kouknu&amp;nbsp;znova.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/python/cpython/pull/19133"&gt;U&amp;nbsp;opravy kopírování ukazatele&lt;/a&gt;
+  jsem vzal navrhnuté změny a&amp;nbsp;dal jsem je do nového PR.
+  Autor původního PR totiž už pár měsíců neodpovídá na komentáře.
+  (Ale jinak je to fajn člověk ☺)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Večer jsem pak aktualizoval tenhle blog a&amp;nbsp;začal psát tenhle příspěvek.
+Potěšilo mě, jak málo změn bylo potřeba při aktualizaci na novou verzi
+&lt;a href="https://docs.getpelican.com/en/stable/index.html"&gt;Pelicanu&lt;/a&gt;&amp;nbsp;udělat.&lt;/p&gt;
+&lt;h2 id="streda-actvtek-abi3pep"&gt;Středa a&amp;nbsp;čtvtek: abi3&amp;nbsp;PEP&lt;/h2&gt;
+&lt;p&gt;Ve středu jsem psal PEP.
+PEP (Python Enhancement Proposal) je (většinou) dokument, který vysvětluje
+plánovanou změnu v Pythonu, jako přidání &lt;a href="https://www.python.org/dev/peps/pep-0492"&gt;nového klíčového slova&lt;/a&gt;
+nebo &lt;a href="https://www.python.org/dev/peps/pep-0498/"&gt;řetězcových šablon&lt;/a&gt;.
+Můj PEP bude o&amp;nbsp;tom, na co chci dál v Pythonu zaměřit.
+Tak trochu novoroční předsevzetí.&lt;/p&gt;
+&lt;p&gt;A&amp;nbsp;co že to chci dělat?
+Oživit &lt;a href="https://docs.python.org/3/c-api/stable.html"&gt;stabilní ABI&lt;/a&gt; Pythonu, které aktuálně není v moc dobrém stavu
+(např. nikdo vlastně neví, co to přesně je), a&amp;nbsp;napsat testy a&amp;nbsp;procesy,
+aby se v budoucnu tolik nerozbíjelo.&lt;/p&gt;
+&lt;p&gt;Za středu a&amp;nbsp;čtvrtek jsem dokument dostal do &lt;a href="https://github.com/encukou/abi3/blob/main/PEP.rst"&gt;podoby&lt;/a&gt;,
+ve které jsem se ho nebál ho poslat do &lt;a href="https://mail.python.org/archives/list/capi-sig@python.org/thread/PMM5QG4IAL6LOMNFXNHW72INSCN4JC5H/"&gt;diskuze&lt;/a&gt;, aby se k němu vyjádřili
+i&amp;nbsp;ostatní kdo jsou v téhle oblasti aktivní.
+Další důvod proč píšu dokument je totiž ten, že chci abychom se zkoordinovali.
+Aktuálně má každý kdo s tímto tématem chce pomoct trochu jinou představu
+o&amp;nbsp;konečném výsledku. S takovou z toho žádný rozumný výsledek&amp;nbsp;nebude.&lt;/p&gt;
+&lt;h2 id="patek-svatek"&gt;Pátek – svátek&lt;/h2&gt;
+&lt;p&gt;No a&amp;nbsp;v pátek byl svátek, který jsem se rozhodl strávit bez počítače.
+O&amp;nbsp;výletech na kopec tenhle blog není, tak se nic psát nebudu.
+Ahoj za týden!&lt;/p&gt;
+&lt;h2 id="aco-vy"&gt;A&amp;nbsp;co vy?&lt;/h2&gt;
+&lt;p&gt;Honza, od kterého jsem okopíroval tenhle formát blogu,
+má &lt;a href="https://honzajavorek.cz/blog/neni-to-zavod/"&gt;článek&lt;/a&gt; pro všechny, kterým výpis všeho, co jsem za týden udělal,
+přináší deprese.
+Se spoustou z toho – i&amp;nbsp;když samozřejmě ne se vším – se ztotožňuju. 
+Není to závod!&lt;/p&gt;
+&lt;p&gt;Navíc doporučím &lt;a href="https://www.youtube.com/watch?v=N_gysDr2gfc&amp;amp;t=3423s"&gt;Lumírovu přednášku&lt;/a&gt; plnou tipů pro produktivitu,
+ve které zmiňuje, jak je dobré si sepsat, co člověk za den/týden udělal.
+Pokud to neděláte, pravděpodobně vám samým toho spousta&amp;nbsp;uniká.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>PyCon 2016 Report</title><link href="http://encukou.cz/blog/2016/06/20/pycon-report" rel="alternate"></link><published>2016-06-20T00:00:00+02:00</published><updated>2016-06-20T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2016-06-20:/blog/2016/06/20/pycon-report</id><summary type="html">&lt;p&gt;I attended PyCon 2016, the annual Python language conference, which took part
+between May 28th to June 5th.&lt;/p&gt;
+&lt;p&gt;Here's a long, rambling and somewhat personal report of what I got from
+the conference.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I&amp;nbsp;attended PyCon 2016, the annual Python language conference, which took part
 between May 28th to June 5th.&lt;/p&gt;
 &lt;p&gt;Here's&amp;nbsp;a&amp;nbsp;long, rambling and somewhat personal report of what I&amp;nbsp;got from
 the conference.&lt;/p&gt;
@@ -273,11 +386,13 @@ After the sprints, I&amp;nbsp;got some Fedora swag from Remy to bring back to Br
 and joined fellow BeeWare sprinters – Jeremy, Marina and Holly – for dinner
 and board games.&lt;/p&gt;
 &lt;p&gt;And that was it!  I&amp;nbsp;spent a&amp;nbsp;few days after the conference enjoying the city
-of Portland, then hopped on a&amp;nbsp;train to Seattle and back&amp;nbsp;home.&lt;/p&gt;</summary><category term="conference"></category><category term="pycon"></category></entry><entry><title>First Layer Patterns with Slic3r Modifier Objects</title><link href="http://encukou.cz/blog/2015/10/25/en-slic3r-first-layer-patterns" rel="alternate"></link><published>2015-10-25T00:00:00+02:00</published><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-10-25:blog/2015/10/25/en-slic3r-first-layer-patterns</id><summary type="html">&lt;p&gt;I've built a&amp;nbsp;3D printer, and found a&amp;nbsp;cool effect I&amp;nbsp;wasn't able to
+of Portland, then hopped on a&amp;nbsp;train to Seattle and back&amp;nbsp;home.&lt;/p&gt;</content><category term="misc"></category><category term="conference"></category><category term="pycon"></category></entry><entry><title>First Layer Patterns with Slic3r Modifier Objects</title><link href="http://encukou.cz/blog/2015/10/25/en-slic3r-first-layer-patterns" rel="alternate"></link><published>2015-10-25T00:00:00+02:00</published><updated>2015-10-25T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-10-25:/blog/2015/10/25/en-slic3r-first-layer-patterns</id><summary type="html">&lt;p&gt;I've built a 3D printer, and found a cool effect I wasn't able to
+find on the Internet yet.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I've built a&amp;nbsp;3D printer, and found a&amp;nbsp;cool effect I&amp;nbsp;wasn't able to
 find on the Internet yet.&lt;/p&gt;
 
 
-&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/first-layer.jpg"&gt;&lt;img alt="What I'll be describing" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/first-layer.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/first-layer.jpg"&gt;&lt;img alt="What I'll be describing" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/first-layer.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="my-setup"&gt;My Setup&lt;/h2&gt;
 &lt;p&gt;I&amp;nbsp;haven't blogged about my 3D printer yet, so let's&amp;nbsp;quickly get that out
 of the way.&lt;/p&gt;
@@ -301,7 +416,7 @@ The three main programs I&amp;nbsp;use are:&lt;/p&gt;
 &lt;p&gt;Today I'll be talking about the second tool in that chain.
 But first, what will I&amp;nbsp;print?&lt;/p&gt;
 &lt;h2 id="adrawer-handle"&gt;A&amp;nbsp;Drawer Handle&lt;/h2&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/handle-old.jpg"&gt;&lt;img alt="The Problem" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/handle-old.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/handle-old.jpg"&gt;&lt;img alt="The Problem" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/handle-old.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I&amp;nbsp;have some drawers whose handles are pretty flimsy, and as time goes by,
 they're detaching.
 Which is a&amp;nbsp;shame, because these big, red handles fit my room really well.
@@ -330,11 +445,11 @@ Some are only available for the inside of objects, because they can't cover
 100% of the space, but there's&amp;nbsp;still a&amp;nbsp;good selection: the boring old
 Rectilinear, the outline-following Cocentric, the fractal Hilbert Curve,
 the Archimedean Chords spiral, and the angular Octagram&amp;nbsp;Spiral.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/rectilinear.png"&gt;&lt;img alt="Plain Old Rectilinear" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/rectilinear.png" /&gt;&lt;/a&gt;
-&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/cocentric.png"&gt;&lt;img alt="Cocentric pattern" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/cocentric.png" /&gt;&lt;/a&gt;
-&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/hilbert.png"&gt;&lt;img alt="Hilbert Curve" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/hilbert.png" /&gt;&lt;/a&gt;
-&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/archimedean.png"&gt;&lt;img alt="Archimedean Chords" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/archimedean.png" /&gt;&lt;/a&gt;
-&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/octagram-spiral.png"&gt;&lt;img alt="Octagram Spiral" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/octagram-spiral.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/rectilinear.png"&gt;&lt;img alt="Plain Old Rectilinear" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/rectilinear.png" /&gt;&lt;/a&gt;
+&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/cocentric.png"&gt;&lt;img alt="Cocentric pattern" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/cocentric.png" /&gt;&lt;/a&gt;
+&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/hilbert.png"&gt;&lt;img alt="Hilbert Curve" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/hilbert.png" /&gt;&lt;/a&gt;
+&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/archimedean.png"&gt;&lt;img alt="Archimedean Chords" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/archimedean.png" /&gt;&lt;/a&gt;
+&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/octagram-spiral.png"&gt;&lt;img alt="Octagram Spiral" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/octagram-spiral.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;They're mostly meant to be functional, but some are quite aesthetically
 pleasing than others.
 Being the geek that I&amp;nbsp;am, I&amp;nbsp;prefer the Archimedean Chords and
@@ -369,7 +484,7 @@ The thickness is about the same as the first layer of my printout.
 Then, I&amp;nbsp;added the part as a&amp;nbsp;Modifier object in Slic3r, and set its infill
 to Hilbert Curve. The rest of the object usess Archimedean&amp;nbsp;Chords.&lt;/p&gt;
 &lt;p&gt;Et voilà! A&amp;nbsp;combined pattern&amp;nbsp;emerges.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/combination.png"&gt;&lt;img alt="Sliced bottom layer" class="size-full" src="http://encukou.cz/../images/2015-10-25-slic3r/combination.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/combination.png"&gt;&lt;img alt="Sliced bottom layer" class="size-full" src="http://encukou.cz/images/2015-10-25-slic3r/combination.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Slic3r adds quite a&amp;nbsp;wide margin between the two areas, which works out well
 for my use of two large patches of distinct textures.
 If you want finer control, it might not be that&amp;nbsp;convenient.&lt;/p&gt;
@@ -384,7 +499,7 @@ small enough to not be printed.
 You can see them in the screnshot above as light grey dots off to the sides
 of the pentagon.
 This tricked Slic3r into putting the center where it should&amp;nbsp;be.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/../images/2015-10-25-slic3r/handle-new.jpg"&gt;&lt;img alt="The Solution" class="size-auto" src="http://encukou.cz/../images/2015-10-25-slic3r/handle-new.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/handle-new.jpg"&gt;&lt;img alt="The Solution" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/handle-new.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="to-be-continued"&gt;To Be Continued&lt;/h2&gt;
 &lt;p&gt;Now that I&amp;nbsp;have the first layer ready, I'm off to making the screw &amp;amp; nut fit
 well inside the handle.
@@ -398,7 +513,11 @@ Enjoy!&lt;/p&gt;
 we can chat while watching the printer make electronic noises and plastic
 creations. (Otherwise, i&amp;nbsp;might add a&amp;nbsp;simple, small object to a&amp;nbsp;print job
 if you send me a&amp;nbsp;fully prepared model, but you're probably better off ordering
-a&amp;nbsp;print online.)&lt;/p&gt;</summary><category term="3d"></category></entry><entry><title>Types as namespaces</title><link href="http://encukou.cz/blog/2015/03/01/en-variable-types" rel="alternate"></link><published>2015-03-01T00:00:00+01:00</published><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-03-01:blog/2015/03/01/en-variable-types</id><summary type="html">&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
+a&amp;nbsp;print online.)&lt;/p&gt;</content><category term="misc"></category><category term="3d"></category></entry><entry><title>Types as namespaces</title><link href="http://encukou.cz/blog/2015/03/01/en-variable-types" rel="alternate"></link><published>2015-03-01T00:00:00+01:00</published><updated>2015-03-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-03-01:/blog/2015/03/01/en-variable-types</id><summary type="html">&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
+Read that first.&lt;/p&gt;
+&lt;p&gt;In Python's duck-typing system, it's enough if things quack.
+They don't actually need to quack &lt;em&gt;like a duck&lt;/em&gt;.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
 Read that first.&lt;/p&gt;
 &lt;p&gt;In Python's&amp;nbsp;duck-typing system, it's&amp;nbsp;enough if things quack.
 They don't actually need to quack &lt;em&gt;like a&amp;nbsp;duck&lt;/em&gt;.&lt;/p&gt;
@@ -409,18 +528,16 @@ They don't actually need to quack &lt;em&gt;like a&amp;nbsp;duck&lt;/em&gt;.&lt;
 Some languages – the statically typed ones – require you to specify the type in front, and then they check it rigorously.
 In Python, you need to keep track of this in your head.
 It's&amp;nbsp;possible that you're writing code where a&amp;nbsp;variable could be either a&amp;nbsp;string or a&amp;nbsp;number:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def add(a, b):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def add(a, b):
     return a + b
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;... or you might want a&amp;nbsp;variable to changes type in the middle of a&amp;nbsp;function,
 like in the example from &lt;a href="http://docs.python-guide.org/en/latest/writing/structure/#dynamic-typing"&gt;Hitchhiker's&amp;nbsp;guide to Python&lt;/a&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;items = &amp;#39;a b c d&amp;#39;  # This is a string...
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;items = &amp;#39;a b c d&amp;#39;  # This is a string...
 items = items.split(&amp;#39; &amp;#39;)  # ...becoming a list
 items = set(items)  # ...and then a set
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Those are smells: they should be &lt;em&gt;possible&lt;/em&gt; but not&amp;nbsp;&lt;em&gt;easy&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Variables (the &lt;em&gt;names&lt;/em&gt;, not just values) always have types, even if,
@@ -431,11 +548,10 @@ rather than “the method &lt;em&gt;named&lt;/em&gt;&amp;nbsp;startswith”.&lt;
 &lt;h2 id="types-of-variables"&gt;Types of variables&lt;/h2&gt;
 &lt;p&gt;I&amp;nbsp;have some syntax in mind. If I&amp;nbsp;rewrite one of the first examples in
 Eevee's&amp;nbsp;post in it, I&amp;nbsp;can get something like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def foo(a: String, b: StringPattern, c: List):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def foo(a: String, b: StringPattern, c: List):
     if a.startswith(b):
         c.append(a)
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;By which I&amp;nbsp;want to say &lt;code&gt;b&lt;/code&gt; can be string, or a&amp;nbsp;tuple of strings,
 or even a&amp;nbsp;regex for all I&amp;nbsp;care – as long as it can be matched against a&amp;nbsp;string.
@@ -459,15 +575,14 @@ your code might break with the next version of my&amp;nbsp;library.&lt;/p&gt;
 &lt;p&gt;Of course, usually &lt;code&gt;a&lt;/code&gt; will be an “actual string”, and the compiler can
 optimize for that case.&lt;/p&gt;
 &lt;p&gt;I'll put a&amp;nbsp;random snippet with syntax ideas here:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;from somewhere import Snake
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;from somewhere import Snake
 
 def print_length(x: List):
     print(x.length)
 
     if x has Snake:length:
         print(&amp;quot;Scary! I got a {}m long snake as argument!&amp;quot;(x.Snake:length))
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id="type-declarations"&gt;Type declarations&lt;/h2&gt;
 &lt;p&gt;For variables, the type can be specified declaration.
@@ -478,24 +593,22 @@ of the cases, but when you get hit by the 1%, you don't even know where to look
 Javascript's&amp;nbsp;explicit &lt;code&gt;var&lt;/code&gt; keyword is a&amp;nbsp;good thing, for much the same reasons as Python's
 explicit &lt;code&gt;self&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;In my syntax, variable declarations can specify the type:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;str: String = &amp;quot;abcd&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;str: String = &amp;quot;abcd&amp;quot;
 
 list: List = [1, 2, 3]
 
 for i:int in list:
     print(i * i)
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;But, since most (or ideally all) expressions have a&amp;nbsp;well-defined types, a&amp;nbsp;shorthand comes to mind:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;str := &amp;quot;abcd&amp;quot;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;str := &amp;quot;abcd&amp;quot;
 list := [&amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;3&amp;quot;]
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id="operator-namespaces"&gt;Operator namespaces&lt;/h2&gt;
 &lt;p&gt;This would work:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;def concat(a: List, b: List):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;def concat(a: List, b: List):
     return a + b
 
 def elementwise-add(a: Array, b: Array):
@@ -506,8 +619,7 @@ b := [4, 5, 6]
 
 assert concat(a, b) == [1, 2, 3, 4, 5, 6]
 assert elementwise-add(a, b) == [5, 7, 9]
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;because while &lt;code&gt;Sequence:\+&lt;/code&gt; and &lt;code&gt;Array:\+&lt;/code&gt; are two different things,
 lists can support &lt;em&gt;both&lt;/em&gt;.
@@ -517,12 +629,11 @@ a&amp;nbsp;Sequence.)&lt;/p&gt;
 &lt;h2 id="definitions-and-implementations"&gt;Definitions and Implementations&lt;/h2&gt;
 &lt;p&gt;Let's&amp;nbsp;make a&amp;nbsp;Tree interface.
 I'll use &lt;a href="https://www.python.org/dev/peps/pep-0484/"&gt;PEP 484&lt;/a&gt;-ish syntax for generics:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;T := TypePlaceholder()
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;T := TypePlaceholder()
 
 interface Tree:
     walk(self: T) -&amp;gt; Iterator[T]
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This says that the type of &lt;code&gt;x.Tree:walk().next()&lt;/code&gt; will be the same as the
 type of &lt;code&gt;x&lt;/code&gt;.
@@ -530,7 +641,7 @@ type of &lt;code&gt;x&lt;/code&gt;.
 it's&amp;nbsp;defining the namespace that expression will use by default.)&lt;/p&gt;
 &lt;p&gt;Then you can define BinaryTree like this.
 &lt;code&gt;BinaryTree:walk&lt;/code&gt; becomes an implementation of&amp;nbsp;&lt;code&gt;Tree:walk&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class BinaryTree(Tree):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;class BinaryTree(Tree):
     left: Tree
     right: Tree
 
@@ -540,8 +651,7 @@ it's&amp;nbsp;defining the namespace that expression will use by default.)&lt;/p
         yield self
         if self.right:
             yield from self.left.walk()
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Note the kewyord is &lt;code&gt;impl&lt;/code&gt;, not &lt;code&gt;def&lt;/code&gt;: this ensures that if the &lt;code&gt;Tree&lt;/code&gt; interface
 grows a&amp;nbsp;new method, existing methods of the same name won't magically become
@@ -551,7 +661,7 @@ by classes that claim to implement &lt;code&gt;Tree&lt;/code&gt;.)&lt;/p&gt;
 &lt;p&gt;Next let's&amp;nbsp;have a&amp;nbsp;class for corporate employees.
 An amployee is not a&amp;nbsp;tree, and there's&amp;nbsp;no &lt;code&gt;Employee:walk&lt;/code&gt; in our model,
 but you can still use an employee as a&amp;nbsp;tree node:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class Employee:
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;class Employee:
     boss: Employee
     underlings: List[Employee]
 
@@ -559,18 +669,16 @@ but you can still use an employee as a&amp;nbsp;tree node:&lt;/p&gt;
         yield self
         for underling in self.underlings:
             yield from underling.walk()
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And you might want to attach a &lt;code&gt;Tree:walk&lt;/code&gt; to something from some library you
 can't easily change, like the stdlib.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;impl Path.Tree:walk(self):
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;impl Path.Tree:walk(self):
     yield self
     if self.isdir:
         for child:Tree in self.listdir:
             yield from child
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The language should probably limit who can do this and where,&amp;nbsp;though.&lt;/p&gt;
 &lt;p&gt;To step away from Tree for one paragraph:
@@ -582,7 +690,7 @@ And you can later add &lt;code&gt;impl Object:to_string&lt;/code&gt;, which won'
 &lt;code&gt;YourClass:to_string&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="interface-conflicts"&gt;Interface conflicts&lt;/h2&gt;
 &lt;p&gt;Consider this class:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;class FamilyMember:
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;class FamilyMember:
     parents: List[FamilyMember]
     children: List[FamilyMember]
 
@@ -591,8 +699,7 @@ And you can later add &lt;code&gt;impl Object:to_string&lt;/code&gt;, which won'
         yield self
         for child:Tree in self.children:
             yield from child
-&lt;/pre&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Now, if you inherit from both &lt;code&gt;Employee&lt;/code&gt; and &lt;code&gt;FamilyMember&lt;/code&gt;, you're in trouble.
 The resulting &lt;code&gt;Tree:walk&lt;/code&gt; should fail loudly, unless you explicitly override&amp;nbsp;it.&lt;/p&gt;
@@ -607,4 +714,4 @@ and implement &lt;code&gt;Visit:leaf&lt;/code&gt;, where &lt;code&gt;Visit&lt;/c
 &lt;h2 id="thatsit-for-now"&gt;That's&amp;nbsp;it for now&lt;/h2&gt;
 &lt;p&gt;I&amp;nbsp;could rant on, about, say, registration conflicts or efficient vtable
 references, but let's&amp;nbsp;end it here, throw it at the wall and see if it&amp;nbsp;sticks.&lt;/p&gt;
-&lt;p&gt;(I&amp;nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)&lt;/p&gt;</summary><category term="language design"></category></entry></feed>
+&lt;p&gt;(I&amp;nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)&lt;/p&gt;</content><category term="misc"></category><category term="language design"></category></entry></feed>
