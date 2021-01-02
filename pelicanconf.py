@@ -89,7 +89,7 @@ XMENUITEMS = (
     )
 DISPLAY_PAGES_ON_MENU = False
 
-PAGE_PATHS = ['pages']
+PAGE_PATHS = ['../pages']
 STATIC_PATHS = [
     '../images',
     '../extra/CNAME',
