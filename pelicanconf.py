@@ -42,8 +42,8 @@ FOOTER_TEXT = """
         by <a href="https://twitter.com/thisistran">Tran</a>
         and <a href="http://bunnyman.info/">tBunnyMan</a>
     <br>
-    fonts: Signika by <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
-        and Jockey One by <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    fonts: Signika by <a href="http://ancymonic.com/">Anna Giedryś</a>
+        and Jockey One by <a href="www.type-together.com">TypeTogether</a>
     <br>
     fork this blog on <a href="https://github.com/encukou/blog">Github</a>
     <br>
@@ -61,8 +61,8 @@ FOOTER_TEXT_CS = """
         © <a href="https://twitter.com/thisistran">Tran</a>
         a <a href="http://bunnyman.info/">tBunnyMan</a>
     <br>
-    použité fonty: Signika © <a href="https://plus.google.com/u/0/105016556070324621004/about">Anna Giedryś</a>
-        a Jockey One © <a href="https://plus.google.com/u/0/109781094858738402812/posts">TypeTogether</a>
+    použité fonty: Signika © <a href="http://ancymonic.com/">Anna Giedryś</a>
+        a Jockey One © <a href="www.type-together.com">TypeTogether</a>
     <br>
     tento blog je na <a href="https://github.com/encukou/blog">Githubu</a>
     <br>
