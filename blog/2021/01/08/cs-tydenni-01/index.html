@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>encukou/blog &mdash; Týdenní poznámky #1</title>
+        <meta charset="utf-8" />
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="stylesheet" type="text/css" href="http://encukou.cz/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            body.custom-background { background-color: #f5f5f5; }
+        </style>
+        <link rel="alternate" type="application/atom+xml"
+            title="encukou/blog — Atom"
+            href="http://encukou.cz/feeds/all.atom.xml" />
+        <link rel="icon" type="image/png" href="http://encukou.cz/images/eck512.png">
+        <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
+</head>
+
+<body class="home blog custom-background single-author" >
+    <div id="container">
+        <div id="header">
+                <h1 id="site-title"><a href="http://encukou.cz"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>.cz</a></h1>
+                <h2 id="site-description">primary colors underneath</h2>
+        </div><!-- /#banner -->
+        
+        <div class="page-title">
+        </div>
+
+        <div id="menu">
+            <div class="menu-navigation-container">
+                <ul id="menu-navigation" class="menu">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="http://github.com/encukou">github</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
+
+                </ul>
+            </div> <!--/#menu-navigation-container-->
+        </div><!-- /#menu -->
+
+        <div id="contents">
+
+<div class="post type-post status-publish format-standard hentry category-general">
+    <div class="entry-meta">
+        <div class="date"><a href="http://encukou.cz/blog/2021/01/08/cs-tydenni-01">2021-01-08</a></div>
+    </div> <!-- /#entry-meta -->
+    <div class="main">
+        <h2 class="entry-title">
+            <a href="http://encukou.cz/blog/2021/01/08/cs-tydenni-01" title="Permalink to Týdenní poznámky #1" rel="bookmark">Týdenní poznámky #1</a>
+        </h2>
+        <div class="entry-content">
+
+
+<p>Utekl další týden (3. 1. – 8. 1.), a&nbsp;tak si sepisuju, co jsem&nbsp;dělal.</p>
+
+
+<h2 id="pondeli-email">Pondělí: email</h2>
+<p>Po dovolené jsem se přihlásil do práce a&nbsp;svítilo na mě <strong>Inbox (1412)</strong>.
+Celý pracovní den jsem to procházel, odpovídal na jednodušší kousky a
+složitější si zapisoval to úkolníčku.</p>
+<p>Večer jsem zase <a href="https://www.youtube.com/watch?v=XOf46FLt78k">streamoval Freezeyt</a>.
+Přes minulý týden nikdo jiný na projektu nepracoval, takže z toho byly
+dvě hodiny refactoringu konfigurace.
+Doufám, že to k něčemu je – ale jedna ze <a href="http://zpetnovazebnik.herokuapp.com/2020-brno-podzim/asteroids/">zpětných vazeb</a> na <em>live coding</em>
+po začátečnickém kurzu byla:</p>
+<blockquote>
+<p>Opět moc pěkná lekce, tyhle "celoprogramovací" mě baví asi&nbsp;nejvíc.</p>
+</blockquote>
+<p>Takže asi v pohodě.
+Až budou otázky, může to zase být víc o&nbsp;odpovědích a&nbsp;odbočkách.</p>
+<h2 id="utery-cpython">Úterý: CPython</h2>
+<p>Úterý je den pro Python!</p>
+<p>Udělal jsem pár menších review ohledně izolace stavu modulů.
+O&nbsp;PEP 630&nbsp;jsem psal i&nbsp;minule, tak trochu víc detailů:</p>
+<p>Posledních pár let do Pythonu přispívám s tím, že modul – to co se
+importuje – je objekt jako každý jiný.
+Z jednoho <code>.py</code> souboru se dá vytvořit několik modulových objektů, které
+se chovají stejně, ale navzájem se neovlivňují.
+To pak má výhody v tom, že aplikace může spustit Python několikrát za sebou,
+nebo dokonce paralelně vedle sebe, s různým nastavením.
+A&nbsp;stejně by se měly chovat i&nbsp;moduly napsané v C (nebo podobných jazycích),
+jenže to zatím moc nejde, protože jednotlivé objekty navzájem ovlivňují.
+Moje <a href="https://www.python.org/dev/peps/pep-0630/">PEP 630</a> problém popisuje a&nbsp;ukazuje, jak ho&nbsp;řešit.</p>
+<p>Hlavní myšlenka je v tom, že se všechny prostředky – paměť, Pythonní objekty,
+otevřené soubory, a&nbsp;kdo ví co všechno – navážou na objekt modulu.
+Když jsou ty objekty dva, musí všechno být dvakrát.
+A&nbsp;problém je v tom, že v C je velice jednoduché použít statickou proměnnou,
+která je v celém procesu jen jedna.</p>
+<ul>
+<li>Modul <a href="https://github.com/python/cpython/pull/24096">datetime</a>
+  jeden takový objekt používal, tak se z <code>static struct PyExpat_CAPI capi</code>
+  muselo udělat něco trochu složitějšího.</li>
+<li>Podobnou opravu <a href="https://github.com/python/cpython/pull/24061">v modulu expat</a>
+  jsem zkontroloval potom, co hlavní review udělal&nbsp;Victor.</li>
+<li>Změnu <a href="https://github.com/python/cpython/pull/23124">v modulu array</a>
+  jsem začlenil, ale zapomněl jsem na detail, který autor
+  <a href="https://github.com/python/cpython/pull/24066">opravil vzápětí</a>.</li>
+<li>Udělal jsem další review na
+  <a href="https://github.com/python/cpython/pull/22632">opravu správy paměti při importování</a>
+  Jde hlavně o&nbsp;chování v chybových situacích; Python při nich občas měl
+  <em>refleak</em> – zapoměl odevzdat kousek paměti kterou dál nevyužíval.
+  Bohužel tomu neprošly automatické testy kvůli <a href="https://bugs.python.org/issue42794">úplně jiné chybě</a>
+  a&nbsp;když jsem to zkoušel testovat u&nbsp;sebe, našel jsem zase úplně jinou chybu,
+  která se neprojeví.
+  Poslal jsem na ni <a href="https://github.com/python/cpython/pull/24119">pull request</a>,
+  ale protože se v téhle oblasti nevyznám, bude ho potřeba ještě doladit.
+  Původní oprava ale prošla a&nbsp;příští úterý ji chci začlenit.
+  (Snažím se to dělat když mám před sebou den dedikovaný pro Python,
+  abych mohl reagovat když se něco po... nepodaří.)</li>
+<li>
+<p><a href="https://github.com/python/cpython/pull/19133">Oprava kopírování ukazatele</a>,
+  o&nbsp;které jsem se zmínil minule, je&nbsp;začleněná.</p>
+</li>
+<li>
+<p>O <a href="https://github.com/python/cpython/pull/23903">přidání funkce PyType_GetName</a>
+  se stále diskutuje, i&nbsp;když&nbsp;pomalu.</p>
+</li>
+</ul>
+<p>No a&nbsp;pak jsem začal definovat stabilní ABI.
+Napsal jsem si na to formát (a&nbsp;jednoduchý parser), protože dat je moc a
+potřebuju v nich mít co nejlepší&nbsp;přehled.</p>
+<h2 id="streda-python-310">Středa: Python 3.10</h2>
+<p>Ve středu jsem napsal <a href="https://github.com/pypa/setuptools/pull/2523">dvouřádkový pull request</a>. Byla to práce na celý den,
+protože jsem napřed musel porozumět tomu, co ten kód vlastně dělá a&nbsp;jaké
+jsou alternativy.</p>
+<p>Pull request v Setuptools odstraňuje použití funkce <code>load_module</code>, která od
+Pythonu 3.12&nbsp;nebude fungovet.
+Ale potřebujeme se jí zbavit už teď, protože v&nbsp;Pythonu 3.10&nbsp;začala házet
+varování a&nbsp;u&nbsp;některých balíčků, které na Setuptools (resp. <code>pkg_resources</code>)
+závisí, selžou testu když na varování&nbsp;narazí.</p>
+<p>Kromě toho bylo v týmu pár plánovacích porad, takže to nebylo doopravdy na
+celý pracovní den. Ale skoro.</p>
+<h2 id="ctvrtek-py3c">Čtvrtek: py3c</h2>
+<p>Ve čtvrtek jsem dělal pár menších věcí pro Fedoru.
+Hlavní byla aktualizace <a href="https://py3c.readthedocs.io">py3c</a>, projektu
+na portování C-API modulů z Pythonu 2&nbsp;na Python 3.
+Byl tam menší zádrhel s generováním dokumentace, testy na Travis CI trvaly tak
+dlouho, že jsem <a href="https://github.com/encukou/py3c/pull/39">přešel na GitHub Actions</a>.
+To zabralo překvapivě moc času, protože na GitHub Actions se nedá
+testovat na architektuře POWER, což se <a href="https://github.com/encukou/py3c/pull/33">nelíbilo jistému Gerritovi</a>,
+který POWER o&nbsp;testů nedávno přidal.
+S Mirovou pomocí jsme testy vypiplali do stavu, kdy se stydím že nedávám tolik
+úsilí do užitečnějších projektů ;)</p>
+<h2 id="patek-planovani">Pátek: plánování</h2>
+<p>V pátek jsem si urovnal pracovní úkolníček, zamyslel se co dál,
+a&nbsp;několik menších věcí co už dlouho hnily vyřešil nebo posunul&nbsp;kupředu.</p>        </div> <!--/#entry-content-->
+            <span class="tag-links"><strong>⚑</strong>
+ <a href="http://encukou.cz/blog/tag/weekly" rel="tag">weekly</a>            </span>
+        <ul class="article-links">
+                <li><a href="mailto:encukou@gmail.com?subject=Re:+článek+'T%C3%BDdenn%C3%AD%20pozn%C3%A1mky%20%231'">Přidat <em>komentář</em></a></li>
+                <li><a href="https://github.com/encukou/blog/blob/master/posts/2021-01-08-cs-tydenni-01.md"><em>Forknout</em> tenhle článek na Githubu</a></li>
+        </ul>
+    </div> <!--/#main-->
+</div>  <!--/#post-->
+        </div>
+
+
+<ul class="prev-next">
+    <li class="prev">
+        <a href="http://encukou.cz/blog/2021/01/01/cs-tydenni-00">
+            Týdenní poznámky #0
+        </a>
+    </li>
+</ul>
+<span class="clearfix"></span>
+
+
+        <footer id="footer">
+            <p>
+        
+    tento blog používá systém <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    styl adaptovaný z <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        © <a href="https://twitter.com/thisistran">Tran</a>
+        a <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    použité fonty: Signika © <a href="http://ancymonic.com/">Anna Giedryś</a>
+        a Jockey One © <a href="www.type-together.com">TypeTogether</a>
+    <br>
+    tento blog je na <a href="https://github.com/encukou/blog">Githubu</a>
+    <br>
+    <br>
+    text na této stránce je k dispozici pod licencí
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+            Creative Commons Attribution-ShareAlike 3.0 Unported</a>
+    <br>
+    © Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    
+            </p>
+        </footer>
+    </div><!-- /#container -->
+    <div style="display:none"></div>
+</body>
+</html>

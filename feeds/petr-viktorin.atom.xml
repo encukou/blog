@@ -1,5 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - Petr Viktorin</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/petr-viktorin.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-01T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #0</title><link href="http://encukou.cz/blog/2021/01/01/cs-tydenni-00" rel="alternate"></link><published>2021-01-01T00:00:00+01:00</published><updated>2021-01-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-01:/blog/2021/01/01/cs-tydenni-00</id><summary type="html">&lt;p&gt;Utekl další týden (12. 28.–1. 1.), a tak si po vzoru
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - Petr Viktorin</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/petr-viktorin.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-08T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #1</title><link href="http://encukou.cz/blog/2021/01/08/cs-tydenni-01" rel="alternate"></link><published>2021-01-08T00:00:00+01:00</published><updated>2021-01-08T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-08:/blog/2021/01/08/cs-tydenni-01</id><summary type="html">
+&lt;p&gt;Utekl další týden (3. 1. – 8. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
+</summary><content type="html">
+
+&lt;p&gt;Utekl další týden (3. 1. – 8. 1.), a&amp;nbsp;tak si sepisuju, co jsem&amp;nbsp;dělal.&lt;/p&gt;
+
+
+&lt;h2 id="pondeli-email"&gt;Pondělí: email&lt;/h2&gt;
+&lt;p&gt;Po dovolené jsem se přihlásil do práce a&amp;nbsp;svítilo na mě &lt;strong&gt;Inbox (1412)&lt;/strong&gt;.
+Celý pracovní den jsem to procházel, odpovídal na jednodušší kousky a
+složitější si zapisoval to úkolníčku.&lt;/p&gt;
+&lt;p&gt;Večer jsem zase &lt;a href="https://www.youtube.com/watch?v=XOf46FLt78k"&gt;streamoval Freezeyt&lt;/a&gt;.
+Přes minulý týden nikdo jiný na projektu nepracoval, takže z toho byly
+dvě hodiny refactoringu konfigurace.
+Doufám, že to k něčemu je – ale jedna ze &lt;a href="http://zpetnovazebnik.herokuapp.com/2020-brno-podzim/asteroids/"&gt;zpětných vazeb&lt;/a&gt; na &lt;em&gt;live coding&lt;/em&gt;
+po začátečnickém kurzu byla:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Opět moc pěkná lekce, tyhle "celoprogramovací" mě baví asi&amp;nbsp;nejvíc.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Takže asi v pohodě.
+Až budou otázky, může to zase být víc o&amp;nbsp;odpovědích a&amp;nbsp;odbočkách.&lt;/p&gt;
+&lt;h2 id="utery-cpython"&gt;Úterý: CPython&lt;/h2&gt;
+&lt;p&gt;Úterý je den pro Python!&lt;/p&gt;
+&lt;p&gt;Udělal jsem pár menších review ohledně izolace stavu modulů.
+O&amp;nbsp;PEP 630&amp;nbsp;jsem psal i&amp;nbsp;minule, tak trochu víc detailů:&lt;/p&gt;
+&lt;p&gt;Posledních pár let do Pythonu přispívám s tím, že modul – to co se
+importuje – je objekt jako každý jiný.
+Z jednoho &lt;code&gt;.py&lt;/code&gt; souboru se dá vytvořit několik modulových objektů, které
+se chovají stejně, ale navzájem se neovlivňují.
+To pak má výhody v tom, že aplikace může spustit Python několikrát za sebou,
+nebo dokonce paralelně vedle sebe, s různým nastavením.
+A&amp;nbsp;stejně by se měly chovat i&amp;nbsp;moduly napsané v C (nebo podobných jazycích),
+jenže to zatím moc nejde, protože jednotlivé objekty navzájem ovlivňují.
+Moje &lt;a href="https://www.python.org/dev/peps/pep-0630/"&gt;PEP 630&lt;/a&gt; problém popisuje a&amp;nbsp;ukazuje, jak ho&amp;nbsp;řešit.&lt;/p&gt;
+&lt;p&gt;Hlavní myšlenka je v tom, že se všechny prostředky – paměť, Pythonní objekty,
+otevřené soubory, a&amp;nbsp;kdo ví co všechno – navážou na objekt modulu.
+Když jsou ty objekty dva, musí všechno být dvakrát.
+A&amp;nbsp;problém je v tom, že v C je velice jednoduché použít statickou proměnnou,
+která je v celém procesu jen jedna.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Modul &lt;a href="https://github.com/python/cpython/pull/24096"&gt;datetime&lt;/a&gt;
+  jeden takový objekt používal, tak se z &lt;code&gt;static struct PyExpat_CAPI capi&lt;/code&gt;
+  muselo udělat něco trochu složitějšího.&lt;/li&gt;
+&lt;li&gt;Podobnou opravu &lt;a href="https://github.com/python/cpython/pull/24061"&gt;v modulu expat&lt;/a&gt;
+  jsem zkontroloval potom, co hlavní review udělal&amp;nbsp;Victor.&lt;/li&gt;
+&lt;li&gt;Změnu &lt;a href="https://github.com/python/cpython/pull/23124"&gt;v modulu array&lt;/a&gt;
+  jsem začlenil, ale zapomněl jsem na detail, který autor
+  &lt;a href="https://github.com/python/cpython/pull/24066"&gt;opravil vzápětí&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Udělal jsem další review na
+  &lt;a href="https://github.com/python/cpython/pull/22632"&gt;opravu správy paměti při importování&lt;/a&gt;
+  Jde hlavně o&amp;nbsp;chování v chybových situacích; Python při nich občas měl
+  &lt;em&gt;refleak&lt;/em&gt; – zapoměl odevzdat kousek paměti kterou dál nevyužíval.
+  Bohužel tomu neprošly automatické testy kvůli &lt;a href="https://bugs.python.org/issue42794"&gt;úplně jiné chybě&lt;/a&gt;
+  a&amp;nbsp;když jsem to zkoušel testovat u&amp;nbsp;sebe, našel jsem zase úplně jinou chybu,
+  která se neprojeví.
+  Poslal jsem na ni &lt;a href="https://github.com/python/cpython/pull/24119"&gt;pull request&lt;/a&gt;,
+  ale protože se v téhle oblasti nevyznám, bude ho potřeba ještě doladit.
+  Původní oprava ale prošla a&amp;nbsp;příští úterý ji chci začlenit.
+  (Snažím se to dělat když mám před sebou den dedikovaný pro Python,
+  abych mohl reagovat když se něco po... nepodaří.)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/python/cpython/pull/19133"&gt;Oprava kopírování ukazatele&lt;/a&gt;,
+  o&amp;nbsp;které jsem se zmínil minule, je&amp;nbsp;začleněná.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;O &lt;a href="https://github.com/python/cpython/pull/23903"&gt;přidání funkce PyType_GetName&lt;/a&gt;
+  se stále diskutuje, i&amp;nbsp;když&amp;nbsp;pomalu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No a&amp;nbsp;pak jsem začal definovat stabilní ABI.
+Napsal jsem si na to formát (a&amp;nbsp;jednoduchý parser), protože dat je moc a
+potřebuju v nich mít co nejlepší&amp;nbsp;přehled.&lt;/p&gt;
+&lt;h2 id="streda-python-310"&gt;Středa: Python 3.10&lt;/h2&gt;
+&lt;p&gt;Ve středu jsem napsal &lt;a href="https://github.com/pypa/setuptools/pull/2523"&gt;dvouřádkový pull request&lt;/a&gt;. Byla to práce na celý den,
+protože jsem napřed musel porozumět tomu, co ten kód vlastně dělá a&amp;nbsp;jaké
+jsou alternativy.&lt;/p&gt;
+&lt;p&gt;Pull request v Setuptools odstraňuje použití funkce &lt;code&gt;load_module&lt;/code&gt;, která od
+Pythonu 3.12&amp;nbsp;nebude fungovet.
+Ale potřebujeme se jí zbavit už teď, protože v&amp;nbsp;Pythonu 3.10&amp;nbsp;začala házet
+varování a&amp;nbsp;u&amp;nbsp;některých balíčků, které na Setuptools (resp. &lt;code&gt;pkg_resources&lt;/code&gt;)
+závisí, selžou testu když na varování&amp;nbsp;narazí.&lt;/p&gt;
+&lt;p&gt;Kromě toho bylo v týmu pár plánovacích porad, takže to nebylo doopravdy na
+celý pracovní den. Ale skoro.&lt;/p&gt;
+&lt;h2 id="ctvrtek-py3c"&gt;Čtvrtek: py3c&lt;/h2&gt;
+&lt;p&gt;Ve čtvrtek jsem dělal pár menších věcí pro Fedoru.
+Hlavní byla aktualizace &lt;a href="https://py3c.readthedocs.io"&gt;py3c&lt;/a&gt;, projektu
+na portování C-API modulů z Pythonu 2&amp;nbsp;na Python 3.
+Byl tam menší zádrhel s generováním dokumentace, testy na Travis CI trvaly tak
+dlouho, že jsem &lt;a href="https://github.com/encukou/py3c/pull/39"&gt;přešel na GitHub Actions&lt;/a&gt;.
+To zabralo překvapivě moc času, protože na GitHub Actions se nedá
+testovat na architektuře POWER, což se &lt;a href="https://github.com/encukou/py3c/pull/33"&gt;nelíbilo jistému Gerritovi&lt;/a&gt;,
+který POWER o&amp;nbsp;testů nedávno přidal.
+S Mirovou pomocí jsme testy vypiplali do stavu, kdy se stydím že nedávám tolik
+úsilí do užitečnějších projektů ;)&lt;/p&gt;
+&lt;h2 id="patek-planovani"&gt;Pátek: plánování&lt;/h2&gt;
+&lt;p&gt;V pátek jsem si urovnal pracovní úkolníček, zamyslel se co dál,
+a&amp;nbsp;několik menších věcí co už dlouho hnily vyřešil nebo posunul&amp;nbsp;kupředu.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #0</title><link href="http://encukou.cz/blog/2021/01/01/cs-tydenni-00" rel="alternate"></link><published>2021-01-01T00:00:00+01:00</published><updated>2021-01-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-01:/blog/2021/01/01/cs-tydenni-00</id><summary type="html">&lt;p&gt;Utekl další týden (28. 12.–1. 1.), a tak si po vzoru
 &lt;a href="https://honzajavorek.cz/blog/#archives-2020"&gt;Honzy Javorka&lt;/a&gt;
 sepisuju, co jsem dělal.
 Uvidíme, třeba se mi to podaří dělat nějak pravidelněji.&lt;/p&gt;
@@ -8,7 +104,7 @@ Uvidíme, třeba se mi to podaří dělat nějak pravidelněji.&lt;/p&gt;
 ale klíčové lidi napadl virus a tak nakonec nebylo moc co dělat
 a byt stále není hotový.
 A tak jsem seděl za počítačem.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Utekl další týden (12. 28.–1. 1.), a&amp;nbsp;tak si po vzoru
+</summary><content type="html">&lt;p&gt;Utekl další týden (28. 12.–1. 1.), a&amp;nbsp;tak si po vzoru
 &lt;a href="https://honzajavorek.cz/blog/#archives-2020"&gt;Honzy Javorka&lt;/a&gt;
 sepisuju, co jsem dělal.
 Uvidíme, třeba se mi to podaří dělat nějak&amp;nbsp;pravidelněji.&lt;/p&gt;
