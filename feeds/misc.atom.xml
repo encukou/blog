@@ -1,5 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - misc</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-08T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #1</title><link href="http://encukou.cz/blog/2021/01/08/cs-tydenni-01" rel="alternate"></link><published>2021-01-08T00:00:00+01:00</published><updated>2021-01-08T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-08:/blog/2021/01/08/cs-tydenni-01</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - misc</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-15T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #2</title><link href="http://encukou.cz/blog/2021/01/15/cs-tydenni-02" rel="alternate"></link><published>2021-01-15T00:00:00+01:00</published><updated>2021-01-15T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-15:/blog/2021/01/15/cs-tydenni-02</id><summary type="html">
+&lt;p&gt;Utekl další týden (12. 1. – 15. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
+</summary><content type="html">
+
+&lt;p&gt;Utekl další týden (12. 1. – 15. 1.), a&amp;nbsp;tak si sepisuju, co jsem&amp;nbsp;dělal.&lt;/p&gt;
+
+
+&lt;h2 id="pondeli-naucse"&gt;Pondělí: naucse&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/pyvec/naucse/pull/44"&gt;Opravil jsem CSS&lt;/a&gt; pro lekce psané
+v Jupyter Notebooku. Ještě to není úplně nasazené, příští týden&amp;nbsp;dokončím.&lt;/p&gt;
+&lt;p&gt;Sepsal jsem si, co bude potřeba pro rozjezd videokurzu.
+Zas tolik toho není; zatím to vypadá že největší překážka je asi drobnost
+v &lt;a href="https://projekty.pyladies.cz/"&gt;odevzdávátku&lt;/a&gt;.
+Tak se to snad povede a&amp;nbsp;zorganizuju kurz – po pár letech co učím kurzy které
+organizují &lt;a href="https://pyladies.cz/brno/#past-meetups"&gt;PyLadies&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="utery-cpython"&gt;Úterý: CPython&lt;/h2&gt;
+&lt;p&gt;Většinu úterka jsem strávil definování stabilního ABI – slučováním seznamů
+z několika různých zdrojů.
+Už se „těším“ na diskuse které nastanou až budu hotový se svým&amp;nbsp;návrhem.&lt;/p&gt;
+&lt;p&gt;A&amp;nbsp;pár menších věcí:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Oprava &lt;a href="https://github.com/python/cpython/pull/22632"&gt;správy paměti při importech&lt;/a&gt;
+  je konečně hotová&lt;/li&gt;
+&lt;li&gt;Oprava správy paměti &lt;a href="https://bugs.python.org/issue40052"&gt;u &lt;em&gt;vectorcall&lt;/em&gt;&lt;/a&gt;
+  taky, bude v&amp;nbsp;další revizi&amp;nbsp;3.8.&lt;/li&gt;
+&lt;li&gt;Oprava &lt;a href="https://github.com/python/cpython/pull/24119"&gt;zavírání souborů&lt;/a&gt;
+  v ttestech se trochu posunula,&amp;nbsp;CI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Taky se strhla &lt;a href="https://mail.python.org/archives/list/python-dev@python.org/thread/C4ILXGPKBJQYUN5YDMTJOEOX7RHOD4S3/#CKABGMLSJLKDGKUOMXA6MKO36MEWZIIS"&gt;mailová diskuse&lt;/a&gt;
+ohledně &lt;em&gt;heap types&lt;/em&gt;.
+Co to je? Zjednodušeně řečeno: typy které se dají měnit, na rozdíl od
+&lt;em&gt;statických typů&lt;/em&gt; jako např. &lt;code&gt;str&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;něco jiného&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="n"&gt;attributes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;built&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;extension&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;str&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Třídy definované v Pythonu jsou &lt;em&gt;heap types&lt;/em&gt;.
+Aktuálně se na ně převádí spousta „vestavěných“ typů.
+V aktuální alfa verzi Pythonu 3.10&amp;nbsp;tak jde udělat třeba:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;array&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;něco jiného&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;něco jiného&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Diskuse se točila kolem toho, proč jsou &lt;em&gt;heap types&lt;/em&gt; lepší, pokud chceme
+umožnit &lt;a href="https://www.python.org/dev/peps/pep-0554/"&gt;pod-interprety&lt;/a&gt;
+bez GIL (sdíleného zámku).&lt;/p&gt;
+&lt;p&gt;Než se bude dát měnit &lt;code&gt;str&lt;/code&gt;, nějakou dobu to potrvá a&amp;nbsp;nejspíš bude potřeba
+změnit C-API Pythonu. Ale zatím to vypadá že nakonec to tak&amp;nbsp;bude.&lt;/p&gt;
+&lt;h2 id="streda-fedora"&gt;Středa: Fedora&lt;/h2&gt;
+&lt;p&gt;Ve středu jsem hlavně spravoval věci ve Fedoře.
+Poslal jsem &lt;a href="https://github.com/sqlalchemy/mako/pull/328"&gt;PR do šablonovacího jazyka Mako&lt;/a&gt;,
+který v Pythonu 3.10&amp;nbsp;narážel na varování, což pak rozbíjelo testy projektů,
+které Mako používají a&amp;nbsp;varování ve svých vlastních testech berou jako&amp;nbsp;chyby.&lt;/p&gt;
+&lt;p&gt;Taky jsem pokročil v balíčkování nové verze Pipenv, ale nestihl jsem to otestovat.
+Miro se na to kouknul a&amp;nbsp;hned asi tři našel.
+(Pipenv je, mimochodem, strašlivé mocnáctihlavé monstrum. Ale užitečné.)&lt;/p&gt;
+&lt;h2 id="ctvrtek-planovani-apython-2"&gt;Čtvrtek: Plánování a&amp;nbsp;Python 2&lt;/h2&gt;
+&lt;p&gt;Ve čtvrtek jsem (kromě extra velké týmové porady) vyndával z Fedoray věci,
+které ještě pořád potřebují Python 2.
+Zbývá jich už &lt;a href="https://fedora.portingdb.xyz/"&gt;jen 70&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="patek-prace-vkorporatu"&gt;Pátek: Práce v&amp;nbsp;korporátu&lt;/h2&gt;
+&lt;p&gt;No a&amp;nbsp;v pátek jsem podobné nechtěné balíčky vyndával z budoucí verze &lt;a href="https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux"&gt;RHEL&lt;/a&gt;u,
+aby tam zbyly jen věci, které reálně můžeme nějaké to desetiletí&amp;nbsp;podporovat.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #1</title><link href="http://encukou.cz/blog/2021/01/08/cs-tydenni-01" rel="alternate"></link><published>2021-01-08T00:00:00+01:00</published><updated>2021-01-08T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-08:/blog/2021/01/08/cs-tydenni-01</id><summary type="html">
 &lt;p&gt;Utekl další týden (3. 1. – 8. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
