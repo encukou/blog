@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-15T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #2</title><link href="http://encukou.cz/blog/2021/01/15/cs-tydenni-02" rel="alternate"></link><published>2021-01-15T00:00:00+01:00</published><updated>2021-01-15T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-15:/blog/2021/01/15/cs-tydenni-02</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-22T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #3</title><link href="http://encukou.cz/blog/2021/01/22/cs-tydenni-03" rel="alternate"></link><published>2021-01-22T00:00:00+01:00</published><updated>2021-01-22T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-22:/blog/2021/01/22/cs-tydenni-03</id><summary type="html">
+&lt;p&gt;Utekl další týden (19. 1. – 22. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
+</summary><content type="html">
+
+&lt;p&gt;Utekl další týden (19. 1. – 22. 1.), a&amp;nbsp;tak si sepisuju, co jsem&amp;nbsp;dělal.&lt;/p&gt;
+
+
+&lt;h2 id="pondeli-priprava-tymoveho-kurzu"&gt;Pondělí: Příprava týmového kurzu&lt;/h2&gt;
+&lt;p&gt;Připravuju začátečický kurz, který neorganizují PyLadies.
+Přes video, pro všechny.
+Registrovaní budou mít určité výhody, ale hlavní je lepší motivace&amp;nbsp;vydržet.&lt;/p&gt;
+&lt;p&gt;Rozhodl jsem se na tomhle kurzu vyzkoušet skupinové přihlašování,
+něco, o&amp;nbsp;čem jsem slyšel někdy v začátcích kurzů pro PyLadies
+&lt;a href="https://youtu.be/FtKO619O5g0?t=714"&gt;na přednášce Grega Wilsona&lt;/a&gt;,
+ale co jsem nikdy neimplementoval.
+Doufám že to trochu pomůže s tou motivací – čekám, že u&amp;nbsp;videokurzu s ní
+budou problémy.&lt;/p&gt;
+&lt;p&gt;Minule jsem zjistil, že jeden z nástrojů co se na kurzy používá nemá
+na mě dost dobře vyřešenou ochranu soukromí.
+Tento týden jsem udělal něco pro nápravu; snad se to&amp;nbsp;povede.&lt;/p&gt;
+&lt;h2 id="utery-cpython"&gt;Úterý: CPython&lt;/h2&gt;
+&lt;p&gt;Mergnul jsem &lt;a href="https://github.com/python/cpython/pull/24119"&gt;konečnće hotové PR&lt;/a&gt;
+a&amp;nbsp;pak jsem celý den zkoumal, jak vypadá a&amp;nbsp;jak by mělo vypadat stabilní ABI
+CPythonu.
+Je to zhruba tisíc funkcí a&amp;nbsp;datových typů, a&amp;nbsp;já se snažím zjistit, které přesně
+to jsou.&lt;/p&gt;
+&lt;h2 id="adal"&gt;A&amp;nbsp;dál...?&lt;/h2&gt;
+&lt;p&gt;Další dny jsem dělal spoustu malých věcí, z nichž spousta ještě není&amp;nbsp;veřejná.&lt;/p&gt;
+&lt;p&gt;U&amp;nbsp;úkolů co si naplánuju předem je jednoduché je místo smazání přesunout
+do osonovy tohohle článku na blog.
+Nemám ale nacvičené zapisování „reaktivních“ činností: zapletení se do
+konverzace, review kódu o&amp;nbsp;který mě někdo požádá, reakce na novou prioritní
+chybu.
+Druhá půlka tohohle týdne byla plná takových věcí, a&amp;nbsp;teď si připadám že jsem
+se tři dny flákal, i&amp;nbsp;když jsem pracoval.
+Takže úkol na příště: všechno si&amp;nbsp;zapisovat!&lt;/p&gt;
+&lt;h2 id="ctenarsky-denik"&gt;Čtenářský deník&lt;/h2&gt;
+&lt;p&gt;Dočetl jsem knížku &lt;a href="https://www.goodreads.com/book/show/39074550-humble-pi#"&gt;Humble Pi&lt;/a&gt; od Matta Parkera.
+Je o&amp;nbsp;matematických chybách, kvůli kterým padaly mosty a&amp;nbsp;letadla – nebo jen
+nevyšlo množství sladu na pivo.
+Spousta too pro mě nebyla nová, ale přesto jsem se&amp;nbsp;bavil.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #2</title><link href="http://encukou.cz/blog/2021/01/15/cs-tydenni-02" rel="alternate"></link><published>2021-01-15T00:00:00+01:00</published><updated>2021-01-15T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-15:/blog/2021/01/15/cs-tydenni-02</id><summary type="html">
 &lt;p&gt;Utekl další týden (12. 1. – 15. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
