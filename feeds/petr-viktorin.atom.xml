@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - Petr Viktorin</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/petr-viktorin.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-22T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #3</title><link href="http://encukou.cz/blog/2021/01/22/cs-tydenni-03" rel="alternate"></link><published>2021-01-22T00:00:00+01:00</published><updated>2021-01-22T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-22:/blog/2021/01/22/cs-tydenni-03</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - Petr Viktorin</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/petr-viktorin.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-29T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #4</title><link href="http://encukou.cz/blog/2021/01/29/cs-tydenni-04" rel="alternate"></link><published>2021-01-29T00:00:00+01:00</published><updated>2021-01-29T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-29:/blog/2021/01/29/cs-tydenni-04</id><summary type="html">
+&lt;p&gt;Utekl další týden (26. 1. – 29. 1.). Vlastě už utekl celý měsíc!&lt;/p&gt;
+</summary><content type="html">
+
+&lt;p&gt;Utekl další týden (26. 1. – 29. 1.). Vlastě už utekl celý&amp;nbsp;měsíc!&lt;/p&gt;
+
+
+&lt;h2 id="pondeli-scenar"&gt;Pondělí: Scénář&lt;/h2&gt;
+&lt;p&gt;To hlavní, co jsem stihl v pondělí, je scénář pro první lekci nového kurzu.
+Pořád jsem si ještě nezvykl, jak dlouho tyhle věci trvají, ať už jde o&amp;nbsp;kurz
+nebo přednášku.
+Když chci půl hodiny mluvit, chce to minimálně 4&amp;nbsp;hodiny přípravy.
+Když chci mluvit dvě hodiny týdně, tak to s&amp;nbsp;nahráváním post-processingem
+vypadá na práci plný úvazek. Ještě že většina kurzu už je&amp;nbsp;napsaná.&lt;/p&gt;
+&lt;p&gt;Večer jsem se tradičně připojil na Freezeyt stream.
+Tentokrát jsem většinu času strávil implementací (a&amp;nbsp;kontrolou) detailů
+protokolu WSGI.
+Nástroj tak snad bude použitelný na opravdu všechny stránky napsané v Pythonu.
+Teda kromě těch co používají novější&amp;nbsp;ASGI.&lt;/p&gt;
+&lt;p&gt;Zbytek týdne jsem po večerech stavěl teleprompter z kousků dřeva a&amp;nbsp;polystyrenu
+(průhledného, ne pěnového), 
+Snažím se zůstávat doma, ne běhat do železářství pro šroubky.
+Design tím docela trpí, ale to nevadí – stejně tenhle výtvor nikdo&amp;nbsp;neuvidí.&lt;/p&gt;
+&lt;h2 id="utery-setuptools-py3c-apathlib"&gt;Úterý: Setuptools, py3c a&amp;nbsp;pathlib&lt;/h2&gt;
+&lt;p&gt;V úterý jsem tentokrát jen koukal na pull requesty a&amp;nbsp;diskutoval.&lt;/p&gt;
+&lt;p&gt;Modul &lt;code&gt;distutils&lt;/code&gt; ze standardní knihovny nefunguje moc dobře; skoro všichni
+místo něj používají Setuptools.
+Rozhodlo se tedy, že se &lt;code&gt;distutils&lt;/code&gt; z&amp;nbsp;Pythonu odebere a&amp;nbsp;začlení do Setuptools.
+Ale je s tím problém: &lt;code&gt;distutils&lt;/code&gt; je jediné místo, kde se dá nastavit kam
+se soubory kolem Pythonu instalují, a&amp;nbsp;tak má spousta linuxových distribucí
+v &lt;code&gt;setuptools&lt;/code&gt; několik změn, které nastavují např. kdy instalovat do
+instalovat do &lt;code&gt;/usr/&lt;/code&gt; a&amp;nbsp;kdy do &lt;code&gt;/usr/local/&lt;/code&gt;.
+Ve standardní knihovně se takové změny dají dělat jednoduše, ale u&amp;nbsp;Setuptools
+je to horší – tam si uživatel může doinstalovat novou verzi a&amp;nbsp;všechny změny
+přepsat.
+A&amp;nbsp;tak je potřeba udělat nové místo na nastavením a&amp;nbsp;zajistit aby ho všechny
+distribuce i&amp;nbsp;Setuptools začaly používat.
+Do &lt;a href="https://github.com/pypa/distutils/pull/23"&gt;pull requestu do Setuptools&lt;/a&gt;,
+který se o&amp;nbsp;tohle snaží, jsem napsal pár&amp;nbsp;postřehů.&lt;/p&gt;
+&lt;p&gt;Někdo poslal &lt;a href="https://github.com/encukou/py3c/pull/42"&gt;pull request do py3c&lt;/a&gt;,
+knihovny pro zpětnou kompatibilitu rozšiřujících modulů pro Python 2/3.
+(Něco jako &lt;code&gt;six&lt;/code&gt; pro moduly napsané v C.)
+Nápad byl dobrý, ale &lt;a href="https://github.com/encukou/py3c/pull/41"&gt;celý PR jsem nakonec&amp;nbsp;přepsal&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Přidal jsem i &lt;a href="https://discuss.python.org/t/make-pathlib-extensible/3428/28?u=encukou"&gt;komentář&lt;/a&gt;
+do tématu o&amp;nbsp;tom, že by se modul &lt;code&gt;pathlib&lt;/code&gt; dal
+používat pro jiné „cesty“ než ty v tradičním souborovém systému.
+To je něco, co bych mohl využít ve
+&lt;a href="https://github.com/encukou/gitpathlib"&gt;svojí knihovně na cesty v&amp;nbsp;Gitovém ropozitáři&lt;/a&gt;.
+Trochu mě mrzí, že tomuhle projektu nemůžu věnovat víc&amp;nbsp;času.&lt;/p&gt;
+&lt;h2 id="streda-bcond"&gt;Středa: bcond&lt;/h2&gt;
+&lt;p&gt;Ve středu jsem se potýkal s makrama v RPM, balíčkovacím systému co používáme
+ve Fedoře.
+Napsal jsem &lt;a href="https://github.com/rpm-software-management/rpm/pull/1520"&gt;makro &lt;code&gt;%bcond&lt;/code&gt;&lt;/a&gt;,
+které by mělo zjednodušit parametrizaci balíčků: v Pythonu to např. používáme
+pro variantu „bez testů“ nebo „bez optimizací“, které se rychleji vytvoří
+(ale nefungují pak tak dobře) a&amp;nbsp;tak je používáme na zkoušení nových&amp;nbsp;věcí.&lt;/p&gt;
+&lt;h2 id="ctvrtek-fedora"&gt;Čtvrtek: Fedora&lt;/h2&gt;
+&lt;p&gt;Spousta malých věcí.
+Nejdůležitější asi byla triviální aktualizace
+&lt;a href="https://src.fedoraproject.org/rpms/python-plette/pull-request/1"&gt;plette&lt;/a&gt; –
+snad poslední věc co blokuje vydání nového Pipenv ve&amp;nbsp;Fedoře.&lt;/p&gt;
+&lt;h2 id="patek-el"&gt;Pátek: EL&lt;/h2&gt;
+&lt;p&gt;No a&amp;nbsp;v pátek jsem dělal hlavně na něčem, co budou veřejné až za pár měsíců ;)&lt;/p&gt;
+&lt;h2 id="ctenarsky-denik"&gt;Čtenářský deník&lt;/h2&gt;
+&lt;p&gt;Dočetl jsem &lt;em&gt;The Last Continent&lt;/em&gt; od T. Pratchetta, jednu z posledních
+zeměplošských knížek co mi ještě zbývala.
+Nebylo to tak skvělé jak si Zeměplochu pamatuju.
+Možná jsem moc vyrostl, možná jenom zrovna v téhle knížce bylo příliš mnoho
+stereotypně otravných čarodějů.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #3</title><link href="http://encukou.cz/blog/2021/01/22/cs-tydenni-03" rel="alternate"></link><published>2021-01-22T00:00:00+01:00</published><updated>2021-01-22T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-22:/blog/2021/01/22/cs-tydenni-03</id><summary type="html">
 &lt;p&gt;Utekl další týden (19. 1. – 22. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 

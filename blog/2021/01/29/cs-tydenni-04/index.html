@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>encukou/blog &mdash; Týdenní poznámky #4</title>
+        <meta charset="utf-8" />
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="stylesheet" type="text/css" href="http://encukou.cz/theme/css/style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Signika|Jockey+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            body.custom-background { background-color: #f5f5f5; }
+        </style>
+        <link rel="alternate" type="application/atom+xml"
+            title="encukou/blog — Atom"
+            href="http://encukou.cz/feeds/all.atom.xml" />
+        <link rel="icon" type="image/png" href="http://encukou.cz/images/eck512.png">
+        <!--[if lte IE 8]><script src="http://encukou.cz/theme/js/html5shiv.js"></script><![endif]-->
+</head>
+
+<body class="home blog custom-background single-author" >
+    <div id="container">
+        <div id="header">
+                <h1 id="site-title"><a href="http://encukou.cz"><span class="_en">en</span><span class="_cu">cu</span><span class="_kou">kou</span>.cz</a></h1>
+                <h2 id="site-description">primary colors underneath</h2>
+        </div><!-- /#banner -->
+        
+        <div class="page-title">
+        </div>
+
+        <div id="menu">
+            <div class="menu-navigation-container">
+                <ul id="menu-navigation" class="menu">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="http://github.com/encukou">github</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="http://encukou.cz">home</a></li>
+
+                </ul>
+            </div> <!--/#menu-navigation-container-->
+        </div><!-- /#menu -->
+
+        <div id="contents">
+
+<div class="post type-post status-publish format-standard hentry category-general">
+    <div class="entry-meta">
+        <div class="date"><a href="http://encukou.cz/blog/2021/01/29/cs-tydenni-04">2021-01-29</a></div>
+    </div> <!-- /#entry-meta -->
+    <div class="main">
+        <h2 class="entry-title">
+            <a href="http://encukou.cz/blog/2021/01/29/cs-tydenni-04" title="Permalink to Týdenní poznámky #4" rel="bookmark">Týdenní poznámky #4</a>
+        </h2>
+        <div class="entry-content">
+
+
+<p>Utekl další týden (26. 1. – 29. 1.). Vlastě už utekl celý&nbsp;měsíc!</p>
+
+
+<h2 id="pondeli-scenar">Pondělí: Scénář</h2>
+<p>To hlavní, co jsem stihl v pondělí, je scénář pro první lekci nového kurzu.
+Pořád jsem si ještě nezvykl, jak dlouho tyhle věci trvají, ať už jde o&nbsp;kurz
+nebo přednášku.
+Když chci půl hodiny mluvit, chce to minimálně 4&nbsp;hodiny přípravy.
+Když chci mluvit dvě hodiny týdně, tak to s&nbsp;nahráváním post-processingem
+vypadá na práci plný úvazek. Ještě že většina kurzu už je&nbsp;napsaná.</p>
+<p>Večer jsem se tradičně připojil na Freezeyt stream.
+Tentokrát jsem většinu času strávil implementací (a&nbsp;kontrolou) detailů
+protokolu WSGI.
+Nástroj tak snad bude použitelný na opravdu všechny stránky napsané v Pythonu.
+Teda kromě těch co používají novější&nbsp;ASGI.</p>
+<p>Zbytek týdne jsem po večerech stavěl teleprompter z kousků dřeva a&nbsp;polystyrenu
+(průhledného, ne pěnového), 
+Snažím se zůstávat doma, ne běhat do železářství pro šroubky.
+Design tím docela trpí, ale to nevadí – stejně tenhle výtvor nikdo&nbsp;neuvidí.</p>
+<h2 id="utery-setuptools-py3c-apathlib">Úterý: Setuptools, py3c a&nbsp;pathlib</h2>
+<p>V úterý jsem tentokrát jen koukal na pull requesty a&nbsp;diskutoval.</p>
+<p>Modul <code>distutils</code> ze standardní knihovny nefunguje moc dobře; skoro všichni
+místo něj používají Setuptools.
+Rozhodlo se tedy, že se <code>distutils</code> z&nbsp;Pythonu odebere a&nbsp;začlení do Setuptools.
+Ale je s tím problém: <code>distutils</code> je jediné místo, kde se dá nastavit kam
+se soubory kolem Pythonu instalují, a&nbsp;tak má spousta linuxových distribucí
+v <code>setuptools</code> několik změn, které nastavují např. kdy instalovat do
+instalovat do <code>/usr/</code> a&nbsp;kdy do <code>/usr/local/</code>.
+Ve standardní knihovně se takové změny dají dělat jednoduše, ale u&nbsp;Setuptools
+je to horší – tam si uživatel může doinstalovat novou verzi a&nbsp;všechny změny
+přepsat.
+A&nbsp;tak je potřeba udělat nové místo na nastavením a&nbsp;zajistit aby ho všechny
+distribuce i&nbsp;Setuptools začaly používat.
+Do <a href="https://github.com/pypa/distutils/pull/23">pull requestu do Setuptools</a>,
+který se o&nbsp;tohle snaží, jsem napsal pár&nbsp;postřehů.</p>
+<p>Někdo poslal <a href="https://github.com/encukou/py3c/pull/42">pull request do py3c</a>,
+knihovny pro zpětnou kompatibilitu rozšiřujících modulů pro Python 2/3.
+(Něco jako <code>six</code> pro moduly napsané v C.)
+Nápad byl dobrý, ale <a href="https://github.com/encukou/py3c/pull/41">celý PR jsem nakonec&nbsp;přepsal</a>.</p>
+<p>Přidal jsem i <a href="https://discuss.python.org/t/make-pathlib-extensible/3428/28?u=encukou">komentář</a>
+do tématu o&nbsp;tom, že by se modul <code>pathlib</code> dal
+používat pro jiné „cesty“ než ty v tradičním souborovém systému.
+To je něco, co bych mohl využít ve
+<a href="https://github.com/encukou/gitpathlib">svojí knihovně na cesty v&nbsp;Gitovém ropozitáři</a>.
+Trochu mě mrzí, že tomuhle projektu nemůžu věnovat víc&nbsp;času.</p>
+<h2 id="streda-bcond">Středa: bcond</h2>
+<p>Ve středu jsem se potýkal s makrama v RPM, balíčkovacím systému co používáme
+ve Fedoře.
+Napsal jsem <a href="https://github.com/rpm-software-management/rpm/pull/1520">makro <code>%bcond</code></a>,
+které by mělo zjednodušit parametrizaci balíčků: v Pythonu to např. používáme
+pro variantu „bez testů“ nebo „bez optimizací“, které se rychleji vytvoří
+(ale nefungují pak tak dobře) a&nbsp;tak je používáme na zkoušení nových&nbsp;věcí.</p>
+<h2 id="ctvrtek-fedora">Čtvrtek: Fedora</h2>
+<p>Spousta malých věcí.
+Nejdůležitější asi byla triviální aktualizace
+<a href="https://src.fedoraproject.org/rpms/python-plette/pull-request/1">plette</a> –
+snad poslední věc co blokuje vydání nového Pipenv ve&nbsp;Fedoře.</p>
+<h2 id="patek-el">Pátek: EL</h2>
+<p>No a&nbsp;v pátek jsem dělal hlavně na něčem, co budou veřejné až za pár měsíců ;)</p>
+<h2 id="ctenarsky-denik">Čtenářský deník</h2>
+<p>Dočetl jsem <em>The Last Continent</em> od T. Pratchetta, jednu z posledních
+zeměplošských knížek co mi ještě zbývala.
+Nebylo to tak skvělé jak si Zeměplochu pamatuju.
+Možná jsem moc vyrostl, možná jenom zrovna v téhle knížce bylo příliš mnoho
+stereotypně otravných čarodějů.</p>        </div> <!--/#entry-content-->
+            <span class="tag-links"><strong>⚑</strong>
+ <a href="http://encukou.cz/blog/tag/weekly" rel="tag">weekly</a>            </span>
+        <ul class="article-links">
+                <li><a href="mailto:encukou@gmail.com?subject=Re:+článek+'T%C3%BDdenn%C3%AD%20pozn%C3%A1mky%20%234'">Přidat <em>komentář</em></a></li>
+                <li><a href="https://github.com/encukou/blog/blob/master/posts/2021-01-29-cs-tydenni-04.md"><em>Forknout</em> tenhle článek na Githubu</a></li>
+        </ul>
+    </div> <!--/#main-->
+</div>  <!--/#post-->
+        </div>
+
+
+<ul class="prev-next">
+    <li class="prev">
+        <a href="http://encukou.cz/blog/2021/01/22/cs-tydenni-03">
+            Týdenní poznámky #3
+        </a>
+    </li>
+</ul>
+<span class="clearfix"></span>
+
+
+        <footer id="footer">
+            <p>
+        
+    tento blog používá systém <a href="http://getpelican.com/">Pelican</a>
+    <br>
+    styl adaptovaný z <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
+        © <a href="https://twitter.com/thisistran">Tran</a>
+        a <a href="http://bunnyman.info/">tBunnyMan</a>
+    <br>
+    použité fonty: Signika © <a href="http://ancymonic.com/">Anna Giedryś</a>
+        a Jockey One © <a href="www.type-together.com">TypeTogether</a>
+    <br>
+    tento blog je na <a href="https://github.com/encukou/blog">Githubu</a>
+    <br>
+    <br>
+    text na této stránce je k dispozici pod licencí
+    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+            Creative Commons Attribution-ShareAlike 3.0 Unported</a>
+    <br>
+    © Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    
+            </p>
+        </footer>
+    </div><!-- /#container -->
+    <div style="display:none"></div>
+</body>
+</html>
