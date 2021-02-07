@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - misc</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-01-29T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #4</title><link href="http://encukou.cz/blog/2021/01/29/cs-tydenni-04" rel="alternate"></link><published>2021-01-29T00:00:00+01:00</published><updated>2021-01-29T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-29:/blog/2021/01/29/cs-tydenni-04</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - misc</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-02-05T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #5</title><link href="http://encukou.cz/blog/2021/02/05/cs-tydenni-05" rel="alternate"></link><published>2021-02-05T00:00:00+01:00</published><updated>2021-02-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-05:/blog/2021/02/05/cs-tydenni-05</id><summary type="html">
+&lt;p&gt;Utekl další týden (2. 2. – 5. 2.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
+</summary><content type="html">
+
+&lt;p&gt;Utekl další týden (2. 2. – 5. 2.), a&amp;nbsp;tak si sepisuju, co jsem&amp;nbsp;dělal.&lt;/p&gt;
+
+
+&lt;h2 id="pondeli-kurz-bude"&gt;Pondělí: Kurz bude&lt;/h2&gt;
+&lt;p&gt;Dál jsem připravoval podklady k úvodní lekci.
+Tentokrát to byl hlavně úvod do příkazové řádky.
+Kolem začátků kurzů bývá docela shon, tak jsem se k téhle části moc nedostal,
+i&amp;nbsp;když potřebuje zjednodušit.
+A&amp;nbsp;doplnit o&amp;nbsp;kopírování textu z (a&amp;nbsp;do)&amp;nbsp;terminálu.&lt;/p&gt;
+&lt;p&gt;Příště už začnu budu točit, fakt!&lt;/p&gt;
+&lt;h2 id="utery-stabilni-abi"&gt;Úterý: Stabilní ABI&lt;/h2&gt;
+&lt;p&gt;Celý den jsem implementoval nový PEP ohledně stabilního ABI
+a&amp;nbsp;podle toho na co jsem si přitom vzpoměl jsem dolaďpoval text.
+A&amp;nbsp;bylo to super!
+Už se mi moc nestává že bych strávil celý den programováním a&amp;nbsp;docela mi
+to chybí.
+V devět večer, kdy už normálně, jsem se podíval na hodiny – a&amp;nbsp;ono bylo devět
+večer! &lt;a href="https://en.wikipedia.org/wiki/Flow_(psychology)"&gt;Flow&lt;/a&gt; je skvělá&amp;nbsp;věc.&lt;/p&gt;
+&lt;p&gt;Ten jsem pak zveřejnil na
+&lt;a href="https://discuss.python.org/t/pre-pep-maintaining-the-stable-abi/6986"&gt;discuss.python.org&lt;/a&gt;,
+což je jedna z byrokratických podmínek pro to, aby o&amp;nbsp;tom pak hlasoval&amp;nbsp;výbor.&lt;/p&gt;
+&lt;p&gt;Pár lidí (včetně Guida, kterého jsem v téhle oblasti nečekal) se ozvalo
+s připomínkama, ale na žádné zásadní změny to&amp;nbsp;nevypadá.&lt;/p&gt;
+&lt;h2 id="streda-balickovani"&gt;Středa: Balíčkování&lt;/h2&gt;
+&lt;p&gt;Poslední verze Setuptools už neobsahuje nástroj
+&lt;a href="http://peak.telecommunity.com/DevCenter/EasyInstall"&gt;easy-install&lt;/a&gt;.
+A&amp;nbsp;kromě toho je teď k instalaci Setuptools potřeba Setuptools
+(většinou ve starší verzi).
+Ta se dá nainstalovat Pipem, ale k sestavení Pipu je potřeba Setuptools.
+Ve Fedoře jsou s tím docela problémy (a&amp;nbsp;v jiných distribucích taky – nejhůř
+na tom jsou asi distra jako Arch), ale s autorem Setuptools se naštěstí dá
+mluvit, tak se situace snad zlepší. I&amp;nbsp;kdyby ne, uživatel to nepocítí.
+No, a&amp;nbsp;co jsem k&amp;nbsp;tomu udělal já ve středu? Pár review; oddřel to hlavně&amp;nbsp;Miro.&lt;/p&gt;
+&lt;p&gt;Odpoledne jsem dělal na podpoře pro &lt;a href="https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards"&gt;standardy, které vyžaduje americká vláda&lt;/a&gt;,
+a&amp;nbsp;tak je přidáváme do Pythonu.
+Reálný přínos je sporný, ale zaplatí to spoustu z toho ostatního co děláme :)&lt;/p&gt;
+&lt;h2 id="ctvrtek-mitink-brifink-brainstormink"&gt;Čtvrtek: Mítink brífink brainstormink&lt;/h2&gt;
+&lt;p&gt;Nějaké reviews, týmový meeting, a&amp;nbsp;spousta malých&amp;nbsp;úkolů.&lt;/p&gt;
+&lt;p&gt;Šéf si mě pozval na kobereček, tak jsme pokecali, stanovili formální cíle
+a&amp;nbsp;zadali je do nástroje pro správu formálních cílů.
+A&amp;nbsp;přijde mi že čím jsem starší, tím víc mi tyhle věci dávají smysl.
+Znamená to že jsem dospělejší, nebo&amp;nbsp;zkostnatělejší?&lt;/p&gt;
+&lt;h2 id="patek-podman"&gt;Pátek: Podman&lt;/h2&gt;
+&lt;p&gt;V pátek byl v Red Hatu „Learning Day“ – zrušily se téměř všechny porady a
+schůze v celé firmě a&amp;nbsp;každý měl za úkol se něco nového&amp;nbsp;(na)učit.&lt;/p&gt;
+&lt;p&gt;S Lumírem jsme nasadili tymový &lt;a href="https://etherpad.org/"&gt;Etherpad&lt;/a&gt;, abychom
+si mohli dělat poznámky.
+Dokumenty v Google Docs, Jiře a&amp;nbsp;podobných nám totiž moc nevyhovují:
+barevné zvýraznění podle autora je na poznámky naprosto skvělá&amp;nbsp;věc.&lt;/p&gt;
+&lt;p&gt;A&amp;nbsp;tak vím zase něco víc o&amp;nbsp;kontejnerech a &lt;code&gt;systemd&lt;/code&gt; :)&lt;/p&gt;
+&lt;p&gt;Ansible jsme nakonec nepoužili, ale i&amp;nbsp;ten jsem vyzkoušel  – a&amp;nbsp;dokonce v něm
+našel &lt;a href="https://github.com/ansible/ansible/issues/73503"&gt;chybu&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="ctenarsky-denik"&gt;Čtenářský deník&lt;/h2&gt;
+&lt;p&gt;Dočetl jsem &lt;em&gt;I, Robot&lt;/em&gt; or I, Asimova.
+Naprostá klasika, která inspirovala spoustu pozdějších příběhů s robotama
+(i&amp;nbsp;když akční nesmysl stejného jména je o&amp;nbsp;něčem úplně&amp;nbsp;jiném).&lt;/p&gt;
+&lt;p&gt;Jedna z&amp;nbsp;povídek se odehrává na světlé straně Merkuru, což mi ještě víc než
+všudypřítomné kouření připomnělo jak je ta knížka stará.
+Na to, že se tam střídá den a&amp;nbsp;noc, se přišlo ještě než jsem se&amp;nbsp;narodil!&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #4</title><link href="http://encukou.cz/blog/2021/01/29/cs-tydenni-04" rel="alternate"></link><published>2021-01-29T00:00:00+01:00</published><updated>2021-01-29T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-29:/blog/2021/01/29/cs-tydenni-04</id><summary type="html">
 &lt;p&gt;Utekl další týden (26. 1. – 29. 1.). Vlastě už utekl celý měsíc!&lt;/p&gt;
 </summary><content type="html">
 
