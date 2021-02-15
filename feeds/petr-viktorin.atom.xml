@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - Petr Viktorin</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/petr-viktorin.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-02-05T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #5</title><link href="http://encukou.cz/blog/2021/02/05/cs-tydenni-05" rel="alternate"></link><published>2021-02-05T00:00:00+01:00</published><updated>2021-02-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-05:/blog/2021/02/05/cs-tydenni-05</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - Petr Viktorin</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/petr-viktorin.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-02-12T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #6</title><link href="http://encukou.cz/blog/2021/02/12/cs-tydenni-06" rel="alternate"></link><published>2021-02-12T00:00:00+01:00</published><updated>2021-02-12T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-12:/blog/2021/02/12/cs-tydenni-06</id><summary type="html">
+&lt;p&gt;Utekl další týden (9. 2. – 12. 2.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
+</summary><content type="html">
+
+&lt;p&gt;Utekl další týden (9. 2. – 12. 2.), a&amp;nbsp;tak si sepisuju, co jsem&amp;nbsp;dělal.&lt;/p&gt;
+
+
+&lt;h2 id="pondeli-nahravani"&gt;Pondělí: Nahrávání&lt;/h2&gt;
+&lt;p&gt;V pondělí jsem postavil domácí studio a&amp;nbsp;nahrával úvodní video
+nového začátečnického kurzu.
+Nepodařilo se to úplně, tak jsem ve zbytku týdne dodělával
+a&amp;nbsp;nakonec ho i&amp;nbsp;nahrál &lt;a href="https://www.youtube.com/watch?v=so10Ud-YlKE"&gt;na&amp;nbsp;YouTube&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="utery-cpython"&gt;Úterý: CPython&lt;/h2&gt;
+&lt;p&gt;Dokument, o&amp;nbsp;tom, co chci v Pythonu změnit kolem stabilního Pythonu, má číslo:
+je to &lt;a href="https://www.python.org/dev/peps/pep-0652/"&gt;PEP 652&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Pořád je to návrh. Až budu dostatečně jistý, že je rozumný a&amp;nbsp;proveditelný
+(což zjistím tak, že si ty změny udělám u&amp;nbsp;sebe), pošlu ho pythonovému
+&lt;a href="https://www.python.org/dev/peps/pep-8016/"&gt;řídícímu výboru&lt;/a&gt; na&amp;nbsp;oštemplování.&lt;/p&gt;
+&lt;h2 id="streda-fedora"&gt;Středa: Fedora&lt;/h2&gt;
+&lt;p&gt;Jak to už ve středy bývá, dělal jsem spoustu malých komunikací a&amp;nbsp;review.
+Třeba na Mirův &lt;a href="https://src.fedoraproject.org/rpms/pyproject-rpm-macros/pull-request/146"&gt;pull request na opravu makra &lt;code&gt;%pyproject_save_files&lt;/code&gt;&lt;/a&gt;,
+které vytahuje seznam souborů z Pythnonních &lt;em&gt;wheel&lt;/em&gt;&amp;nbsp;archivů.&lt;/p&gt;
+&lt;p&gt;RPM třeba potřebuje kromě jednotlivých souborů vědět i&amp;nbsp;o&amp;nbsp;adresářích,
+ve kterých soubory jsou, ale &lt;em&gt;wheel&lt;/em&gt; adresáře většinou neuvádí.
+A&amp;nbsp;stejně tak neuvádí automaticky generované soubory &lt;code&gt;.pyc&lt;/code&gt;.
+Doplňování těchto informací tak není úplkně&amp;nbsp;jednoduché.&lt;/p&gt;
+&lt;h2 id="ctvrtek-porada"&gt;Čtvrtek: Porada&lt;/h2&gt;
+&lt;p&gt;Měli jsme dlouhou diskusi o&amp;nbsp;detailech nových &lt;a href="https://hackmd.io/XzJe-sHUQvWK7cSrEH_aKg"&gt;balíčkovacích pravidela&lt;/a&gt;
+pro Python ve Fedoře. Snad se tuhle verzi podaří&amp;nbsp;schválit...&lt;/p&gt;
+&lt;p&gt;Největší změna v nových pravidlech je synchronizace s jmény projektů na PyPI:
+když se něco ve Fedoře jmenuje Requests (technicky, &lt;code&gt;python3dist(requests)&lt;/code&gt;),
+tak to musí odpovídat balíčku &lt;a href="https://pypi.org/project/requests/"&gt;requests&lt;/a&gt; na PyPI.
+To se teď neděje a&amp;nbsp;tak je těžké korektně automatizovat balíčkování&amp;nbsp;závislostí.&lt;/p&gt;
+&lt;h2 id="patek"&gt;Pátek&lt;/h2&gt;
+&lt;p&gt;No a&amp;nbsp;pátek jsem zabil prací co zatím není úplně&amp;nbsp;veřejná.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #5</title><link href="http://encukou.cz/blog/2021/02/05/cs-tydenni-05" rel="alternate"></link><published>2021-02-05T00:00:00+01:00</published><updated>2021-02-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-05:/blog/2021/02/05/cs-tydenni-05</id><summary type="html">
 &lt;p&gt;Utekl další týden (2. 2. – 5. 2.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
