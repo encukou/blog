@@ -37,30 +37,30 @@ FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})-(?P<day_disambig>\d+-)?(?P<lang
 DEFAULT_DATE_FORMAT = '%Y-%m-%d'
 SITESUBTITLE = 'primary colors underneath'
 FOOTER_TEXT = """
-    powered by <a href="http://getpelican.com/">Pelican</a>
+    powered by <a href="https://getpelican.com/">Pelican</a>
     <br>
     theme adapted from <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
         by <a href="https://twitter.com/thisistran">Tran</a>
-        and <a href="http://bunnyman.info/">tBunnyMan</a>
+        and <a href="https://bunnyman.info/">tBunnyMan</a>
     <br>
     fonts: Signika by <a href="http://ancymonic.com/">Anna Giedryś</a>
-        and Jockey One by <a href="www.type-together.com">TypeTogether</a>
+        and Jockey One by <a href="https://www.type-together.com">TypeTogether</a>
     <br>
     fork this blog on <a href="https://github.com/encukou/blog">Github</a>
     <br>
     <br>
     the text on this page is licensed under the
-    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
             Creative Commons Attribution-ShareAlike 3.0 Unported License</a>
     <br>
-    by Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    by Petr Viktorin, <a href="https://encukou.cz">encukou.cz</a>
     """
 FOOTER_TEXT_CS = """
-    tento blog používá systém <a href="http://getpelican.com/">Pelican</a>
+    tento blog používá systém <a href="https://getpelican.com/">Pelican</a>
     <br>
     styl adaptovaný z <a href="https://github.com/tbunnyman/pelican-chunk">pelican-chunk</a>
         © <a href="https://twitter.com/thisistran">Tran</a>
-        a <a href="http://bunnyman.info/">tBunnyMan</a>
+        a <a href="https://bunnyman.info/">tBunnyMan</a>
     <br>
     použité fonty: Signika © <a href="http://ancymonic.com/">Anna Giedryś</a>
         a Jockey One © <a href="www.type-together.com">TypeTogether</a>
@@ -69,23 +69,23 @@ FOOTER_TEXT_CS = """
     <br>
     <br>
     text na této stránce je k dispozici pod licencí
-    <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+    <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
             Creative Commons Attribution-ShareAlike 3.0 Unported</a>
     <br>
-    © Petr Viktorin, <a href="http://encukou.cz">encukou.cz</a>
+    © Petr Viktorin, <a href="https://encukou.cz">encukou.cz</a>
     """
 DISPLAY_CATEGORIES_ON_MENU = False
 SINGLE_AUTHOR = True
 MENUITEMS_COLORFUL = (
         ('e-mail', 'mailto:encukou@gmail.com', '_kou'),
         ('twitter', 'https://twitter.com/encukou', '_cu'),
-        ('github', 'http://github.com/encukou', '_en'),
+        ('github', 'https://github.com/encukou', '_en'),
     )
 MENUITEMS = (
-        ('home', 'http://encukou.cz'),
+        ('home', 'https://encukou.cz'),
     )
 XMENUITEMS = (
-        ('blog', 'http://encukou.cz/blog'),
+        ('blog', 'https://encukou.cz/blog'),
     )
 DISPLAY_PAGES_ON_MENU = False
 
@@ -195,5 +195,5 @@ PLUGINS = ['summary', 'neighbors', 'latex', GithubLinkPlugin()]
 
 GITHUB_URL = 'https://github.com/encukou/blog/blob/master/'
 
-SITEURL = 'http://encukou.cz'
+SITEURL = 'https://encukou.cz'
 FEED_DOMAIN = SITEURL

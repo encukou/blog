@@ -4,7 +4,7 @@ Image: mic
 
 I also share my knowledge in various presentations.
 Most of my talks happen at meetups of the
-[Python users group](http://python.cz) in Brno,
+[Python users group](https://python.cz) in Brno,
 which I help organize.
 I also design and teach community programming courses.
 
