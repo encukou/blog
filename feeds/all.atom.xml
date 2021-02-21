@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2021-02-12T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #6</title><link href="http://encukou.cz/blog/2021/02/12/cs-tydenni-06" rel="alternate"></link><published>2021-02-12T00:00:00+01:00</published><updated>2021-02-12T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-12:/blog/2021/02/12/cs-tydenni-06</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog</title><link href="https://encukou.cz/" rel="alternate"></link><link href="https://encukou.cz/feeds/all.atom.xml" rel="self"></link><id>https://encukou.cz/</id><updated>2021-02-19T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #7</title><link href="https://encukou.cz/blog/2021/02/19/cs-tydenni-07" rel="alternate"></link><published>2021-02-19T00:00:00+01:00</published><updated>2021-02-19T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-19:/blog/2021/02/19/cs-tydenni-07</id><summary type="html">
+&lt;p&gt;Utekl další týden (16. 2. – 19. 2.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
+</summary><content type="html">
+
+&lt;p&gt;Utekl další týden (16. 2. – 19. 2.), a&amp;nbsp;tak si sepisuju, co jsem&amp;nbsp;dělal.&lt;/p&gt;
+
+
+&lt;h2 id="pondeli-kurz"&gt;Pondělí: Kurz!&lt;/h2&gt;
+&lt;p&gt;V pondělí jsem zpracovával registrace ne kurz, vítal účastníky, odpovídal
+na otázky.
+I&amp;nbsp;na přípravu a&amp;nbsp;točení videí na instalační lekci zbyla trocha času,
+i&amp;nbsp;když ne tolik, kolik bych&amp;nbsp;chtěl.&lt;/p&gt;
+&lt;p&gt;Většina týmů se přihlásila v pondělí a&amp;nbsp;úterý, ale spočítal jsem je až později,
+když jsem uzavíral přihlášky.
+Celkem je týmů 56&amp;nbsp;a&amp;nbsp;mají od dvou do pěti lidí.
+I&amp;nbsp;kdyby to bylo jen 56&amp;nbsp;lidí, byl by to největší kurz co jsem zatím učil,
+a&amp;nbsp;tak doufám, že náročnost neroste&amp;nbsp;lineárně.&lt;/p&gt;
+&lt;p&gt;Docela dost týmů má někoho, kdo není úplný začátečník; snad i&amp;nbsp;tohle ze začátku
+trochu uleví koučům.&lt;/p&gt;
+&lt;p&gt;Večer byl další sraz projektu Freezeyt.
+Tentokrát se k nám přidal nový člen (který v klubu junior.guru hledal projekt,
+tak jsem ho tak trochu naverboval).
+A&amp;nbsp;tak jsem prošel celý kód, vysvětloval co to dělá a&amp;nbsp;odpovídal na otázky.
+Všem je to teď jasnější – ne jen&amp;nbsp;nováčkovi.&lt;/p&gt;
+&lt;p&gt;Další Freezeyt srazy jsme přesunuli na úterý, protože v pondělí bude
+začátečnický kurz.&lt;/p&gt;
+&lt;h2 id="utery-cpython"&gt;Úterý: CPython&lt;/h2&gt;
+&lt;p&gt;Úterky mám vyhrazené na vylepšování stabilního ABI.
+A&amp;nbsp;tak jsem dělal přesně tohle.
+Jediné co je z toho vidět je &lt;a href="https://github.com/python/cpython/pull/24551"&gt;pull request na zveřejnění funkce &lt;code&gt;PyCFunction_New&lt;/code&gt;&lt;/a&gt;,
+která byla k dispozici na Windows ale ne na&amp;nbsp;Linuxu.&lt;/p&gt;
+&lt;p&gt;To je docela rarita.
+Většinou to bývá naopak, protože Windows má &lt;a href="https://github.com/python/cpython/blob/d5fc99873769f0d0d5c5d5d99059177a75a4e46e/PC/python3dll.c"&gt;seznam exportovaných fukcí&lt;/a&gt;,
+ktežto Linuxu se exportuje každá funkce nadefinovaná jako API.
+Jenže zrovna &lt;code&gt;PyCFunction_New&lt;/code&gt; byla nadefinována jako makro, což znamená,
+že v C fungovala normálně ale z jiných jazyků by použít&amp;nbsp;nešla.&lt;/p&gt;
+&lt;h2 id="streda"&gt;Středa&lt;/h2&gt;
+&lt;p&gt;Nějakou dobu už se nám na nejnovější Fedoře nedaří zkompilovat
+Python 3.4, 3.5&amp;nbsp;a&amp;nbsp;3.6, tak jsem se na to ve podíval.
+Jde o&amp;nbsp;dvě nezávislé chyby.
+Na jednu jsem přišel docela rychle, ale pak jsem většinu dne
+strávil tím, že jsem se snažil tu druhou zreplikovat na svém počítači.
+Bylo do dost frustrující.&lt;/p&gt;
+&lt;h2 id="ctvrtek"&gt;Čtvrtek&lt;/h2&gt;
+&lt;p&gt;Ve čtvrtek jsem chybu v&amp;nbsp;Pythonu 3.5&amp;nbsp;konečně dostal u&amp;nbsp;sebe,
+po pár pokusech jsem místo „testy spadnou“ věděl, který z testů padá,
+pak která funkce a&amp;nbsp;pak i&amp;nbsp;který řádek Pythoního kódu.
+To ale nestačilo: pokračoval jsem řádkem C kódu a&amp;nbsp;nakonec i&amp;nbsp;konkrétní
+instrukcí procesoru.
+K tomu jsem si musel dohledat, co vlastně dělají instrukce jako &lt;code&gt;punpcklqdq&lt;/code&gt; a
+&lt;code&gt;movaps&lt;/code&gt; – a&amp;nbsp;najednou to začlo být jasné.
+Instrukce &lt;code&gt;movaps&lt;/code&gt; totiž pracuje s daty, které jsou v paměti zarovnané:
+začínají na sudém bajtu.
+Za to je (předpokládám) trochu rychlejší než alternativy.
+No a&amp;nbsp;novější překladač C se snaží vytvořit co nejrychlejší kód, a&amp;nbsp;tak tam, kde
+umí dokázat že příslušná data musí být zarovnaná, použije tuhle instrukci.
+No a&amp;nbsp;protože zdrojáky Pythonu 3.6, zdá se, neodpovídají úplně přesně detailům
+standardu C, chyba je na světě.&lt;/p&gt;
+&lt;p&gt;Večer jsem &lt;a href="https://bugzilla.redhat.com/show_bug.cgi?id=1923658#c13"&gt;chybu a&amp;nbsp;svou analýzu&lt;/a&gt; ukázal Victorovi, který si
+vzpomněl že v Pythonu 3.7&amp;nbsp;se něco podobného řešilo a&amp;nbsp;nasměroval mě na&amp;nbsp;opravu.
+Hurá!&lt;/p&gt;
+&lt;p&gt;Jo, a&amp;nbsp;taky ve čtvrtek začal &lt;a href="https://www.devconf.info/cz/"&gt;DevConf&lt;/a&gt;, tak jsem koukal na pár&amp;nbsp;přednášek.&lt;/p&gt;
+&lt;h2 id="patek-devconf"&gt;Pátek: DevConf&lt;/h2&gt;
+&lt;p&gt;DevConf pokračoval i&amp;nbsp;v pátek.
+Sledoval jsem další přednášky, ale ty online konference prostě nejsou ono.
+Zpětně mi to přijde spíš jako promrhaný čas :(&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #6</title><link href="https://encukou.cz/blog/2021/02/12/cs-tydenni-06" rel="alternate"></link><published>2021-02-12T00:00:00+01:00</published><updated>2021-02-12T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-12:/blog/2021/02/12/cs-tydenni-06</id><summary type="html">
 &lt;p&gt;Utekl další týden (9. 2. – 12. 2.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
@@ -33,7 +98,7 @@ když se něco ve Fedoře jmenuje Requests (technicky, &lt;code&gt;python3dist(r
 tak to musí odpovídat balíčku &lt;a href="https://pypi.org/project/requests/"&gt;requests&lt;/a&gt; na PyPI.
 To se teď neděje a&amp;nbsp;tak je těžké korektně automatizovat balíčkování&amp;nbsp;závislostí.&lt;/p&gt;
 &lt;h2 id="patek"&gt;Pátek&lt;/h2&gt;
-&lt;p&gt;No a&amp;nbsp;pátek jsem zabil prací co zatím není úplně&amp;nbsp;veřejná.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #5</title><link href="http://encukou.cz/blog/2021/02/05/cs-tydenni-05" rel="alternate"></link><published>2021-02-05T00:00:00+01:00</published><updated>2021-02-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-05:/blog/2021/02/05/cs-tydenni-05</id><summary type="html">
+&lt;p&gt;No a&amp;nbsp;pátek jsem zabil prací co zatím není úplně&amp;nbsp;veřejná.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #5</title><link href="https://encukou.cz/blog/2021/02/05/cs-tydenni-05" rel="alternate"></link><published>2021-02-05T00:00:00+01:00</published><updated>2021-02-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-05:/blog/2021/02/05/cs-tydenni-05</id><summary type="html">
 &lt;p&gt;Utekl další týden (2. 2. – 5. 2.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
@@ -95,7 +160,7 @@ Naprostá klasika, která inspirovala spoustu pozdějších příběhů s robot
 (i&amp;nbsp;když akční nesmysl stejného jména je o&amp;nbsp;něčem úplně&amp;nbsp;jiném).&lt;/p&gt;
 &lt;p&gt;Jedna z&amp;nbsp;povídek se odehrává na světlé straně Merkuru, což mi ještě víc než
 všudypřítomné kouření připomnělo jak je ta knížka stará.
-Na to, že se tam střídá den a&amp;nbsp;noc, se přišlo ještě než jsem se&amp;nbsp;narodil!&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #4</title><link href="http://encukou.cz/blog/2021/01/29/cs-tydenni-04" rel="alternate"></link><published>2021-01-29T00:00:00+01:00</published><updated>2021-01-29T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-29:/blog/2021/01/29/cs-tydenni-04</id><summary type="html">
+Na to, že se tam střídá den a&amp;nbsp;noc, se přišlo ještě než jsem se&amp;nbsp;narodil!&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #4</title><link href="https://encukou.cz/blog/2021/01/29/cs-tydenni-04" rel="alternate"></link><published>2021-01-29T00:00:00+01:00</published><updated>2021-01-29T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-29:/blog/2021/01/29/cs-tydenni-04</id><summary type="html">
 &lt;p&gt;Utekl další týden (26. 1. – 29. 1.). Vlastě už utekl celý měsíc!&lt;/p&gt;
 </summary><content type="html">
 
@@ -163,7 +228,7 @@ snad poslední věc co blokuje vydání nového Pipenv ve&amp;nbsp;Fedoře.&lt;/
 zeměplošských knížek co mi ještě zbývala.
 Nebylo to tak skvělé jak si Zeměplochu pamatuju.
 Možná jsem moc vyrostl, možná jenom zrovna v téhle knížce bylo příliš mnoho
-stereotypně otravných čarodějů.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #3</title><link href="http://encukou.cz/blog/2021/01/22/cs-tydenni-03" rel="alternate"></link><published>2021-01-22T00:00:00+01:00</published><updated>2021-01-22T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-22:/blog/2021/01/22/cs-tydenni-03</id><summary type="html">
+stereotypně otravných čarodějů.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #3</title><link href="https://encukou.cz/blog/2021/01/22/cs-tydenni-03" rel="alternate"></link><published>2021-01-22T00:00:00+01:00</published><updated>2021-01-22T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-22:/blog/2021/01/22/cs-tydenni-03</id><summary type="html">
 &lt;p&gt;Utekl další týden (19. 1. – 22. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
@@ -203,7 +268,7 @@ Takže úkol na příště: všechno si&amp;nbsp;zapisovat!&lt;/p&gt;
 &lt;p&gt;Dočetl jsem knížku &lt;a href="https://www.goodreads.com/book/show/39074550-humble-pi#"&gt;Humble Pi&lt;/a&gt; od Matta Parkera.
 Je o&amp;nbsp;matematických chybách, kvůli kterým padaly mosty a&amp;nbsp;letadla – nebo jen
 nevyšlo množství sladu na pivo.
-Spousta too pro mě nebyla nová, ale přesto jsem se&amp;nbsp;bavil.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #2</title><link href="http://encukou.cz/blog/2021/01/15/cs-tydenni-02" rel="alternate"></link><published>2021-01-15T00:00:00+01:00</published><updated>2021-01-15T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-15:/blog/2021/01/15/cs-tydenni-02</id><summary type="html">
+Spousta too pro mě nebyla nová, ale přesto jsem se&amp;nbsp;bavil.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #2</title><link href="https://encukou.cz/blog/2021/01/15/cs-tydenni-02" rel="alternate"></link><published>2021-01-15T00:00:00+01:00</published><updated>2021-01-15T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-15:/blog/2021/01/15/cs-tydenni-02</id><summary type="html">
 &lt;p&gt;Utekl další týden (12. 1. – 15. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
@@ -269,7 +334,7 @@ které ještě pořád potřebují Python 2.
 Zbývá jich už &lt;a href="https://fedora.portingdb.xyz/"&gt;jen 70&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="patek-prace-vkorporatu"&gt;Pátek: Práce v&amp;nbsp;korporátu&lt;/h2&gt;
 &lt;p&gt;No a&amp;nbsp;v pátek jsem podobné nechtěné balíčky vyndával z budoucí verze &lt;a href="https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux"&gt;RHEL&lt;/a&gt;u,
-aby tam zbyly jen věci, které reálně můžeme nějaké to desetiletí&amp;nbsp;podporovat.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #1</title><link href="http://encukou.cz/blog/2021/01/08/cs-tydenni-01" rel="alternate"></link><published>2021-01-08T00:00:00+01:00</published><updated>2021-01-08T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-08:/blog/2021/01/08/cs-tydenni-01</id><summary type="html">
+aby tam zbyly jen věci, které reálně můžeme nějaké to desetiletí&amp;nbsp;podporovat.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #1</title><link href="https://encukou.cz/blog/2021/01/08/cs-tydenni-01" rel="alternate"></link><published>2021-01-08T00:00:00+01:00</published><updated>2021-01-08T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-08:/blog/2021/01/08/cs-tydenni-01</id><summary type="html">
 &lt;p&gt;Utekl další týden (3. 1. – 8. 1.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
@@ -365,7 +430,7 @@ S Mirovou pomocí jsme testy vypiplali do stavu, kdy se stydím že nedávám t
 úsilí do užitečnějších projektů ;)&lt;/p&gt;
 &lt;h2 id="patek-planovani"&gt;Pátek: plánování&lt;/h2&gt;
 &lt;p&gt;V pátek jsem si urovnal pracovní úkolníček, zamyslel se co dál,
-a&amp;nbsp;několik menších věcí co už dlouho hnily vyřešil nebo posunul&amp;nbsp;kupředu.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #0</title><link href="http://encukou.cz/blog/2021/01/01/cs-tydenni-00" rel="alternate"></link><published>2021-01-01T00:00:00+01:00</published><updated>2021-01-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-01:/blog/2021/01/01/cs-tydenni-00</id><summary type="html">&lt;p&gt;Utekl další týden (28. 12.–1. 1.), a tak si po vzoru
+a&amp;nbsp;několik menších věcí co už dlouho hnily vyřešil nebo posunul&amp;nbsp;kupředu.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #0</title><link href="https://encukou.cz/blog/2021/01/01/cs-tydenni-00" rel="alternate"></link><published>2021-01-01T00:00:00+01:00</published><updated>2021-01-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-01-01:/blog/2021/01/01/cs-tydenni-00</id><summary type="html">&lt;p&gt;Utekl další týden (28. 12.–1. 1.), a tak si po vzoru
 &lt;a href="https://honzajavorek.cz/blog/#archives-2020"&gt;Honzy Javorka&lt;/a&gt;
 sepisuju, co jsem dělal.
 Uvidíme, třeba se mi to podaří dělat nějak pravidelněji.&lt;/p&gt;
@@ -474,7 +539,7 @@ Se spoustou z toho – i&amp;nbsp;když samozřejmě ne se vším – se ztoto�
 Není to závod!&lt;/p&gt;
 &lt;p&gt;Navíc doporučím &lt;a href="https://www.youtube.com/watch?v=N_gysDr2gfc&amp;amp;t=3423s"&gt;Lumírovu přednášku&lt;/a&gt; plnou tipů pro produktivitu,
 ve které zmiňuje, jak je dobré si sepsat, co člověk za den/týden udělal.
-Pokud to neděláte, pravděpodobně vám samým toho spousta&amp;nbsp;uniká.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>PyCon 2016 Report</title><link href="http://encukou.cz/blog/2016/06/20/pycon-report" rel="alternate"></link><published>2016-06-20T00:00:00+02:00</published><updated>2016-06-20T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2016-06-20:/blog/2016/06/20/pycon-report</id><summary type="html">&lt;p&gt;I attended PyCon 2016, the annual Python language conference, which took part
+Pokud to neděláte, pravděpodobně vám samým toho spousta&amp;nbsp;uniká.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>PyCon 2016 Report</title><link href="https://encukou.cz/blog/2016/06/20/pycon-report" rel="alternate"></link><published>2016-06-20T00:00:00+02:00</published><updated>2016-06-20T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2016-06-20:/blog/2016/06/20/pycon-report</id><summary type="html">&lt;p&gt;I attended PyCon 2016, the annual Python language conference, which took part
 between May 28th to June 5th.&lt;/p&gt;
 &lt;p&gt;Here's a long, rambling and somewhat personal report of what I got from
 the conference.&lt;/p&gt;
@@ -752,13 +817,13 @@ After the sprints, I&amp;nbsp;got some Fedora swag from Remy to bring back to Br
 and joined fellow BeeWare sprinters – Jeremy, Marina and Holly – for dinner
 and board games.&lt;/p&gt;
 &lt;p&gt;And that was it!  I&amp;nbsp;spent a&amp;nbsp;few days after the conference enjoying the city
-of Portland, then hopped on a&amp;nbsp;train to Seattle and back&amp;nbsp;home.&lt;/p&gt;</content><category term="misc"></category><category term="conference"></category><category term="pycon"></category></entry><entry><title>First Layer Patterns with Slic3r Modifier Objects</title><link href="http://encukou.cz/blog/2015/10/25/en-slic3r-first-layer-patterns" rel="alternate"></link><published>2015-10-25T00:00:00+02:00</published><updated>2015-10-25T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-10-25:/blog/2015/10/25/en-slic3r-first-layer-patterns</id><summary type="html">&lt;p&gt;I've built a 3D printer, and found a cool effect I wasn't able to
+of Portland, then hopped on a&amp;nbsp;train to Seattle and back&amp;nbsp;home.&lt;/p&gt;</content><category term="misc"></category><category term="conference"></category><category term="pycon"></category></entry><entry><title>First Layer Patterns with Slic3r Modifier Objects</title><link href="https://encukou.cz/blog/2015/10/25/en-slic3r-first-layer-patterns" rel="alternate"></link><published>2015-10-25T00:00:00+02:00</published><updated>2015-10-25T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-10-25:/blog/2015/10/25/en-slic3r-first-layer-patterns</id><summary type="html">&lt;p&gt;I've built a 3D printer, and found a cool effect I wasn't able to
 find on the Internet yet.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;I've built a&amp;nbsp;3D printer, and found a&amp;nbsp;cool effect I&amp;nbsp;wasn't able to
 find on the Internet yet.&lt;/p&gt;
 
 
-&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/first-layer.jpg"&gt;&lt;img alt="What I'll be describing" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/first-layer.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/first-layer.jpg"&gt;&lt;img alt="What I'll be describing" class="size-auto" src="https://encukou.cz/images/2015-10-25-slic3r/first-layer.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="my-setup"&gt;My Setup&lt;/h2&gt;
 &lt;p&gt;I&amp;nbsp;haven't blogged about my 3D printer yet, so let's&amp;nbsp;quickly get that out
 of the way.&lt;/p&gt;
@@ -782,7 +847,7 @@ The three main programs I&amp;nbsp;use are:&lt;/p&gt;
 &lt;p&gt;Today I'll be talking about the second tool in that chain.
 But first, what will I&amp;nbsp;print?&lt;/p&gt;
 &lt;h2 id="adrawer-handle"&gt;A&amp;nbsp;Drawer Handle&lt;/h2&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/handle-old.jpg"&gt;&lt;img alt="The Problem" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/handle-old.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/handle-old.jpg"&gt;&lt;img alt="The Problem" class="size-auto" src="https://encukou.cz/images/2015-10-25-slic3r/handle-old.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I&amp;nbsp;have some drawers whose handles are pretty flimsy, and as time goes by,
 they're detaching.
 Which is a&amp;nbsp;shame, because these big, red handles fit my room really well.
@@ -811,11 +876,11 @@ Some are only available for the inside of objects, because they can't cover
 100% of the space, but there's&amp;nbsp;still a&amp;nbsp;good selection: the boring old
 Rectilinear, the outline-following Cocentric, the fractal Hilbert Curve,
 the Archimedean Chords spiral, and the angular Octagram&amp;nbsp;Spiral.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/rectilinear.png"&gt;&lt;img alt="Plain Old Rectilinear" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/rectilinear.png" /&gt;&lt;/a&gt;
-&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/cocentric.png"&gt;&lt;img alt="Cocentric pattern" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/cocentric.png" /&gt;&lt;/a&gt;
-&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/hilbert.png"&gt;&lt;img alt="Hilbert Curve" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/hilbert.png" /&gt;&lt;/a&gt;
-&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/archimedean.png"&gt;&lt;img alt="Archimedean Chords" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/archimedean.png" /&gt;&lt;/a&gt;
-&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/octagram-spiral.png"&gt;&lt;img alt="Octagram Spiral" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/octagram-spiral.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/rectilinear.png"&gt;&lt;img alt="Plain Old Rectilinear" class="size-auto" src="https://encukou.cz/images/2015-10-25-slic3r/rectilinear.png" /&gt;&lt;/a&gt;
+&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/cocentric.png"&gt;&lt;img alt="Cocentric pattern" class="size-auto" src="https://encukou.cz/images/2015-10-25-slic3r/cocentric.png" /&gt;&lt;/a&gt;
+&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/hilbert.png"&gt;&lt;img alt="Hilbert Curve" class="size-auto" src="https://encukou.cz/images/2015-10-25-slic3r/hilbert.png" /&gt;&lt;/a&gt;
+&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/archimedean.png"&gt;&lt;img alt="Archimedean Chords" class="size-auto" src="https://encukou.cz/images/2015-10-25-slic3r/archimedean.png" /&gt;&lt;/a&gt;
+&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/octagram-spiral.png"&gt;&lt;img alt="Octagram Spiral" class="size-auto" src="https://encukou.cz/images/2015-10-25-slic3r/octagram-spiral.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;They're mostly meant to be functional, but some are quite aesthetically
 pleasing than others.
 Being the geek that I&amp;nbsp;am, I&amp;nbsp;prefer the Archimedean Chords and
@@ -850,7 +915,7 @@ The thickness is about the same as the first layer of my printout.
 Then, I&amp;nbsp;added the part as a&amp;nbsp;Modifier object in Slic3r, and set its infill
 to Hilbert Curve. The rest of the object usess Archimedean&amp;nbsp;Chords.&lt;/p&gt;
 &lt;p&gt;Et voilà! A&amp;nbsp;combined pattern&amp;nbsp;emerges.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/combination.png"&gt;&lt;img alt="Sliced bottom layer" class="size-full" src="http://encukou.cz/images/2015-10-25-slic3r/combination.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/combination.png"&gt;&lt;img alt="Sliced bottom layer" class="size-full" src="https://encukou.cz/images/2015-10-25-slic3r/combination.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Slic3r adds quite a&amp;nbsp;wide margin between the two areas, which works out well
 for my use of two large patches of distinct textures.
 If you want finer control, it might not be that&amp;nbsp;convenient.&lt;/p&gt;
@@ -865,7 +930,7 @@ small enough to not be printed.
 You can see them in the screnshot above as light grey dots off to the sides
 of the pentagon.
 This tricked Slic3r into putting the center where it should&amp;nbsp;be.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/images/2015-10-25-slic3r/handle-new.jpg"&gt;&lt;img alt="The Solution" class="size-auto" src="http://encukou.cz/images/2015-10-25-slic3r/handle-new.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://encukou.cz/images/2015-10-25-slic3r/handle-new.jpg"&gt;&lt;img alt="The Solution" class="size-auto" src="https://encukou.cz/images/2015-10-25-slic3r/handle-new.jpg" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="to-be-continued"&gt;To Be Continued&lt;/h2&gt;
 &lt;p&gt;Now that I&amp;nbsp;have the first layer ready, I'm off to making the screw &amp;amp; nut fit
 well inside the handle.
@@ -879,7 +944,7 @@ Enjoy!&lt;/p&gt;
 we can chat while watching the printer make electronic noises and plastic
 creations. (Otherwise, i&amp;nbsp;might add a&amp;nbsp;simple, small object to a&amp;nbsp;print job
 if you send me a&amp;nbsp;fully prepared model, but you're probably better off ordering
-a&amp;nbsp;print online.)&lt;/p&gt;</content><category term="misc"></category><category term="3d"></category></entry><entry><title>Types as namespaces</title><link href="http://encukou.cz/blog/2015/03/01/en-variable-types" rel="alternate"></link><published>2015-03-01T00:00:00+01:00</published><updated>2015-03-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-03-01:/blog/2015/03/01/en-variable-types</id><summary type="html">&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
+a&amp;nbsp;print online.)&lt;/p&gt;</content><category term="misc"></category><category term="3d"></category></entry><entry><title>Types as namespaces</title><link href="https://encukou.cz/blog/2015/03/01/en-variable-types" rel="alternate"></link><published>2015-03-01T00:00:00+01:00</published><updated>2015-03-01T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2015-03-01:/blog/2015/03/01/en-variable-types</id><summary type="html">&lt;p&gt;Musings inspired by Eevee's &lt;a href="http://eev.ee/blog/2015/02/28/sylph-the-programming-language-i-want/"&gt;post about Sylph&lt;/a&gt;.
 Read that first.&lt;/p&gt;
 &lt;p&gt;In Python's duck-typing system, it's enough if things quack.
 They don't actually need to quack &lt;em&gt;like a duck&lt;/em&gt;.&lt;/p&gt;
@@ -1080,11 +1145,11 @@ and implement &lt;code&gt;Visit:leaf&lt;/code&gt;, where &lt;code&gt;Visit&lt;/c
 &lt;h2 id="thatsit-for-now"&gt;That's&amp;nbsp;it for now&lt;/h2&gt;
 &lt;p&gt;I&amp;nbsp;could rant on, about, say, registration conflicts or efficient vtable
 references, but let's&amp;nbsp;end it here, throw it at the wall and see if it&amp;nbsp;sticks.&lt;/p&gt;
-&lt;p&gt;(I&amp;nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)&lt;/p&gt;</content><category term="misc"></category><category term="language design"></category></entry><entry><title>Měnění objektů</title><link href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-meneni-objektu</id><summary type="html">&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v Pythonu fungují proměnné&lt;/a&gt;.
+&lt;p&gt;(I&amp;nbsp;welcome comments, by the way – if you have any, send them by e-mail or pull request)&lt;/p&gt;</content><category term="misc"></category><category term="language design"></category></entry><entry><title>Měnění objektů</title><link href="https://encukou.cz/blog/2014/01/05/cs-meneni-objektu" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-meneni-objektu</id><summary type="html">&lt;p&gt;Už víme, &lt;a href="https://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v Pythonu fungují proměnné&lt;/a&gt;.
 (Pokud ne, doporučuju to napřed zjistit,
 už jen pro seznámení s mými uměleckými diagramy.)
 Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy objekty.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
+</summary><content type="html">&lt;p&gt;Už víme, &lt;a href="https://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
 (Pokud ne, doporučuju to napřed zjistit,
 už jen pro seznámení s&amp;nbsp;mými uměleckými diagramy.)
 Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy&amp;nbsp;objekty.&lt;/p&gt;
@@ -1092,7 +1157,7 @@ Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy&amp;nbsp
 
 &lt;p&gt;Toto je druhý ze série článků o&amp;nbsp;tom, jak funguje Python.
 Pokud jsi se dostala přímo sem, koukni na
-&lt;a href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
+&lt;a href="https://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
 a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;Řetězce, stejně jako čísla nebo n-tice, jsou neměnitelné &lt;em&gt;(immutable)&lt;/em&gt;.
@@ -1225,7 +1290,7 @@ nelze přiřadit přímo do jejích položek:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;A&amp;nbsp;to je prozatím k&amp;nbsp;měnění objektů všechno.
-Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="mutability"></category></entry><entry><title>Proměnné jsou jména</title><link href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-promenne-jsou-jmena</id><summary type="html">&lt;p&gt;Jak v Pythonu fungují proměnné?
+Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="mutability"></category></entry><entry><title>Proměnné jsou jména</title><link href="https://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-promenne-jsou-jmena</id><summary type="html">&lt;p&gt;Jak v Pythonu fungují proměnné?
 Už asi víš, že se přiřazují pomocí rovnítka,
 a že se pak dají používat ve výrazech.
 Pojďme se na ně podívat trochu podrobněji.&lt;/p&gt;
@@ -1237,7 +1302,7 @@ Pojďme se na ně podívat trochu&amp;nbsp;podrobněji.&lt;/p&gt;
 
 &lt;p&gt;Toto je první ze série článků o&amp;nbsp;tom, jak funguje Python.
 Pokud jsi se dostala přímo sem, koukni na
-&lt;a href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
+&lt;a href="https://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
 a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;Na rozdíl od jazyků jako C, kde proměnná je vyhrazené místo v&amp;nbsp;paměti,
@@ -1311,7 +1376,7 @@ Takovéhle sirotky Python časem smaže, aby nezabíraly paměť počítače:&lt
 &lt;p&gt;Teď, když víme jak fungují proměnné, se můžeme podívat na zoubek
 jejich hodnotám, tedy objektům.
 Další článek v&amp;nbsp;sérii nám poví
-o &lt;a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;.&lt;/p&gt;
+o &lt;a href="https://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h3 id="zdroje-adalsi-materialy"&gt;Zdroje a&amp;nbsp;další materiály&lt;/h3&gt;
 &lt;ul&gt;
@@ -1329,7 +1394,7 @@ a budou “žít” dál.
 Podrobněji to plánuju rozeberat v článku &lt;em&gt;identity a hodnoty&lt;/em&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:interned-strings" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="proměnné"></category></entry><entry><title>Jak funguje Python</title><link href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-rozcestnik-python</id><summary type="html">&lt;p&gt;Znáte to.
+&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="proměnné"></category></entry><entry><title>Jak funguje Python</title><link href="https://encukou.cz/blog/2014/01/05/cs-rozcestnik-python" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-rozcestnik-python</id><summary type="html">&lt;p&gt;Znáte to.
 Studentka vám položí otázku, a abyste na ni mohli pořádně odpovědět,
 je potřeba trochu osvětlit základy.
 Mně se to stalo s proměnnými v Pythonu.&lt;/p&gt;
@@ -1348,8 +1413,8 @@ Píšu už druhý den.&lt;/p&gt;
 &lt;p&gt;Přišel čas to trošku rozdělit.
 Tady je moje osnova; až (a&amp;nbsp;jestli) to dopíšu, tak z&amp;nbsp;toho udělám&amp;nbsp;odkazy.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;Proměnné jsou jména&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;Proměnné jsou jména&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Přiřazování&lt;/li&gt;
 &lt;li&gt;Jmenné prostory&lt;/li&gt;
 &lt;li&gt;Identity a&amp;nbsp;hodnoty &lt;!-- udělat odkaz v&amp;nbsp;poznámce pod čarou v "Proměnné jsou jména" --&gt;&lt;/li&gt;
@@ -1364,7 +1429,7 @@ napiš na začátek každého pythoního souboru tyto řádky:&lt;/p&gt;
 &lt;p&gt;Jinak by všechny ukázky kódu měly fungovat v&amp;nbsp;Pythonu 2.7&amp;nbsp;i&amp;nbsp;3.3,
 pokud není jinak uvedeno.&lt;/p&gt;
 &lt;p&gt;Pokud uvidíš nějakou chybu, ozvi se mi na &lt;a href="mailto:encukou@gmail.com"&gt;mail&lt;/a&gt;,
-nebo rovnou založ &lt;a href="https://github.com/encukou/blog/issues/new"&gt;issue&lt;/a&gt; či &lt;a href="https://github.com/encukou/blog"&gt;pull&amp;nbsp;request&lt;/a&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="rozcestník"></category></entry><entry><title>Raspberry Pi and my Third Screen</title><link href="http://encukou.cz/blog/2013/05/04/en-raspberry-third-screen" rel="alternate"></link><published>2013-05-04T00:00:00+02:00</published><updated>2013-05-04T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-05-04:/blog/2013/05/04/en-raspberry-third-screen</id><summary type="html">&lt;p&gt;Today, I finally figured out what was wrong with my Raspberry Pi.
+nebo rovnou založ &lt;a href="https://github.com/encukou/blog/issues/new"&gt;issue&lt;/a&gt; či &lt;a href="https://github.com/encukou/blog"&gt;pull&amp;nbsp;request&lt;/a&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="rozcestník"></category></entry><entry><title>Raspberry Pi and my Third Screen</title><link href="https://encukou.cz/blog/2013/05/04/en-raspberry-third-screen" rel="alternate"></link><published>2013-05-04T00:00:00+02:00</published><updated>2013-05-04T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-05-04:/blog/2013/05/04/en-raspberry-third-screen</id><summary type="html">&lt;p&gt;Today, I finally figured out what was wrong with my Raspberry Pi.
 It &lt;a href="http://file3.status.net/i/identica/encukou-20130120T115619-yw8xyls.jpeg"&gt;worked before&lt;/a&gt;,
 connected to a TV, without ethernet, and with a power supply and keyboard
 borrowed from my brother.
@@ -1499,7 +1564,7 @@ but if I&amp;nbsp;need control, I&amp;nbsp;just click the top-left corner on my 
 main screen and type away.
 A&amp;nbsp;popular generalization of &lt;a href="http://en.wikipedia.org/wiki/Fitts%27s_law"&gt;Fitts' law&lt;/a&gt;
 says this is very convenient, and I'm sure not arguing with&amp;nbsp;that.&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://encukou.cz/images/2013-05-04-screenshot.png"&gt;&lt;img alt="Screenshot of my screen with a&amp;nbsp;red freehand arrow pointing at the pi-remote" class="size-full" src="http://encukou.cz/images/2013-05-04-screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://encukou.cz/images/2013-05-04-screenshot.png"&gt;&lt;img alt="Screenshot of my screen with a&amp;nbsp;red freehand arrow pointing at the pi-remote" class="size-full" src="https://encukou.cz/images/2013-05-04-screenshot.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Here's&amp;nbsp;a&amp;nbsp;review of my files, for future reference:&lt;/p&gt;
 &lt;p&gt;At the main machine, named &lt;code&gt;tapio&lt;/code&gt;, there's:&lt;/p&gt;
 &lt;ul&gt;
@@ -1558,7 +1623,7 @@ so I&amp;nbsp;run the shell in a&amp;nbsp;loop:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;tmux new-session -s third-monitor &lt;span class="s1"&gt;&amp;#39;while true; bash; reset; done&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;I&amp;nbsp;sure hope there is an easier way to do this.&amp;nbsp;Anyone?&lt;/p&gt;</content><category term="Computers"></category><category term="raspberry"></category><category term="shell"></category><category term="quassel"></category><category term="tmux"></category></entry><entry><title>Stavové prostory</title><link href="http://encukou.cz/blog/2013/03/03/cs-stavove-prostory" rel="alternate"></link><published>2013-03-03T00:00:00+01:00</published><updated>2013-03-03T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-03-03:/blog/2013/03/03/cs-stavove-prostory</id><summary type="html">&lt;p&gt;&lt;a href="http://glutexo.livejournal.com/137926.html"&gt;Glutexo píše&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;I&amp;nbsp;sure hope there is an easier way to do this.&amp;nbsp;Anyone?&lt;/p&gt;</content><category term="Computers"></category><category term="raspberry"></category><category term="shell"></category><category term="quassel"></category><category term="tmux"></category></entry><entry><title>Stavové prostory</title><link href="https://encukou.cz/blog/2013/03/03/cs-stavove-prostory" rel="alternate"></link><published>2013-03-03T00:00:00+01:00</published><updated>2013-03-03T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2013-03-03:/blog/2013/03/03/cs-stavove-prostory</id><summary type="html">&lt;p&gt;&lt;a href="http://glutexo.livejournal.com/137926.html"&gt;Glutexo píše&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Narazil jsem na drsné a vytůněné Sudoku: Podobá se klasickému killer sudoku:
 V začátku neznáme žádná čísla, pouze máme ohraničené spojité oblasti, u
@@ -1820,7 +1885,7 @@ stavů nebo toho, jak si algoritmus vede (např. velikosti množin &lt;code&gt;o
 Možná není potřeba to přehánět jako já (ty ASCII-arty výše jsou v&amp;nbsp;mém programu
 navíc obarvené podle oblastí se součtem), ale cokoli pomůže pochopit to, co se
 vevnitř děje, hodně pomáhá.&lt;/p&gt;
-&lt;p&gt;Tož přeji hezké programování, snad tenhle výlev trochu&amp;nbsp;pomůže.&lt;/p&gt;</content><category term="Computers"></category><category term="geocaching"></category><category term="algorithm"></category></entry><entry><title>Caps Lock a přepínání klávesnice</title><link href="http://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice" rel="alternate"></link><published>2011-11-21T00:00:00+01:00</published><updated>2011-11-21T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-11-21:/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</id><summary type="html">&lt;p&gt;Caps Lock je k ničemu.
+&lt;p&gt;Tož přeji hezké programování, snad tenhle výlev trochu&amp;nbsp;pomůže.&lt;/p&gt;</content><category term="Computers"></category><category term="geocaching"></category><category term="algorithm"></category></entry><entry><title>Caps Lock a přepínání klávesnice</title><link href="https://encukou.cz/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice" rel="alternate"></link><published>2011-11-21T00:00:00+01:00</published><updated>2011-11-21T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-11-21:/blog/2011/11/21/cs-caps-lock-a-prepinani-klavesnice</id><summary type="html">&lt;p&gt;Caps Lock je k ničemu.
 Posledních asi pět let jsem ho mačkal prakticky jen omylem.
 Možná to je tím, že neumím psát všema deseti, a tudíž věci jako
 LD_LIBRARY_PATH nebo UNESCO jdou napsat rychle jen se Shiftem – každopádně fakt
@@ -1852,7 +1917,7 @@ Shift+Caps přepne na češtinu, Caps na angličtinu.
 A&amp;nbsp;tak to mám doteď, i&amp;nbsp;když je pravda že českou klávesnici zas tak často
 nepoužívám,
 takže je to možná stejně zbytečné.&lt;/p&gt;
-&lt;p&gt;Jestli nakonec nebude přece jen lepší mít na místě Capsu druhý Backspace…&lt;/p&gt;</content><category term="Computers"></category><category term="posterous"></category><category term="capslock"></category></entry><entry><title>Dennis Ritchie has died.</title><link href="http://encukou.cz/blog/2011/10/13/en-rip-dennis-ritchie" rel="alternate"></link><published>2011-10-13T00:00:00+02:00</published><updated>2011-10-13T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-10-13:/blog/2011/10/13/en-rip-dennis-ritchie</id><summary type="html">
+&lt;p&gt;Jestli nakonec nebude přece jen lepší mít na místě Capsu druhý Backspace…&lt;/p&gt;</content><category term="Computers"></category><category term="posterous"></category><category term="capslock"></category></entry><entry><title>Dennis Ritchie has died.</title><link href="https://encukou.cz/blog/2011/10/13/en-rip-dennis-ritchie" rel="alternate"></link><published>2011-10-13T00:00:00+02:00</published><updated>2011-10-13T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2011-10-13:/blog/2011/10/13/en-rip-dennis-ritchie</id><summary type="html">
 &lt;p&gt;We have lost a humble genius, a mathematician, an architect of the abstract.
 It's sad that most poeple will never be able to appreciate the beauty of things
 he has done.

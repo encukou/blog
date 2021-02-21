@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - Python</title><link href="http://encukou.cz/" rel="alternate"></link><link href="http://encukou.cz/feeds/python.atom.xml" rel="self"></link><id>http://encukou.cz/</id><updated>2014-01-05T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Měnění objektů</title><link href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-meneni-objektu</id><summary type="html">&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v Pythonu fungují proměnné&lt;/a&gt;.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - Python</title><link href="https://encukou.cz/" rel="alternate"></link><link href="https://encukou.cz/feeds/python.atom.xml" rel="self"></link><id>https://encukou.cz/</id><updated>2014-01-05T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Měnění objektů</title><link href="https://encukou.cz/blog/2014/01/05/cs-meneni-objektu" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-meneni-objektu</id><summary type="html">&lt;p&gt;Už víme, &lt;a href="https://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v Pythonu fungují proměnné&lt;/a&gt;.
 (Pokud ne, doporučuju to napřed zjistit,
 už jen pro seznámení s mými uměleckými diagramy.)
 Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy objekty.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Už víme, &lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
+</summary><content type="html">&lt;p&gt;Už víme, &lt;a href="https://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;jak v&amp;nbsp;Pythonu fungují proměnné&lt;/a&gt;.
 (Pokud ne, doporučuju to napřed zjistit,
 už jen pro seznámení s&amp;nbsp;mými uměleckými diagramy.)
 Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy&amp;nbsp;objekty.&lt;/p&gt;
@@ -11,7 +11,7 @@ Teď se pojďme podívat na to, jak se chovají jejich hodnoty – tedy&amp;nbsp
 
 &lt;p&gt;Toto je druhý ze série článků o&amp;nbsp;tom, jak funguje Python.
 Pokud jsi se dostala přímo sem, koukni na
-&lt;a href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
+&lt;a href="https://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
 a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;Řetězce, stejně jako čísla nebo n-tice, jsou neměnitelné &lt;em&gt;(immutable)&lt;/em&gt;.
@@ -144,7 +144,7 @@ nelze přiřadit přímo do jejích položek:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;A&amp;nbsp;to je prozatím k&amp;nbsp;měnění objektů všechno.
-Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="mutability"></category></entry><entry><title>Proměnné jsou jména</title><link href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-promenne-jsou-jmena</id><summary type="html">&lt;p&gt;Jak v Pythonu fungují proměnné?
+Příště se můžeš těšit na důkladný rozbor&amp;nbsp;&lt;em&gt;přiřazování&lt;/em&gt;.&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="mutability"></category></entry><entry><title>Proměnné jsou jména</title><link href="https://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-promenne-jsou-jmena</id><summary type="html">&lt;p&gt;Jak v Pythonu fungují proměnné?
 Už asi víš, že se přiřazují pomocí rovnítka,
 a že se pak dají používat ve výrazech.
 Pojďme se na ně podívat trochu podrobněji.&lt;/p&gt;
@@ -156,7 +156,7 @@ Pojďme se na ně podívat trochu&amp;nbsp;podrobněji.&lt;/p&gt;
 
 &lt;p&gt;Toto je první ze série článků o&amp;nbsp;tom, jak funguje Python.
 Pokud jsi se dostala přímo sem, koukni na
-&lt;a href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
+&lt;a href="https://encukou.cz/blog/2014/01/05/cs-rozcestnik-python"&gt;Rozcestník&lt;/a&gt;
 a&amp;nbsp;trochu se zorientuj.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;Na rozdíl od jazyků jako C, kde proměnná je vyhrazené místo v&amp;nbsp;paměti,
@@ -230,7 +230,7 @@ Takovéhle sirotky Python časem smaže, aby nezabíraly paměť počítače:&lt
 &lt;p&gt;Teď, když víme jak fungují proměnné, se můžeme podívat na zoubek
 jejich hodnotám, tedy objektům.
 Další článek v&amp;nbsp;sérii nám poví
-o &lt;a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;.&lt;/p&gt;
+o &lt;a href="https://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h3 id="zdroje-adalsi-materialy"&gt;Zdroje a&amp;nbsp;další materiály&lt;/h3&gt;
 &lt;ul&gt;
@@ -248,7 +248,7 @@ a budou “žít” dál.
 Podrobněji to plánuju rozeberat v článku &lt;em&gt;identity a hodnoty&lt;/em&gt;.&amp;#160;&lt;a class="footnote-backref" href="#fnref:interned-strings" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="proměnné"></category></entry><entry><title>Jak funguje Python</title><link href="http://encukou.cz/blog/2014/01/05/cs-rozcestnik-python" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-rozcestnik-python</id><summary type="html">&lt;p&gt;Znáte to.
+&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="proměnné"></category></entry><entry><title>Jak funguje Python</title><link href="https://encukou.cz/blog/2014/01/05/cs-rozcestnik-python" rel="alternate"></link><published>2014-01-05T00:00:00+01:00</published><updated>2014-01-05T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2014-01-05:/blog/2014/01/05/cs-rozcestnik-python</id><summary type="html">&lt;p&gt;Znáte to.
 Studentka vám položí otázku, a abyste na ni mohli pořádně odpovědět,
 je potřeba trochu osvětlit základy.
 Mně se to stalo s proměnnými v Pythonu.&lt;/p&gt;
@@ -267,8 +267,8 @@ Píšu už druhý den.&lt;/p&gt;
 &lt;p&gt;Přišel čas to trošku rozdělit.
 Tady je moje osnova; až (a&amp;nbsp;jestli) to dopíšu, tak z&amp;nbsp;toho udělám&amp;nbsp;odkazy.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;Proměnné jsou jména&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://encukou.cz/blog/2014/01/05/cs-promenne-jsou-jmena"&gt;Proměnné jsou jména&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://encukou.cz/blog/2014/01/05/cs-meneni-objektu"&gt;Měnění objektů&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Přiřazování&lt;/li&gt;
 &lt;li&gt;Jmenné prostory&lt;/li&gt;
 &lt;li&gt;Identity a&amp;nbsp;hodnoty &lt;!-- udělat odkaz v&amp;nbsp;poznámce pod čarou v "Proměnné jsou jména" --&gt;&lt;/li&gt;
