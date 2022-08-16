@@ -7,7 +7,7 @@ leading the Python Maintenance team.
 We integrate Python with [Fedora](https://getfedora.org/) and
 [RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux).
 
-Previously I worked on [FreeIPA](s),
+Previously I worked on [FreeIPA](https://freeipa.org),
 which involved fighting [mutant dogs from the underworld](http://kerberos.org/software),
 a hipster [NoSQL database](https://directory.fedoraproject.org) (which was cool *way* before NoSQL was cool),
 and a [certificate system](https://pki.fedoraproject.org).
