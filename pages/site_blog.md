@@ -7,5 +7,7 @@ Feel free to look around.
 If you wish to understand everything on there,
 you should learn [Czech](https://en.wikipedia.org/wiki/Czech_language).
 
+<p>
 Should you require more frequent updates, you can follow me on
-<a href="https://twitter.com/encukou">Twitter</a>
+<a href="https://mastodon.social/@encukou">Mastodon</a>.
+</p>

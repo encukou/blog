@@ -78,7 +78,7 @@ DISPLAY_CATEGORIES_ON_MENU = False
 SINGLE_AUTHOR = True
 MENUITEMS_COLORFUL = (
         ('e-mail', 'mailto:encukou@gmail.com', '_kou'),
-        ('twitter', 'https://twitter.com/encukou', '_cu'),
+        ('mastodon', 'https://mastodon.social/@encukou', '_cu'),
         ('github', 'https://github.com/encukou', '_en'),
     )
 MENUITEMS = (
