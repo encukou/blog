@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - misc</title><link href="https://encukou.cz/" rel="alternate"></link><link href="https://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>https://encukou.cz/</id><updated>2021-02-19T00:00:00+01:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Týdenní poznámky #7</title><link href="https://encukou.cz/blog/2021/02/19/cs-tydenni-07" rel="alternate"></link><published>2021-02-19T00:00:00+01:00</published><updated>2021-02-19T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-19:/blog/2021/02/19/cs-tydenni-07</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>encukou/blog - misc</title><link href="https://encukou.cz/" rel="alternate"></link><link href="https://encukou.cz/feeds/misc.atom.xml" rel="self"></link><id>https://encukou.cz/</id><updated>2023-10-19T00:00:00+02:00</updated><subtitle>primary colors underneath</subtitle><entry><title>Quick notes: Oct 16-19</title><link href="https://encukou.cz/blog/2023/10/19/en-weekly" rel="alternate"></link><published>2023-10-19T00:00:00+02:00</published><updated>2023-10-19T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2023-10-19:/blog/2023/10/19/en-weekly</id><summary type="html">
+&lt;p&gt;Is this thing still on?&lt;/p&gt;
+&lt;p&gt;Let me try to restart weekly notes about what I've been up to.
+In the beginning, a lot of context will be missing...&lt;/p&gt;
+</summary><content type="html">
+
+&lt;p&gt;Is this thing still on?&lt;/p&gt;
+&lt;p&gt;Let me try to restart weekly notes about what I've been up to.
+In the beginning, a&amp;nbsp;lot of context will be&amp;nbsp;missing...&lt;/p&gt;
+
+
+&lt;p&gt;Last week, I&amp;nbsp;organized the CPython core developer sprint in Brno.
+That should get its own blog post...&lt;/p&gt;
+&lt;p&gt;On Monday, I&amp;nbsp;stayed offline after the busy&amp;nbsp;week.&lt;/p&gt;
+&lt;p&gt;Tuesday, I&amp;nbsp;started on reading all the emails from last week.
+With various interruptions, that took me two&amp;nbsp;days.&lt;/p&gt;
+&lt;p&gt;Tuesday's &lt;a href="https://youtube.com/live/H_8AKmB6c_0?feature=share"&gt;freezeyt stream&lt;/a&gt;
+went nicely; with an overview of &lt;code&gt;contextlib.ExitStack&lt;/code&gt;, and more time spent
+adding static typing information.
+I&amp;nbsp;still don't know if I&amp;nbsp;want to add the&amp;nbsp;types.&lt;/p&gt;
+&lt;p&gt;For work, I&amp;nbsp;got to port a&amp;nbsp;security fix to Python 2.6.
+Yup, 2.6&amp;nbsp;is still supported!&lt;/p&gt;
+&lt;p&gt;Thursday, I&amp;nbsp;paid the administrative fee required to legally
+do contract work.
+Hopefully, the paperwork will be done&amp;nbsp;soon.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>Týdenní poznámky #7</title><link href="https://encukou.cz/blog/2021/02/19/cs-tydenni-07" rel="alternate"></link><published>2021-02-19T00:00:00+01:00</published><updated>2021-02-19T00:00:00+01:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2021-02-19:/blog/2021/02/19/cs-tydenni-07</id><summary type="html">
 &lt;p&gt;Utekl další týden (16. 2. – 19. 2.), a tak si sepisuju, co jsem dělal.&lt;/p&gt;
 </summary><content type="html">
 
@@ -539,7 +563,7 @@ Se spoustou z toho – i&amp;nbsp;když samozřejmě ne se vším – se ztoto�
 Není to závod!&lt;/p&gt;
 &lt;p&gt;Navíc doporučím &lt;a href="https://www.youtube.com/watch?v=N_gysDr2gfc&amp;amp;t=3423s"&gt;Lumírovu přednášku&lt;/a&gt; plnou tipů pro produktivitu,
 ve které zmiňuje, jak je dobré si sepsat, co člověk za den/týden udělal.
-Pokud to neděláte, pravděpodobně vám samým toho spousta&amp;nbsp;uniká.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>PyCon 2016 Report</title><link href="https://encukou.cz/blog/2016/06/20/pycon-report" rel="alternate"></link><published>2016-06-20T00:00:00+02:00</published><updated>2016-06-20T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2016-06-20:/blog/2016/06/20/pycon-report</id><summary type="html">&lt;p&gt;I attended PyCon 2016, the annual Python language conference, which took part
+Pokud to neděláte, pravděpodobně vám samým toho spousta&amp;nbsp;uniká.&lt;/p&gt;</content><category term="misc"></category><category term="weekly"></category></entry><entry><title>PyCon 2016 Report</title><link href="https://encukou.cz/blog/2016/06/20/en-pycon-report" rel="alternate"></link><published>2016-06-20T00:00:00+02:00</published><updated>2016-06-20T00:00:00+02:00</updated><author><name>Petr Viktorin</name></author><id>tag:encukou.cz,2016-06-20:/blog/2016/06/20/en-pycon-report</id><summary type="html">&lt;p&gt;I attended PyCon 2016, the annual Python language conference, which took part
 between May 28th to June 5th.&lt;/p&gt;
 &lt;p&gt;Here's a long, rambling and somewhat personal report of what I got from
 the conference.&lt;/p&gt;

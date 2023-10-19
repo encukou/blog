@@ -30,7 +30,7 @@
             <div class="menu-navigation-container">
                 <ul id="menu-navigation" class="menu">
                         <li class="menu-item menu-item-type-post_type menu-item-object-page _kou"><a href="mailto:encukou@gmail.com">e-mail</a></li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="https://twitter.com/encukou">twitter</a></li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page _cu"><a href="https://mastodon.social/@encukou">mastodon</a></li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page _en"><a href="https://github.com/encukou">github</a></li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://encukou.cz">home</a></li>
 
@@ -152,11 +152,11 @@ already running, with its own environment.
 There's&nbsp;probably an amazingly obvious way to do this, but after a&nbsp;while of
 searching I&nbsp;decided for a&nbsp;brute-force approach: before joining the session I
 save the SSH-related env:</p>
-<div class="highlight"><pre><span></span><code>env <span class="p">|</span> grep ^SSH  &gt; ~/.ssh/third_monitor_callback_env
+<div class="highlight"><pre><span></span><code>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>^SSH<span class="w">  </span>&gt;<span class="w"> </span>~/.ssh/third_monitor_callback_env
 </code></pre></div>
 
 <p>and before SSH-ing back, I&nbsp;restore&nbsp;it.</p>
-<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="nb">read</span> line<span class="p">;</span> <span class="k">do</span> <span class="nb">declare</span> -x <span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span> <span class="k">done</span> &lt; ~/.ssh/third_monitor_callback_env
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">declare</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>~/.ssh/third_monitor_callback_env
 </code></pre></div>
 
 <p>Works for me.</p>
@@ -176,13 +176,13 @@ says this is very convenient, and I'm sure not arguing with&nbsp;that.</p>
 <ul>
 <li>
 <p>~/bin/pi-remote:</p>
-<div class="highlight"><pre><span></span><code>xterm -T <span class="s1">&#39;rpi remote!&#39;</span> +sb call-to-pi <span class="p">&amp;</span>
+<div class="highlight"><pre><span></span><code>xterm<span class="w"> </span>-T<span class="w"> </span><span class="s1">&#39;rpi remote!&#39;</span><span class="w"> </span>+sb<span class="w"> </span>call-to-pi<span class="w"> </span><span class="p">&amp;</span>
 </code></pre></div>
 
 </li>
 <li>
 <p>~/bin/call-to-pi:</p>
-<div class="highlight"><pre><span></span><code>ssh -t eckpi <span class="s1">&#39;env | grep ^SSH  &gt; ~/.ssh/third_monitor_callback_env; stty cols 256; stty rows 256; ~/bin/nowinch tmux attach-session -t third-monitor&#39;</span>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-t<span class="w"> </span>eckpi<span class="w"> </span><span class="s1">&#39;env | grep ^SSH  &gt; ~/.ssh/third_monitor_callback_env; stty cols 256; stty rows 256; ~/bin/nowinch tmux attach-session -t third-monitor&#39;</span>
 </code></pre></div>
 
 </li>
@@ -217,16 +217,16 @@ wmclassmatch=1
 <p>And at the Pi side, there's <code>~/bin/nowinch</code> modified from the signal blocker
 from <a href="http://stackoverflow.com/a/4515549/99057">StackOverflow</a>,
 and <code>~/bin/tapio</code> to SSH back home:</p>
-<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="nb">read</span> line<span class="p">;</span> <span class="k">do</span>
-    <span class="nb">declare</span> -x <span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span>
-<span class="k">done</span> &lt; ~/.ssh/third_monitor_callback_env
-ssh tapio
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">declare</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>~/.ssh/third_monitor_callback_env
+ssh<span class="w"> </span>tapio
 </code></pre></div>
 
 <p>And, of course, an always-on <code>tmux</code> session.
 I&nbsp;sometimes press Ctrl-D by mistake and don't want to get disconnected,
 so I&nbsp;run the shell in a&nbsp;loop:</p>
-<div class="highlight"><pre><span></span><code>tmux new-session -s third-monitor <span class="s1">&#39;while true; bash; reset; done&#39;</span>
+<div class="highlight"><pre><span></span><code>tmux<span class="w"> </span>new-session<span class="w"> </span>-s<span class="w"> </span>third-monitor<span class="w"> </span><span class="s1">&#39;while true; bash; reset; done&#39;</span>
 </code></pre></div>
 
 <p>I&nbsp;sure hope there is an easier way to do this.&nbsp;Anyone?</p>        </div> <!--/#entry-content-->
