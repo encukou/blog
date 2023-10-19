@@ -138,8 +138,8 @@ SUMMARY_MAX_LENGTH = None
 # Join one-letter words (Czech typography convention)
 
 class VlnaExtension(markdown.Extension):
-    def extendMarkdown(self, md, md_globals):
-        md.treeprocessors.add('vlna', VlnaProcessor(), '_begin')
+    def extendMarkdown(self, md, md_globals=None):
+        md.treeprocessors.register(VlnaProcessor(), 'vlna', 100)
 
 class VlnaProcessor(markdown.treeprocessors.Treeprocessor):
     def fix(self, text):
@@ -158,7 +158,7 @@ class VlnaProcessor(markdown.treeprocessors.Treeprocessor):
             return node
         if node.text:
             node.text = self.fix(node.text)
-        for child in node.getchildren():
+        for child in node:
             self.run(child)
         return node
 
